@@ -1,1 +1,10 @@
 {% extends 'common/base.html' %}
+
+{% block title %}홈 화면{% endblock title %}
+
+{% block body %}
+  설명
+  시작버튼 <br>
+  <a href="{% url 'user:login' %}">로그인</a>
+
+{% endblock body %}
