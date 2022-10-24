@@ -1,1 +1,10 @@
 {% extends 'common/base.html' %}
+
+{% block title %}home{% endblock %}
+
+
+{% block body %} 
+
+<a href="{% url 'user:login' %}">시작하기</a>
+
+{% endblock body %}
