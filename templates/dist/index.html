@@ -36,7 +36,7 @@
 												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<a href="#" class="btn mt-4">submit</a>
+											<a href="#" class="btn mt-4" onclick="loginFormCheck();">submit</a>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -70,5 +70,25 @@
 <!-- partial -->
   <script  src="{% static 'user/login/script.js' %}"></script>
 
+<!-- templates에 많은 div태그가 있는데 혹시 div태그에 직접 form을 씌우면 망가질까봐 아래에 form 태그 작성 -->
+<form action="login url" method="post" id="loginForm">
+	<input type="hidden" name="사용자ID변수명" id="userId">
+	<input type="hidden" name="사용자비밀번호변수명" id="userPw">
+</form>
+
+<!-- 자바스크립트에 작성해야할 사항인데 이상하게 'user/login/script.js' 을 인식못하는 오류가 console창에 떠는 상황,
+유저가 못보닌깐 script 여기 작성 -->
+<script>
+function loginFormCheck() {
+	let logemail = document.getElementById("logemail").value;
+	let logpass = document.getElementById("logpass").value;
+	// ... 아이디 비밀번호 검사
+	// return; // 통과 못했을 경우
+
+	document.getElementById("userId").value = logemail;
+	document.getElementById("userPw").value = logpass
+	document.getElementById("loginForm").submit();
+}
+</script>
 </body>
 </html>
