@@ -1,15 +1,21 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'common/menubar/style.css' %}">
 
-<div style="width: 100%; height:100px; background-color:lightgray;">
-    <img src="/static/1logo.PNG" width="160" height="100%" alt="로고">
 
-    {% if user.is_authenticated %}
-  
-    <div>{{ user.username }}님, 환영합니다.</div><br>
-    <a href="{% url 'user:profile' %}">내정보</a>
-    <a href="{% url 'user:logout' %}"><div> 로그아웃</div></a>
+<div style="background-color:#1f2029; display: inline;">
+  <a href="/" class="logo" target="blank">
+		<img src="../../static/My project-1.png" alt="일일영화 로고">
+	</a>
     
-    {% else %}
-    <div>안녕하세요?</div>
-    <a href="{% url 'user:login' %}"><div>로그인하기</div></a>
-    {% endif %}
-</div>
+  {% if user.is_authenticated %}
+  <div>{{ user.username }}님, 환영합니다.</div><br>
+    <a href="{% url 'user:profile' %}" class="btn">내정보</a>
+    <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+  {% else %}
+  <div style="text-align:right;"">
+  <br>
+    <a href="{% url 'user:login' %}" class="btn">로그인하기</a>
+  {% endif %}
+  </div>
+
+
