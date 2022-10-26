@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+
+def MovieBoardtest(request):
+    """ClassView를 사용하기전 임시로 사용하는 view함수"""
+    return render(request, 'movie/main.html')
+
+# class MovieBoard(generic.ListView):
+#     model: Optional[Type[Model]]
