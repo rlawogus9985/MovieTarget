@@ -1,14 +1,73 @@
 {% extends 'common/base.html' %}
 
+{% load static %}
 
 {% block title %}영화게시판{% endblock title %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'common/main/outcome.css' %}">
+<link rel="stylesheet" href="{% static 'common/main/surf.css' %}">
+<link rel="stylesheet" href="{% static 'common/main/drops.css' %}">
+
+{% endblock head %}
+
 
 {% block body %}
-<div>영화게시판</div>
+
+{% if user.is_authenticated %}
+<div>{{ user.username }}님, 환영합니다.</div>
+{% else %}
+<div>로그인해주세요.</div>
+{% endif %}
+
+
+<!-- 검색버튼 -->
+<div class="buttons">
+  <h1> 원하는 사항을 <code>선택해주세요.</code></h1>
+  
+  
+  <button class="raise">장르</button>
+  
+    
+  <button class="raise">배우</button>
+  
+  
+  <button class="raise">감독</button>
+  
+
+    <button class="raise"> 
+      <label for="world"> 국내/해외 </label>
+      <select id="global," name="fruit">
+          <option value="strawberry">국내</option>
+          <option value="banana">해외</option>
+      </select> 
+    </button>
+ 
+
+  
+  <button class="raise">관람등급</button>
+  
+
+ 
+  <button class="raise">개봉시기</button>
+ 
+</div>
 
 
 
+<form>
+<!-- 결과창으로 이동 할 버튼 -->
+<a aria-label='Thanks' class='h-button centered pulse'  data-text='선택완료' href='#'>
+  <span>결</span>
+  <span>과</span>
+  <span>보</span>
+  <span>러</span>
+  <span>가</span>
+  <span>기</span>
+</a>
+</form>
 {% endblock body %}
+
+
   
   
