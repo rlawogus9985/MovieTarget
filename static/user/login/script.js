@@ -1,26 +1,26 @@
 /* ========================================= * 
-		        BEST VIEWED FULLSCREEN
-   https://codepen.io/ig_design/full/KKVQpVP
- * ========================================= */
+BEST VIEWED FULLSCREEN
+https://codepen.io/ig_design/full/KKVQpVP
+* ========================================= */
 
-   function loginFormCheck() {
+function loginFormCheck() {
     
     // 로그인 아이디 비밀번호 확인
     let loginname = document.getElementById("loginname").value;
     let loginpassword = document.getElementById("loginpassword").value;
-
+    
     document.getElementById("username").value = loginname;
     document.getElementById("password").value = loginpassword;
     document.getElementById("loginForm").submit();
   }
-   function SignupFormCheck() {
-
+  function SignupFormCheck() {
+    
     // 아이디 검사
     let idTxt = document.getElementById("signupname").value;
     if (idTxt.length < 4 || idTxt.length > 12) {
       alert("아이디 글자 수를 확인해 주세요.");
       return false;
-
+      
     }
     // 비밀번호 글자수 검사
     let pwTxt = document.getElementById("signuppass").value;
@@ -40,3 +40,22 @@
     document.getElementById("joinpassword2").value = PwChkTxt;
     document.getElementById("signupForm").submit();
   }
+  
+  // $("#loginForm").click(function(){
+  //   alert("환영합니다.")
+  // });
+  function loginFormcheckment() {
+    alert("환영합니다.");
+
+    return true;
+  }
+  // $("#signupForm").click(function(){
+  //   alert("회원가입이 완료되었습니다.")
+  //   return true
+  // });
+  
+  function signupFormcheckment() {
+    alert("회원가입이 완료되었습니다.");
+
+    return true;
+  } 
