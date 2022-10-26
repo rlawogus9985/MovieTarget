@@ -8,7 +8,6 @@
 	</a>
     
   {% if user.is_authenticated %}
-
   <div>{{ user.username }}님, 환영합니다.</div><br>
     <a href="{% url 'user:profile' %}" class="btn">내정보</a>
     <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
@@ -16,8 +15,7 @@
     {% else %}
   <div style="text-align:right;"">
   <br>
-  <div>안녕하세요?</div>
-    <a href="{% url 'user:login' %}"><div>로그인하기</div></a>
+    <a href="{% url 'user:login' %}" class="btn">로그인하기</a>
   {% endif %}
   </div>
 
