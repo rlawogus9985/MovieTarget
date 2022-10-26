@@ -67,16 +67,19 @@
 	    </div>
 	</div>
 <!-- partial -->
-{% load static %}
-  <script  src="{% static 'user/login/script.js' %}"></script>
+<!-- {% load static %}
+  <script  src="{% static 'user/login/script.js' %}"></script> -->
+  <!-- <script src="{% static 'jquery.min.js' %}"></script> -->
 
 
-<form action="{% url 'user:login' %}" method="post" id="loginForm">
+
+<form action="{% url 'user:login' %}" method="post" id="loginForm" onsubmit="return loginFormcheckment()">
   {% csrf_token %}
 	<input type="hidden" name="username" id="username">
 	<input type="hidden" name="password" id="password">
 </form>
-<form action="{% url 'user:join' %}" method="post" id="signupForm">
+
+<form action="{% url 'user:join' %}" method="post" id="signupForm" onsubmit="return signupFormcheckment()">
   {% csrf_token %}
 	<input type="hidden" name="username" id="joinusername">
 	<input type="hidden" name="password1" id="joinpassword1">
