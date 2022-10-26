@@ -1,7 +1,16 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'common/menubar/style.css' %}">
 
-<div style="width: 100%; height:100px; background-color:lightgray;">
-    <img src="/static/1logo.PNG" width="160" height="100%" alt="로고">
+
+<div style="background-color:#1f2029; display: inline;">
+  <a href="/" class="logo" target="blank">
+		<img src="../../static/My project-1.png" alt="일일영화 로고">
+	</a>
     
-    {% comment %} <a href="{% url 'user:profile' %}">내정보</a> {% endcomment %}
-    <a href="{% url 'user:logout' %}">로그아웃</a>
+  <div style="text-align:right;"">
+  <br>
+  <a href="#" class="btn">내정보</a>
+  <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+  </div>
+
 </div>
