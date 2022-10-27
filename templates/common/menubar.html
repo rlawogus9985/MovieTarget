@@ -7,15 +7,17 @@
 		<img src="../../static/My project-1.png" alt="일일영화 로고">
 	</a>
     
+  <div style="text-align:right; position: absolute; top: 5px; right: 10px;"">
   {% if user.is_authenticated %}
-  <div>{{ user.username }}님, 환영합니다.</div><br>
+  <div>{{ user.username }}님, 환영합니다.</div>
     <a href="{% url 'user:profile' %}" class="btn">내정보</a>
     <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
   {% else %}
-  <div style="text-align:right;"">
-  <br>
+    <br>
+    <br>
     <a href="{% url 'user:login' %}" class="btn">로그인하기</a>
   {% endif %}
   </div>
+</div>
 
 
