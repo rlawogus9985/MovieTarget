@@ -7,52 +7,30 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'common/main/outcome.css' %}">
 <link rel="stylesheet" href="{% static 'common/main/surf.css' %}">
-<link rel="stylesheet" href="{% static 'common/main/drops.css' %}">
+
 
 {% endblock head %}
 
 
 {% block body %}
 
-{% if user.is_authenticated %}
-<div>{{ user.username }}님, 환영합니다.</div>
-{% else %}
-<div>로그인해주세요.</div>
-{% endif %}
-
-
 <!-- 검색버튼 -->
 <div class="buttons">
   <h1> 원하는 사항을 <code>선택해주세요.</code></h1>
   
-  
   <button class="raise">장르</button>
-  
-    
+      
   <button class="raise">배우</button>
-  
   
   <button class="raise">감독</button>
   
+  <button class="raise">해외/국내</button>
 
-    <button class="raise"> 
-      <label for="world"> 국내/해외 </label>
-      <select id="global," name="fruit">
-          <option value="strawberry">국내</option>
-          <option value="banana">해외</option>
-      </select> 
-    </button>
- 
-
-  
   <button class="raise">관람등급</button>
-  
-
- 
+   
   <button class="raise">개봉시기</button>
  
 </div>
-
 
 
 <form>
