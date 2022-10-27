@@ -1,66 +1,43 @@
 {% extends 'common/base.html' %}
 
-{% load static %}
 
 {% block title %}영화게시판{% endblock title %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'common/main/outcome.css' %}">
-<link rel="stylesheet" href="{% static 'common/main/surf.css' %}">
-<link rel="stylesheet" href="{% static 'common/main/drops.css' %}">
-
+{% load static %}
+<script src="../../static/main.js"></script>
 {% endblock head %}
 
 
 {% block body %}
 
-<!-- 검색버튼 -->
-<div class="buttons">
-  <h1> 원하는 사항을 <code>선택해주세요.</code></h1>
-  
-  
-  <button class="raise">장르</button>
-  
-    
-  <button class="raise">배우</button>
-  
-  
-  <button class="raise">감독</button>
-  
+{% load static %}
+<link rel="stylesheet" href="{% static 'common/main/drops.css' %}">
 
-    <button class="raise"> 
-      <label for="world"> 국내/해외 </label>
-      <select id="global," name="fruit">
-          <option value="strawberry">국내</option>
-          <option value="banana">해외</option>
-      </select> 
-    </button>
- 
+<select class="dropdown" placeholder="Please choose">
+  <option>국내</option>
+  <option>해외</option>
+  <option>List entry #3</option>
+  <option>List entry #4</option>
+</select>
 
-  
-  <button class="raise">관람등급</button>
-  
+<select class="dropdown" placeholder="Please choose">
+  <option>1분기</option>
+  <option>2분기</option>
+  <option>3분기</option>
+  <option>4분기</option>
+</select>
 
- 
-  <button class="raise">개봉시기</button>
- 
-</div>
+<select class="dropdown" placeholder="관람등급">
+  <option>12세</option>
+  <option>12세 이상</option>
+  <option>15세</option>
+  <option>전체 이용</option>
+  <option>청소년 관람 불가</option>
+</select>
 
 
-
-<form>
-<!-- 결과창으로 이동 할 버튼 -->
-<a aria-label='Thanks' class='h-button centered pulse'  data-text='선택완료' href='#'>
-  <span>결</span>
-  <span>과</span>
-  <span>보</span>
-  <span>러</span>
-  <span>가</span>
-  <span>기</span>
-</a>
-</form>
 {% endblock body %}
 
 
-  
-  
+
