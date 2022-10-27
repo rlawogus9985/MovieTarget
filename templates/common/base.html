@@ -7,11 +7,13 @@
     <!-- <script src="../../static/jquery.min.js"></script> -->
     <title>{% block title %}{% endblock %}</title>
     
+    {% block head %}
+      
+    {% endblock head %}
+      
   </head>
   <body>
-    {% comment %}
     {% include 'common/menubar.html' %}
-    {% endcomment %}
 
     <div>
       {% block body %} 

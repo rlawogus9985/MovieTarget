@@ -5,9 +5,6 @@
 
 {% block body %} 
 
-
-
-
 {% load static %}
 <link rel="stylesheet" href="{% static 'common/home/style.css' %}">
 
@@ -16,20 +13,17 @@
     <div class="card-3d-wrapper">
       <div class="card-front">
         <div class="center-wrap">
-          <h1>설명</h1>
+          <br>
+          <br>
+          <img src="../../static/film-slate.png" width="90px" height="90px">
+          <br>
           
-          <h3>설명설명</h3>
-          <pre>
-
-
-
-          
-          </pre>
-
-          <div style="text-align: center;">
-          <a href="{% url 'user:login' %}" class="btn">시작하기</a>
-          </div>
-
+          <h3>
+            오직 일일영화에서만 제공하는<br>
+            차별화된 영화 흥행 예측 서비스!
+          </h3>
+          <h4>지금 바로 만나보세요</h4>
+          <br>
           <div style="text-align: center;">
             <a href="{% url 'user:login' %}" class="cta">
               <span>시작하기</span>
@@ -45,10 +39,5 @@
     </div>
   </div>
 </div>
-
-
-
-
-
 
 {% endblock body %}
