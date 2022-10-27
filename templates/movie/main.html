@@ -1,21 +1,26 @@
 {% extends 'common/base.html' %}
 
-{% load static %}
 
 {% block title %}영화게시판{% endblock title %}
 
 {% block head %}
+<<<<<<< HEAD
 <script src="{% static 'common/main/moving.js' %}"></script>
 <link rel="stylesheet" href="{% static 'common/main/outcome.css' %}">
 <link rel="stylesheet" href="{% static 'common/main/surf.css' %}">
 <link rel="stylesheet" href="{% static 'common/main/choice.css' %}">
 
 
+=======
+{% load static %}
+<script src="../../static/main.js"></script>
+>>>>>>> a02dba76b8f10b82ce14c4f357e3babe0304fc44
 {% endblock head %}
 
 
 {% block body %}
 
+<<<<<<< HEAD
 
 
 
@@ -53,8 +58,35 @@
 
 
 
+=======
+{% load static %}
+<link rel="stylesheet" href="{% static 'common/main/drops.css' %}">
+
+<select class="dropdown" placeholder="Please choose">
+  <option>국내</option>
+  <option>해외</option>
+  <option>List entry #3</option>
+  <option>List entry #4</option>
+</select>
+
+<select class="dropdown" placeholder="Please choose">
+  <option>1분기</option>
+  <option>2분기</option>
+  <option>3분기</option>
+  <option>4분기</option>
+</select>
+
+<select class="dropdown" placeholder="관람등급">
+  <option>12세</option>
+  <option>12세 이상</option>
+  <option>15세</option>
+  <option>전체 이용</option>
+  <option>청소년 관람 불가</option>
+</select>
+
+
+>>>>>>> a02dba76b8f10b82ce14c4f357e3babe0304fc44
 {% endblock body %}
 
 
-  
-  
+
