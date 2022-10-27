@@ -6,8 +6,18 @@
 {% block body %}
 
 <div>나중에 뽑아올 유저관련 데이터</div>  
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div><a href="{% url 'user:change_user_page' %}">회원정보수정</a></div>
+<br>
+<br>
+<br>
+<div><a href="{% url 'user:delete_user_page' %}">회원탈퇴</a></div>
 
-<a href="{% url 'user:delete_user_page' %}">회원탈퇴</a>
 
 {% endblock body %}
   

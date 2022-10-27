@@ -8,6 +8,7 @@
   <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
   <link rel="stylesheet" href="{% static 'user/login/style.css' %}">
   <script src="{% static 'user/login/script.js' %}"></script>
+  <script src="{% static 'jquery.min.js' %}"></script>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -28,11 +29,11 @@
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">로그인</h4>
 											<div class="form-group">
-												<input type="text" name="loginname" class="form-style" placeholder="아이디를 입력해주세요." id="loginname" autocomplete="off">
+												<input type="text" name="loginame" class="form-style" placeholder="아이디를 입력해주세요." id="loginName" autocomplete="off">
 												<i class="input-icon uil uil-at"></i>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="password" name="loginpassword" class="form-style" placeholder="패스워드를 입력해주세요." id="loginpassword" autocomplete="off">
+												<input type="password" name="loginpassword" class="form-style" placeholder="패스워드를 입력해주세요." id="loginPassword" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
 											<a href="#" class="btn mt-4" onclick="loginFormCheck();">확인</a>
@@ -44,18 +45,18 @@
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">회원가입</h4>
 											<div class="form-group">
-												<input type="text" name="signupname" class="form-style" placeholder="4~12글자 사이의 ID를 입력해주세요." id="signupname" autocomplete="off">
+												<input type="text" name="signupname" class="form-style" placeholder="4~12글자 사이의 ID를 입력해주세요." id="signupName" autocomplete="off">
 												<i class="input-icon uil uil-user"></i>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="password" name="signuppass" class="form-style" placeholder="8~20글자 사이의 PW를 입력해주세요." id="signuppass" autocomplete="off">
+												<input type="password" name="signuppass" class="form-style" placeholder="8~20글자 사이의 PW를 입력해주세요." id="signupPass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="password" name="signuppass2" class="form-style" placeholder="비밀번호를 다시 한 번 입력해주세요." id="signuppass2" autocomplete="off">
+												<input type="password" name="signuppass2" class="form-style" placeholder="비밀번호를 다시 한 번 입력해주세요." id="signupPass2" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<a href="#" class="btn mt-4" onclick="SignupFormCheck()">가입하기</a>
+											<a href="#" class="btn mt-5" onclick="SignupFormCheck()">가입하기</a>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -70,20 +71,21 @@
 <!-- {% load static %}
   <script  src="{% static 'user/login/script.js' %}"></script> -->
   <!-- <script src="{% static 'jquery.min.js' %}"></script> -->
+  
+  <!-- onsubmit="return loginFormcheckMent();"
+  onsubmit="return signupFormcheckMent();" -->
 
-
-
-<form action="{% url 'user:login' %}" method="post" id="loginForm" onsubmit="return loginFormcheckment()">
+<form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">
   {% csrf_token %}
-	<input type="hidden" name="username" id="username">
-	<input type="hidden" name="password" id="password">
+	<input type="hidden" name="username" id="userName">
+	<input type="hidden" name="password" id="passWord">
 </form>
 
-<form action="{% url 'user:join' %}" method="post" id="signupForm" onsubmit="return signupFormcheckment()">
+<form action="{% url 'user:join' %}" method="post" id="signupForm"  autocomplete="off">
   {% csrf_token %}
-	<input type="hidden" name="username" id="joinusername">
-	<input type="hidden" name="password1" id="joinpassword1">
-	<input type="hidden" name="password2" id="joinpassword2">
+	<input type="hidden" name="username" id="joinUserName">
+	<input type="hidden" name="password1" id="joinPassword1">
+	<input type="hidden" name="password2" id="joinPassword2">
 </form>
 
 </body>

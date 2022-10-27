@@ -1,8 +1,9 @@
 {% load static %}
-
-<form action="{% url 'user:delete_user' %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
-  {% csrf_token %}
-  {{ user.username }} 회원님의 계정을 삭제 하시겠습니까?<br>
-  <button type="submit" name="delete_user_bt" id="deleteUserBt">탈퇴하기</button>
-</form>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+  <form action="{% url 'user:delete_user' %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
+    {% csrf_token %}
+    {{ user.username }} 회원님의 계정을 삭제 하시겠습니까?<br>
+    <button type="submit" name="delete_user_bt" id="deleteUserBt">탈퇴하기</button>
+  </form>
   <script src="{% static 'user/delete/script.js' %}"></script>
+</body>
