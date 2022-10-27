@@ -1,1 +1,30 @@
 {% extends 'common/base.html' %}
+
+
+{% block title %}장르 선택{% endblock %}
+
+
+{% block head %}
+      
+{% endblock head %}
+
+
+{% block body %} 
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'movie/select/style.css' %}">
+
+<div class="container">
+  <form autocomplete="off">
+    <div class="finder">
+      <div class="finder__outer">
+        <div class="finder__inner">
+          <div class="finder__icon" ref="icon"></div>
+          <input class="finder__input" type="text" name="q" />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock body %}
