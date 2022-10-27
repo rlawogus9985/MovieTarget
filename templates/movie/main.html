@@ -14,6 +14,7 @@
 
 {% block body %}
 
+
 {% if user.is_authenticated %}
 <div>{{ user.username }}님, 환영합니다.</div>
 {% else %}
@@ -54,18 +55,19 @@
 </div>
 
 
-
-<form>
-<!-- 결과창으로 이동 할 버튼 -->
-<a aria-label='Thanks' class='h-button centered pulse'  data-text='선택완료' href='#'>
-  <span>결</span>
-  <span>과</span>
-  <span>보</span>
-  <span>러</span>
-  <span>가</span>
-  <span>기</span>
-</a>
-</form>
+<div>
+  <form>
+  <!-- 결과창으로 이동 할 버튼 -->
+  <a aria-label='Thanks' class='h-button centered pulse'  data-text='선택완료' href='#'>
+    <span>결</span>
+    <span>과</span>
+    <span>보</span>
+    <span>러</span>
+    <span>가</span>
+    <span>기</span>
+  </a>
+  </form>
+</div>
 {% endblock body %}
 
 
