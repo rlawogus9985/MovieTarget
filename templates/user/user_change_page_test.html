@@ -1,0 +1,34 @@
+
+{% load static %}
+<script src="{% static 'user/change/script.js' %}"></script>
+
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+    <br>
+    <br>
+    {{ user.username }} 회원님 정보를 수정하시겠습니까?
+    <br>
+    <br>
+    <input type="text" id="chageName" placeholder="수정ID입력란">
+    <input type="hidden" id="originName" value="{{ user.username }}">
+    <br>
+    <input type="password" id="changePassword1" placeholder="수정PW입력란">
+    <br>
+    <input type="password" id="changePassword2" placeholder="PW를 다시입력해주세요."> 
+    <input type="hidden" id="originPassword" value="{{ user.password }}">
+    <br>
+    <br>
+    <button type="submit" name="change_user_bt" id="changeUserBt">ID수정하기</button>
+ 
+    <button type="submit" name="change_user_bt" id="changeUserBt2">PW수정하기</button>
+</body>
+
+<form action="{% url 'user:change_user' %}" method="post" id="changeUserBt" novalidate onsubmit="return changeFormIdCheckMent();">
+  {% csrf_token %}
+  <input type="hidden" name="username" id="chageName">
+</form>
+
+
+<form action="{% url 'user:change_user' %}" method="post" id="changeUserBt2" novalidate>
+  {% csrf_token %}
+  <input type="hidden" name="password" id="changePassword1">
+</form>
