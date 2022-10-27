@@ -4,4 +4,5 @@ app_name = 'movie'
 urlpatterns = [
     # path('board/',views.MovieBoard ,name='board'),
     path('board/',views.MovieBoardtest ,name='board'),
+    path('select/', views.select, name='select'),
 ]
