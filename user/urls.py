@@ -9,4 +9,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('delete_user_page/', views.delete_user_page, name='delete_user_page'),
     path('delete_user/', views.delete_user, name='delete_user'),
+    path('change_user_apge/', views.userchangepage ,name='change_user_page'),
+    path('change_user/', views.UserChangeForm.as_view() ,name='change_user'),
+    
 ]

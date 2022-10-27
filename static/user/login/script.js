@@ -59,21 +59,6 @@ function SignupFormCheck() {
   alert("회원가입이 완료되었습니다.")
   }
   
-
-  // function loginFormcheckMent() {
-  //   alert("환영합니다.");
-  //   return true;
-  // }
-
-
-  // function signupFormcheckMent() {
-  //   alert("회원가입이 완료되었습니다.");
-  //   return true;
-  // } 
-  // $("#loginForm").click(function(){
-  //   alert("환영합니다.")
-  // });
-// $("#signupForm").click(function(){
-//   alert("회원가입이 완료되었습니다.")
-//   return true
-// });
+  document.getElementsByClassName('btn mt-4').addEventListener('click', e => {
+    window.history.forward();
+  })
