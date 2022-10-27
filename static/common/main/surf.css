@@ -1,0 +1,87 @@
+/*
+  https://developer.mozilla.org/en/docs/Web/CSS/box-shadow
+  box-shadow: [inset?] [top] [left] [blur] [size] [color];
+
+  Tips:
+    - We're setting all the blurs to 0 since we want a solid fill.
+    - Add the inset keyword so the box-shadow is on the inside of the element
+    - Animating the inset shadow on hover looks like the element is filling in from whatever side you specify ([top] and [left] accept negative values to become [bottom] and [right])
+    - Multiple shadows can be stacked
+    - If you're animating multiple shadows, be sure to keep the same number of shadows on hover/focus as non-hover/focus (even if you have to create a transparent shadow) so the animation is smooth. Otherwise, you'll get something choppy.
+*/
+
+.pulse:hover,
+.pulse:focus {
+  -webkit-animation: pulse 1s;
+          animation: pulse 1s;
+  box-shadow: 0 0 0 2em transparent;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+.pulse {
+  --color: #ef6eae;
+  --hover: #ef8f6e;
+}
+
+.raise {
+  --color: #ffa260;
+  --hover: #e5ff60;
+}
+
+
+button {
+  color: var(--color);
+  transition: 0.25s;
+}
+button:hover, button:focus {
+  border-color: var(--hover);
+  color: #fff;
+}
+
+body {
+  color: #fff;
+  background: #17181c;
+  font: 300 1em "Fira Sans", sans-serif;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+}
+
+button {
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+
+h1 {
+  font-weight: 400;
+}
+
+code {
+  color: #e4cb58;
+  font: inherit;
+}
