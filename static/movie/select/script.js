@@ -25,3 +25,14 @@ form.addEventListener("submit", (ev) => {
     }
   }, 1000);
 });
+
+function movieSelect() {
+  let nations = document.getElementById('movieNations').value;
+  let opendt = document.getElementById('movieOpenDt').value;
+  let autidt = document.getElementById('movieAudit').value;
+  document.getElementById('nations').value = nations;
+  // document.getElementById('openDt').value = opendt;
+  document.getElementById('audit').value = autidt;
+  document.getElementById('movieSelect').submit();
+  // alert('선택이 완료되었습니다.')
+}

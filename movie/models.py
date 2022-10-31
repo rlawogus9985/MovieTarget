@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import models as auth_models
 
 class TargetBase(models.Model):
     moviecd = models.IntegerField(db_column='movieCd', primary_key=True)  # Field name made lowercase.
@@ -17,3 +18,4 @@ class TargetBase(models.Model):
     class Meta:
         managed = False
         db_table = 'target_base'
+
