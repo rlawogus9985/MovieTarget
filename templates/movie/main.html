@@ -5,32 +5,30 @@
 {% block title %}영화게시판{% endblock title %}
 
 {% block head %}
-
 <script src="../../static/main.js"></script>
+<script src="../../static/movie/select/script.js"></script>
 <link rel="stylesheet" href="{% static 'common/main/style.css' %}">
-
 {% endblock head %}
 
 
 {% block body %}
 
-
 <div style="text-align: center;">
-  <select class="dropdown" placeholder="Please choose">
+  <select class="dropdown" placeholder="Please choose" id="movieNations">
     <option>국내</option>
     <option>해외</option>
     <option>List entry #3</option>
     <option>List entry #4</option>
   </select>
   
-  <select class="dropdown" placeholder="Please choose">
+  <select class="dropdown" placeholder="Please choose" id="movieOpenDt">
     <option>1분기</option>
     <option>2분기</option>
     <option>3분기</option>
     <option>4분기</option>
   </select>
   
-  <select class="dropdown" placeholder="관람등급">
+  <select class="dropdown" placeholder="관람등급" id="movieAudit">
     <option>전체관람가</option>
     <option>12세</option>
     <option>12세이상관람가</option>
@@ -61,6 +59,19 @@
   <a href="#" class="btn_" style="text-align:right;">결과 보기</a>
 </div>
 
+
+<div><a href="javascript:movieSelect();" style="text-decoration:none;">선택완료</a></div>
+<!-- <div><a href="{% url 'movie:selectlist' %}" style="text-decoration:none;" >결과보기</a></div> -->
+
+<form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
+  {% csrf_token %}
+  <input type="hidden" name="nations" id="nations">
+  <!-- <input type="hidden" name="openDt2" id="openDt"> -->
+  <input type="hidden" name="audit" id="audit">
+  <!-- <select type="hidden" name="nations" id="nations"></select>
+  <select type="hidden" name="openDt" id="openDt"></select>
+  <select type="hidden" name="audit" id="audit"></select> -->
+</form>
 
 {% comment %}
 

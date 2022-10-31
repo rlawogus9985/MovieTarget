@@ -1,1 +1,17 @@
 {% extends 'common/base.html' %}
+
+{% block title %}
+영화선택결과페이지
+{% endblock title %}
+  
+{% block body %}
+<div>영화선택결과페이지</div>
+
+{% for moviebase in moviebase_list %}
+  {{ moviebase.id }}
+  {{ moviebase.nations }} 
+  {{ moviebase.audit }}
+{% endfor %}
+  
+{% endblock body %}
+  
