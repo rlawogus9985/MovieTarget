@@ -1,8 +1,9 @@
 {% load static %}
 
-<script src="{% static 'user/change/script.js' %}"></script>
+<!-- <script src="{% static 'user/change/script.js' %}"></script> -->
 
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<!-- <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload=""> -->
+<body>
   {% include 'common/menubar.html' %}
   <br>
   <br>
@@ -17,17 +18,28 @@
     <tbody>
       <tr>
         <td>
+          {% comment %}
           <form action="{% url 'user:change_user' %}" id="userChange" method="post" novalidate onsubmit="return changeFormIdCheckMent();">
+          <form action="{% url 'user:change_user' %}" id="userChange" method="post">
+          {% endcomment %}
+            
+          <form action="{% url 'user:change_user' auth_user_id=user.id %}" id="userChange" method="post">
             {% csrf_token %}
-            <input type="text" name="username" value="username" id="changeName" placeholder="ID를 입력해주세요.">
+            <input type="text" name="username"  id="changeName" placeholder="ID를 입력해주세요.">
             <input type="hidden" id="originName" value="{{ user.username }}"><br>
-            <input type="password" name="password" value="password" id="changePassword1" placeholder="변경하실 PW를 입력해주세요."> <br>
-            <input type="password" name="password" id="changePassword2" placeholder="PW를 한번더 입력해주세요."> <br>
+            <input type="password" name="password"  id="changePassword1" placeholder="변경하실 PW를 입력해주세요."> <br>
+            <input type="password" name="password2" id="changePassword2" placeholder="PW를 한번더 입력해주세요."> <br>
             <button type="submit" name="change_user_bt">수정하기</button>
           </form>
         </td>
       </tr>
     </tbody>
-
   </table>
 </body>
+
+{% comment %}
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  </form>
+{% endcomment %}
