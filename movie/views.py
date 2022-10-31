@@ -38,7 +38,7 @@ class SelectCreateView(LoginRequiredMixin ,generic.CreateView):
         return super().form_invalid(form)
 
 class SelectListView(generic.ListView):
-    model = MovieBase
+    model = TargetBase
     template_name = 'movie/result.html'
 
 class SelectDetailView(generic.DetailView):
