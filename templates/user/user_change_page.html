@@ -1,33 +1,40 @@
 {% load static %}
 
 <script src="{% static 'user/change/script.js' %}"></script>
+<link rel="stylesheet" href="{% static 'user/change/modify.css' %}">
+<link rel="stylesheet" href="{% static 'common/home/style.css' %}">
 
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
   {% include 'common/menubar.html' %}
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <table border="1" >
-    <thead>
-      <th>비밀번호수정</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <form action="{% url 'user:change_user' %}" id="userChange" method="post" novalidate onsubmit="return changeFormIdCheckMent();">
-            {% csrf_token %}
-            <input type="text" name="username" value="username" id="changeName" placeholder="ID를 입력해주세요.">
-            <input type="hidden" id="originName" value="{{ user.username }}"><br>
-            <input type="password" name="password" value="password" id="changePassword1" placeholder="변경하실 PW를 입력해주세요."> <br>
-            <input type="password" name="password" id="changePassword2" placeholder="PW를 한번더 입력해주세요."> <br>
-            <button type="submit" name="change_user_bt">수정하기</button>
-          </form>
-        </td>
-      </tr>
-    </tbody>
-
-  </table>
+  <div class="section pb-5 pt-5 pt-sm-2 text-center" style="text-align:center">
+    <div class="card-3d-wrap mx-auto">
+      <div class="card-3d-wrapper">
+        <div class="card-front">
+          <div class="center-wrap">
+            <div class="container">
+              <table style="left: 50%; width: 500px; height: 160%; text-align: center;">
+                <thead>
+                  <th><code>비밀번호수정</code></th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <form action="{% url 'user:change_user' %}" id="userChange" method="post" novalidate onsubmit="return changeFormIdCheckMent();">
+                        {% csrf_token %}
+                        <input type="text" name="username" value="username" id="changeName" placeholder="ID를 입력해주세요.">
+                        <input type="hidden" id="originName" value="{{ user.username }}"><br><br>
+                        <input type="password" name="password" value="password" id="changePassword1" placeholder="변경하실 PW를 입력해주세요."> <br><br> 
+                        <input type="password" name="password" id="changePassword2" placeholder="비밀번호를 한번 더 입력해주세요."><br><br><br> 
+                        <button type="submit" name="change_user_bt" class="w-btn-outline w-btn-gray-outline">수정하기</button>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
