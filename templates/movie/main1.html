@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>감독 선택</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'common/menubar/style.css' %}">
+  <link rel="stylesheet" href="{% static 'common/main/slide.css' %}">
+  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
+  <script src="{% static 'movie/select/dselect.js' %}"></script>
+</head>
+<body style="background-color:#171c28;">
+
+<!-- 메뉴 바(직접 작성)-->
+<div style="background-color:#1f2029; display: flex; justify-content: space-between">
+  <img src="../../static/My project-1.png" alt="일일영화 로고"
+   style="height: 100px; width: auto;">
+	
+  <div style="color: white; text-align:right; top: 5px; right: 10px;">
+  {% if user.is_authenticated %}
+    {{ user.username }}님, 환영합니다.<br>
+    <a href="{% url 'user:profile' %}" class="btn">내정보</a>
+    <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+  {% endif %}
+  </div>
+</div>
+
+{{ targetbase_list }}
+<div style="color: white;">
+  {% for list in targetbase_list %}
+    {{ list.director }}<br>
+  {% endfor %}
+</div>
+<div>
+
+  <ul class="pagination justify-content-center">
+    <!--이전 페이지-->
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">이전</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
+      </li>
+    {% endif %}
+  
+    <!-- 페이지 리스트 -->
+    {% for page_number in page_obj.paginator.page_range %}
+    {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+      {% if page_number == page_obj.number %}
+        <li class="page-item active" aria-current="page">
+          <a href="?page={{ page_number }}" class="page-link">{{ page_number }}</a>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a href="?page={{ page_number }}" class="page-link">{{ page_number }}</a>
+        </li>
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    <!-- 다음 페이지 -->
+    {% if page_obj.has_next %}
+    <li class="page-item">
+      <a href="?page={{ page_obj.next_page_number }}" class="page-item">다음</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+
+  <!-- 왼쪽 클릭은 2,3 페이지만-->
+  <div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div>
+  <!-- 오른쪽 클릭은 1,2,3 페이지만-->
+  <!-- 현지점(1페이지)에서 누르면 바로 4페이지로 가는 임시 기능-->
+  <div class="slide_next_button slide_button"><a href="{% url 'movie:board4' %}">▶</a></div>
+  
+
+</body>
+</html>
