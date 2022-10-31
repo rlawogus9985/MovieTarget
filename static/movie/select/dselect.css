@@ -1,0 +1,11 @@
+a {
+  text-decoration: none;
+}
+
+.slide_button > a {
+  color: black;
+}
+
+.page-link {
+  color: white;
+}
