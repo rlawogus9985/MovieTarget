@@ -5,16 +5,59 @@
 {% block title %}영화게시판{% endblock title %}
 
 {% block head %}
-{% load static %}
 <script src="../../static/main.js"></script>
 <script src="../../static/movie/select/script.js"></script>
+<link rel="stylesheet" href="{% static 'common/main/style.css' %}">
 {% endblock head %}
 
 
 {% block body %}
 
-{% load static %}
-<link rel="stylesheet" href="{% static 'common/main/style.css' %}">
+<div style="text-align: center;">
+  <select class="dropdown" placeholder="Please choose">
+    <option>국내</option>
+    <option>해외</option>
+    <option>List entry #3</option>
+    <option>List entry #4</option>
+  </select>
+  
+  <select class="dropdown" placeholder="Please choose">
+    <option>1분기</option>
+    <option>2분기</option>
+    <option>3분기</option>
+    <option>4분기</option>
+  </select>
+  
+  <select class="dropdown" placeholder="관람등급">
+    <option>전체관람가</option>
+    <option>12세</option>
+    <option>12세이상관람가</option>
+    <option>15세이상관람가</option>
+    <option>청소년관람불가</option>
+  </select>
+</div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="lower_bar" style="position: absolute; display: inline;">
+    <a href="#" class="btn_" >이전(◀)</a>
+    <button style="visibility: hidden; width: 200px"></button>
+    <div class="points">
+      <a href="#"><div class="points_point"></div></a>
+      <button class="points_point"style="visibility: hidden;"></button>
+      <a href="#"><div class="points_point"></div></a>
+      <button class="points_point"style="visibility: hidden;"></button>
+      <a href="#"><div class="points_point"></div></a>
+      <button class="points_point"style="visibility: hidden;"></button>
+      <div class="points_point active"></div>
+    </div>
+    <button style="visibility: hidden; width: 200px"></button>
+    <a href="#" class="btn_" >결과 보기</a>
+  </div>
 
 <select class="dropdown" placeholder="Please choose"  id="movieNations">
   <option>국내</option>
@@ -50,6 +93,11 @@
   <select type="hidden" name="openDt" id="openDt"></select>
   <select type="hidden" name="audit" id="audit"></select> -->
 </form>
+
+{% comment %}
+
+{% endcomment %}
+
 
 {% endblock body %}
 

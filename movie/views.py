@@ -2,9 +2,10 @@ from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse_lazy
-from movie.models import MovieBase
+from django.urls import reverse, reverse_lazy
+from movie.models import TargetBase
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 @login_required(login_url=reverse_lazy('user:login'))
 def MovieBoardtest(request):
@@ -17,7 +18,7 @@ def select(request):
     return render(request, 'movie/select.html')
 
 class SelectCreateView(LoginRequiredMixin ,generic.CreateView):
-    model = MovieBase
+    model = TargetBase
     fields = ['nations', 'audit']
     template_name = 'movie/main.html'
     login_url = reverse_lazy('user:login')
@@ -44,4 +45,22 @@ class SelectDetailView(generic.DetailView):
     pass
 
 
+# class MovieBoard(generic.ListView):
+#     model: Optional[Type[Model]]
+
+# @login_required(login_url=reverse_lazy('user:login'))
+class MovieBoardtest1(generic.ListView):
+
+    # model = TargetBase
+    paginate_by = 12
+    template_name = "movie/main1.html"
+    queryset = TargetBase.objects.values('director').distinct()
+    context_object_name = "targetbase_list"
+    
+    # def get_queryset(self):
+    #     return TargetBase.objects.distinct().values_list('director')
+
+# def testboard(request):
+#     posts = TargetBase.objects.all()
+#     return render(request, 'movie/main1.html', {"posts": posts})
 
