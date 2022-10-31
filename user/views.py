@@ -22,7 +22,7 @@ def profile(request):
     return render(request, 'user/profile.html')
 
 def delete_user_page(request):
-    return render(request, 'user/delete.html')
+    return render(request, 'user/user_delete.html')
 
 class UserCreateForm(generic.CreateView):
     form_class = auth_forms.UserCreationForm
