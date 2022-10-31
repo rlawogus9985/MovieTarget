@@ -1,198 +1,18 @@
 .dropdown {
-  --max-scroll: 8;
-  --text: #ffeba7;
-  --border: #2f3545;
-  --borderActive: #23c4f8;
-  --background: #151924;
-  --arrow: #6c7486;
-  --arrowActive: #e4ecfa;
-  --listText: #99a3ba;
-  --listBackground: #f5f9ff;
-  --listActive: #e4ecfa;
-  --listTextActive: #6c7486;
-  --listBorder: none;
-  --textFilled: #99a3ba;
-  width: 220px;
-  position: relative;
-  top: 50%;
-}
-.dropdown.light {
-  --text: #cdd9ed;
-  --border: #cdd9ed;
-  --borderActive: #23c4f8;
-  --background: #fff;
-  --arrow: #99a3ba;
-  --arrowActive: #6c7486;
-  --listText: #99a3ba;
-  --listBackground: #fff;
-  --listActive: #f5f9ff;
-  --listTextActive: #6c7486;
-  --listBorder: #e4ecfa;
-  --textFilled: #6c7486;
-}
-.dropdown select {
-  display: none;
-}
-.dropdown > span {
-  cursor: pointer;
-  padding: 9px 16px;
-  border-radius: 6px;
-  display: block;
-  position: relative;
-  color: var(--text);
-  border: 1px solid var(--border);
-  background: var(--background);
-  transition: all 0.3s ease;
-}
-.dropdown > span:before,
-.dropdown > span:after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 8px;
-  height: 2px;
-  border-radius: 1px;
-  top: 50%;
-  right: 15px;
-  background: var(--arrow);
-  transition: all 0.3s ease;
-}
-.dropdown > span:before {
-  margin-right: 4px;
-  transform: scale(0.96, 0.8) rotate(50deg);
-}
-.dropdown > span:after {
-  transform: scale(0.96, 0.8) rotate(-50deg);
-}
-.dropdown ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  max-height: calc(var(--max-scroll) * 42px);
-  top: 42px;
-  left: 0;
-  z-index: 1;
-  right: 0;
-  background: var(--listBackground);
-  border-radius: 6px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  transform-origin: 0 0;
-  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
-  transform: scale(0.8) translate(0, 4px);
-  border: 1px solid var(--listBorder);
-}
-.dropdown ul li {
-  opacity: 0;
-  transform: translate(6px, 0);
-  transition: all 0.3s ease;
-}
-.dropdown ul li a {
-  cursor: pointer;
-  display: block;
-  padding: 10px 16px;
-  color: var(--listText);
-  text-decoration: none;
-  outline: none;
-  position: relative;
-  transition: all 0.3s ease;
-}
-.dropdown ul li a:hover {
-  color: var(--listTextActive);
-}
-.dropdown ul li.active a {
-  color: var(--listTextActive);
-  background: var(--listActive);
-}
-.dropdown ul li.active a:before,
-.dropdown ul li.active a:after {
-  --scale: 0.6;
-  content: "";
-  display: block;
-  width: 10px;
-  height: 2px;
-  position: absolute;
-  right: 17px;
-  top: 50%;
-  opacity: 0;
-  background: var(--listText);
-  transition: all 0.2s ease;
-}
-.dropdown ul li.active a:before {
-  transform: rotate(45deg) scale(var(--scale));
-}
-.dropdown ul li.active a:after {
-  transform: rotate(-45deg) scale(var(--scale));
-}
-.dropdown ul li.active a:hover:before,
-.dropdown ul li.active a:hover:after {
-  --scale: 0.9;
-  opacity: 1;
-}
-.dropdown ul li:first-child a {
-  border-radius: 6px 6px 0 0;
-}
-.dropdown ul li:last-child a {
-  border-radius: 0 0 6px 6px;
-}
-.dropdown.filled > span {
-  color: var(--textFilled);
-}
-.dropdown.open > span {
-  border-color: var(--borderActive);
-}
-.dropdown.open > span:before,
-.dropdown.open > span:after {
-  background: var(--arrowActive);
-}
-.dropdown.open > span:before {
-  transform: scale(0.96, 0.8) rotate(-50deg);
-}
-.dropdown.open > span:after {
-  transform: scale(0.96, 0.8) rotate(50deg);
-}
-.dropdown.open ul {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1) translate(0, 12px);
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
-}
-.dropdown.open ul li {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-.dropdown.open ul li:nth-child(1) {
-  transition-delay: 80ms;
-}
-.dropdown.open ul li:nth-child(2) {
-  transition-delay: 160ms;
-}
-.dropdown.open ul li:nth-child(3) {
-  transition-delay: 240ms;
-}
-.dropdown.open ul li:nth-child(4) {
-  transition-delay: 320ms;
-}
-.dropdown.open ul li:nth-child(5) {
-  transition-delay: 400ms;
-}
-.dropdown.open ul li:nth-child(6) {
-  transition-delay: 480ms;
-}
-.dropdown.open ul li:nth-child(7) {
-  transition-delay: 560ms;
-}
-.dropdown.open ul li:nth-child(8) {
-  transition-delay: 640ms;
-}
-.dropdown.open ul li:nth-child(9) {
-  transition-delay: 720ms;
-}
-.dropdown.open ul li:nth-child(10) {
-  transition-delay: 800ms;
+    --max-scroll: 8;
+    --text: #ffeba7;
+    --border: #2F3545;
+    --borderActive: #23C4F8;
+    --background: #151924;
+    --arrow: #6C7486;
+    --arrowActive: #E4ECFA;
+    --listText: #99A3BA;
+    --listBackground: #F5F9FF;
+    --listActive: #E4ECFA;
+    --listTextActive: #6C7486;
+    --listBorder: none;
+    --textFilled: #99A3BA;
+    width: 220px;
 }
 select {
   --text: #3f4656;
@@ -209,76 +29,6 @@ select.dropdown {
   font-size: 16px;
   font-family: inherit;
 }
-html {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-}
-* {
-  box-sizing: inherit;
-}
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-.switch {
-  height: 20px;
-  display: block;
-  position: relative;
-  cursor: pointer;
-}
-.switch input {
-  display: none;
-}
-.switch input + span {
-  padding-left: 38px;
-  min-height: 20px;
-  line-height: 20px;
-  display: block;
-  color: #3f4656;
-  position: relative;
-  white-space: nowrap;
-}
-.switch input + span:not(:empty) {
-  padding-left: 46px;
-}
-.switch input + span:before,
-.switch input + span:after {
-  content: "";
-  display: block;
-  position: absolute;
-  border-radius: 10px;
-}
-.switch input + span:before {
-  top: 0;
-  left: 0;
-  width: 38px;
-  height: 20px;
-  border: 1px solid #2f3545;
-  transition: all 0.3s ease;
-}
-.switch input + span:after {
-  width: 14px;
-  height: 14px;
-  background: #2f3545;
-  top: 3px;
-  left: 3px;
-  transition: all 0.45s ease;
-}
-.switch input + span + svg {
-  display: none;
-}
-.switch input:checked + span:before {
-  background: #5628ee;
-  border-color: #5628ee;
-}
-.switch input:checked + span:after {
-  background: #fff;
-  transform: translate(18px, 0);
-}
-.switch:hover input:not(:checked) + span:before {
-  border-color: #23c4f8;
-}
-
 body {
   --bg: #171c28;
   min-height: 100vh;
@@ -289,25 +39,77 @@ body {
   transition: background 0.3s ease;
   background: var(--bg);
 }
-body.light {
-  --bg: #f5f9ff;
-}
-body .switch {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
 body .dropdown {
-  margin-top: 60px;
+    margin-top: 35%;
 }
-body .dribbble {
-  position: fixed;
-  display: block;
-  right: 20px;
-  bottom: 20px;
+
+.points {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 200px;
+    height: 0px;
 }
-body .dribbble img {
-  display: block;
-  height: 28px;
+.points .active {
+    background: #ffeba7;
 }
+.points_point {
+    float: left;
+    width: 12px;
+    display: inline-block;
+    border-radius: 10px;
+    height: 12px;
+    background: #69aef3;
+    margin-right: 4px;
+    position: relative;
+}
+
+
+a {
+	cursor: pointer;
+    transition: all 200ms linear;
+}
+a:hover {
+	text-decoration: none;
+}
+.btn_{
+    border-radius: 4px;
+    height: 44px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    -webkit-transition : all 200ms linear;
+    transition: all 200ms linear;
+    padding: 0 30px;
+    letter-spacing: 1px;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    text-align: center;
+    border: none;
+    background-color: #ffeba7;
+    color: #102770;
+    box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+.btn_:active,
+.btn_:focus{  
+    background-color: #102770;
+    color: #ffeba7;
+    box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+.btn_:hover{  
+    background-color: #102770;
+    color: #ffeba7;
+    box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+
