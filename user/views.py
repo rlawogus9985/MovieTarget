@@ -1,4 +1,6 @@
+from asyncio import events
 from multiprocessing import context
+from wsgiref.util import request_uri
 from django.shortcuts import  redirect, render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -41,15 +43,17 @@ def userchangepage(request):
 @login_required(login_url=reverse_lazy('user:login'))
 def  userchangeview(request, auth_user_id):
     # auth_user.username 테이블 필드명 
+
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
     
     try:
-        # authuserpk = auth_views.UserModel.objects.get(pk=auth_user_id)
-        # authuserpk.password = password
-        # auth_views.UserModel.save()
-        auth_views.UserModel.objects.get(pk=auth_user_id).update(password=password)
-        auth_views.UserModel.save()
+        if username == request.user.username:
+            user = auth_views.UserModel.objects.get(pk=auth_user_id)
+            user.set_password(password)
+            user.save()
+        else:
+            print("일치하는 회원이 없습니다.")
     except:
         pass
 

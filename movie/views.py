@@ -1,7 +1,10 @@
+from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from movie.models import MovieBase
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 @login_required(login_url=reverse_lazy('user:login'))
 def MovieBoardtest(request):
@@ -13,5 +16,32 @@ def select(request):
     """선택/검색 임시"""
     return render(request, 'movie/select.html')
 
-# class MovieBoard(generic.ListView):
-#     model: Optional[Type[Model]]
+class SelectCreateView(LoginRequiredMixin ,generic.CreateView):
+    model = MovieBase
+    fields = ['nations', 'audit']
+    template_name = 'movie/main.html'
+    login_url = reverse_lazy('user:login')
+
+    def form_valid(self, form):
+        print(form.instance)
+        print(form.cleaned_data)
+        # print(form.cleaned_data['openDt2'])
+        form.instance.moviebase_id = self.request.user.id
+        form.save()
+        return redirect(reverse_lazy('movie:selectlist'))
+    
+    def form_invalid(self, form):
+        print("유효하지 않은 폼 데이터")
+        print(form.instance)
+        print(form.cleaned_data)
+        return super().form_invalid(form)
+
+class SelectListView(generic.ListView):
+    model = MovieBase
+    template_name = 'movie/result.html'
+
+class SelectDetailView(generic.DetailView):
+    pass
+
+
+
