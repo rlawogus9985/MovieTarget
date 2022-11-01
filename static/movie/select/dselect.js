@@ -13,3 +13,9 @@ window.onload = function () {
     });
   });
 };
+
+// 감독 선택을 위한 js
+function TableDirector(e) {
+  selected_director = e.innerHTML.trim();
+  document.getElementById("selected_director").value = selected_director;
+}
