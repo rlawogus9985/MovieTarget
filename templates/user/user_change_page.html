@@ -19,17 +19,13 @@
                 <tbody>
                   <tr>
                     <td>
-                    {% comment %}
-                    <form action="{% url 'user:change_user' %}" id="userChange" method="post" novalidate onsubmit="return changeFormIdCheckMent();">
-                    <form action="{% url 'user:change_user' %}" id="userChange" method="post">
-                    {% endcomment %}
-                      <form action="{% url 'user:change_user' auth_user_id=user.id %}" id="userChange" method="post">
+                      <form action="{% url 'user:change_user' auth_user_id=user.id %}" id="userChange" method="post" onsubmit="return false;">
                         {% csrf_token %}
-                        <input type="text" name="username" value="username" id="changeName" placeholder="ID를 입력해주세요.">
+                        <input type="text" name="username"  value="{{ user.username }}" id="changeName" >
                         <input type="hidden" id="originName" value="{{ user.username }}"><br><br>
-                        <input type="password" name="password" value="password" id="changePassword1" placeholder="변경하실 PW를 입력해주세요."> <br><br> 
+                        <input type="password" name="password"  id="changePassword1" placeholder="변경하실 PW를 입력해주세요."> <br><br> 
                         <input type="password" name="password2" id="changePassword2" placeholder="비밀번호를 한번 더 입력해주세요."><br><br><br> 
-                        <button type="submit" name="change_user_bt" class="w-btn-outline w-btn-gray-outline">수정하기</button>
+                        <button type="submit" name="change_user_bt" class="w-btn-outline w-btn-gray-outline" onclick="changeFormIdCheckMent();">수정하기</button>
                       </form>
                     </td>
                   </tr>
