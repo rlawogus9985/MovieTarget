@@ -10,8 +10,8 @@
     
   <div style="text-align:right; position: absolute; top: 5px; right: 10px;">
   {% if user.is_authenticated %}
-  <div style="color: #c4c3ca;">{{ user.username }}님, 환영합니다.</div>
-    <a href="{% url 'user:profile' %}" class="btn">내정보</a>
+  <div class="sawname">{{ user.username }}님, 환영합니다.</div>
+    <a href="{% url 'user:profile' %}" class="btn">회원정보</a>
     <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
   {% else %}
     <br>

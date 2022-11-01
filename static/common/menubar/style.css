@@ -3,6 +3,7 @@ a {
   transition: all 200ms linear;
   text-decoration: none;
 }
+
 .btn {
   border-radius: 4px;
   height: 44px;
