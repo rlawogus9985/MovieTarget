@@ -78,8 +78,6 @@
 <form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">
   {% csrf_token %}
 	<input type="hidden" name="username" id="userName">
-  <input type="hidden" id="originalUserName" value="{{ user.username }}">
-  <input type="hidden" id="originalUserPassword" value="{{ user.password }}">
 	<input type="hidden" name="password" id="passWord">
 </form>
 
