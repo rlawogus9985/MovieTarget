@@ -1,11 +1,11 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'common/menubar/style.css' %}">
 
-
 <div style="background-color:#1f2029; display: inline;">
   <a href="/" class="logo" target="blank">
-		<img src="../../static/My project-1.png" alt="일일영화 로고">
-	</a>
+		<!-- <img src="../../static/My project-1.png" alt="일일영화 로고"> -->
+	  <img src="{% static 'My project-1.png' %}" alt="">
+  </a>
     
   <div style="text-align:right; position: absolute; top: 5px; right: 10px;">
   {% if user.is_authenticated %}
