@@ -1,86 +1,78 @@
-{% extends 'common/base.html' %}
-{% load static %}
-
-
-{% block title %}영화게시판{% endblock title %}
-
-{% block head %}
-<script src="../../static/main.js"></script>
-<script src="../../static/movie/select/script.js"></script>
-<link rel="stylesheet" href="{% static 'common/main/style.css' %}">
-{% endblock head %}
-
-
-{% block body %}
-
-<div style="text-align: center;">
-  <select class="dropdown" placeholder="Please choose" id="movieNations">
-    <option>국내</option>
-    <option>해외</option>
-    <option>List entry #3</option>
-    <option>List entry #4</option>
-  </select>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>board 4</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'common/menubar/style.css' %}">
+  <link rel="stylesheet" href="{% static 'common/main/style.css' %}">
+</head>
+<body>
   
-  <select class="dropdown" placeholder="Please choose" id="movieOpenDt">
-    <option>1분기</option>
-    <option>2분기</option>
-    <option>3분기</option>
-    <option>4분기</option>
-  </select>
-  
-  <select class="dropdown" placeholder="관람등급" id="movieAudit">
-    <option>전체관람가</option>
-    <option>12세</option>
-    <option>12세이상관람가</option>
-    <option>15세이상관람가</option>
-    <option>청소년관람불가</option>
-  </select>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="points" style="justify-content: center;">
-  <a href="#"><div class="points_point"></div></a>
-  <button class="points_point"style="visibility: hidden;"></button>
-  <a href="#"><div class="points_point"></div></a>
-  <button class="points_point"style="visibility: hidden;"></button>
-  <a href="#"><div class="points_point"></div></a>
-  <button class="points_point"style="visibility: hidden;"></button>
-  <div class="points_point active"></div>
-</div>
+  <div style="background-color:#171c28; display: flex; justify-content: space-between">
+    <img src="../../static/My project-1.png" alt="일일영화 로고"
+      style="height: 100px; width: auto;">
+    
+    <div style="color: white; text-align:right; top: 5px; right: 10px;">
+    {% if user.is_authenticated %}
+      {{ user.username }}님, 환영합니다.<br>
+      <a href="{% url 'user:profile' %}" class="btn">내정보</a>
+      <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+    {% endif %}
+    </div>
+  </div>
 
-<div class="lower_bar" style="position: absolute; display: inline;">
-  <a href="#" class="btn_" style="text-align:left;">이전(◀)</a>
-  <button style="visibility: hidden; width: "></button>
-  <a href="#" class="btn_" style="text-align:right;">결과 보기</a>
-</div>
+  <div class="dropdown_">
+    <select class="dropdown" id="movieNations">
+      <option>국내</option>
+      <option>해외</option>
+      <option>List entry #3</option>
+      <option>List entry #4</option>
+    </select>
+    
+    <select class="dropdown" id="movieOpenDt">
+      <option>1분기</option>
+      <option>2분기</option>
+      <option>3분기</option>
+      <option>4분기</option>
+    </select>
+    
+    <select class="dropdown" id="movieAudit">
+      <option>전체관람가</option>
+      <option>12세</option>
+      <option>12세이상관람가</option>
+      <option>15세이상관람가</option>
+      <option>청소년관람불가</option>
+    </select>
+  </div>
 
+  <div class="points_"">
+    <a href="#"class="points_point"></a>
+    <button class="points_point"style="visibility: hidden;"></button>
+    <a href="#"class="points_point"></a>
+    <button class="points_point"style="visibility: hidden;"></button>
+    <a href="#"class="points_point"></a>
+    <button class="points_point"style="visibility: hidden;"></button>
+    <div class="points_point active"></div>
+  </div>
 
-<div><a href="javascript:movieSelect();" style="text-decoration:none;">선택완료</a></div>
-<!-- <div><a href="{% url 'movie:selectlist' %}" style="text-decoration:none;" >결과보기</a></div> -->
+  <div class="lower_">
+    <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a>
+    <a href="{% url 'movie:selectlist' %}" class="btn_">결과 보기</a>
+  </div>
 
-<form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
-  {% csrf_token %}
-  <input type="hidden" name="nations" id="nations">
-  <!-- <input type="hidden" name="openDt2" id="openDt"> -->
-  <input type="hidden" name="audit" id="audit">
-  <!-- <select type="hidden" name="nations" id="nations"></select>
-  <select type="hidden" name="openDt" id="openDt"></select>
-  <select type="hidden" name="audit" id="audit"></select> -->
-</form>
+  <form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
+    {% csrf_token %}
+    <input type="hidden" name="nations" id="nations">
+    <!-- <input type="hidden" name="openDt2" id="openDt"> -->
+    <input type="hidden" name="audit" id="audit">
+    <!-- <select type="hidden" name="nations" id="nations"></select>
+      <select type="hidden" name="openDt" id="openDt"></select>
+      <select type="hidden" name="audit" id="audit"></select> -->
+  </form>
 
-{% comment %}
-
-<button style="visibility: hidden; width: 250px"></button>
-
-{% endcomment %}
-
-
-{% endblock body %}
-
-
+</body>
+</html>
 
