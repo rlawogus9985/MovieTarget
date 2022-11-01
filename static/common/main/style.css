@@ -1,21 +1,20 @@
 body .dropdown_ {
     position: absolute;
-    display: flex;
+    display: inline-flex;
     left: 50%;
-    top: 50%;
+    top: 45%;
     transform: translate(-50%, -50%);
 }
 
 .lower_ {
     position: absolute;
     display: inline-flex;
-    left: 40px;
+    left: 20px;
     right: 0;
     margin: auto;
     height: 0px;
-    margin-top: 470px;
+    margin-top: 530px;
 }
-
 .dropdown {
     --max-scroll: 8;
     --text: #ffeba7;
@@ -31,12 +30,7 @@ body .dropdown_ {
     --listBorder: none;
     --textFilled: #99A3BA;
     width: 220px;
-    
-    margin: auto;
-    display: inline;
 }
-
-
 
 select {
     --text: #3f4656;
@@ -45,6 +39,7 @@ select {
 
     margin: auto;
     display: inline;
+    text-align: center;
 }
 select.dropdown {
     padding: 9px 16px;
@@ -78,7 +73,7 @@ body {
     margin: auto;
     width: 200px;
     height: 0px;
-    margin-top: 420px;
+    margin-top: 530px;
 }
 .points_ .active {
     background: #ffeba7;
