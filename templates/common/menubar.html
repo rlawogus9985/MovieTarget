@@ -2,14 +2,14 @@
 <link rel="stylesheet" href="{% static 'common/menubar/style.css' %}">
 
 
-<div style="background-color:#1f2029; display: inline;">
+<div style="background-color:#1f2029; display: inline-flex;">
   <a href="/" class="logo" target="blank">
 		<img src="../../static/My project-1.png" alt="일일영화 로고">
 	</a>
     
   <div style="text-align:right; position: absolute; top: 5px; right: 10px;">
   {% if user.is_authenticated %}
-  <div>{{ user.username }}님, 환영합니다.</div>
+  <div style="color: #c4c3ca;">{{ user.username }}님, 환영합니다.</div>
     <a href="{% url 'user:profile' %}" class="btn">내정보</a>
     <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
   {% else %}
