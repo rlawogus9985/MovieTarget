@@ -5,18 +5,16 @@ https://codepen.io/ig_design/full/KKVQpVP
 
 function loginFormCheck() {
   // Form에 제출하기전 user가 입력한 input태그의 id를 통하여 value를 변수명 객체에 초기화  
-  let username = document.getElementById("userName").value;
-  let originalusername = document.getElementById("originalUserName").value;
-  let password = document.getElementById("passWord").value;
-  let originalUserpassword = document.getElementById("originalUserPassword").value;
+  let username = document.getElementById("loginName").value;
+  let password = document.getElementById("loginPassword").value;
   // 로그인 아이디 및 패스워드 무입력 검사
   if (username==0 || username=="") {
     alert("ID를 입력해주세요.")
     return false;
-  } else if (username != originalusername) {
-    alert("존재하지 않는 ID입니다.")
-    return false;
-  } 
+  } // else if (username != originalusername) {
+  //   alert("존재하지 않는 ID입니다.")
+  //   return false;
+  // } 
   // else if (password != originalUserpassword) {
   //   alert("비밀번호가 틀렸습니다.")
   //   return false;
@@ -26,11 +24,8 @@ function loginFormCheck() {
     return false;
   }
   document.getElementById("userName").value = username;
-  document.getElementById("originalUserName").value = originalusername;
   document.getElementById("passWord").value = password;
-  document.getElementById("originalUserPassword").value = originalUserpassword;
   document.getElementById("loginForm").submit();
-  
   }
 
 
@@ -70,6 +65,6 @@ function SignupFormCheck() {
   alert("회원가입이 완료되었습니다.")
   }
   
-  document.getElementsByClassName('btn mt-4').addEventListener('click', e => {
-    window.history.forward();
-  })
+  // document.getElementsByClassName('btn mt-4').addEventListener('click', e => {
+  //   window.history.forward();
+  // })
