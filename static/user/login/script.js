@@ -5,19 +5,30 @@ https://codepen.io/ig_design/full/KKVQpVP
 
 function loginFormCheck() {
   // Form에 제출하기전 user가 입력한 input태그의 id를 통하여 value를 변수명 객체에 초기화  
-  let loginname = document.getElementById("loginName").value;
-  let loginpassword = document.getElementById("loginPassword").value;
-  // let loginform = document.getElementById("loginForm").value;
+  let username = document.getElementById("userName").value;
+  let originalusername = document.getElementById("originalUserName").value;
+  let password = document.getElementById("passWord").value;
+  let originalUserpassword = document.getElementById("originalUserPassword").value;
   // 로그인 아이디 및 패스워드 무입력 검사
-  if (loginname==0 || loginname=="") {
+  if (username==0 || username=="") {
     alert("ID를 입력해주세요.")
-    // loginform.loginname.focus();
-  }else if(loginpassword==0 || loginpassword=="") {
+    return false;
+  } else if (username != originalusername) {
+    alert("존재하지 않는 ID입니다.")
+    return false;
+  } 
+  // else if (password != originalUserpassword) {
+  //   alert("비밀번호가 틀렸습니다.")
+  //   return false;
+  // }
+  else if(password==0 || password=="") {
     alert("PW를 입력해주세요.")
-    // loginform.loginpassword.focus();
+    return false;
   }
-  document.getElementById("userName").value = loginname;
-  document.getElementById("passWord").value = loginpassword;
+  document.getElementById("userName").value = username;
+  document.getElementById("originalUserName").value = originalusername;
+  document.getElementById("passWord").value = password;
+  document.getElementById("originalUserPassword").value = originalUserpassword;
   document.getElementById("loginForm").submit();
   
   }
