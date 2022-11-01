@@ -1,3 +1,20 @@
+body .dropdown_ {
+    position: absolute;
+    display: inline-flex;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.lower_ {
+    position: absolute;
+    display: inline-flex;
+    left: 20px;
+    right: 0;
+    margin: auto;
+    height: 0px;
+    margin-top: 530px;
+}
 .dropdown {
     --max-scroll: 8;
     --text: #ffeba7;
@@ -14,21 +31,30 @@
     --textFilled: #99A3BA;
     width: 220px;
 }
+
 select {
-  --text: #3f4656;
-  --border: #2f3545;
-  --background: #151924;
+    --text: #3f4656;
+    --border: #2f3545;
+    --background: #151924;
+
+    margin: auto;
+    display: inline;
+    text-align: center;
 }
 select.dropdown {
-  padding: 9px 16px;
-  border-radius: 6px;
-  color: var(--text);
-  border: 1px solid var(--border);
-  background: var(--background);
-  line-height: 22px;
-  font-size: 16px;
-  font-family: inherit;
+    padding: 9px 16px;
+    border-radius: 6px;
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: var(--background);
+    line-height: 22px;
+    font-size: 16px;
+    font-family: inherit;
+  
+    margin: auto;
+    display: inline;
 }
+
 body {
   --bg: #171c28;
   min-height: 100vh;
@@ -39,41 +65,37 @@ body {
   transition: background 0.3s ease;
   background: var(--bg);
 }
-body .dropdown {
-    margin-top: 35%;
-}
 
-.points {
+.points_ {
     position: absolute;
-    left: 0;
+    left: 95px;
     right: 0;
     margin: auto;
     width: 200px;
     height: 0px;
+    margin-top: 530px;
 }
-.points .active {
+.points_ .active {
     background: #ffeba7;
 }
 .points_point {
     float: left;
     width: 12px;
-    display: inline-block;
+    display: inline;
     border-radius: 10px;
     height: 12px;
     background: #69aef3;
     margin-right: 4px;
     position: relative;
+    display: inline;
 }
 
 
-a {
-	cursor: pointer;
-    transition: all 200ms linear;
-}
-a:hover {
-	text-decoration: none;
-}
+
+
 .btn_{
+    cursor: pointer;
+    transition: all 200ms linear;
     border-radius: 4px;
     height: 44px;
     font-size: 13px;
@@ -100,6 +122,10 @@ a:hover {
     background-color: #ffeba7;
     color: #102770;
     box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+    
+    margin: auto;
+    text-decoration: none;
+
 }
 .btn_:active,
 .btn_:focus{  
