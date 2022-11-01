@@ -54,9 +54,26 @@ class MovieBoardtest1(generic.ListView):
     # model = TargetBase
     paginate_by = 12
     template_name = "movie/main1.html"
-    queryset = TargetBase.objects.values('director').distinct()
+    # queryset = TargetBase.objects.values('director').distinct()
     context_object_name = "targetbase_list"
+
+    # 검색창에서 검색한 내용을 띄어주기 위한것
+    def get_queryset(self):
+        search_word = self.request.GET.get('searchWord','')
+        if search_word:
+            result = TargetBase.objects.values('director').distinct().filter(director__contains=search_word)
+        else:
+            result = TargetBase.objects.values('director').distinct()            
+        return result
     
+    # 요청을 통해 전달받은 검색어를 다시 템플릿으로 전달
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search_word = self.request.GET.get('searchWord','')
+        if search_word:
+            context['searchWord'] = search_word
+        return context
+
     # def get_queryset(self):
     #     return TargetBase.objects.distinct().values_list('director')
 
