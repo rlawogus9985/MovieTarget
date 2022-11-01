@@ -29,7 +29,7 @@
     <form action="{% url 'user:change_user' %}" id="userChange" method="post">
     {% endcomment %}
     <div class="box">
-      <form action="{% url 'user:change_user' auth_user_id=user.id %}" id="userChange" method="post">
+      <form action="{% url 'user:change_user' auth_user_id=user.id %}" id="userChange" method="post" onsubmit="return false">
         {% csrf_token %}
         <span class="text-center">비밀번호 수정</span>
         <div class="input-container">
@@ -45,7 +45,7 @@
           <input type="password" name="password2" id="changePassword2" required=""/>
           <label>비밀번호 재입력</label>
         </div>
-          <button type="submit" name="change_user_bt" class="mbtn">수정하기</button>
+          <button type="submit" name="change_user_bt" class="mbtn" onclick="changeFormIdCheckMent();">수정하기</button>
       </form>
     </div>
   </table>        
