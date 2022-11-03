@@ -194,3 +194,19 @@ table.director-list {
   margin-right: auto;
   margin-bottom: 30px;
 }
+
+/* 장르 테이블을 정렬하기 위한 css */
+table.genre-list {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+/* 배우 테이블을 정렬하기 위한 css */
+table.actor-list {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}

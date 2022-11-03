@@ -16,6 +16,12 @@ class TargetBase(models.Model):
     audit = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'target_base'
 
+class Actorlist(models.Model):
+    actor1 = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'actorlist'
