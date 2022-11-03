@@ -98,6 +98,7 @@ class MovieBoard1SelectCreateView(LoginRequiredMixin, generic.CreateView):
     # form_class = SelectedBaseForm
 
 def movieboardselectview(request, user_id):
+    request.session['selected_director']= request.GET['director']
     target = request.GET.get('director','') 
     user = auth_views.UserModel.objects.get(pk=user_id)
     SelectedBase.objects.create(director=target, writer_id=user.id)
