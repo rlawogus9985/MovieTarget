@@ -17,15 +17,11 @@ a {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
+  
   align-items: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
+  
   justify-content: center;
-  -ms-flex-pack: center;
+
   text-align: center;
   border: none;
   background-color: #ffeba7;
