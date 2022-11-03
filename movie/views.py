@@ -99,9 +99,27 @@ class MovieBoard1SelectCreateView(LoginRequiredMixin, generic.CreateView):
 
 def movieboardselectview(request, user_id):
     request.session['selected_director']= request.GET['director']
-    target = request.GET.get('director','') 
+    request.session['selected_genre']= request.GET['genre']
+    # request.session['selected_nations']= request.GET['nations']
+    # request.session['selected_audit']= request.GET['audit']
+    # request.session['selected_actor1']= request.GET['actor1']
+    # request.session['selected_actor2']= request.GET['actor2']
+    # request.session['selected_actor3']= request.GET['actor3']
+    # request.session['selected_opendt']= request.GET['opendt']
+
+    targetdirector = request.GET.get('director','') 
+    targetgenre = request.GET.get('genre', '')
+    # targetnations = request.GET.get('nations', '')
+    # targetaudit = request.GET.get('audit', '')
+    # targetactor1 = request.GET.get('actor1', '')
+    # targetactor2 = request.GET.get('actor2', '')
+    # targetactor3 = request.GET.get('actor3', '')
+    # targetopendt = request.GEt.get('opendt', '')
+
     user = auth_views.UserModel.objects.get(pk=user_id)
-    SelectedBase.objects.create(director=target, writer_id=user.id)
+    SelectedBase.objects.create(writer_id=user.id, director=targetdirector, genre=targetgenre) 
+    # ,nations=targetnations, 
+    # autid=targetaudit, actor1=targetactor1, actor2=targetactor2, actor3=targetactor3, opendt=targetopendt)
     return render(request, 'movie/result.html')
    
 # 메인페이지2. 장르 선택 페이지를 보여주기 위한 클래스뷰

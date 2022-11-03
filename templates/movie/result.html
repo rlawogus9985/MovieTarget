@@ -16,6 +16,13 @@ Object lobj_getdata = session.getAttribute("selected_director");
 {% endcomment %}
 
 {{ request.session.selected_director }}
+{{ request.session.selected_genre }}
+{{ request.session.selected_nations }}
+{{ request.session.selected_audit }}
+{{ request.session.selected_actor1 }}
+{{ request.session.selected_actor2 }}
+{{ request.session.selected_actor3 }}
+{{ request.session.selected_opendt }}
 
 {% for selectedbase in selectedbase_list %}
 {{ selectedbase.id }}

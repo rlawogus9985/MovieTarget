@@ -136,13 +136,14 @@
   <h5 style="text-align: center;">
     선택한 내용 - <input type="text" name="selected_genre" id="selected_genre" value="{{ selected_genre|default_if_none:'' }}"  readonly>
   </h5>
+  <!-- <a href="#" onclick="selectDataGenre(); sessionDataImport();">완료</a> -->
 </div>
 
   <!-- 왼쪽 클릭은 2,3 페이지만-->
   <div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div>
   <!-- 오른쪽 클릭은 1,2,3 페이지만-->
   <!-- 현지점(1페이지)에서 누르면 바로 4페이지로 가는 임시 기능-->
-  <div class="slide_next_button slide_button"><a href="{% url 'movie:board3' %}">▶</a></div>
+  <div class="slide_next_button slide_button"><a href="{% url 'movie:board3' %}" onclick="selectDataGenre(); sessionGenreDataImport();">▶</a></div>
   
   <form id="pageForm">
     <input type="hidden" name="searchWord" id="searchWord">
@@ -151,4 +152,9 @@
   </form>
 
 </body>
+<script src="{% static 'common/session.js' %}"></script>
 </html>
+
+<form action="{% url 'movie:board1S' user_id=user.id %}" method="get" id="selectedGenreForm">
+  <input type="hidden" name="genre" id="selected_genre_hidden_input">
+</form>

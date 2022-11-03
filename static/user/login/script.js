@@ -5,14 +5,19 @@ https://codepen.io/ig_design/full/KKVQpVP
 window.onload = function() {
   document.getElementById('loginName').addEventListener('keyup', enterCheckLogin);
   document.getElementById('loginPassword').addEventListener('keyup', enterCheckLogin);
-  document.getElementById('signupName').addEventListener('keyup', enterCheckLogin);
-  document.getElementById('signupPass').addEventListener('keyup', enterCheckLogin);
-  document.getElementById('signupPass2').addEventListener('keyup', enterCheckLogin);
 }
-
+window.onload - function() {
+  document.getElementById('signupName').addEventListener('keyup', enterCheckSign);
+  document.getElementById('signupPass').addEventListener('keyup', enterCheckSign);
+  document.getElementById('signupPass2').addEventListener('keyup', enterCheckSign);
+}
 function enterCheckLogin(e) {
   if (e.key == "Enter") loginFormCheck();
 }
+function enterCheckSign(e) {
+  if (e.key == "Enter") SignupFormCheck();
+}
+
 
 function loginFormCheck() {
   // Form에 제출하기전 user가 입력한 input태그의 id를 통하여 value를 변수명 객체에 초기화  
@@ -32,16 +37,6 @@ function loginFormCheck() {
       document.getElementById("loginForm").submit();
     }
     
-    // function enterCheckSign(e) {
-    //   if (e.key == "Enter") SignupFormCheck();
-    // }
-    function enterCheckSign() {
-      if (window.event.keycode == 13) {
-        SignupFormCheck();
-      }
-    }
-
-
 function SignupFormCheck() {
 
   // 무입력 아이디 검사

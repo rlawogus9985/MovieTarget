@@ -11,8 +11,6 @@
   <script src="{% static 'jquery.min.js' %}"></script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-
 
 	<div class="section">
 		<div class="container">
@@ -37,7 +35,6 @@
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
 											<a href="#" class="btn mt-4" onclick="loginFormCheck();">확인</a>
-                      <!-- <a href="#" class="btn mt-4" onkeyup="enterCheckLogin()">확인</a> -->
 				      					</div>
 			      					</div>
 			      				</div>
@@ -58,7 +55,6 @@
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
 											<a href="#" class="btn mt-5" onclick="SignupFormCheck();">가입하기</a>
-                      <!-- <a href="#" class="btn mt-5" onkeyup="enterCheckSign()">가입하기</a> -->
 				      					</div>
 			      					</div>
 			      				</div>
@@ -69,13 +65,6 @@
 	      	</div>
 	    </div>
 	</div>
-<!-- partial -->
-<!-- {% load static %}
-  <script  src="{% static 'user/login/script.js' %}"></script> -->
-  <!-- <script src="{% static 'jquery.min.js' %}"></script> -->
-  
-  <!-- onsubmit="return loginFormcheckMent();"
-  onsubmit="return signupFormcheckMent();" -->
 
 <form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">
   {% csrf_token %}

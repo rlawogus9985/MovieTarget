@@ -51,15 +51,17 @@
 // sessionStorage.setItem("selected_director",JSON.stringify(selected_director));
 
     
-function sessionDataImport() {
+function sessionDirectorDataImport() {
     let selected_director = document.getElementById("selected_director").value;
     sessionStorage.setItem("selected_director",selected_director);
     // sessionStorage.getItem("selected_director");
     
 }
-// function sessionDataExport() {
-    // sessionStorage.getItem("selected_director");
-// }
+
+function sessionGenreDataImport() {
+    let selected_genre = document.getElementById("selected_genre").value;
+    sessionStorage.setItem("selected_genre",selected_genre);
+}
 
 
 

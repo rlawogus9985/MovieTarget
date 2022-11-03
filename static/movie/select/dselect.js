@@ -13,16 +13,9 @@ window.onload = function () {
   // });
 };
 
-// 감독 선택을 위한 js
-function TableDirector(e) {
-  // e.innerHTML로 DOM 안의 텍스트를 가져와서 .trim()으로 앞뒤 불필요한 공백을 지워준다.
-  selected_director = e.innerHTML.trim();
-  // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
-  document.getElementById("selected_director").value = selected_director;
-}
-
+////////////////////무기입방지 
 // 감독선택후 무기입 방지
-function selectData() {
+function selectDataDirector() {
   selected_director = document.getElementById("selected_director").value;
 
   if (selected_director == 0 || selected_director == "") {
@@ -31,9 +24,35 @@ function selectData() {
   }
 
   document.getElementById("selected_director_hidden_input").value = selected_director;
-  document.getElementById("selectedForm").submit();
+  document.getElementById("selectedDirectorForm").submit();
   alert("선택이 완료되었습니다.");
 }
+
+// 장르 선택 후 무기입 방지
+function selectDataGenre() {
+  selected_genre = document.getElementById("selected_genre").value;
+
+  if (selected_genre == 0 || selected_genre == "") {
+    alert("장르를 선택하시고 완료버튼을 눌러주세요");
+    return false;
+  }
+
+  document.getElementById("selected_director_hidden_input").value = selected_genre;
+  document.getElementById("selectedGenreForm").submit();
+  alert("선택이 완료되었습니다.");
+}
+
+////////////////////무기입방지 
+
+// 감독 선택을 위한 js
+function TableDirector(e) {
+  // e.innerHTML로 DOM 안의 텍스트를 가져와서 .trim()으로 앞뒤 불필요한 공백을 지워준다.
+  selected_director = e.innerHTML.trim();
+  // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
+  document.getElementById("selected_director").value = selected_director;
+}  
+
+
 
 // 장르 선택을 위한 js
 function TableGenre(e) {
