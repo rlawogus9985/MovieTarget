@@ -94,7 +94,7 @@
     <!--이전 페이지-->
     {% if page_obj.has_previous %}
       <li class="page-item">
-        <a href="?searchWord={{ searchWord }}&page={{ page_obj.previous_page_number }}" class="page-link">이전</a>
+        <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.previous_page_number }})" class="page-link">이전</a>
       </li>
     {% else %}
       <li class="page-item disabled">
@@ -107,11 +107,11 @@
     {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
       {% if page_number == page_obj.number %}
         <li class="page-item active" aria-current="page">
-          <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
         </li>
       {% else %}
         <li class="page-item">
-          <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
         </li>
       {% endif %}
     {% endif %}
@@ -120,7 +120,7 @@
     <!-- 다음 페이지 -->
     {% if page_obj.has_next %}
     <li class="page-item">
-      <a href="?searchWord={{ searchWord }}&page={{ page_obj.next_page_number }}" class="page-link">다음</a>
+      <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.next_page_number }});" class="page-link">다음</a>
     </li>
     {% else %}
     <li class="page-item disabled">
@@ -133,7 +133,9 @@
 
 <!-- 선택한 내용 보여주기 -->
 <div style="color: white;">
-  <h5 style="text-align: center;">선택한 내용 - <input type="text" name="selected_genre" id="selected_genre" readonly></h5>
+  <h5 style="text-align: center;">
+    선택한 내용 - <input type="text" name="selected_genre" id="selected_genre" value="{{ selected_genre|default_if_none:'' }}"  readonly>
+  </h5>
 </div>
 
   <!-- 왼쪽 클릭은 2,3 페이지만-->
@@ -142,6 +144,11 @@
   <!-- 현지점(1페이지)에서 누르면 바로 4페이지로 가는 임시 기능-->
   <div class="slide_next_button slide_button"><a href="{% url 'movie:board3' %}">▶</a></div>
   
+  <form id="pageForm">
+    <input type="hidden" name="searchWord" id="searchWord">
+    <input type="hidden" name="page" id="page">
+    <input type="hidden" name="selected_genre" id="genre" value="{{ selected_genre|default_if_none:'' }}">
+  </form>
 
 </body>
 </html>
