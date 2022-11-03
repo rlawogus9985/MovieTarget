@@ -187,8 +187,8 @@ form {
   transform: translateY(-5px);
 }
 
-/* 리스트 테이블을 정렬하기 위한 css */
-table.director-list {
+/* 감독 리스트 테이블을 정렬하기 위한 css */
+table.director-list, .genre-list, .actor-list {
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -267,59 +267,70 @@ table.actor-list {
 
 
 
-
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  line-height: 1.42em;
-  color:#A7A1AE;
-  background-color:#1F2739;
-}
-.director-list td {
+.director-list, 
+.genre-list, 
+.actor-list td {
 	  font-weight: normal;
 	  font-size: 1em;
   -webkit-box-shadow: 0 2px 2px -2px #0E1119;
 	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
 	        box-shadow: 0 2px 2px -2px #0E1119;
 }
-.director-list {
+.director-list, 
+.genre-list, 
+.actor-list {
 	text-align: center;
-	overflow: hidden;
 	margin: 0 auto;
   display: table;
   padding: 0 0 8em 0;
 }
 
-.director-list td, .director-list th {
+.director-list td, 
+.genre-list td, 
+.actor-list td{
 	padding-bottom: 2%;
 	padding-top: 2%;
   width: 300px;
 }
 
 /* Background-color of the odd rows */
-.director-list tr:nth-child(odd) {
+.director-list tr:nth-child(odd), 
+.genre-list tr:nth-child(odd), 
+.actor-list tr:nth-child(odd) {
 	  background-color: #323C50;
 }
 
 /* Background-color of the even rows */
-.director-list tr:nth-child(even) {
+.director-list tr:nth-child(even),
+.genre-list tr:nth-child(even),
+.actor-list tr:nth-child(even) {
 	  background-color: #2C3446;
 }
 
-.director-list th {
+.director-list th, 
+.genre-list th, 
+.actor-list th {
 	  background-color: #1F2739;
 }
 
-.director-list td { color: #ffeba7; }
-
-.director-list tr:hover {
-   background-color: #464A52;
--webkit-box-shadow: 0 6px 6px -6px #0E1119;
-	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
-	        box-shadow: 0 6px 6px -6px #0E1119;
+.director-list td, 
+.genre-list td, 
+.actor-list td { 
+  color: #ffeba7; 
 }
 
-.director-list td:hover {
+.director-list tr:hover, 
+.genre-list tr:hover, 
+.actor-list tr:hover {
+  background-color: #464A52;
+  -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	-moz-box-shadow: 0 6px 6px -6px #0E1119;
+	box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.director-list td:hover, 
+.genre-list td:hover, 
+.actor-list td:hover {
   background-color: #FFF842;
   color: #403E10;
   font-weight: bold;
@@ -328,12 +339,12 @@ body {
   transform: translate3d(6px, -6px, 0);
   
   transition-delay: 0s;
-	  transition-duration: 0.4s;
-	  transition-property: all;
+	transition-duration: 0.4s;
+	transition-property: all;
   transition-timing-function: line;
 }
 
 @media (max-width: 800px) {
-.director-list td:nth-child(4),
-.director-list th:nth-child(4) { display: none; }
+.director-list td:nth-child(4), .genre-list td:nth-child(4), .actor-list td:nth-child(4),
+.director-list th:nth-child(4), .genre-list th:nth-child(4), .actor-list th:nth-child(4) { display: none; }
 }
