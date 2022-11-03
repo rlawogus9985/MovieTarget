@@ -1,12 +1,12 @@
-from unittest.loader import VALID_MODULE_NAME
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
-from movie.models import TargetBase
+from movie.models import TargetBase, SelectedBase
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
+from .forms import SelectedBaseForm
+from .models import SelectedBase
+from django.contrib.auth import views as auth_views
 @login_required(login_url=reverse_lazy('user:login'))
 def MovieBoardtest(request):
     """ClassView를 사용하기전 임시로 사용하는 view함수"""
@@ -81,3 +81,24 @@ class MovieBoardtest1(generic.ListView):
 #     posts = TargetBase.objects.all()
 #     return render(request, 'movie/main1.html', {"posts": posts})
 
+# class MovieBoard1SelectDetailView(generic.DetailView):
+#     model = SelectedBase
+#     template_name = 'movie/result.html'
+#     # context_object_name: str
+#     pk_url_kwarg = 'movie_id'
+
+class MovieBoard1SelectCreateView(LoginRequiredMixin, generic.CreateView):    
+    model = SelectedBase
+    template_name = 'movie/result.html'
+    fields = ['director']
+    success_url = '/'
+    pk_url_kwarg = 'user_id'
+    login_url = reverse_lazy('user:login')
+    # form_class = SelectedBaseForm
+
+def movieboardselectview(request, user_id):
+    target = request.GET.get('director','') 
+    user = auth_views.UserModel.objects.get(pk=user_id)
+    SelectedBase.objects.create(director=target, writer_id=user.id)
+    return render(request, 'movie/result.html')
+    

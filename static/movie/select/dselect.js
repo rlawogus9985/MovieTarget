@@ -19,3 +19,19 @@ function TableDirector(e) {
   selected_director = e.innerHTML.trim();
   document.getElementById("selected_director").value = selected_director;
 }
+
+// 감독선택후 무기입 방지 
+function selectData() {
+
+  selected_director = document.getElementById("selected_director").value;
+
+  if (selected_director==0 || selected_director=='') {
+    alert("감독을 선택하시고 완료버튼을 눌러주세요");
+    return false;
+  } 
+
+  document.getElementById("selected_director_hidden_input").value = selected_director;
+  document.getElementById("selectedForm").submit();
+  alert("선택이 완료되었습니다.");
+}
+
