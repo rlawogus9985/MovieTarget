@@ -129,8 +129,10 @@ class MovieBoardGenre(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         search_word = self.request.GET.get('searchWord','')
+        selected_genre = self.request.GET.get('selected_genre', '')
         if search_word:
             context['searchWord'] = search_word
+        context['selected_genre'] = selected_genre
         return context
    
 # 메인페이지3. 배우 선택 페이지를 보여주기 위한 클래스뷰

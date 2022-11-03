@@ -21,15 +21,14 @@ function TableDirector(e) {
   document.getElementById("selected_director").value = selected_director;
 }
 
-// 감독선택후 무기입 방지 
+// 감독선택후 무기입 방지
 function selectData() {
-
   selected_director = document.getElementById("selected_director").value;
 
-  if (selected_director==0 || selected_director=='') {
+  if (selected_director == 0 || selected_director == "") {
     alert("감독을 선택하시고 완료버튼을 눌러주세요");
     return false;
-  } 
+  }
 
   document.getElementById("selected_director_hidden_input").value = selected_director;
   document.getElementById("selectedForm").submit();
@@ -40,6 +39,8 @@ function selectData() {
 function TableGenre(e) {
   selected_genre = e.innerHTML.trim();
   document.getElementById("selected_genre").value = selected_genre;
+  document.getElementById("genre").value = selected_genre;
+  document.getElementById("pageForm").submit();
 }
 // 배우 선택을 위한 js
 function TableActor(e) {
@@ -59,21 +60,33 @@ function TableActor(e) {
     document.getElementById("selected_actor3").value = selected_actor;
     document.getElementById("actor3").value = selected_actor;
   }
+  document.getElementById("pageForm").submit();
 }
 // 배우 선택을 취소하기 위한 js
 function DeleteSelectActor1() {
   let input = document.getElementById("selected_actor1");
+  let input2 = document.getElementById("actor1");
   input.value = null;
+  input2.value = null;
+  document.getElementById("pageForm").submit();
 }
 function DeleteSelectActor2() {
   let input = document.getElementById("selected_actor2");
+  let input2 = document.getElementById("actor2");
   input.value = null;
+  input2.value = null;
+  document.getElementById("pageForm").submit();
 }
 function DeleteSelectActor3() {
   let input = document.getElementById("selected_actor3");
+  let input2 = document.getElementById("actor3");
   input.value = null;
+  input2.value = null;
+  document.getElementById("pageForm").submit();
 }
+// 배우 선택을 취소하기 위한 js 끝
 
+// 페이징을 클릭하면 검색했던 내용을 pageForm에 제출하기 위한 js
 function searchFormCheck(searchWord, pageNumber) {
   document.getElementById("searchWord").value = searchWord;
   document.getElementById("page").value = pageNumber;
