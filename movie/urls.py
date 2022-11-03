@@ -8,5 +8,7 @@ urlpatterns = [
     path('slectlist/', views.SelectListView.as_view(), name='selectlist'),
     path('selectdetail/', views.SelectDetailView.as_view(), name='selectdetail'),
     path('board/1', views.MovieBoardtest1.as_view(), name='board1'),
+    path('board/2', views.MovieBoardGenre.as_view(), name='board2'),
+    path('board/3', views.MovieBoardActor.as_view(), name='board3'),
     path('board/4',views.MovieBoardtest ,name='board4'),
 ]
