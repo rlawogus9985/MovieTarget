@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import models as auth_models
+from django.contrib.auth import views as auth_views
 
 class TargetBase(models.Model):
     moviecd = models.IntegerField(db_column='movieCd', primary_key=True)  # Field name made lowercase.
@@ -17,7 +18,19 @@ class TargetBase(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'target_base'
+        # db_table = 'target_base'
+
+class SelectedBase(models.Model):
+    director = models.TextField(blank=True, null=True)
+    genre = models.TextField(blank=True, null=True)
+    nations = models.TextField(blank=True, null=True)
+    audit = models.TextField(blank=True, null=True)
+    actor1 = models.TextField(blank=True, null=True)
+    actor2 = models.TextField(blank=True, null=True)
+    actor3 = models.TextField(blank=True, null=True)
+    opendt = models.TextField(blank=True, null=True)
+    writer = models.ForeignKey(auth_views.UserModel, on_delete=models.CASCADE)
+
 
 class Actorlist(models.Model):
     actor1 = models.TextField(blank=True, null=True)
@@ -25,4 +38,3 @@ class Actorlist(models.Model):
     class Meta:
         managed = True
         db_table = 'actorlist'
-

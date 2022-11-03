@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
   <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}">
   <script src="{% static 'movie/select/dselect.js' %}"></script>
+  <script src="{% static 'jquery.min.js' %}"></script>
+  
+
 </head>
 <body style="background-color:#1f2029;">
 
@@ -137,7 +140,11 @@
 </div>
 <!-- 페이징 기능 끝 -->
 
-
+<!-- 선택한 내용 보여주기 -->
+<div style="color: white;">
+  <h5 style="text-align: center;">선택한 내용 - <input type="text" name="selected_director" id="selected_director" readonly></h5>
+  <a href="#" onclick="selectData(); sessionDataImport()">완료</a>
+</div>
 
   <!-- 왼쪽 클릭은 2,3 페이지만-->
   {% comment %} <div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div> {% endcomment %}
@@ -152,4 +159,10 @@
   </div>
 
 </body>
+<script src="{% static 'common/session.js' %}"></script>
+
 </html>
+
+<form action="{% url 'movie:board1S' user_id=user.id %}" method="get" id="selectedForm">
+  <input type="hidden" name="director" id="selected_director_hidden_input">
+</form>

@@ -20,6 +20,22 @@ function TableDirector(e) {
   // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
   document.getElementById("selected_director").value = selected_director;
 }
+
+// 감독선택후 무기입 방지 
+function selectData() {
+
+  selected_director = document.getElementById("selected_director").value;
+
+  if (selected_director==0 || selected_director=='') {
+    alert("감독을 선택하시고 완료버튼을 눌러주세요");
+    return false;
+  } 
+
+  document.getElementById("selected_director_hidden_input").value = selected_director;
+  document.getElementById("selectedForm").submit();
+  alert("선택이 완료되었습니다.");
+}
+
 // 장르 선택을 위한 js
 function TableGenre(e) {
   selected_genre = e.innerHTML.trim();

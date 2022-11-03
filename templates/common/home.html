@@ -24,6 +24,17 @@
           </h3>
           <h4>지금 바로 만나보세요</h4>
           <br>
+          {% if user.is_authenticated %}
+          <div style="text-align: center;">
+            <a href="{% url 'movie:board1' %}" class="cta">
+              <span>시작하기</span>
+              <svg width="13px" height="10px" viewBox="0 0 13 10">
+                <path d="M1,5 L11,5"></path>
+                <polyline points="8 1 12 5 8 9"></polyline>
+              </svg>
+            </a>
+          </div>
+          {% else %}
           <div style="text-align: center;">
             <a href="{% url 'user:login' %}" class="cta">
               <span>시작하기</span>
@@ -33,6 +44,7 @@
               </svg>
             </a>
           </div>
+          {% endif %}
 
         </div>
       </div>

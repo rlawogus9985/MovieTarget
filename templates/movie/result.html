@@ -1,17 +1,31 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block title %}
-영화선택결과페이지
+영화선택페이지
 {% endblock title %}
-  
 {% block body %}
 <div>영화선택결과페이지</div>
 
-{% for moviebase in moviebase_list %}
-  {{ moviebase.id }}
-  {{ moviebase.nations }} 
-  {{ moviebase.audit }}
+{% comment %}
+String ls_getdata = (String)lobj_getdata
+나중에 str 아닌 session정보 str로 변환하는것 밑에서 빼옴.  
+<%
+Object lobj_getdata = session.getAttribute("selected_director");
+%>
+{% endcomment %}
+
+{{ request.session.selected_director }}
+
+{% for selectedbase in selectedbase_list %}
+{{ selectedbase.id }}
+{{ selectedbase.direct }}
+{{ selectedbase.nations }} 
+{{ selectedbase.audit }}
 {% endfor %}
-  
+
 {% endblock body %}
+<script src="{% static 'common/session.js' %}"></script> 
+
+<script>sessionStorage.getItem("selected_director")</script>
   
