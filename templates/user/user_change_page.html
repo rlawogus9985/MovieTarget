@@ -2,9 +2,9 @@
 <script src="{% static 'user/change/script.js' %}"></script>
 <link rel="stylesheet" href="{% static 'user/change/modify.css' %}">
 
-
 <!-- <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload=""> -->
 <body>
+  
   <!-- 메뉴바 -->
   <div style="background-color:#1f2029; display: inline;">
     <a href="/" class="logo" target="blank">
@@ -34,7 +34,7 @@
         <span class="text-center">비밀번호 수정</span>
         <div class="input-container">
           <span class="name-id">아이디</span>
-          <input type="text" style="text-align: center;" name="username" value="{{ user.username }}" id="changeName" readonly>
+          <input type="text" name="username" value="{{ user.username }}" id="changeName" readonly>
           <input type="hidden" id="originName" value="{{ user.username }}">
         </div>
         <div class="input-container">		
