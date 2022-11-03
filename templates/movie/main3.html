@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>감독 선택</title>
+  <title>배우 선택</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'common/main/slide.css' %}">
   <!-- 부트스트랩과 메뉴바의 btn이 혼동되어 적용되어서 메뉴바 css인 main/style.css에서 -->
@@ -12,9 +12,6 @@
   <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
   <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}">
   <script src="{% static 'movie/select/dselect.js' %}"></script>
-  <script src="{% static 'jquery.min.js' %}"></script>
-  
-
 </head>
 <body style="background-color:#1f2029;">
 
@@ -34,7 +31,7 @@
 
 <!-- 페이지 설명 창-->
 <div style="margin-bottom: 20px">
-  <h1 style="color: white; text-align:center;">감독을 선택해주세요</h1>
+  <h1 style="color: white; text-align:center;">배우를 3명 선택해주세요</h1>
 </div>
 
 
@@ -52,43 +49,37 @@
   </form>
 </div>
 
-<!-- 선택한 내용 보여주기 -->
-<br>
-<div style="color: white;">
-  <h5 style="text-align: center;">선택한 내용 - <input type="text" name="selected_director" id="selected_director" readonly></h5>
-</div>
-
 <!-- 데이터베이스에 뭐가 있는지 출력-->
-<div>
-  <table class="director-list table-bordered table-hover">
+<div style="color: white;">
+  <table class="actor-list table-bordered table-hover" border="4" >
     <tr>
-      {% for list in targetbase_list %}
+      {% for list in actorlist_list %}
       {% if forloop.counter == 1 or forloop.counter == 2 or forloop.counter == 3 or forloop.counter == 4 %}
       <td>
-        <span onclick="TableDirector(this)">
-          {{ list.director }}
+        <span onclick="TableActor(this)">
+          {{ list.actor1 }}
         </span>
       </td>
       {% endif %}
       {% endfor %}
     </tr>
     <tr>
-      {% for list in targetbase_list %}
+      {% for list in actorlist_list %}
       {% if forloop.counter == 5 or forloop.counter == 6 or forloop.counter == 7 or forloop.counter == 8 %}
       <td>
-        <span onclick="TableDirector(this)">
-          {{ list.director }}
+        <span onclick="TableActor(this)">
+          {{ list.actor1 }}
         </span>
       </td>
       {% endif %}
       {% endfor %}
     </tr>
     <tr>
-      {% for list in targetbase_list %}
+      {% for list in actorlist_list %}
       {% if forloop.counter == 9 or forloop.counter == 10 or forloop.counter == 11 or forloop.counter == 12 %}
       <td >
-        <span onclick="TableDirector(this)">
-          {{ list.director }}
+        <span onclick="TableActor(this)">
+          {{ list.actor1 }}
         </span>
       </td>
       {% endif %}
@@ -103,7 +94,7 @@
     <!--이전 페이지-->
     {% if page_obj.has_previous %}
       <li class="page-item">
-        <a href="?searchWord={{ searchWord }}&page={{ page_obj.previous_page_number }}" class="page-link">이전</a>
+        <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.previous_page_number }})" class="page-link">이전</a>
       </li>
     {% else %}
       <li class="page-item disabled">
@@ -116,11 +107,11 @@
     {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
       {% if page_number == page_obj.number %}
         <li class="page-item active" aria-current="page">
-          <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
         </li>
       {% else %}
         <li class="page-item">
-          <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
         </li>
       {% endif %}
     {% endif %}
@@ -129,7 +120,7 @@
     <!-- 다음 페이지 -->
     {% if page_obj.has_next %}
     <li class="page-item">
-      <a href="?searchWord={{ searchWord }}&page={{ page_obj.next_page_number }}" class="page-link">다음</a>
+      <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.next_page_number }});" class="page-link">다음</a>
     </li>
     {% else %}
     <li class="page-item disabled">
@@ -142,27 +133,25 @@
 
 <!-- 선택한 내용 보여주기 -->
 <div style="color: white;">
-  <h5 style="text-align: center;">선택한 내용 - <input type="text" name="selected_director" id="selected_director" readonly></h5>
-  <a href="#" onclick="selectData(); sessionDataImport()">완료</a>
+  <h5 style="text-align: center;">
+    선택한 내용 - <input type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
+    <input type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
+    <input type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
+  </h5>
 </div>
 
   <!-- 왼쪽 클릭은 2,3 페이지만-->
-  {% comment %} <div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div> {% endcomment %}
+  <div class="slide_prev_button slide_button"><a href="movie:board2">◀</a></div>
   <!-- 오른쪽 클릭은 1,2,3 페이지만-->
-  <!-- 현지점(1페이지)에서 누르면 바로 2페이지로 가는 임시 기능-->
-  <div class="slide_next_button slide_button"><a href="{% url 'movie:board2' %}">▶</a></div>
+  <!-- 현지점(1페이지)에서 누르면 바로 4페이지로 가는 임시 기능-->
+  <div class="slide_next_button slide_button"><a href="{% url 'movie:board4' %}">▶</a></div>
   
-  <br>
-  <div class="lower_">
-    <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a>
-    <a href="{% url 'movie:board4' %}" class="btn_">다음(▶)</a>
-  </div>
-
-</body>
-<script src="{% static 'common/session.js' %}"></script>
-
-</html>
-
-<form action="{% url 'movie:board1S' user_id=user.id %}" method="get" id="selectedForm">
-  <input type="hidden" name="director" id="selected_director_hidden_input">
+<form id="pageForm">
+  <input type="hidden" name="searchWord" id="searchWord">
+  <input type="hidden" name="page" id="page">
+  <input type="hidden" name="selected_actor1" id="actor1" value="{{ selected_actor1|default_if_none:'' }}">
+  <input type="hidden" name="selected_actor2" id="actor2" value="{{ selected_actor2|default_if_none:'' }}">
+  <input type="hidden" name="selected_actor3" id="actor3" value="{{ selected_actor3|default_if_none:'' }}">
 </form>
+</body>
+</html>

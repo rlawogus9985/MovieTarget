@@ -64,7 +64,7 @@ def  userchangeview(request, auth_user_id):
 #     fields = ['username', 'password']
 #     template_name = 'dist/index.html'
     
-    
+
     # def post(self, request):
     #     data = json.loads(request.body)
     #     try:
@@ -80,6 +80,7 @@ def  userchangeview(request, auth_user_id):
     #     except KeyError:
     #         return JsonResponse({'error': 'KEY_ERROR'}, status=400)
 
+# 원래 사용하던 유저탈퇴 함수뷰
 @require_POST
 @login_required(login_url=reverse_lazy('user:login'))
 def delete_user(request):
@@ -87,4 +88,14 @@ def delete_user(request):
     # request.user.is_active()
 
     return redirect('user:join')
+
+## delete() 하지않고 is_active를 0으로 변환시킬 새로운 회원탈퇴함수뷰.
+# @require_POST
+# @login_required(login_url=reverse_lazy('user:login'))
+# def delete_user(request):
+#     pk = request.user.id
+#     user =  auth_views.UserModel.objects.get(pk=pk)
+#     now_is_active = user.is_active
+#     auth_views.UserModel.objects.update(is_active= now_is_active)
+#     return redirect('user:join')
 

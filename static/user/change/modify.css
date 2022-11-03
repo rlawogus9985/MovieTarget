@@ -21,22 +21,26 @@ body{
 	color:#fff;	
 	text-transform:uppercase;
 	display: block;
-	/* position:absolute; */
-
-	margin-bottom: -8px;
+	text-align: left;
+	margin-bottom: -2px;
 	font-size:12px;
-
-	
 }
 
 .box{
-	position:absolute;
 	left:50%;
 	top:50%;
 	transform: translate(-50%,-50%);
-	background-color: rgba(0, 0, 0, 0.89);
 	border-radius:3px;
-	padding:70px 100px;
+	backdrop-filter: blur(10px);
+    background-color: rgba(29, 28, 28, 0.345);
+    border: 1px solid rgba(254, 254, 254, 0.18);
+    box-shadow: 0 10px 35px 0 rgba(54, 33, 0, 0.65);
+    max-width: 300px;
+    overflow: hidden;
+    padding: 50px 30px 50px 30px;
+    position: relative;
+    text-align: center;
+    z-index: 1;
 }
 
 .input-container{
@@ -54,7 +58,7 @@ body{
 }
 .input-container input{ 
 	border:0;
-	border-bottom:1px solid #555;  
+	border-bottom:1px solid rgb(151, 124, 124);  
 	background:transparent;
 	width:100%;
 	padding:8px 0 5px 0;
@@ -64,11 +68,13 @@ body{
 .input-container input:focus{ 
 	border:none;	
 	outline:none;
-	border-bottom:1px solid #e74c3c;	
+	border-bottom:1px solid #ffffff;
 }
 .mbtn{
-	color:#fff;
-	background-color:#e74c3c;
+	border: 1px solid #fff;
+	background-color: rgba(29, 28, 28, 0.345);
+	color: #fff;
+	box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
 	outline: none;
 	border: 0;
 	padding:10px 20px;
@@ -78,26 +84,19 @@ body{
 	border-radius:2px;
 	cursor:pointer;
 	position:relative;
+	right:30px;
 }
 
-.mbtn:after{
-	content:" ";
-	position:absolute;
-	background:rgba(0,0,0,0.50);
-	top:0;
-	right:0;
-	width:100%;
-	height:100%;
+.mbtn:active,
+.mbtn:focus{  
+	background-color: #fff;
+	color: #000000d7;
+	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
-
-.mbtn:hover:after{
-	content:" ";
-	position:absolute;
-	background:rgba(0,0,0,0);
-	top:0;
-	right:0;
-	width:100%;
-	height:100%;
+.mbtn:hover{  
+	background-color: #fff;
+	color: #000000d7;
+	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 
 
@@ -134,7 +133,6 @@ a {
 	text-decoration: none;
 }
 .btn{  
-	
 	border-radius: 4px;
 	height: 44px;
 	font-size: 13px;
@@ -159,7 +157,7 @@ a {
 	text-align: center;
 	border: 1px solid #fff;
 	background-color: rgba(29, 28, 28, 0.345);
-	color: fff;
+	color: #fff;
 	box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
 }
 .btn:active,

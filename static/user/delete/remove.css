@@ -1,0 +1,117 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.blur,
+.main,
+.particles{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.blur{
+    background-color: #212121;
+    background-image: url("https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=725&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+    transform: scale(1.2);
+    /* animation: bg 8s linear infinite alternate; */
+
+}
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 100;
+}
+.title{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 15px;
+    padding: 12.5px 25px;
+    text-shadow: 1px 1px 10px black;
+    border: 2px solid rgba( 255, 255, 255, .5);
+    border-radius: 4px;
+    color: white;
+    position: relative;
+    bottom: 85px;
+    
+}
+
+.particles{
+    position: absolute;
+    z-index: 200;
+    overflow: hidden;
+}
+
+.particle{
+    border-radius: 50%;
+    filter: blur(3px);
+    position: absolute;
+}
+@keyframes bg {
+    0%{ transform: scale(1.2);}
+    100%{ transform: scale(1.3);}
+}
+@keyframes move {
+    0%{
+        transform: translateX(0);
+        opacity: 0;
+    }
+    10% ,90%{
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(45vw);
+        opacity: 0;
+    }
+}
+
+/* 삭제버튼 */
+.btn{  
+    position: relative;
+    top: 380px;
+    left: 700px;
+	border-radius: 4px;
+	height: 44px;
+	font-size: 13px;
+	font-weight: 600;
+	text-transform: uppercase;
+	transition: all 200ms linear;
+	padding: 0 30px;
+	letter-spacing: 1px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	border: 1px solid #fff;
+	background-color: rgba(29, 28, 28, 0.345);
+	color: #fff;
+	box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+.btn:active,
+.btn:focus{  
+	background-color: #fff;
+	color: #1f2029d7;
+	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+.btn:hover{  
+	background-color: #fff;
+	color: #1f2029d4;
+	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+
+button#deleteUserBt {
+    z-index: 9999;
+}
