@@ -19,3 +19,9 @@ class TargetBase(models.Model):
         managed = False
         db_table = 'target_base'
 
+class Actorlist(models.Model):
+    actor1 = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'actorlist'
