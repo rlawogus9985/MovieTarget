@@ -43,6 +43,9 @@
         <div class="finder__inner custom">
           <div class="finder__icon custom" ref="icon"></div>
           <input class="finder__input custom" type="text" name="searchWord" value="{{ searchWord|default_if_none:'' }}" />
+          <input type="hidden" name="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}">
+          <input type="hidden" name="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}">
+          <input type="hidden" name="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}">
         </div>
       </div>
     </div>

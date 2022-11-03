@@ -94,7 +94,7 @@
     <!--이전 페이지-->
     {% if page_obj.has_previous %}
       <li class="page-item">
-        <a href="?searchWord={{ searchWord }}&page={{ page_obj.previous_page_number }}" class="page-link">이전</a>
+        <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.previous_page_number }})" class="page-link">이전</a>
       </li>
     {% else %}
       <li class="page-item disabled">
@@ -107,11 +107,11 @@
     {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
       {% if page_number == page_obj.number %}
         <li class="page-item active" aria-current="page">
-          <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
         </li>
       {% else %}
         <li class="page-item">
-          <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
         </li>
       {% endif %}
     {% endif %}
@@ -120,7 +120,7 @@
     <!-- 다음 페이지 -->
     {% if page_obj.has_next %}
     <li class="page-item">
-      <a href="?searchWord={{ searchWord }}&page={{ page_obj.next_page_number }}" class="page-link">다음</a>
+      <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.next_page_number }});" class="page-link">다음</a>
     </li>
     {% else %}
     <li class="page-item disabled">
@@ -146,6 +146,11 @@
   <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a>
   <a href="{% url 'movie:board3' %}" class="btn_">다음(▶)</a>
 </div>
+  <form id="pageForm">
+    <input type="hidden" name="searchWord" id="searchWord">
+    <input type="hidden" name="page" id="page">
+    <input type="hidden" name="selected_genre" id="genre" value="{{ selected_genre|default_if_none:'' }}">
+  </form>
 
 </body>
 </html>
