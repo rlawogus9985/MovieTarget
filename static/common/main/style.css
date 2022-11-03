@@ -56,15 +56,15 @@ select.dropdown {
 }
 
 body {
-  --bg: #171c28;
-  min-height: 100vh;
-  font-family: "Mukta Malar", Arial;
-  line-height: 22px;
-  font-size: 16px;
-  color: #adafb6;
-  transition: background 0.3s ease;
-  background: var(--bg);
-}
+    --bg: #171c28;
+    min-height: 100vh;
+    font-family: "Mukta Malar", Arial;
+    line-height: 22px;
+    font-size: 16px;
+    color: #adafb6;
+    transition: background 0.3s ease;
+    background: var(--bg);
+  }
 
 .points_ {
     position: absolute;
