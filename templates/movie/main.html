@@ -50,7 +50,7 @@
 
   <div class="lower_">
     <a href="{% url 'movie:board3' %}" class="btn_">이전(◀)</a>
-    <a href="{% url 'movie:selectlist' %}" class="btn_">결과 보기</a>
+    <a href="{% url 'movie:selectlist' %}" class="btn_" onclick="selectDataNationsAuditOpendt();">결과 보기</a>
   </div>
 
   <form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
@@ -64,5 +64,12 @@
   </form>
 
 </body>
+<script src="{% static 'common/session.js' %}"></script>
+<script src="{% static 'movie/select/dselect.js' %}"></script>
 </html>
 
+<form action="{% url 'movie:board1S' user_id=user.id %}" method="get" id="selectedNationsOpendtAuditForm">
+  <input type="hidden" name="nations" id="selected_nations_hidden_input">
+  <input type="hidden" name="opendt" id="selected_opendt_hidden_input">
+  <input type="hidden" name="audit" id="selected_audit_hidden_input">
+</form>

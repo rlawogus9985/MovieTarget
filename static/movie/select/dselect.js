@@ -13,34 +13,89 @@ window.onload = function () {
   // });
 };
 
-// 감독 선택을 위한 js
-function TableDirector(e) {
-  // e.innerHTML로 DOM 안의 텍스트를 가져와서 .trim()으로 앞뒤 불필요한 공백을 지워준다.
-  selected_director = e.innerHTML.trim();
-  // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
-  document.getElementById("selected_director").value = selected_director;
-}
-
+////////////////////무기입방지 
 // 감독선택후 무기입 방지
-function selectData() {
-  selected_director = document.getElementById("selected_director").value;
+function selectDataDirector() {
+  let selected_director = document.getElementById("selected_director").value;
 
   if (selected_director == 0 || selected_director == "") {
-    alert("감독을 선택하시고 완료버튼을 눌러주세요");
+    alert("감독을 선택하시고 완료버튼을 눌러주세요.");
     return false;
   }
 
   document.getElementById("selected_director_hidden_input").value = selected_director;
-  document.getElementById("selectedForm").submit();
   alert("선택이 완료되었습니다.");
+  sessionStorage.setItem("selected_director",selected_director);
+  document.getElementById("selectedDirectorForm").submit();
 }
+
+// 장르 선택 후 무기입 방지
+function selectDataGenre() {
+  let selected_genre = document.getElementById("selected_genre").value;
+
+  if (selected_genre == 0 || selected_genre == "") {
+    alert("장르를 선택하시고 완료버튼을 눌러주세요");
+    return false;
+  }
+
+  document.getElementById("selected_genre_hidden_input").value = selected_genre;
+  sessionStorage.setItem("selected_genre",selected_genre);
+  alert("선택이 완료되었습니다.");
+  document.getElementById("selectedGenreForm").submit();
+}
+
+// actor1, actor2, actor3 무기입 방지
+function selectDataActors() {
+  let selected_actor1 = document.getElementById("selected_actor1").value;
+  let selected_actor2 = document.getElementById("selected_actor2").value;
+  let selected_actor3 = document.getElementById("selected_actor3").value;
+
+  if (selected_actor1 == 0 || selected_actor1 =="" || selected_actor2 == 0 || selected_actor2 =="" || selected_actor3 == 0 || selected_actor3 =="") {
+    alert("세 명의 배우 모두를 선택해주세요.")
+    return false;
+  }
+
+  document.getElementById("selected_actor1_hidden_input").value = selected_actor1
+  document.getElementById("selected_actor2_hidden_input").value = selected_actor2
+  document.getElementById("selected_actor3_hidden_input").value = selected_actor3
+  document.getElementById("selectedActorsForm").submit();
+}
+
+function selectDataNationsAuditOpendt() {
+  selected_nations = document.getElementById("movieNations").value;
+  selected_opendt = document.getElementById("movieOpenDt").value;
+  selected_audit = document.getElementById("movieAudit").value;
+
+  // if (selected_nations == 0 || selected_nations =="" || selected_opendt == 0 || selected_opendt =="" || selected_audit == 0 || selected_audit =="") {
+  //   alert("모든 선택사항을 골라주세요.")
+  //   return false;
+  // }
+
+  document.getElementById("selected_nations_hidden_input").value = selected_nations
+  document.getElementById("selected_opendt_hidden_input").value = selected_opendt
+  document.getElementById("selected_audit_hidden_input").value = selected_audit
+  document.getElementById("selectedNationsOpendtAuditForm").submit();
+  alert("모든 선택이 완료되었습니다.\n 결과를 확인해 보실까요?")
+}
+
+////////////////////무기입방지 
+
+// 감독 선택을 위한 js
+function TableDirector(e) {
+  // e.innerHTML로 DOM 안의 텍스트를 가져와서 .trim()으로 앞뒤 불필요한 공백을 지워준다.
+  let selected_director = e.innerHTML.trim();
+  // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
+  document.getElementById("selected_director").value = selected_director;
+}  
+
+
 
 // 장르 선택을 위한 js
 function TableGenre(e) {
   selected_genre = e.innerHTML.trim();
   document.getElementById("selected_genre").value = selected_genre;
   document.getElementById("genre").value = selected_genre;
-  document.getElementById("pageForm").submit();
+  // document.getElementById("pageForm").submit();
 }
 // 배우 선택을 위한 js
 function TableActor(e) {

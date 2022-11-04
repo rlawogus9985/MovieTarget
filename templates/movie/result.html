@@ -45,6 +45,13 @@ Object lobj_getdata = session.getAttribute("selected_director");
 {% endcomment %}
 
 {{ request.session.selected_director }}
+{{ request.session.selected_genre }}
+{{ request.session.selected_nations }}
+{{ request.session.selected_audit }}
+{{ request.session.selected_actor1 }}
+{{ request.session.selected_actor2 }}
+{{ request.session.selected_actor3 }}
+{{ request.session.selected_opendt }}
 
 {% for selectedbase in selectedbase_list %}
 {{ selectedbase.id }}
@@ -56,5 +63,13 @@ Object lobj_getdata = session.getAttribute("selected_director");
 {% endblock body %}
 <script src="{% static 'common/session.js' %}"></script> 
 
-<script>sessionStorage.getItem("selected_director")</script>
+<script>
+sessionStorage.getItem("selected_director")
+sessionStorage.getItem("selected_genre")
+sessionStorage.getItem("selected_nations")
+sessionStorage.getItem("selected_audit")
+sessionStorage.getItem("selected_actor1")
+sessionStorage.getItem("selected_actor2")
+sessionStorage.getItem("selected_actor3")
+</script>
   
