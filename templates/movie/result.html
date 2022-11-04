@@ -7,34 +7,90 @@
 
 {% block head %}
 {% load static %}
-<!-- CSS only -->
 <link rel="stylesheet" href="{% static 'movie/result/result.css' %}">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
 {% endblock head %}
   
 {% block body %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 <div>영화선택결과페이지</div>
 
-<button type="button" class="btn_ btn-outline-primary">Primary</button>
-<button type="button" class="btn_ btn-outline-secondary">Secondary</button>
-<button type="button" class="btn_ btn-outline-success">Success</button>
-<button type="button" class="btn_ btn-outline-info">Info</button>
-<button type="button" class="btn_ btn-outline-warning">Warning</button>
-<button type="button" class="btn_ btn-outline-danger">Danger</button>
-<button type="button" class="btn_ btn-outline-light">Light</button>
-<button type="button" class="btn_ btn-outline-dark">Dark</button>
+<div class="button" id="button-5">
+  <div id="translate"></div>
+  <a href="#">Let's Go!</a>
+</div>
+<div class="button" id="button-5">
+  <div id="translate"></div>
+  <a href="#">Let's Go!</a>
+</div>
+<div class="button" id="button-5">
+  <div id="translate"></div>
+  <a href="#">Let's Go!</a>
+</div>
+<div class="button" id="button-5">
+  <div id="translate"></div>
+  <a href="#">Let's Go!</a>
+</div>
+<div class="button" id="button-5">
+  <div id="translate"></div>
+  <a href="#">Let's Go!</a>
+</div>
+<br>
+<div class="button" id="button-5">
+  <div id="translate"></div>
+  <a href="#">Let's Go!</a>
+</div>
+<div class="button" id="button-5">
+  <div id="translate"></div>
+  <a href="#">Let's Go!</a>
+</div>
+<div class="button" id="button-5">
+  <div id="translate"></div>
+  <a href="#">Let's Go!</a>
+</div>
 
-<p class="bs-component">
-  <button type="button" class="btn btn-primary">Primary</button>
-  <button type="button" class="btn btn-secondary">Secondary</button>
-  <button type="button" class="btn btn-success">Success</button>
-  <button type="button" class="btn btn-info">Info</button>
-  <button type="button" class="btn btn-warning">Warning</button>
-  <button type="button" class="btn btn-danger">Danger</button>
-  <button type="button" class="btn btn-light">Light</button>
-  <button type="button" class="btn btn-dark">Dark</button>
-</p>
+{% comment %}
+
+<a href="#" class="btn_">
+  <span class="text">Text</span>
+  <span class="flip-front">Front</span>
+  <span class="flip-back">감독</span>
+</a>
+<a href="#" class="btn_">
+  <span class="text">Text</span>
+  <span class="flip-front">Front</span>
+  <span class="flip-back">장르</span>
+</a>
+<a href="#" class="btn_">
+  <span class="text">Text</span>
+  <span class="flip-front">Front</span>
+  <span class="flip-back">배우</span>
+</a>
+<a href="#" class="btn_">
+  <span class="text">Text</span>
+  <span class="flip-front">Front</span>
+  <span class="flip-back">배우</span>
+</a>
+<a href="#" class="btn_">
+  <span class="text">Text</span>
+  <span class="flip-front">Front</span>
+  <span class="flip-back">배우</span>
+</a>
+<a href="#" class="btn_">
+  <span class="text">Text</span>
+  <span class="flip-front">Front</span>
+  <span class="flip-back">국가</span>
+</a>
+<a href="#" class="btn_">
+  <span class="text">Text</span>
+  <span class="flip-front">Front</span>
+  <span class="flip-back">분기</span>
+</a>
+<a href="#" class="btn_">
+  <span class="text">Text</span>
+  <span class="flip-front">Front</span>
+  <span class="flip-back">관람등급</span>
+</a>
+
+{% endcomment %}
 
 {% comment %}
 String ls_getdata = (String)lobj_getdata
