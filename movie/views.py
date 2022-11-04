@@ -97,10 +97,38 @@ class MovieBoard1SelectCreateView(LoginRequiredMixin, generic.CreateView):
     login_url = reverse_lazy('user:login')
     # form_class = SelectedBaseForm
 
+def director_to_genre(request):
+    targetdirector = request.GET.get('director','')
+    request.session['selected_director']= targetdirector
+    return redirect(reverse('movie:board2'))
+
+def genre_to_actor(request):
+    targetgenre = request.GET.get('genre','')
+    request.session['selected_genre']= targetgenre
+    return redirect(reverse('movie:board3'))
+
 def movieboardselectview(request, user_id):
-    target = request.GET.get('director','') 
+    targetdirector = request.GET.get('director','') 
+    targetgenre = request.GET.get('genre', '')
+    targetnations = request.GET.get('nations', '')
+    targetaudit = request.GET.get('audit', '')
+    targetactor1 = request.GET.get('actor1', '')
+    targetactor2 = request.GET.get('actor2', '')
+    targetactor3 = request.GET.get('actor3', '')
+    targetopendt = request.GET.get('opendt', '')
+    
+    request.session['selected_nations']= targetnations
+    request.session['selected_audit']= targetaudit
+    request.session['selected_actor1']= targetactor1
+    request.session['selected_actor2']= targetactor2
+    request.session['selected_actor3']= targetactor3
+    request.session['selected_opendt']= targetopendt
+
     user = auth_views.UserModel.objects.get(pk=user_id)
-    SelectedBase.objects.create(director=target, writer_id=user.id)
+    SelectedBase.objects.create(
+    writer_id=user.id, director=targetdirector, genre=targetgenre,nations=targetnations, 
+    audit=targetaudit, actor1=targetactor1, actor2=targetactor2, actor3=targetactor3, opendt=targetopendt
+    )
     return render(request, 'movie/result.html')
    
 # 메인페이지2. 장르 선택 페이지를 보여주기 위한 클래스뷰
@@ -128,8 +156,10 @@ class MovieBoardGenre(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         search_word = self.request.GET.get('searchWord','')
+        selected_genre = self.request.GET.get('selected_genre', '')
         if search_word:
             context['searchWord'] = search_word
+        context['selected_genre'] = selected_genre
         return context
    
 # 메인페이지3. 배우 선택 페이지를 보여주기 위한 클래스뷰

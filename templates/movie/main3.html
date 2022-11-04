@@ -43,6 +43,9 @@
         <div class="finder__inner custom">
           <div class="finder__icon custom" ref="icon"></div>
           <input class="finder__input custom" type="text" name="searchWord" value="{{ searchWord|default_if_none:'' }}" />
+          <input type="hidden" name="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}">
+          <input type="hidden" name="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}">
+          <input type="hidden" name="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}">
         </div>
       </div>
     </div>
@@ -157,8 +160,15 @@
 <br>
 <div class="lower_">
   <a href="{% url 'movie:board2' %}" class="btn_">이전(◀)</a>
-  <a href="{% url 'movie:board4' %}" class="btn_">다음(▶)</a>
+  <a href="{% url 'movie:board4' %}" class="btn_" onclick="selectDataActors(); sessionActorsDataImport();" >다음(▶)</a>
 </div>
 
 </body>
+<script src="{% static 'common/session.js' %}"></script>
 </html>
+
+<form action="{% url 'movie:board1S' user_id=user.id %}" method="get" id="selectedActorsForm">
+  <input type="hidden" name="genre" id="selected_actor1_hidden_input">
+  <input type="hidden" name="genre" id="selected_actor2_hidden_input">
+  <input type="hidden" name="genre" id="selected_actor3_hidden_input">
+</form>

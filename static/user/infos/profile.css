@@ -1,0 +1,277 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #dae7fa;
+    font-family: -apple-system, sans-serif;	
+}
+
+.wrap {
+    width: 980px;
+    padding: 80px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+.wrap .card {
+    position: relative;
+    width: calc(316px - 64px);
+    height: calc(220px - 64px);
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 #ccd0d9;
+    border-radius: 4px;
+    margin: 0 20px 16px 0;
+    padding: 32px;
+    cursor: pointer;
+    will-change: transform;
+    transition: all 0.3s ease;
+}
+
+.wrap .card__top {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* 카드 아이콘 */
+.wrap .card__top svg {
+    transition: all 0.3s ease;
+}
+.wrap .card__top:after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    /* 카드 뒤의 화살표 그림 */
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/cards-arrow.svg") no-repeat;
+    background-size: 16px;
+    background-position: center;
+    transform: translatex(-50%);
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+}
+.wrap .card__top h2 {
+    font-weight: 400;
+    margin-left: 12px;
+    font-size: 18px;
+    color: #ffffff;
+    transform: translatex(-8%);
+    transition: all 0.2s ease-out;
+    opacity: 0;
+}
+
+.wrap .card__bottom {
+    position: relative;
+    margin-top: 24px;
+}
+.wrap .card__bottom h2 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #292f3a;
+    transition: all 0.2s ease-out;
+}
+.wrap .card__bottom h2:before {
+    content: "";
+    display: block;
+    position: relative;
+    top: 30px;
+    width: 100%;
+    height: 1px;
+    background-color: #d8dde6;
+}
+.wrap .card__bottom p {
+    transition: all 0.2s ease-out;
+}
+.wrap .card__bottom p:nth-of-type(1) {
+    opacity: 0.7;
+    font-size: 14px;
+    color: #292f3a;
+    letter-spacing: 0;
+    line-height: 21px;
+}
+.wrap .card__bottom p:nth-of-type(2) {
+    opacity: 0;
+    font-size: 13px;
+    font-weight: 300;
+    color: #c3d5ff;
+    letter-spacing: 0;
+    line-height: 19px;
+    position: absolute;
+    top: -30px;
+    transform: translateY(-10px);
+}
+
+.wrap .card:hover {
+    transform: scale3d(0.985, 0.985, 0.985) translateX(0);
+    background-color: #3973ff;
+    box-shadow: none;
+}
+.wrap .card:hover .card__top:after {
+    opacity: 1;
+    transform: translatex(0);
+}
+.wrap .card:hover .card__top svg #Combined-Shape {
+    fill: #fff;
+}
+.wrap .card:hover .card__top svg #Rectangle-13 {
+    fill: url(#linearGradient-2) !important;
+}
+.wrap .card:hover .card__top h2 {
+    opacity: 1;
+    transform: translatex(0);
+}
+.wrap .card:hover .card__bottom h2 {
+    transform: translateY(16px);
+    opacity: 0;
+}
+.wrap .card:hover .card__bottom p:nth-of-type(1) {
+    transform: translateY(16px);
+    opacity: 0;
+}
+.wrap .card:hover .card__bottom p:nth-of-type(2) {
+    transform: translateY(0);
+    opacity: 1;
+}
+.wrap .card:hover span {
+    opacity: 1;
+    transform: scale(1);
+}
+.wrap .card span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 카드 뒤 해골 반 그림 */
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/bg-222.png") no-repeat; 
+    background-size: contain;
+    background-position: left;
+    opacity: 0;
+    transition-delay: 0.3s;
+    transform-origin: left;
+    transform: scale(0.9);
+    transition: all 0.4s ease;
+}
+#sz {
+    /* 카드 뒤 나뭇잎 반 그림 */
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/sz.png") no-repeat;
+    background-size: contain;
+    background-position: -100%;
+}
+
+
+.preShow {
+    position: relative;
+    opacity: 0;
+    will-change: transform;
+    transform: translateX(-30px);
+    animation: preShow 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+.preShow::before {
+    content: "";
+    z-index: 999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #f1f5fb;
+    transform-origin: right;
+    will-change: transform;
+    animation-delay: 1s;
+    animation: preShowMove 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+@keyframes preShowMove {
+    to {
+        transform: scaleX(0);
+    }
+}
+@keyframes preShow {
+    0% {
+        box-shadow: none;
+    }
+    60% {
+        box-shadow: none;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        box-shadow: 0 2px 4px 0 #ccd0d9;
+    }
+}
+.dr {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 100px;
+}
+
+
+/* menubar */
+.sawname {
+	color: #000b24;
+	padding-bottom: 5px;
+}
+
+.logo {
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	display: block;
+	z-index: 100;
+	transition: all 250ms linear;
+	}
+.logo img {
+	height: 100px;
+	width: auto;
+	display: block;
+}
+
+a {
+	cursor: pointer;
+	transition: all 200ms linear;
+	text-decoration: none;
+}
+.btn{  
+	border-radius: 4px;
+	height: 44px;
+	font-size: 13px;
+	font-weight: 600;
+	text-transform: uppercase;
+	-webkit-transition: all 200ms linear;
+	transition: all 200ms linear;
+	padding: 0 30px;
+	letter-spacing: 1px;
+	display: -webkit-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+	-ms-flex-pack: center;
+	text-align: center;
+	border: 1px solid #fff;
+	background-color: #fff;
+	color: #3973ff;
+	box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+.btn:active,
+.btn:focus,
+.btn:hover{  
+	background-color: #3973ff;
+    border: 1px solid #3973ff;
+	color: #fff;
+	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}

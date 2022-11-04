@@ -14,4 +14,6 @@ urlpatterns = [
     path('board/2', views.MovieBoardGenre.as_view(), name='board2'),
     path('board/3', views.MovieBoardActor.as_view(), name='board3'),
     path('board/4',views.MovieBoardtest ,name='board4'),
+    path('board/1to2/', views.director_to_genre, name='board1to2'),
+    path('board/2to3/', views.genre_to_actor, name='board2to3'),
 ]
