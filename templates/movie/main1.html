@@ -52,11 +52,11 @@
   </form>
 </div>
 
-<!-- 선택한 내용 보여주기
+<!-- 선택한 내용 보여주기 -->
 <br>
 <div style="color: white;">
   <h5 style="text-align: center;">선택한 내용 - <input type="text" name="selected_director" id="selected_director" readonly></h5>
-</div> -->
+</div>
 
 <!-- 데이터베이스에 뭐가 있는지 출력-->
 <div>
@@ -145,7 +145,7 @@
 <br>
 <div class="lower_">
   <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a>
-  <a href="{% url 'movie:board2' %}" class="btn_">다음(▶)</a>
+  <a href="javascript:void(0);" class="btn_" onclick="selectDataDirector();">다음(▶)</a>
 </div>
 
 </body>
@@ -153,6 +153,6 @@
 
 </html>
 
-<form action="{% url 'movie:board1S' user_id=user.id %}" method="get" id="selectedDirectorForm">
+<form action="{% url 'movie:board1to2' %}" method="get" id="selectedDirectorForm">
   <input type="hidden" name="director" id="selected_director_hidden_input">
 </form>
