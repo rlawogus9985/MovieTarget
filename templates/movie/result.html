@@ -46,12 +46,12 @@ Object lobj_getdata = session.getAttribute("selected_director");
 
 {{ request.session.selected_director }}
 {{ request.session.selected_genre }}
-{{ request.session.selected_nations }}
-{{ request.session.selected_audit }}
 {{ request.session.selected_actor1 }}
 {{ request.session.selected_actor2 }}
 {{ request.session.selected_actor3 }}
+{{ request.session.selected_nations }}
 {{ request.session.selected_opendt }}
+{{ request.session.selected_audit }}
 
 {% for selectedbase in selectedbase_list %}
 {{ selectedbase.id }}
@@ -61,15 +61,18 @@ Object lobj_getdata = session.getAttribute("selected_director");
 {% endfor %}
 
 {% endblock body %}
+{% comment %}
 <script src="{% static 'common/session.js' %}"></script> 
-
+<!-- storage에서 key로 value 빼오는 코드 이걸 jvs에 쓰는건지 html 템플릿에 쓰는건지 모르니 일단 써둠. -->
 <script>
 sessionStorage.getItem("selected_director")
 sessionStorage.getItem("selected_genre")
-sessionStorage.getItem("selected_nations")
-sessionStorage.getItem("selected_audit")
 sessionStorage.getItem("selected_actor1")
 sessionStorage.getItem("selected_actor2")
 sessionStorage.getItem("selected_actor3")
+sessionStorage.getItem("selected_nations")
+sessionStorage.getItem("selected_opendt")
+sessionStorage.getItem("selected_audit")
 </script>
+{% endcomment %}
   

@@ -9,6 +9,9 @@
     <h1 class="title">{{ user.username }} 회원님의 계정을 삭제 하시겠습니까?</h1>
   </div>
   
+  {% comment %}
+  <form action="{% url 'user:delete_user' auth_user_id=user.id %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
+  {% endcomment %}
   <form action="{% url 'user:delete_user' %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
     {% csrf_token %}
     <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn">탈퇴하기</button>

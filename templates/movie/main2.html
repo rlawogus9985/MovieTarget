@@ -153,7 +153,10 @@
   </form>
 
 </body>
+{% comment %}
 <script src="{% static 'common/session.js' %}"></script>
+{% endcomment %}
+  
 </html>
 
 <form action="{% url 'movie:board2to3' %}" method="get" id="selectedGenreForm">

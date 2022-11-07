@@ -17,7 +17,7 @@ window.onload = function () {
 // 감독선택후 무기입 방지
 function selectDataDirector() {
   let selected_director = document.getElementById("selected_director").value;
-
+  
   if (selected_director == 0 || selected_director == "") {
     alert("감독을 선택하시고 완료버튼을 눌러주세요.");
     return false;
@@ -58,6 +58,7 @@ function selectDataActors() {
   document.getElementById("selected_actor1_hidden_input").value = selected_actor1
   document.getElementById("selected_actor2_hidden_input").value = selected_actor2
   document.getElementById("selected_actor3_hidden_input").value = selected_actor3
+  alert("선택이 완료되었습니다.")
   document.getElementById("selectedActorsForm").submit();
 }
 
@@ -74,8 +75,8 @@ function selectDataNationsAuditOpendt() {
   document.getElementById("selected_nations_hidden_input").value = selected_nations
   document.getElementById("selected_opendt_hidden_input").value = selected_opendt
   document.getElementById("selected_audit_hidden_input").value = selected_audit
+  alert("모든 선택이 완료되었습니다.\n결과를 확인해 보실까요?")
   document.getElementById("selectedNationsOpendtAuditForm").submit();
-  alert("모든 선택이 완료되었습니다.\n 결과를 확인해 보실까요?")
 }
 
 ////////////////////무기입방지 
