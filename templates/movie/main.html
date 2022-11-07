@@ -13,7 +13,6 @@
 <body>
   
   {% include 'common/menubar.html' %}
-
   <div class="dropdown_">
     <select class="dropdown" id="movieNations">
       <option>한국</option>
@@ -54,7 +53,7 @@
     <a href="javascript:void(0);" class="btn_" onclick="selectDataNationsAuditOpendt();">결과 보기</a>
   </div>
 
-  <form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
+  {% comment %} <form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
     {% csrf_token %}
     <input type="hidden" name="nations" id="selected_nations_hidden_input">
     <input type="hidden" name="opendt" id="selected_opendt_hidden_input">
@@ -63,7 +62,7 @@
     <!-- <select type="hidden" name="nations" id="nations"></select>
       <select type="hidden" name="openDt" id="openDt"></select>
       <select type="hidden" name="audit" id="audit"></select> -->
-  </form>
+  </form> {% endcomment %}
 
 </body>
 {% comment %}
