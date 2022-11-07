@@ -63,7 +63,7 @@ class MovieBoardtest1(generic.ListView):
     context_object_name = "targetbase_list"
 
     # 검색창에서 검색한 내용을 띄어주기 위한것
-    def get_queryset(self):
+    def get_queryset(self): 
         search_word = self.request.GET.get('searchWord','')
         if search_word:
             result = TargetBase.objects.values('director').distinct().filter(director__contains=search_word)
