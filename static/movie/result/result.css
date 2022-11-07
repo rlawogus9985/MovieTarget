@@ -35,7 +35,10 @@ span {
 
 
 /* Button Styles */
-
+.button_{
+  min-width: 1030px;
+  
+}
 .button {
   display: inline-flex;
   height: 40px;
@@ -62,6 +65,7 @@ a {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  margin-top: 60px;
 }
 
 #button-5 a {

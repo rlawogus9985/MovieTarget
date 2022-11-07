@@ -8,89 +8,63 @@
 {% block head %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'movie/result/result.css' %}">
+<script src="{% static 'common/session.js' %}"></script> 
 {% endblock head %}
   
 {% block body %}
 <div>영화선택결과페이지</div>
 
+<div class="button_"></div>
 <div class="button" id="button-5">
   <div id="translate"></div>
-  <a href="#">Let's Go!</a>
+  <a href="#">감독 -<br>
+    {{ request.session.selected_director }}
+  </a>
 </div>
 <div class="button" id="button-5">
   <div id="translate"></div>
-  <a href="#">Let's Go!</a>
+  <a href="#">장르 -<br>
+    {{ request.session.selected_genre }}
+  </a>
 </div>
 <div class="button" id="button-5">
   <div id="translate"></div>
-  <a href="#">Let's Go!</a>
+  <a href="#">배우 -<br>
+    {{ request.session.selected_actor1 }}
+  </a>
 </div>
 <div class="button" id="button-5">
   <div id="translate"></div>
-  <a href="#">Let's Go!</a>
+  <a href="#">배우 -<br>
+    {{ request.session.selected_actor2 }}
+  </a>
 </div>
 <div class="button" id="button-5">
   <div id="translate"></div>
-  <a href="#">Let's Go!</a>
+  <a href="#">배우 -<br>
+    {{ request.session.selected_actor3 }}
+  </a>
 </div>
 <br>
 <div class="button" id="button-5">
   <div id="translate"></div>
-  <a href="#">Let's Go!</a>
+  <a href="#">국가 -<br>
+    {{ request.session.selected_nations }}
+  </a>
 </div>
 <div class="button" id="button-5">
   <div id="translate"></div>
-  <a href="#">Let's Go!</a>
+  <a href="#">개봉 분기 -<br>
+    {{ request.session.selected_opendt }}
+  </a>
 </div>
 <div class="button" id="button-5">
   <div id="translate"></div>
-  <a href="#">Let's Go!</a>
+  <a href="#">관람 등급 -<br>
+    {{ request.session.selected_audit }}
+  </a>
 </div>
 
-{% comment %}
-
-<a href="#" class="btn_">
-  <span class="text">Text</span>
-  <span class="flip-front">Front</span>
-  <span class="flip-back">감독</span>
-</a>
-<a href="#" class="btn_">
-  <span class="text">Text</span>
-  <span class="flip-front">Front</span>
-  <span class="flip-back">장르</span>
-</a>
-<a href="#" class="btn_">
-  <span class="text">Text</span>
-  <span class="flip-front">Front</span>
-  <span class="flip-back">배우</span>
-</a>
-<a href="#" class="btn_">
-  <span class="text">Text</span>
-  <span class="flip-front">Front</span>
-  <span class="flip-back">배우</span>
-</a>
-<a href="#" class="btn_">
-  <span class="text">Text</span>
-  <span class="flip-front">Front</span>
-  <span class="flip-back">배우</span>
-</a>
-<a href="#" class="btn_">
-  <span class="text">Text</span>
-  <span class="flip-front">Front</span>
-  <span class="flip-back">국가</span>
-</a>
-<a href="#" class="btn_">
-  <span class="text">Text</span>
-  <span class="flip-front">Front</span>
-  <span class="flip-back">분기</span>
-</a>
-<a href="#" class="btn_">
-  <span class="text">Text</span>
-  <span class="flip-front">Front</span>
-  <span class="flip-back">관람등급</span>
-</a>
-
-{% endcomment %}
 
 {% comment %}
 String ls_getdata = (String)lobj_getdata
@@ -100,14 +74,6 @@ Object lobj_getdata = session.getAttribute("selected_director");
 %>
 {% endcomment %}
 
-{{ request.session.selected_director }}
-{{ request.session.selected_genre }}
-{{ request.session.selected_nations }}
-{{ request.session.selected_audit }}
-{{ request.session.selected_actor1 }}
-{{ request.session.selected_actor2 }}
-{{ request.session.selected_actor3 }}
-{{ request.session.selected_opendt }}
 
 {% for selectedbase in selectedbase_list %}
 {{ selectedbase.id }}
