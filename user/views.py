@@ -89,13 +89,14 @@ def delete_user(request):
 
     return redirect('user:join')
 
-## delete() 하지않고 is_active를 0으로 변환시킬 새로운 회원탈퇴함수뷰.
+# # delete() 하지않고 is_active를 0으로 변환시킬 새로운 회원탈퇴함수뷰.
 # @require_POST
 # @login_required(login_url=reverse_lazy('user:login'))
-# def delete_user(request):
-#     pk = request.user.id
-#     user =  auth_views.UserModel.objects.get(pk=pk)
-#     now_is_active = user.is_active
-#     auth_views.UserModel.objects.update(is_active= now_is_active)
+# def delete_user(request, auth_user_id):
+#     # username = request.POST.get('delete_user_name', '')
+#     user =  auth_views.UserModel.objects.get(pk=auth_user_id)
+#     user.objects.update(is_active=0)
+#     user.save()
 #     return redirect('user:join')
+
 
