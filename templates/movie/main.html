@@ -54,19 +54,19 @@
     <a href="javascript:void(0);" class="btn_" onclick="selectDataNationsAuditOpendt();">결과 보기</a>
   </div>
 
-  <form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
-    {% csrf_token %}
-    <input type="hidden" name="nations" id="selected_nations_hidden_input">
-    <input type="hidden" name="opendt" id="selected_opendt_hidden_input">
-    <input type="hidden" name="audit" id="selected_audit_hidden_input">
-    <!-- <input type="hidden" name="openDt2" id="openDt"> -->
-    <!-- <select type="hidden" name="nations" id="nations"></select>
-      <select type="hidden" name="openDt" id="openDt"></select>
-      <select type="hidden" name="audit" id="audit"></select> -->
-  </form>
-
+  
 </body>
 {% comment %}
+<form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
+  {% csrf_token %}
+  <input type="hidden" name="nations" id="selected_nations_hidden_input">
+  <input type="hidden" name="opendt" id="selected_opendt_hidden_input">
+  <input type="hidden" name="audit" id="selected_audit_hidden_input">
+  <!-- <input type="hidden" name="openDt2" id="openDt"> -->
+  <!-- <select type="hidden" name="nations" id="nations"></select>
+    <select type="hidden" name="openDt" id="openDt"></select>
+    <select type="hidden" name="audit" id="audit"></select> -->
+</form>
 <script src="{% static 'common/session.js' %}"></script>
 {% endcomment %}
   

@@ -12,6 +12,7 @@ urlpatterns = [
     path('board/4',views.MovieBoardtest ,name='board4'),
 
     path('board/board4toresult', views.nations_opendt_audit_to_result, name='board4toresult'), ##원래 사용하는 함수뷰
+    # path('select/',views.SelectCreateView.as_view(), name='select'),
     # path('board/board4toresult', views.NationsOpendtAuditToResult.as_view(), name='board4toresult'),  ## 시도중인 클래스뷰
         ## class뷰에 generic.ListView를 상속받아 저장되어있는 세션을 이용한 쿼리문 작성을 시도하였으나,
         ## class뷰에는 함수형뷰의 request 매개변수가 없어서 request인수에서 session을 불러오는게 어려워보인다.
@@ -24,9 +25,8 @@ urlpatterns = [
 
     # path('board/',views.MovieBoard ,name='board'), 
     # path('select/', views.select, name='select'),
-    path('select/',views.SelectCreateView.as_view(), name='select'),
-    path('selectlist/', views.SelectListView.as_view(), name='selectlist'),
-    path('selectdetail/', views.SelectDetailView.as_view(), name='selectdetail'),
+    # path('selectlist/', views.SelectListView.as_view(), name='selectlist'),
+    # path('selectdetail/', views.SelectDetailView.as_view(), name='selectdetail'),
     # path('<int:user_id>/board/1/S', views.MovieBoard1SelectCreateView.as_view(), name= 'board1S'), ## 클래스뷰로하려는안되서 함수형뷰사용해보려함.
     # path('<int:movie_id>/board/1/S', views.MovieBoard1SelectDetailView.as_view(), name= 'board1S'),
     
