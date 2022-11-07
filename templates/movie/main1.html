@@ -29,7 +29,7 @@
     <a href="{% url 'user:profile' %}" class="btn other">내정보</a>
     <a href="{% url 'user:logout' %}" class="btn other">로그아웃</a>
   {% endif %}
-  </div>
+  </div> 
 </div>
 
 <!-- 페이지 설명 창-->
@@ -145,14 +145,16 @@
 <br>
 <div class="lower_">
   {% comment %} <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a> {% endcomment %}
-  <a href="{% url 'movie:board2' %}" class="btn_">다음(▶)</a>
+  <a href="javascript:void(0);" class="btn_" onclick="selectDataDirector();">다음(▶)</a>
 </div>
 
 </body>
+{% comment %}
 <script src="{% static 'common/session.js' %}"></script>
-
+{% endcomment %}
+  
 </html>
 
-<form action="{% url 'movie:board1S' user_id=user.id %}" method="get" id="selectedForm">
+<form action="{% url 'movie:board1to2' %}" method="get" id="selectedDirectorForm">
   <input type="hidden" name="director" id="selected_director_hidden_input">
 </form>

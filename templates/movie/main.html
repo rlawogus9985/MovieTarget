@@ -8,6 +8,7 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'common/menubar/style.css' %}">
   <link rel="stylesheet" href="{% static 'common/main/style.css' %}">
+  <script src="{% static 'movie/select/dselect.js' %}"></script>
 </head>
 <body>
   
@@ -50,19 +51,30 @@
 
   <div class="lower_">
     <a href="{% url 'movie:board3' %}" class="btn_">이전(◀)</a>
-    <a href="{% url 'movie:selectlist' %}" class="btn_">결과 보기</a>
+    <a href="javascript:void(0);" class="btn_" onclick="selectDataNationsAuditOpendt();">결과 보기</a>
   </div>
 
   <form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
     {% csrf_token %}
-    <input type="hidden" name="nations" id="nations">
+    <input type="hidden" name="nations" id="selected_nations_hidden_input">
+    <input type="hidden" name="opendt" id="selected_opendt_hidden_input">
+    <input type="hidden" name="audit" id="selected_audit_hidden_input">
     <!-- <input type="hidden" name="openDt2" id="openDt"> -->
-    <input type="hidden" name="audit" id="audit">
     <!-- <select type="hidden" name="nations" id="nations"></select>
       <select type="hidden" name="openDt" id="openDt"></select>
       <select type="hidden" name="audit" id="audit"></select> -->
   </form>
 
 </body>
+{% comment %}
+<script src="{% static 'common/session.js' %}"></script>
+{% endcomment %}
+  
+
 </html>
 
+<form action="{% url 'movie:board4toresult' %}" method="get" id="selectedNationsOpendtAuditForm">
+  <input type="hidden" name="nations" id="selected_nations_hidden_input">
+  <input type="hidden" name="opendt" id="selected_opendt_hidden_input">
+  <input type="hidden" name="audit" id="selected_audit_hidden_input">
+</form>

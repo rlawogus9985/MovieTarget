@@ -10,7 +10,11 @@ from .models import SelectedBase
 from django.contrib.auth import views as auth_views
 @login_required(login_url=reverse_lazy('user:login'))
 def MovieBoardtest(request):
-    """ClassView를 사용하기전 임시로 사용하는 view함수"""
+    """
+    [ClassView를 사용하기전 임시로 사용하는 view함수 => 프로젝트초기의설명] 
+    초기에 만들었던 함수로써 관련된 html명의 수정이 필요함,
+    현재에는 path.name의 board4을 출력하는 역할을 하는 함수뷰
+    """
     return render(request, 'movie/main.html')
     
 @login_required(login_url=reverse_lazy('user:login'))
@@ -59,7 +63,7 @@ class MovieBoardtest1(generic.ListView):
     context_object_name = "targetbase_list"
 
     # 검색창에서 검색한 내용을 띄어주기 위한것
-    def get_queryset(self):
+    def get_queryset(self): 
         search_word = self.request.GET.get('searchWord','')
         if search_word:
             result = TargetBase.objects.values('director').distinct().filter(director__contains=search_word)
@@ -97,12 +101,99 @@ class MovieBoard1SelectCreateView(LoginRequiredMixin, generic.CreateView):
     login_url = reverse_lazy('user:login')
     # form_class = SelectedBaseForm
 
-def movieboardselectview(request, user_id):
-    target = request.GET.get('director','') 
-    user = auth_views.UserModel.objects.get(pk=user_id)
-    SelectedBase.objects.create(director=target, writer_id=user.id)
+############ 
+
+# 세션저장을위한 징검다리 역할을 하는 url들의 함수뷰들
+
+def director_to_genre(request):
+    """ board1의 form에서 director라는 name을 가진 데이터를 받아 세션에 저장하고 다음페이지인 board2로 redirect하는 함수뷰"""
+    targetdirector = request.GET.get('director','')
+    request.session['selected_director']= targetdirector
+    return redirect(reverse('movie:board2'))
+
+def genre_to_actor(request):
+    """ board2의 form에서 genre라는 name을 가진 데이터를 받아 세션에 저장하고 다음페이지인 board3로 redirect하는 함수뷰"""
+    targetgenre = request.GET.get('genre','')
+    request.session['selected_genre']= targetgenre
+    return redirect(reverse('movie:board3'))
+
+def actor_to_nations_opendt_audit(request):
+    """ board3의 form에서 actor1~3의 name을 가진 데이터를 받아 세션에 저장하고 다음페이지인 board4로 redirect하는 함수뷰"""
+    targetactor1 = request.GET.get('actor1', '')
+    targetactor2 = request.GET.get('actor2', '')
+    targetactor3 = request.GET.get('actor3', '')
+    request.session['selected_actor1'] = targetactor1
+    request.session['selected_actor2'] = targetactor2
+    request.session['selected_actor3'] = targetactor3
+    return redirect(reverse('movie:board4'))
+
+def nations_opendt_audit_to_result(request):
+    """
+    boar4의 form에서 nations, opendt, audit의 name을 가진 데이터를 받아 세션에 저장하고,
+    다음페이지인 [app_name : movie / pathname " board1S 의 url의 result.html을 향한 render에]  redirect하는 함수뷰
+    pathname이나 해당 html 밑 url명 통일성을위한 향후 수정이 필요함.
+    """
+    targetnations = request.GET.get('nations', '')
+    targetopendt = request.GET.get('opendt', '')
+    targetaudit = request.GET.get('audit', '')
+    request.session['selected_nations'] = targetnations
+    request.session['selected_opendt'] = targetopendt
+    request.session['selected_audit'] = targetaudit
+    return redirect(reverse('movie:board1S'))
+
+###########
+
+
+def movieboardselectview(request):
+    # targetdirector = request.GET.get('director','') 
+    # targetgenre = request.GET.get('genre', '')
+    # targetnations = request.GET.get('nations', '')
+    # targetaudit = request.GET.get('audit', '')
+    # targetactor1 = request.GET.get('actor1', '')
+    # targetactor2 = request.GET.get('actor2', '')
+    # targetactor3 = request.GET.get('actor3', '')
+    # targetopendt = request.GET.get('opendt', '')
+    targetdirector = request.session['selected_director']
+    targetgenre = request.session['selected_genre']
+    targetactor1 = request.session['selected_actor1']
+    targetactor2 = request.session['selected_actor2']
+    targetactor3 = request.session['selected_actor3']
+    targetnations = request.session['selected_nations'] 
+    targetopendt = request.session['selected_opendt']
+    targetaudit = request.session['selected_audit']
+    userid = request.user.id
+    
+    # user = auth_views.UserModel.objects.get(pk=pk)
+
+    SelectedBase.objects.create(
+    writer_id=userid, director=targetdirector, genre=targetgenre,
+    actor1=targetactor1, actor2=targetactor2, actor3=targetactor3,
+    nations=targetnations, audit=targetaudit,  opendt=targetopendt
+    )
     return render(request, 'movie/result.html')
    
+# class NationsOpendtAuditToResult(generic.CreateView):
+
+#     pk_url_kwarg = 'user_id'
+
+#     def get_queryset(self, request, user_id):
+#         targetdirector = request.session['selected_director']
+#         targetgenre = request.session['selected_genre']
+#         targetactor1 = request.session['selected_actor1']
+#         targetactor2 = request.session['selected_actor2']
+#         targetactor3 = request.session['selected_actor3']
+#         targetnations = request.session['selected_nations'] 
+#         targetopendt = request.session['selected_opendt']
+#         targetaudit = request.session['selected_audit']
+
+#         # user = auth_views.UserModel.objects.get(pk=user_id)
+#         SelectedBase.objects.create(writer_id=user_id, director=targetdirector, genre=targetgenre,
+#         actor1=targetactor1, actor2=targetactor2, actor3=targetactor3,
+#         nations=targetnations, audit=targetaudit,  opendt=targetopendt)
+#         return render(request, 'movie/result.html')
+
+
+
 # 메인페이지2. 장르 선택 페이지를 보여주기 위한 클래스뷰
 # classview에서 login_required쓰면 오류가 났었던것 같았음
 # @login_required(login_url=reverse_lazy('user:login'))

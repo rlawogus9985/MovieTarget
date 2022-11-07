@@ -9,7 +9,8 @@ urlpatterns = [
     path('logout/',auth_views.LogoutView.as_view(next_page = '/'),name='logout'),
     path('profile/', views.profile, name='profile'),
     path('delete_user_page/', views.delete_user_page, name='delete_user_page'),
-    path('delete_user/', views.delete_user, name='delete_user'),
+    path('delete_user/', views.delete_user, name='delete_user'), ## 원래사용하던 회원탈퇴url
+    # path('<int:auth_user_id>delete_user/', views.delete_user, name='delete_user'), ## 새로이 만들고자하는 회원탈퇴url
     path('change_user_page/', views.userchangepage ,name='change_user_page'),
     path('<int:auth_user_id>/change_user/', views.userchangeview ,name='change_user'),
 ]
