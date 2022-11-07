@@ -170,6 +170,7 @@ def movieboardselectview(request):
     actor1=targetactor1, actor2=targetactor2, actor3=targetactor3,
     nations=targetnations, audit=targetaudit,  opendt=targetopendt
     )
+
     return render(request, 'movie/result.html')
    
 # class NationsOpendtAuditToResult(generic.CreateView):

@@ -25,6 +25,7 @@ urlpatterns = [
 
     # path('board/',views.MovieBoard ,name='board'), 
     # path('select/', views.select, name='select'),
+    # path('select/',views.SelectCreateView.as_view(), name='select'),
     # path('selectlist/', views.SelectListView.as_view(), name='selectlist'),
     # path('selectdetail/', views.SelectDetailView.as_view(), name='selectdetail'),
     # path('<int:user_id>/board/1/S', views.MovieBoard1SelectCreateView.as_view(), name= 'board1S'), ## 클래스뷰로하려는안되서 함수형뷰사용해보려함.
