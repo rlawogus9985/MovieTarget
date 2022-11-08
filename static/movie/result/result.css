@@ -122,3 +122,26 @@ a {
   word-break: keep-all; /* 단어 단위 줄바꿈 */
   word-wrap: break-word; /* 문자열 강제 줄바꿈 */
 }
+
+.result_menubar_btn {
+  font-family: "Open Sans", sans-serif;
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0 30px;
+  display: inline-flex;
+  align-items: center;
+  background-color: #ffeba7;
+  letter-spacing: 1px;
+  justify-content: center;
+  text-align: center;
+}
+.result_menubar_btn:active,
+.result_menubar_btn:focus,
+.result_menubar_btn:hover {
+  background-color: #102770;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
+}
