@@ -11,6 +11,7 @@
   <!-- btn을 movie/select/dselect.css로 가져와서 mbtn으로 바꾸고 적용한다.-->
   <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
   <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}">
+  <script src="{% static 'jquery.min.js' %}"></script>
   <script src="{% static 'movie/select/dselect.js' %}"></script>
 </head>
 <body style="background-color:#1f2029;">
@@ -52,7 +53,10 @@
 <!-- 선택한 내용 보여주기 -->
 <br>
 <div style="color: white;">
-  <h5 style="text-align: center;">선택한 내용 - <input type="text" value="{{ selected_genre|default_if_none:'' }}" name="selected_genre" id="selected_genre" readonly></h5>
+  <h5 class="showGenres" style="text-align: center;">
+    <input class="showSelect" type="text" value="{{ selected_genre|default_if_none:'' }}" name="selected_genre" id="selected_genre" readonly>
+    <span></span>
+  </h5>
 </div>
 
 <!-- 데이터베이스에 뭐가 있는지 출력-->

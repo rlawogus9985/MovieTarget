@@ -46,7 +46,7 @@
     color: white;
     position: relative;
     bottom: 85px;
-    
+   
 }
 
 .particles{
@@ -83,33 +83,33 @@
     position: relative;
     top: 380px;
     left: 700px;
-	border-radius: 4px;
-	height: 44px;
-	font-size: 13px;
-	font-weight: 600;
-	text-transform: uppercase;
-	transition: all 200ms linear;
-	padding: 0 30px;
-	letter-spacing: 1px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	border: 1px solid #fff;
-	background-color: rgba(29, 28, 28, 0.345);
-	color: #fff;
-	box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+    border-radius: 4px;
+    height: 44px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 200ms linear;
+    padding: 0 30px;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #fff;
+    background-color: rgba(29, 28, 28, 0.345);
+    color: #fff;
+    box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
 }
 .btn:active,
 .btn:focus{  
-	background-color: #fff;
-	color: #1f2029d7;
-	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+    background-color: #fff;
+    color: #1f2029d7;
+    box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 .btn:hover{  
-	background-color: #fff;
-	color: #1f2029d4;
-	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+    background-color: #fff;
+    color: #1f2029d4;
+    box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 
 button#deleteUserBt {

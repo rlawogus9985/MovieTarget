@@ -8,7 +8,7 @@ body {
 .wrap {
     width: 980px;
     padding: 80px 0;
-    display: flex;
+    display: contents;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
@@ -20,7 +20,7 @@ body {
     background-color: #fff;
     box-shadow: 0 2px 4px 0 #ccd0d9;
     border-radius: 4px;
-    margin: 0 20px 16px 0;
+    margin: 250px 50px 50px;
     padding: 32px;
     cursor: pointer;
     will-change: transform;
