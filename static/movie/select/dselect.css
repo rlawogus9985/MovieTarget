@@ -346,7 +346,7 @@ table.actor-list {
 
 @media (max-width: 800px) {
 .director-list td:nth-child(4), .genre-list td:nth-child(4), .actor-list td:nth-child(4),
-.director-list th:nth-child(4), .genre-list th:nth-child(4), .actor-list th:nth-child(4) { display: none; }
+.director-list th:nth-child(4), .genre-list th:nth-child(4), .actor-list th:nth-child(4) { display: none; }}
 
 /* 다음페이지 */
 .btn_next{
