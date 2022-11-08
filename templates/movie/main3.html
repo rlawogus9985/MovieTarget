@@ -159,6 +159,16 @@
   <input type="hidden" name="selected_actor3" id="actor3" value="{{ selected_actor3|default_if_none:'' }}">
 </form>
 
+<div class="points_">
+  <a href="#"class="points_point"></a>
+  <button class="points_point"style="visibility: hidden;"></button>
+  <a href="#"class="points_point"></a>
+  <button class="points_point"style="visibility: hidden;"></button>
+  <a href="#"class="points_point"></a>
+  <button class="points_point"style="visibility: hidden;"></button>
+  <div class="points_point active"></div>
+</div>
+
 <br>
 <div class="lower_">
   <a href="{% url 'movie:board2' %}" class="btn_">이전(◀)</a>

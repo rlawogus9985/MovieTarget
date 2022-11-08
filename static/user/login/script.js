@@ -72,6 +72,39 @@ function SignupFormCheck() {
     return false;
   }
   
+  // ajax해볼자리
+//   $.ajax({
+//     type: 'POST',
+//     url: '{% url "user:join" %}',
+//     data: {
+//         username: $('#signupName').val(),
+//         password1: $('#signupPass').val(),
+//         password2: $('#signupPass2').val(),
+//         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+//         action: 'post'
+//     },
+//     success: function (json) {
+//         if (json.status == 1) {
+//             // document.getElementById("post-form").reset();
+//             document.getElementById("signupForm").reset();
+//             window.location.href = 'http://127.0.0.1:8000/';
+//             alert('등록되었습니다.');
+//         } else if (json.status == 0) {
+//             alert('이미 등록된 회원입니다.');
+//         }
+//     },
+//     error: function (xhr, errmsg, err) {
+//         alert('에러가 발생했습니다.' + errmsg);
+//         console.log(xhr.status + ": " + xhr.responseText);
+//     }
+// });
+
+
+  // 옛날방식 어려움
+  // if (!isIdChecked)
+  // ~~~
+  // return false;
+
   document.getElementById("joinUserName").value = idTxt;
   document.getElementById("joinPassword1").value = pwTxt;
   document.getElementById("joinPassword2").value = PwChkTxt;
@@ -79,4 +112,59 @@ function SignupFormCheck() {
   alert("회원가입이 완료되었습니다.")
   }
   
-  
+// 옛날방식 어려움
+// let isIdChecked = False;  // 아이디 중복 검사 실시했는지(통과했는지) 여부.
+
+// function idCheck() {
+//   ...
+// }
+
+// function ajaxSignup() {
+//   username = document.getElementById("signupName").value;
+//   password1 = document.getElementById("signupPass").value;
+//   password2 = document.getElementById("signupPass2").value;
+//   let data = {username, password1, password2}
+//   $.ajax({
+//     url: '/box_office/user/join/',
+//     type: 'post',
+//     data: JSON.stringify(data),
+//     headers: {
+//       'X-CSRFTOKEN' : '{{ csrf_token }}'
+//     },
+//     success: function(response) {
+//       // 통신에 성공한 경우 실행할 함수. 전달받은 데이터를 매개변수로 통해 받음.
+//       console.log('통신 성공');
+//       console.log(response);
+//     },
+//     error: function(e) {
+//         // 통신에 실패한 경우 실행할 함수. 오류 객체를 매개변수를 통해 받음.
+//         console.log('통신 실패');
+//         console.log(e);
+//     },
+//   });
+// }
+function SignupAjax() {
+  $.ajax({
+    type: 'POST',
+    // url: '{% url "user:ajax_user" %}',
+    url: '/user/ajax_user/',
+    data: JSON.stringify({
+        username: $('#signupName').val()
+    }),
+    headers: {
+      'X-CSRFTOKEN': $('#csrf_token').val()
+    },
+    success: function (json) {
+        if (json == 'True') {
+            alert('회원가입을 할 수 있는 ID입니다.');
+            SignupFormCheck();
+        } else {
+            alert('회원가입을 할 수 없는 ID입니다.');
+        }
+    },
+    error: function (xhr, errmsg, err) {
+        alert('에러가 발생했습니다.' + errmsg);
+        console.log(xhr.status + ": " + xhr.responseText);
+    }
+  }); 
+}

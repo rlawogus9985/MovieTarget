@@ -125,6 +125,7 @@ form {
   outline: none;
   font-size: 1.5rem;
   letter-spacing: 0.75px;
+  width: 90%;
 }
 
 .finder__icon.custom {
@@ -188,7 +189,9 @@ form {
 }
 
 /* 감독 리스트 테이블을 정렬하기 위한 css */
-table.director-list, .genre-list, .actor-list {
+table.director-list,
+.genre-list,
+.actor-list {
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -219,7 +222,7 @@ table.actor-list {
   margin: auto;
   height: 0px;
 }
-.btn_{
+.btn_ {
   cursor: pointer;
   transition: all 200ms linear;
   border-radius: 4px;
@@ -227,7 +230,7 @@ table.actor-list {
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
-  -webkit-transition : all 200ms linear;
+  -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
   padding: 0 30px;
   letter-spacing: 1px;
@@ -247,110 +250,113 @@ table.actor-list {
   border: none;
   background-color: #ffeba7;
   color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
-  
+  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+
   margin: auto;
   text-decoration: none;
-
 }
 .btn_:active,
-.btn_:focus{  
+.btn_:focus {
   background-color: #102770;
   color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
-.btn_:hover{  
+.btn_:hover {
   background-color: #102770;
   color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
-
-
-.director-list, 
-.genre-list, 
+.director-list,
+.genre-list,
 .actor-list td {
-	  font-weight: normal;
-	  font-size: 1em;
-  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
-	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
-	        box-shadow: 0 2px 2px -2px #0E1119;
+  font-weight: normal;
+  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0e1119;
+  -moz-box-shadow: 0 2px 2px -2px #0e1119;
+  box-shadow: 0 2px 2px -2px #0e1119;
 }
-.director-list, 
-.genre-list, 
+.director-list,
+.genre-list,
 .actor-list {
-	text-align: center;
-	margin: 0 auto;
+  text-align: center;
+  margin: 0 auto;
   display: table;
   padding: 0 0 8em 0;
 }
 
-.director-list td, 
-.genre-list td, 
-.actor-list td{
-	padding-bottom: 2%;
-	padding-top: 2%;
+.director-list td,
+.genre-list td,
+.actor-list td {
+  padding-bottom: 2%;
+  padding-top: 2%;
   width: 300px;
 }
 
 /* Background-color of the odd rows */
-.director-list tr:nth-child(odd), 
-.genre-list tr:nth-child(odd), 
+.director-list tr:nth-child(odd),
+.genre-list tr:nth-child(odd),
 .actor-list tr:nth-child(odd) {
-	  background-color: #323C50;
+  background-color: #323c50;
 }
 
 /* Background-color of the even rows */
 .director-list tr:nth-child(even),
 .genre-list tr:nth-child(even),
 .actor-list tr:nth-child(even) {
-	  background-color: #2C3446;
+  background-color: #2c3446;
 }
 
-.director-list th, 
-.genre-list th, 
+.director-list th,
+.genre-list th,
 .actor-list th {
-	  background-color: #1F2739;
+  background-color: #1f2739;
 }
 
-.director-list td, 
-.genre-list td, 
-.actor-list td { 
-  color: #ffeba7; 
+.director-list td,
+.genre-list td,
+.actor-list td {
+  color: #ffeba7;
 }
 
-.director-list tr:hover, 
-.genre-list tr:hover, 
+.director-list tr:hover,
+.genre-list tr:hover,
 .actor-list tr:hover {
-  background-color: #464A52;
-  -webkit-box-shadow: 0 6px 6px -6px #0E1119;
-	-moz-box-shadow: 0 6px 6px -6px #0E1119;
-	box-shadow: 0 6px 6px -6px #0E1119;
+  background-color: #464a52;
+  -webkit-box-shadow: 0 6px 6px -6px #0e1119;
+  -moz-box-shadow: 0 6px 6px -6px #0e1119;
+  box-shadow: 0 6px 6px -6px #0e1119;
 }
 
-.director-list td:hover, 
-.genre-list td:hover, 
+.director-list td:hover,
+.genre-list td:hover,
 .actor-list td:hover {
-  background-color: #FFF842;
-  color: #403E10;
+  background-color: #fff842;
+  color: #403e10;
   font-weight: bold;
-  
-  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+
+  box-shadow: #7f7c21 -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px, #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
   transform: translate3d(6px, -6px, 0);
-  
+
   transition-delay: 0s;
-	transition-duration: 0.4s;
-	transition-property: all;
+  transition-duration: 0.4s;
+  transition-property: all;
   transition-timing-function: line;
 }
 
 @media (max-width: 800px) {
-.director-list td:nth-child(4), .genre-list td:nth-child(4), .actor-list td:nth-child(4),
-.director-list th:nth-child(4), .genre-list th:nth-child(4), .actor-list th:nth-child(4) { display: none; }
+  .director-list td:nth-child(4),
+  .genre-list td:nth-child(4),
+  .actor-list td:nth-child(4),
+  .director-list th:nth-child(4),
+  .genre-list th:nth-child(4),
+  .actor-list th:nth-child(4) {
+    display: none;
+  }
 }
 
 /* 다음페이지 */
-.btn_next{
+.btn_next {
   cursor: pointer;
   transition: all 200ms linear;
   border-radius: 4px;
@@ -368,8 +374,8 @@ table.actor-list {
   border: none;
   background-color: #ffeba7;
   color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
-  
+  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+
   margin-left: 80%;
   margin-top: -3%;
   text-decoration: none;
@@ -377,17 +383,15 @@ table.actor-list {
 
 .btn_next:active,
 .btn_next:focus {
-
   background-color: #102770;
   color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
 .btn_next:hover {
-  
   background-color: #102770;
   color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
 /* 선택한 내용 보여주기 꾸미기 */

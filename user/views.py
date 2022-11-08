@@ -12,10 +12,15 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import AbstractUser
 from django.views import View
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.views import LoginView
+from movie.models import SelectedBase
 
 from user.decorators import * # 함수형 뷰 데코
 # from django.utils.decorators import method_decorator # 클래스기반뷰에사용 데코
 # from django.contrib.auth.decorators import login_required # django 내장 데코
+
+from json import loads
 
 class UserCreateForm(generic.CreateView):
     """ django.views.generic.CreateView 내장뷰를 상속받는 회원가입관련 클래스 뷰"""
@@ -71,26 +76,26 @@ def  userchangeview(request, auth_user_id):
         return render(request, 'user/profile.html')
 
 # 원래 사용하던 유저탈퇴 함수뷰
-@require_POST
-@login_required(login_url=reverse_lazy('user:login'))
-def delete_user(request):
-    request.user.delete()
-    # request.user.is_active()
+# @require_POST
+# @login_required(login_url=reverse_lazy('user:login'))
+# def delete_user(request):
+#     request.user.delete()
+#     # request.user.is_active()
 
-    return redirect('user:join')
-
-########## 위 사용하는 뷰 아래 비사용혹은 테스트중인 뷰
+#     return redirect('user:join')
 
 # delete() 하지않고 is_active를 0으로 update()할 새로운 회원탈퇴함수뷰.
 @require_POST
 @login_required(login_url=reverse_lazy('user:login'))
-def delete_user_test(request):
+def delete_user(request):
 
     userid = request.user.id 
-    user =  auth_views.UserModel.objects.get(pk=userid) 
-    if user.is_active == 1:
-        request.user.update(is_active=0)
-        user.save()
+    userauth = auth_views.UserModel()
+    # user =  auth_views.UserModel.objects.get(pk=userid)
+    # user =  auth_views.UserModel.objects.get_object_or_404(pk=userid)
+    if auth_views.UserModel.objects.get(pk=userid):
+        auth_views.UserModel.objects.filter(pk=userid).update(is_active=False)
+        # userauth.save(pk=)
         print("해당유저가 비활성화 되었습니다.")
         return redirect('user:join')
     else:
@@ -99,6 +104,48 @@ def delete_user_test(request):
 
 def login(request):
     return render(request, 'dist/index.html')
+
+def ajax_user(request):
+    data = loads(request.body)
+    ajax_username = data.get('username')
+    targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+    
+    # 회원가입이 가능한 ID인 경우:
+    if targetuser.username != ajax_username:
+        return JsonResponse({'result': 'True'})
+    # 회원가입이 불가능한 ID인 경우:
+    else:
+        return JsonResponse({'result': 'False'})
+        
+########## 위 사용하는 뷰 아래 비사용혹은 테스트중인 뷰
+
+
+#########
+# @require_POST
+# @login_required(login_url=reverse_lazy('user:login'))
+# def delete_user(request):
+
+#     userid = request.user.id 
+#     user =  auth_views.UserModel.objects.get(pk=userid) 
+#     if user.is_active:
+#         request.user.objects.update(is_active=0)
+#         user.save()
+#         print("해당유저가 비활성화 되었습니다.")
+#         return redirect('user:join')
+#     else:
+#         print("이미 비활성화 되어있는 유저입니다.")
+#         return redirect('user:join')
+
+# def login(request):
+#     return render(request, 'dist/index.html')
+# 로그인할때 사용하는 클래스 함수.
+# 로그인 이후 넘어가는 화면은 settings.py 의 Login_redirect_url
+class UserLoginView(LoginView):
+    template_name = 'dist/index.html'
+
+    def form_invalid(self, form):
+        messages.error(self.request, '로그인에 실패하였습니다.', extra_tags='danger')
+        return super().form_invalid(form)
     
 ## 테스트중인 새로운 클래스뷰
 # @login_required(login_url=reverse_lazy('user:login'))
@@ -124,5 +171,12 @@ def login(request):
     #         return JsonResponse({'error': 'KEY_ERROR'}, status=400)
 
 
+# 유저가 선택한 데이터가 있는 게시판을 만들기 위한 view
+class UserSelectedDataView(generic.ListView):
+    model = SelectedBase
+    paginate_by = 12
+    template_name = 'user/user_selected_data.html'
+    context_object_name = "selecteddata_list"
 
+    
 
