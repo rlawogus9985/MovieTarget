@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 app_name = 'user'
 urlpatterns = [
-    path('login/',auth_views.LoginView.as_view(template_name = 'dist/index.html', next_page = 'movie:board1'),name='login'),
+    # path('login/',auth_views.LoginView.as_view(template_name = 'dist/index.html', next_page = 'movie:board1'),name='login'),
         ## django.contrib.auth.views를 import하여 내장 LoginView를 사용하는 url
         ## dist/index.html은 로그인기능과 회원가입기능이 같이있는 템플릿
     path('join/', views.UserCreateForm.as_view(),name='join'),
