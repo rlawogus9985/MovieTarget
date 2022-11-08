@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
   <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}">
   <script src="{% static 'movie/select/dselect.js' %}"></script>
+  <script src="{% static 'jquery.min.js' %}"></script>
 </head>
 <body style="background-color:#1f2029;">
 
@@ -55,10 +56,11 @@
 <!-- 선택한 내용 보여주기 -->
 <br>
 <div style="color: white;">
-  <h5 style="text-align: center;">
-    선택한 내용 - <input type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
-    <input type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
-    <input type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
+  <h5 class="showActors" style="text-align: center;">
+    <input  class="showSelect" type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
+    <input  class="showSelect" type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
+    <input  class="showSelect" type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
+    <div></div>
   </h5>
 </div>
 

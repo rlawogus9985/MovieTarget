@@ -390,8 +390,11 @@ table.actor-list {
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 
-.show_select {
+/* 선택한 내용 보여주기 꾸미기 */
+.showSelect {
   background-color: #1f2029;
   border: none;
+  outline: 2px none;
   color: white;
+  text-align: center;
 }
