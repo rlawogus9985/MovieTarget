@@ -85,14 +85,17 @@ function TableDirector(e) {
   let selected_director = e.innerHTML.trim();
   // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
   document.getElementById("selected_director").value = selected_director;
+  //감독을 선택하면 선택했다는 텍스트를 넣어준다.
+  $(".showDirectors>span").text("감독을 선택하셨습니다.");
 }
-
 // 장르 선택을 위한 js
 function TableGenre(e) {
-  selected_genre = e.innerHTML.trim();
+  let selected_genre = e.innerHTML.trim();
   document.getElementById("selected_genre").value = selected_genre;
   document.getElementById("genre").value = selected_genre;
   // document.getElementById("pageForm").submit();
+  //장르를 선택하면 선택했다는 텍스트를 넣어준다.
+  $(".showGenres>span").text("장르를 선택하셨습니다.");
 }
 // 배우 선택을 위한 js
 function TableActor(e) {
@@ -100,7 +103,7 @@ function TableActor(e) {
   let fill_actor1 = document.getElementById("selected_actor1").value;
   let fill_actor2 = document.getElementById("selected_actor2").value;
   let fill_actor3 = document.getElementById("selected_actor3").value;
-
+  
   if (fill_actor1 == 0 || fill_actor1 == "") {
     document.getElementById("selected_actor1").value = selected_actor;
     document.getElementById("actor1").value = selected_actor;
@@ -113,6 +116,11 @@ function TableActor(e) {
     document.getElementById("actor3").value = selected_actor;
   }
   document.getElementById("pageForm").submit();
+  // 배우를 선택하면 선택했다는 텍스트를 넣어준다.
+  // $(".showActors>div>sbmit").text("배우를 선택하셨습니다.");
+  // $('.showSelect').css({
+  //   "border-bottom": "2px solid white"
+  // });
 }
 // 배우 선택을 취소하기 위한 js
 function DeleteSelectActor1() {
@@ -144,3 +152,4 @@ function searchFormCheck(searchWord, pageNumber) {
   document.getElementById("page").value = pageNumber;
   document.getElementById("pageForm").submit();
 }
+

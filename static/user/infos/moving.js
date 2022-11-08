@@ -16,3 +16,7 @@ function delete_user(){
    window.location.href = 'http://127.0.0.1:8000/user/delete_user_page/'
    
 }
+function user_data(){
+   window.location.href = 'http://127.0.0.1:8000/user/profile/selected/'
+   
+}
