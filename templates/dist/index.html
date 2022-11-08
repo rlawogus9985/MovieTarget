@@ -11,7 +11,7 @@
   <script src="{% static 'jquery.min.js' %}"></script>
 </head>
 <body>
-
+<input type="hidden" id="csrf_token" value="{{ csrf_token }}">
 	<div class="section">
 		<div class="container">
 			<div class="row full-height justify-content-center">
@@ -44,7 +44,7 @@
 											<h4 class="mb-4 pb-3">회원가입</h4>
 											<div class="form-group">
 												<input type="text" name="signupname" class="form-style" placeholder="4~12글자 사이의 ID를 입력해주세요." id="signupName" autocomplete="off">
-												<i class="input-icon uil uil-user"></i>
+                        <i class="input-icon uil uil-user"></i>
 											</div>	
 											<div class="form-group mt-2">
 												<input type="password" name="signuppass" class="form-style" placeholder="8~20글자 사이의 PW를 입력해주세요." id="signupPass" autocomplete="off">
@@ -54,7 +54,7 @@
 												<input type="password" name="signuppass2" class="form-style" placeholder="비밀번호를 다시 한 번 입력해주세요." id="signupPass2" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<a href="#" class="btn mt-5" onclick="SignupFormCheck();">가입하기</a>
+											<a href="#" class="btn mt-5" id="signUpBtnAjax" onclick="SignupAjax();">가입하기</a>
 				      					</div>
 			      					</div>
 			      				</div>

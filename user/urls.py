@@ -22,7 +22,7 @@ urlpatterns = [
     path('profile/selected/', views.UserSelectedDataView.as_view(), name='selected_data'),
     path('delete_user_page/', views.delete_user_page, name='delete_user_page'),
         ## 회원탈퇴페이지와 관련된 뷰와 연결해주는 url
-    path('delete_user/', views.delete_user, name='delete_user'), ## 원래사용하던 회원탈퇴url
+    # path('delete_user/', views.delete_user, name='delete_user'), ## 원래사용하던 회원탈퇴url
         ## 회원탈퇴기능과 관련된 뷰와 연결해주는 url
     path('change_user_page/', views.userchangepage ,name='change_user_page'),
         ## 회원정보수정페이지와 관련된 뷰와 연결해주는 url
@@ -32,6 +32,8 @@ urlpatterns = [
     ######## 주석기준 위 url 사용중인 url / 아래 비사용 혹은 테스트중인 url
     
     # path('login/', views.LoginClassView.as_view(), name='login'),
-    path('delete_user_test/', views.delete_user_test, name='delete_user_test'),
+    path('delete_user/', views.delete_user, name='delete_user'),
         ## 새로이 만들고자하는 회원탈퇴url
+
+    path('ajax_user/', views.ajax_user, name='ajax_user'),
 ]
