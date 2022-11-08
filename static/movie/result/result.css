@@ -1,8 +1,7 @@
 body {
-  background: #2D3142;
-  font-family: 'Raleway', sans-serif;
+  background: #2d3142;
+  font-family: "Raleway", sans-serif;
 }
-
 
 /* Heading */
 
@@ -10,16 +9,15 @@ h1 {
   font-size: 1.5em;
   text-align: center;
   padding: 70px 0 0 0;
-  color: #EF8354;
+  color: #ef8354;
   font-weight: 300;
   letter-spacing: 1px;
 }
 
 span {
-  border: 2px solid #4F5D75;
+  border: 2px solid #4f5d75;
   padding: 10px;
 }
-
 
 /* Layout Styling */
 
@@ -33,22 +31,20 @@ span {
   justify-content: center;
 }
 
-
 /* Button Styles */
-.button_{
+.button_ {
   min-width: 1030px;
-  
 }
 .button {
   display: inline-flex;
   height: 40px;
   width: 150px;
-  border: 2px solid #BFC0C0;
+  border: 2px solid #bfc0c0;
   margin: 20px 20px 20px 20px;
-  color: #BFC0C0;
+  color: #bfc0c0;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: .8em;
+  font-size: 0.8em;
   letter-spacing: 1.5px;
   align-items: center;
   justify-content: center;
@@ -56,7 +52,7 @@ span {
 }
 
 a {
-  color: #BFC0C0;
+  color: #bfc0c0;
   text-decoration: none;
   letter-spacing: 1px;
 }
@@ -70,7 +66,7 @@ a {
 
 #button-5 a {
   position: relative;
-  transition: all .45s ease-Out;
+  transition: all 0.45s ease-Out;
 }
 
 #translate {
@@ -79,9 +75,9 @@ a {
   height: 250%;
   left: -200px;
   top: -30px;
-  background: #BFC0C0;
+  background: #bfc0c0;
   position: absolute;
-  transition: all .3s ease-Out;
+  transition: all 0.3s ease-Out;
 }
 
 #button-5:hover #translate {
@@ -89,5 +85,40 @@ a {
 }
 
 #button-5:hover a {
-  color: #2D3142;
+  color: #2d3142;
+}
+
+/* 이미지 보이기/감추기 버튼 꾸미기 css */
+#btn_audiAcc,
+#btn_salesAcc {
+  font-size: 14px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  background-color: #0a76b7;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+#AudiToggle,
+#SalesToggle {
+  width: 60%;
+  height: 30%;
+  margin-bottom: 30px;
+}
+
+/* 설명박스에 대한 css */
+.result_repr {
+  border-radius: 5px;
+  border: 5px solid gray;
+  margin: 0 auto;
+  padding: 5px;
+  width: 600px;
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 30px;
+
+  text-align: justify; /* 문자열 좌우 균등 정렬 */
+  word-break: keep-all; /* 단어 단위 줄바꿈 */
+  word-wrap: break-word; /* 문자열 강제 줄바꿈 */
 }

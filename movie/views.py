@@ -53,6 +53,7 @@ class SelectDetailView(generic.DetailView):
 # class MovieBoard(generic.ListView):
 #     model: Optional[Type[Model]]
 
+# board1의 감독선택을 위한 ListView
 # @login_required(login_url=reverse_lazy('user:login'))
 class MovieBoardtest1(generic.ListView):
 
@@ -66,7 +67,7 @@ class MovieBoardtest1(generic.ListView):
     def get_queryset(self): 
         search_word = self.request.GET.get('searchWord','')
         if search_word:
-            result = TargetBase.objects.values('director').distinct().filter(director__contains=search_word)
+            result = TargetBase.objects.values('director').distinct().filter(director__icontains=search_word)
         else:
             result = TargetBase.objects.values('director').distinct()            
         return result
@@ -211,7 +212,7 @@ class MovieBoardGenre(generic.ListView):
     def get_queryset(self):
         search_word = self.request.GET.get('searchWord', '')
         if search_word:
-            result = TargetBase.objects.values('genre').distinct().filter(genre__contains=search_word)
+            result = TargetBase.objects.values('genre').distinct().filter(genre__icontains=search_word)
         else:
             result = TargetBase.objects.values('genre').distinct()
         return result
@@ -240,7 +241,7 @@ class MovieBoardActor(generic.ListView):
     def get_queryset(self):
         search_word = self.request.GET.get('searchWord','')
         if search_word:
-            result = Actorlist.objects.values('actor1').filter(actor1__contains=search_word)
+            result = Actorlist.objects.values('actor1').filter(actor1__icontains=search_word)
         else:
             result = Actorlist.objects.values('actor1')
         return result
