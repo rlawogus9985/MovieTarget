@@ -345,11 +345,18 @@ table.actor-list {
 }
 
 @media (max-width: 800px) {
-.director-list td:nth-child(4), .genre-list td:nth-child(4), .actor-list td:nth-child(4),
-.director-list th:nth-child(4), .genre-list th:nth-child(4), .actor-list th:nth-child(4) { display: none; }}
+  .director-list td:nth-child(4),
+  .genre-list td:nth-child(4),
+  .actor-list td:nth-child(4),
+  .director-list th:nth-child(4),
+  .genre-list th:nth-child(4),
+  .actor-list th:nth-child(4) {
+    display: none;
+  }
+}
 
 /* 다음페이지 */
-.btn_next{
+.btn_next {
   cursor: pointer;
   transition: all 200ms linear;
   border-radius: 4px;
@@ -367,8 +374,8 @@ table.actor-list {
   border: none;
   background-color: #ffeba7;
   color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
-  
+  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+
   margin-left: 80%;
   margin-top: -3%;
   text-decoration: none;
@@ -376,17 +383,15 @@ table.actor-list {
 
 .btn_next:active,
 .btn_next:focus {
-
   background-color: #102770;
   color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
 .btn_next:hover {
-  
   background-color: #102770;
   color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
 /* 선택한 내용 보여주기 꾸미기 */
