@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>감독 선택</title>
   {% load static %}
-  <link rel="stylesheet" href="{% static 'common/main/slide.css' %}">
+  {% comment %} <link rel="stylesheet" href="{% static 'common/main/slide.css' %}"> {% endcomment %}
   <!-- 부트스트랩과 메뉴바의 btn이 혼동되어 적용되어서 메뉴바 css인 main/style.css에서 -->
   <!-- btn을 movie/select/dselect.css로 가져와서 mbtn으로 바꾸고 적용한다.-->
   <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
@@ -148,7 +148,7 @@
 <br>
 <div class="lower_">
   {% comment %} <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a> {% endcomment %}
-  <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(▶)</a>
+  <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>
 </div>
 
 </body>
