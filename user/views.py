@@ -12,6 +12,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import AbstractUser
 from django.views import View
+from django.contrib.auth.views import LoginView
+from movie.models import SelectedBase
 
 from user.decorators import * # 함수형 뷰 데코
 # from django.utils.decorators import method_decorator # 클래스기반뷰에사용 데코
@@ -99,6 +101,15 @@ def delete_user_test(request):
 
 def login(request):
     return render(request, 'dist/index.html')
+
+# 로그인할때 사용하는 클래스 함수.
+# 로그인 이후 넘어가는 화면은 settings.py 의 Login_redirect_url
+class UserLoginView(LoginView):
+    template_name = 'dist/index.html'
+
+    def form_invalid(self, form):
+        messages.error(self.request, '로그인에 실패하였습니다.', extra_tags='danger')
+        return super().form_invalid(form)
     
 ## 테스트중인 새로운 클래스뷰
 # @login_required(login_url=reverse_lazy('user:login'))
@@ -124,5 +135,12 @@ def login(request):
     #         return JsonResponse({'error': 'KEY_ERROR'}, status=400)
 
 
+# 유저가 선택한 데이터가 있는 게시판을 만들기 위한 view
+class UserSelectedDataView(generic.ListView):
+    model = SelectedBase
+    paginate_by = 12
+    template_name = 'user/user_selected_data.html'
+    context_object_name = "selecteddata_list"
 
+    
 
