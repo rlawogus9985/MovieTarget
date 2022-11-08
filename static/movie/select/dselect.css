@@ -398,3 +398,6 @@ table.actor-list {
   color: white;
   text-align: center;
 }
+.showSelect:hover {
+ border-bottom: 2px solid white;
+}
