@@ -55,7 +55,8 @@
 <!-- 선택한 내용 보여주기 -->
 <br>
 <div style="color: white;">
-  <h5 style="text-align: center;">선택한 내용 - <input type="text" name="selected_director" id="selected_director" readonly></h5>
+  <h5 style="text-align: center;">선택한 내용 - 
+    <input type="text" name="selected_director" id="selected_director" readonly></h5>
 </div>
 
 <!-- 데이터베이스에 뭐가 있는지 출력-->
@@ -145,7 +146,7 @@
 <br>
 <div class="lower_">
   {% comment %} <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a> {% endcomment %}
-  <a href="javascript:void(0);" class="btn_" onclick="selectDataDirector();">다음(▶)</a>
+  <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(▶)</a>
 </div>
 
 </body>

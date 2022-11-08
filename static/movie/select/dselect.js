@@ -144,3 +144,4 @@ function searchFormCheck(searchWord, pageNumber) {
   document.getElementById("page").value = pageNumber;
   document.getElementById("pageForm").submit();
 }
+
