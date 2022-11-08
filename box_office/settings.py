@@ -128,3 +128,6 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = [BASE_DIR / 'media']
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# 로그인 되면 이동하는 위치
+LOGIN_REDIRECT_URL = '/'
