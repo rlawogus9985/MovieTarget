@@ -103,7 +103,15 @@ function TableActor(e) {
   let fill_actor1 = document.getElementById("selected_actor1").value;
   let fill_actor2 = document.getElementById("selected_actor2").value;
   let fill_actor3 = document.getElementById("selected_actor3").value;
-  
+
+  // actor 중복검사
+  if (selected_actor != "신입") {
+    if (selected_actor == fill_actor1 || selected_actor == fill_actor2 || selected_actor == fill_actor3) {
+      alert("중복선택하셨습니다. 배우를 다시 선택해주세요.");
+      return;
+    }
+  }
+
   if (fill_actor1 == 0 || fill_actor1 == "") {
     document.getElementById("selected_actor1").value = selected_actor;
     document.getElementById("actor1").value = selected_actor;
@@ -148,4 +156,3 @@ function searchFormCheck(searchWord, pageNumber) {
   document.getElementById("page").value = pageNumber;
   document.getElementById("pageForm").submit();
 }
-

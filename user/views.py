@@ -15,7 +15,7 @@ from django.views import View
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.views import LoginView
 from movie.models import SelectedBase
-
+from django.contrib import messages
 from user.decorators import * # 함수형 뷰 데코
 # from django.utils.decorators import method_decorator # 클래스기반뷰에사용 데코
 # from django.contrib.auth.decorators import login_required # django 내장 데코
@@ -173,10 +173,14 @@ class UserLoginView(LoginView):
 
 # 유저가 선택한 데이터가 있는 게시판을 만들기 위한 view
 class UserSelectedDataView(generic.ListView):
-    model = SelectedBase
+    # model = SelectedBase
     paginate_by = 12
     template_name = 'user/user_selected_data.html'
     context_object_name = "selecteddata_list"
 
+    def get_queryset(self):
+        
+        result = SelectedBase.objects.order_by('-id').filter(writer_id=self.request.user)
+        return result
     
 
