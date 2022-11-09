@@ -5,18 +5,24 @@ https://codepen.io/ig_design/full/KKVQpVP
 window.onload = function() {
   document.getElementById('loginName').addEventListener('keyup', enterCheckLogin);
   document.getElementById('loginPassword').addEventListener('keyup', enterCheckLogin);
-}
-window.onload - function() {
   document.getElementById('signupName').addEventListener('keyup', enterCheckSign);
   document.getElementById('signupPass').addEventListener('keyup', enterCheckSign);
   document.getElementById('signupPass2').addEventListener('keyup', enterCheckSign);
 }
+// window.onload - function() {
+//   document.getElementById('signupName').addEventListener('keyup', enterCheckSign);
+//   document.getElementById('signupPass').addEventListener('keyup', enterCheckSign);
+//   document.getElementById('signupPass2').addEventListener('keyup', enterCheckSign);
+// }
 function enterCheckLogin(e) {
   if (e.key == "Enter") loginFormCheck();
 }
 function enterCheckSign(e) {
   if (e.key == "Enter") SignupFormCheck();
 }
+
+
+
 
 
 function loginFormCheck() {
@@ -72,34 +78,6 @@ function SignupFormCheck() {
     return false;
   }
   
-  // ajax해볼자리
-//   $.ajax({
-//     type: 'POST',
-//     url: '{% url "user:join" %}',
-//     data: {
-//         username: $('#signupName').val(),
-//         password1: $('#signupPass').val(),
-//         password2: $('#signupPass2').val(),
-//         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-//         action: 'post'
-//     },
-//     success: function (json) {
-//         if (json.status == 1) {
-//             // document.getElementById("post-form").reset();
-//             document.getElementById("signupForm").reset();
-//             window.location.href = 'http://127.0.0.1:8000/';
-//             alert('등록되었습니다.');
-//         } else if (json.status == 0) {
-//             alert('이미 등록된 회원입니다.');
-//         }
-//     },
-//     error: function (xhr, errmsg, err) {
-//         alert('에러가 발생했습니다.' + errmsg);
-//         console.log(xhr.status + ": " + xhr.responseText);
-//     }
-// });
-
-
   // 옛날방식 어려움
   // if (!isIdChecked)
   // ~~~
@@ -119,35 +97,12 @@ function SignupFormCheck() {
 //   ...
 // }
 
-// function ajaxSignup() {
-//   username = document.getElementById("signupName").value;
-//   password1 = document.getElementById("signupPass").value;
-//   password2 = document.getElementById("signupPass2").value;
-//   let data = {username, password1, password2}
-//   $.ajax({
-//     url: '/box_office/user/join/',
-//     type: 'post',
-//     data: JSON.stringify(data),
-//     headers: {
-//       'X-CSRFTOKEN' : '{{ csrf_token }}'
-//     },
-//     success: function(response) {
-//       // 통신에 성공한 경우 실행할 함수. 전달받은 데이터를 매개변수로 통해 받음.
-//       console.log('통신 성공');
-//       console.log(response);
-//     },
-//     error: function(e) {
-//         // 통신에 실패한 경우 실행할 함수. 오류 객체를 매개변수를 통해 받음.
-//         console.log('통신 실패');
-//         console.log(e);
-//     },
-//   });
-// }
-function SignupAjax() {
+
+////////// Ajax /////////////
+function signupAjax() {
   $.ajax({
     type: 'POST',
-    // url: '{% url "user:ajax_user" %}',
-    url: '/user/ajax_user/',
+    url: '/user/ajax_user_signup/',
     data: JSON.stringify({
         username: $('#signupName').val()
     }),
@@ -168,3 +123,64 @@ function SignupAjax() {
     }
   }); 
 }
+
+// 원본 Ajax login jvs
+function loginAjax() {
+  $.ajax({
+    type: 'POST',
+    url: '/user/ajax_user_login/',
+    data: JSON.stringify({
+        username: $('#loginName').val(),
+        password: $('#loginPassword').val()
+    }),
+    headers: {
+      'X-CSRFTOKEN': $('#csrf_token').val()
+    },
+    success: function (json) {
+        if (json == 'False') {
+            alert('ID와 PW를 확인해주세요.');
+            
+        } else {
+            loginFormCheck();
+        }
+    },
+    error: function (xhr, errmsg, err) {
+        alert('에러가 발생했습니다.' + errmsg);
+        console.log(xhr.status + ": " + xhr.responseText);
+    }
+  }); 
+}
+
+
+//////테스트 중
+// function loginAjax() {
+//   $.ajax({
+//     type: 'POST',
+//     url: '/user/ajax_user_login/',
+//     data: JSON.stringify({
+//         username: $('#loginName').val(),
+//         password: $('#loginPassword').val()
+//     }),
+//     headers: {
+//       'X-CSRFTOKEN': $('#csrf_token').val()
+//     },
+//     success: function (json) {
+//         if (json == 'UserNameNone') {
+//             alert('ID를 입력해주세요.');  
+//         } else if (json == 'UserPassNone') {
+//             alert('PW를 입력해주세요.')
+//         } else if (json == 'InvalidPw') {
+//             alert('해당 ID의 PW와 일치하지 않습니다.')
+//         }
+//         else if (json == 'True') {
+//             loginFormCheck();
+//         }
+//     },
+//     error: function (xhr, errmsg, err) {
+//         alert('에러가 발생했습니다.' + errmsg);
+//         console.log(xhr.status + ": " + xhr.responseText);
+//     }
+//   }); 
+// }
+
+////////// Ajax /////////////
