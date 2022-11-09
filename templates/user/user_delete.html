@@ -25,7 +25,7 @@
         {% csrf_token %}
         <div class="check">
           삭제 버튼을 누르시면 완전히 삭제가 되어 되돌릴 수 없습니다.<br>
-          정말 {{ user.username }} 회원님의 계정을 삭제 하시겠습니까?<br>
+          {{ user.username }} 회원님의 계정을 삭제 하시겠습니까?<br>
         </div>
     </div>
         <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn o">삭제</button>
