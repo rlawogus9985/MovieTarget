@@ -13,11 +13,15 @@
     {% endcomment %}
     <form action="{% url 'user:delete_user' %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
       {% csrf_token %}
-      <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn">탈퇴하기</button>
+      <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn" >탈퇴하기</button>
     </form>
+
   </div>
   
   
+  {% comment %}
   <div class="particles" id="particles"></div>
+  {% endcomment %}
+    
   
 </body>

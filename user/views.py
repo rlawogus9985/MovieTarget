@@ -107,17 +107,71 @@ def login(request):
 
 ########### Ajax 함수뷰
 
+# 원본 ajax singup view 함수
 def ajax_user_signup(request):
     data = loads(request.body)
-    ajax_username = data.get('username')
-    targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+    ajax_username = data.get('signupname')
+    # ajax_userpasswrod = data.get('signuppassword')
     
-    # 회원가입이 가능한 ID인 경우:
-    if targetuser.username != ajax_username:
-        return JsonResponse({'result': 'True'})
+    targetuser = auth_views.UserModel.objects.filter(username=ajax_username)
+
+    try:
+        if targetuser[0].username != ajax_username:
+            return JsonResponse({'result': 'True'})
+        else:
+            return JsonResponse({'result': 'False'})
+    except:
+            return JsonResponse({'result': 'False'})
+
+            
+
+  
+
+    # if targetuser.count() > 0:
+    #     if targetuser[0].username != ajax_username:
+    #         return JsonResponse({'result': 'True'})
+    #     else:
+    #         return JsonResponse({'result': 'False'})
+    # else:
+    #     print("아이디를 입력해주세요.")
+    # if targetuser.count() > 0:
+    #     if targetuser[0].username != ajax_username:
+    #         return JsonResponse({'result': 'True'})
+    #     elif ajax_username.count() < 0:
+    #         return JsonResponse({'result': 'False'}) 
+    # else:
+    #     return JsonResponse({'result': 'False'})
+    
+    # if ajax_username.count() > 0:
+    #     if targetuser.count() > 0:
+    #         if targetuser[0].username != ajax_username:
+    #             return JsonResponse({'result': 'True'})
+    #     else:
+    #         return JsonResponse({'result': 'False'})
+    # else:
+    #     return JsonResponse({'result': 'False'})
+
+
+
+    # if targetuser.count() > 0 and targetuser[0].username != ajax_username:
+    #     return JsonResponse({'result': 'True'})
+    # elif targetuser.count() < 0 or targetuser[0].username == ajax_username:
+    #     return JsonResponse({'result': 'False'})
+
+#####테스트중 signup
+# def ajax_user_signup(request):
+#     data = loads(request.body)
+#     ajax_username = data.get('username')
+#     targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+#     len_ajax_username = len(ajax_username)
+#     if len_ajax_username < 8 or len_ajax_username > 20:
+#         return JsonResponse({'result': 'invalidLenUsername'})
+#     elif targetuser.username != ajax_username:
+#         return JsonResponse({'result': 'True'})
+
     # 회원가입이 불가능한 ID인 경우:
-    else:
-        return JsonResponse({'result': 'False'})
+    # else:
+    #     return JsonResponse({'result': 'False'})
 
 # # 원본 ajax login view 함수
 def ajax_user_login(request):
@@ -133,21 +187,24 @@ def ajax_user_login(request):
     else:
         return JsonResponse({'result': 'True'})
 
-#####테스트중
+#####테스트중 login 
 # def ajax_user_login(request):
 #     data = loads(request.body)
 #     ajax_username = data.get('username')
 #     ajax_password = data.get('password')
-#     targetuser = auth_views.UserModel.objects.get(username=ajax_username)
-
+#     # targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+#     ajax_username_len = len(ajax_username)
+#     ajax_password_len = len(ajax_password)
 #     if ajax_username is None:
 #         return JsonResponse({'result': 'UserNameNone'})
 #     elif ajax_password is None:
 #         return JsonResponse({'result': 'UserPassNone'})
-#     elif ajax_username =!
-
-#     elif targetuser.set_password != ajax_password:
-#         return JsonResponse({'result': 'InvalidPw'})
+#     elif ajax_username_len < 4 or ajax_username_len > 12:
+#         return JsonResponse({'result':'UserNameNumberInvalid'})
+#     elif ajax_password_len < 8 or ajax_password_len > 20:
+#         return JsonResponse({'result':'UserPassWordInvalid'}) 
+#     # elif targetuser.set_password != ajax_password:
+#     #     return JsonResponse({'result': 'InvalidPw'})
 #     else:
 #         return JsonResponse({'result': 'True'})
 
