@@ -10,6 +10,15 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.content {
+    position: fixed;
+    left: 120%;
+    top: -23%;
+    width: 800px;
+    text-align: center;
+}
+
 a {
     color: #fff;
     text-decoration: none;
@@ -185,4 +194,79 @@ a {
         font-size: 24px;
         margin-bottom: 15px;
     }
+}
+
+/* 소개창 제목 */
+
+.header {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    letter-spacing: 2px;
+    color: #f35626;
+    background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 10s infinite linear;
+}
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}
+
+/* 소개창 내용 */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:700");
+
+body {
+    margin: 0;
+    font-family: Montserrat, sans-serif;
+}
+
+.scroll-container {
+    height: 120vh;
+    overflow: scroll;
+    scroll-snap-type: y mandatory;
+}
+.scroll-item {
+    position: relative;
+    scroll-snap-align: start;
+    height: 100vh;
+
+}
+
+.scroll-item h2 {
+    position: sticky;
+    top: 0;
+    margin: 0;
+    padding: 1rem;
+    color: #a1aae6;
+    z-index: 1;
+}
+.scroll-item__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.scroll-item__inner {
+    border: 2px solid white;
+    padding: 1rem;
+    transition: opacity 800ms, transform 800ms;
+    opacity: 0;
+    transform: translate3d(0, -1.5rem, 0);
+}
+.scroll-item__inner.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.scroll-item__bg-image.is-visible::after {
+    background: rgba(0, 0, 0, 0.3);
 }

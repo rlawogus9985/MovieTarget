@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="{% static 'movie/result/result.css' %}">
 <script src="{% static 'jquery.min.js' %}"></script>
 <script src="{% static 'common/session.js' %}"></script> 
+<link rel="stylesheet" href="{% static 'movie/result/graph.css' %}">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="{% static 'movie/result/graphs.js' %}"></script> 
 {% endblock head %}
   
 {% block body %}
@@ -88,14 +91,15 @@
   <button id="btn_salesAcc">보이기/감추기</button>
   <span style="color: white;">총 매출액 변동 추이</span>
 </div>
-  <img src="{% static 'SalesAccTestImage.png' %}" id="SalesToggle" style="display:none">
-
+  <!-- <img src="{% static 'SalesAccTestImage.png' %}" id="SalesToggle" style="display:none"> -->
+  <div class="SalesToggle" id="curve_chart" style="width: 900px; height: 500px"></div>
 <!-- 총관람객수 추이를 보여주기 위한 란-->
 <div>
   <button id="btn_audiAcc">보이기/감추기</button>
   <span style="color: white;">총 관람객수 변동 추이</span>
 </div>
-  <img src="{% static 'AudiAccTestImage.png' %}" id="AudiToggle" style="display:none">
+  <!-- <img src="{% static 'AudiAccTestImage.png' %}" id="AudiToggle" style="display:none"> -->
+  <div class="AudiToggle" id="chart_div" style="width: 60%; height: 600px;"></div>
 
 {% comment %}
 String ls_getdata = (String)lobj_getdata

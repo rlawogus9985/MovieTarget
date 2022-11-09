@@ -114,13 +114,9 @@ function TableActor(e) {
     fill_actor3 = document.getElementById("selected_actor3").value;
     document.getElementById("selected_actor3").value = selected_actor;
     document.getElementById("actor3").value = selected_actor;
-    $(".showActors>span").text("배우를 선택하셨습니다.");
   }
   document.getElementById("pageForm").submit();
-  // 배우를 선택하면 선택했다는 텍스트를 넣어준다.
-  // $('.showSelect').css({
-  //   "border-bottom": "2px solid white"
-  // });
+  
 }
 // 배우 선택을 취소하기 위한 js
 function DeleteSelectActor1() {

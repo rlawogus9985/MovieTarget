@@ -395,13 +395,17 @@ table.actor-list {
 }
 
 /* 선택한 내용 보여주기 꾸미기 */
-.showSelect {
+.showSelect, .showActors {
   background-color: #1f2029;
   border: none;
   outline: 2px none;
   color: white;
   text-align: center;
 }
-.showSelect:hover {
+
+.showActors {
  border-bottom: 2px solid white;
+ margin-top: 10px;
+
 }
+

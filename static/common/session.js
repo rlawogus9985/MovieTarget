@@ -44,9 +44,9 @@ function sessionNationsOpendtAuditDataImport() {
 // hidden을 없애는 방식
 $(function () {
   $("#btn_salesAcc").click(function () {
-    $("#SalesToggle").toggle();
+    $(".SalesToggle").toggle();
   });
   $("#btn_audiAcc").click(function () {
-    $("#AudiToggle").toggle();
+    $(".AudiToggle").toggle();
   });
 });
