@@ -6,6 +6,8 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'common/home/welcome.css' %}">
+<script src="{% static 'jquery.min.js' %}"></script>
+<script src="{% static 'common/home/about.js' %}"></script>
 
 <!-- 본문 -->
 <div class="promotion-carousel">
@@ -28,6 +30,44 @@
           <div class="buttons">
             <a class="button sho-play-link" href="{% url 'movie:board1' %}"></span>시작하기</a>
           </div>
+<div class="content">
+  <main class="scroll-container">
+    <section class="scroll-item is-visible">
+      <div class="scroll-item__content">
+        <div class="" data-observer>
+          <h3 class="heading">ㅡ<span class="header">일일영화</span>의 시작 ㅡ</h3>
+          <span>영화는 많은 의미가 담겨 있습니다. <br>하지만 의미있는 영화가 전부 가치있는 영화라고 말 하긴 어렵습니다.<br>
+            또한 가치 있는 영화도 좋은 성과를 이루지 못하기도 합니다. <br>특히 영화는 평론과 비평의 결과가 다른 경우가 많습니다.
+            <br><br>
+            왜 그럴까요?
+            <br><br>
+            세상에 나쁜 영화는 없습니다. 관객과 맞지 않는 영화가 존재 할 뿐…
+            <br><br>
+            어떤 영화가 관객과 맞는지 알 수 있는 방법이 있다면 어떨까요? <br>
+            영화를 만들 때 소재별로 관객들의 선호도를 보여주면 어떨까요? <br>
+            영화를 만들기 전에 관객들의 선호도를 미리 알 수 있다면 어떨까요? <br>
+            <br>
+            <span class="header">일일영화</span>는 이런 작은 호기심에서 시작되었습니다. </span>
+            <div>↓</div>
+        </div>
+      </div>
+    </section>
+    <section class="scroll-item">
+      <div class="scroll-item__content">
+        <div class="" data-observer>
+          <h3 class="heading">ㅡ 영화의 <span class="header">가치</span>를 <span class="header">같이</span> 제시하는 공간, <span class="header">일일영화</span> ㅡ</h3>
+          <span> 만약 이런 궁금증을 해결 할 수 있는 공간이 있다면 <br>목적에 맞는 각 분야의 전문가들이 모여 <br>
+            관객을 만족시킬 수 밖에 없는 영화를 만 들 수 있지 않을까요?<br>
+            가치 있는 영화가 큰 성과를 이루는 세상이 되지 않을까요?<br>
+            <br>
+            영화의 흥행지수를 심층분석하여<br>흥행정도를 예측 할 수 있는 일일영화는<br>
+            영화의 가치를 함께 생각하고 제시 할 수 있는 <br> 공간이 되기 위해 노력하겠습니다.</span>
+            <div>↑</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
           {% else %}
           <p class="copy">
             <div class="headline"></div>
@@ -40,6 +80,7 @@
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 {% endblock body %}

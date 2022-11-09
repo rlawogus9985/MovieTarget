@@ -56,12 +56,14 @@
 <!-- 선택한 내용 보여주기 -->
 <br>
 <div style="color: white;">
-  <h5 class="showActors" style="text-align: center;">
-    <input  class="showSelect" type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
-    <input  class="showSelect" type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
-    <input  class="showSelect" type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
-    <div></div>
+  <div style="text-align: center;" > 밑줄에 보이는 이름 클릭하면 선택을 취소할 수 있습니다.</div>
+  <h5 style="text-align: center;">
+    <input  class="showActors" type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
+    <input  class="showActors" type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
+    <input  class="showActors" type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
+    배우들을 선택하셨습니다.
   </h5>
+  
 </div>
 
 <!-- 데이터베이스에 뭐가 있는지 출력-->
