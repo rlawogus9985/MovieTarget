@@ -18,8 +18,8 @@
 {% block body %}
 <!-- 메뉴 바(직접 작성)-->
 <div style="background-color:#2d3142; display: flex; justify-content: space-between">
-  <img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
-   style="height: 100px; width: auto;">
+  <a href="/"><img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
+    style="height: 100px; width: auto;"></a>
 	
   <div style="color: white; text-align:right; top: 5px; right: 10px;">
   {% if user.is_authenticated %}
