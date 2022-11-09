@@ -24,7 +24,7 @@ function selectDataDirector() {
   }
 
   document.getElementById("selected_director_hidden_input").value = selected_director;
-  alert("선택이 완료되었습니다.");
+  // alert("선택이 완료되었습니다.");
   sessionStorage.setItem("selected_director", selected_director);
   document.getElementById("selectedDirectorForm").submit();
 }
@@ -40,7 +40,7 @@ function selectDataGenre() {
 
   document.getElementById("selected_genre_hidden_input").value = selected_genre;
   sessionStorage.setItem("selected_genre", selected_genre);
-  alert("선택이 완료되었습니다.");
+  // alert("선택이 완료되었습니다.");
   document.getElementById("selectedGenreForm").submit();
 }
 
@@ -58,7 +58,7 @@ function selectDataActors() {
   document.getElementById("selected_actor1_hidden_input").value = selected_actor1;
   document.getElementById("selected_actor2_hidden_input").value = selected_actor2;
   document.getElementById("selected_actor3_hidden_input").value = selected_actor3;
-  alert("선택이 완료되었습니다.");
+  // alert("선택이 완료되었습니다.");
   document.getElementById("selectedActorsForm").submit();
 }
 

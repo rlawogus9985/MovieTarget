@@ -105,7 +105,9 @@ def delete_user(request):
 def login(request):
     return render(request, 'dist/index.html')
 
-def ajax_user(request):
+########### Ajax 함수뷰
+
+def ajax_user_signup(request):
     data = loads(request.body)
     ajax_username = data.get('username')
     targetuser = auth_views.UserModel.objects.get(username=ajax_username)
@@ -116,7 +118,56 @@ def ajax_user(request):
     # 회원가입이 불가능한 ID인 경우:
     else:
         return JsonResponse({'result': 'False'})
-        
+
+# # 원본 ajax login view 함수
+def ajax_user_login(request):
+    data = loads(request.body)
+    ajax_username = data.get('username')
+    ajax_password = data.get('password')
+    targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+
+    # 로그인 시 입력한 ID가 데이터베이스에 존재하지만 PW가 일치하지 않아 로그인이 되지 않는 경우.
+    if targetuser.set_password != ajax_password:
+        return JsonResponse({'result': 'False'})
+    # 로그인 시 입력한 ID가 데이터베이스에 존재하지않는 경우 로그인이 되는 경우.
+    else:
+        return JsonResponse({'result': 'True'})
+
+#####테스트중
+# def ajax_user_login(request):
+#     data = loads(request.body)
+#     ajax_username = data.get('username')
+#     ajax_password = data.get('password')
+#     targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+
+#     if ajax_username is None:
+#         return JsonResponse({'result': 'UserNameNone'})
+#     elif ajax_password is None:
+#         return JsonResponse({'result': 'UserPassNone'})
+#     elif ajax_username =!
+
+#     elif targetuser.set_password != ajax_password:
+#         return JsonResponse({'result': 'InvalidPw'})
+#     else:
+#         return JsonResponse({'result': 'True'})
+
+
+    # # 로그인 시 입력한 ID가 데이터베이스에 존재하지만 PW가 일치하지 않아 로그인이 되지 않는 경우.
+    # if targetuser.set_password != ajax_password:
+    #     return JsonResponse({'result': 'False'})
+    # # 로그인 시 입력한 ID가 데이터베이스에 존재하지않는 경우 로그인이 되는 경우.
+    # else:
+    #     return JsonResponse({'result': 'True'})
+##############
+
+class UserLoginView(LoginView):
+    template_name = 'dist/index.html'
+
+    def form_invalid(self, form):
+        messages.error(self.request, '로그인에 실패하였습니다.', extra_tags='danger')
+        return super().form_invalid(form)
+    
+
 ########## 위 사용하는 뷰 아래 비사용혹은 테스트중인 뷰
 
 
@@ -140,13 +191,7 @@ def ajax_user(request):
 #     return render(request, 'dist/index.html')
 # 로그인할때 사용하는 클래스 함수.
 # 로그인 이후 넘어가는 화면은 settings.py 의 Login_redirect_url
-class UserLoginView(LoginView):
-    template_name = 'dist/index.html'
 
-    def form_invalid(self, form):
-        messages.error(self.request, '로그인에 실패하였습니다.', extra_tags='danger')
-        return super().form_invalid(form)
-    
 ## 테스트중인 새로운 클래스뷰
 # @login_required(login_url=reverse_lazy('user:login'))
 # class LoginClassView(View):
