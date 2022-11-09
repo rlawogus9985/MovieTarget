@@ -20,7 +20,12 @@ urlpatterns = [
     
     path('board/1/S/', views.movieboardselectview, name= 'board1S'),  
         ## 함수형뷰 테스트였었던 url로 session들을 뽑아낼 result 결과페이지를 연결하는 url
+
+    # 자료실에서 결과보기를 누르면 이동하는 url
     path('board/2/S/<int:pk>', views.movieboardputview.as_view(), name='board2S'),
+    
+    # 자료실에서 삭제버튼을 누르면 이동하는 url
+    path('board/2/S/<int:pk>/delete', views.delete_board, name='delete')
 
     ####### 기준선으로 위 urlpattern은 사용 / 아래 urlpattern은 비사용 ###########
 
