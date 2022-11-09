@@ -1,23 +1,34 @@
 {% load static %}
 <title>일일영화 - 회원탈퇴</title>
 <script src="{% static 'user/delete/script.js' %}"></script>
+<!-- <link rel="stylesheet" href="{% static 'user/infos/profile.css' %}"> -->
 <link rel="stylesheet" href="{% static 'user/delete/remove.css' %}">
 
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
   
-  <div class="blur"></div>
-  <div class="main" id="main">
-    <h1 class="title">{{ user.username }} 회원님의 계정을 삭제 하시겠습니까?</h1>
-    {% comment %}
-    <form action="{% url 'user:delete_user' auth_user_id=user.id %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
-    {% endcomment %}
-    <form action="{% url 'user:delete_user' %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
-      {% csrf_token %}
-      <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn">탈퇴하기</button>
-    </form>
+  <div style="display: inline-flex;">
+    <a href="/" class="logo" target="blank">
+      <img src="{% static 'My project-1.png' %}" alt="일일영화 로고" style="height: 100px; width: auto;">
+    </a>
+      
+    <div style="text-align:right; position: absolute; top: 5px; right: 10px;">
+    <div class="sawname">{{ user.username }}님, 환영합니다.</div>
+      <a href="{% url 'user:profile' %}" class="btn">회원정보</a>
+      <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
   </div>
-  
-  
-  <div class="particles" id="particles"></div>
-  
+
+  <!-- 템플릿 주내용 -->
+  <table>
+    <div>
+      <form action="{% url 'user:delete_user' %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
+        {% csrf_token %}
+        <div class="check">
+          삭제 버튼을 누르시면 완전히 삭제가 되어 되돌릴 수 없습니다.<br>
+          정말 {{ user.username }} 회원님의 계정을 삭제 하시겠습니까?<br>
+        </div>
+    </div>
+        <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn o">삭제</button>
+      </form>
+        <button type="submit" class="btn x" onclick="info_user()">취소</button>        
+  </table>        
 </body>

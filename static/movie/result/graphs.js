@@ -33,7 +33,7 @@ google.charts.load('current', {'packages':['line', 'corechart']});
           title: '총 매출액 변동 추이',
           subtitle: '원 기준'
         },
-        width: 900,
+        width: 500,
         height: 500
       };
 
@@ -55,7 +55,9 @@ google.charts.load('current', {'packages':['line', 'corechart']});
         var options = {
           title: '흥행률',
           hAxis: {title: '년도',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
+          vAxis: {minValue: 0},
+          width: 500,
+          height: 500
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
