@@ -18,8 +18,8 @@
 {% block body %}
 <!-- 메뉴 바(직접 작성)-->
 <div style="background-color:#2d3142; display: flex; justify-content: space-between">
-  <img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
-   style="height: 100px; width: auto;">
+  <a href="/"><img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
+    style="height: 100px; width: auto;"></a>
 	
   <div style="color: white; text-align:right; top: 5px; right: 10px;">
   {% if user.is_authenticated %}
@@ -35,31 +35,31 @@
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">감독 -<br>
-      {{ request.session.selected_director }}
+      {{ movie.director }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">장르 -<br>
-      {{ request.session.selected_genre }}
+      {{ movie.genre }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">배우 -<br>
-      {{ request.session.selected_actor1 }}
+      {{ movie.actor1 }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">배우 -<br>
-      {{ request.session.selected_actor2 }}
+      {{ movie.actor2 }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">배우 -<br>
-      {{ request.session.selected_actor3 }}
+      {{ movie.actor3 }}
     </a>
   </div>
 </div>
@@ -69,19 +69,22 @@
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">국가 -<br>
-      {{ request.session.selected_nations }}
+      {{ movie.nations }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">개봉 분기 -<br>
-      {{ request.session.selected_opendt }}
+      {{ movie.opendt }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">관람 등급 -<br>
+      {% comment %} {% if request.session.selected_audit %}
       {{ request.session.selected_audit }}
+      {% endif %} {% endcomment %}
+      {{ movie.audit }}
     </a>
   </div>
 </div>

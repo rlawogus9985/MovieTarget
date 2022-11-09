@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{% static 'user/selected/pselected.css' %}">
   {% comment %} <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script> {% endcomment %}
   {% comment %} <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}"> {% endcomment %}
+  <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
 </head>
 <body>
 
@@ -53,13 +54,15 @@
       <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
         <thead>
           <tr class="text-left">
-            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">번호</th>
-            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">감독</th>
-            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">장르</th>
-            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">배우</th>
-            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">국가</th>
-            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">개봉시기</th>
-            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">관람등급</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">번호</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">감독</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">장르</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">배우</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">국가</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">개봉시기</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">관람등급</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">결과보기</th>
+            <th class="py-3 px-6 sticky top-0 border-b border-gray-200 bg-gray-100">삭제</th>
           </tr>
         </thead>
         <tbody>
@@ -72,6 +75,16 @@
                 <td class="border-dashed border-t border-gray-200" ><span class="text-gray-700 px-6 py-3 flex items-center">{{ list.nations }}</span></td>
                 <td class="border-dashed border-t border-gray-200" ><span class="text-gray-700 px-6 py-3 flex items-center">{{ list.opendt }}</span></td>
                 <td class="border-dashed border-t border-gray-200" ><span class="text-gray-700 px-6 py-3 flex items-center">{{ list.audit }}</span></td>
+                <td class="border-dashed border-t border-gray-200" >
+                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
+                    <a href="{% url 'movie:board2S' pk=list.id %}">결과보기</a>
+                  </button>
+                </td>
+                <td class="border-dashed border-t border-gray-200">
+                  <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" >
+                    <a href="{% url 'movie:delete' pk=list.id %}">삭제하기</a>
+                  </button>
+                </td>
               </tr>
          {% endfor %}
         </tbody>
