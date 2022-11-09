@@ -105,7 +105,7 @@ function TableActor(e) {
   let fill_actor3 = document.getElementById("selected_actor3").value;
 
   // actor 중복검사
-  if (selected_actor != "신입") {
+  if (selected_actor != "신입 배우") {
     if (selected_actor == fill_actor1 || selected_actor == fill_actor2 || selected_actor == fill_actor3) {
       alert("중복선택하셨습니다. 배우를 다시 선택해주세요.");
       return;
@@ -124,7 +124,6 @@ function TableActor(e) {
     document.getElementById("actor3").value = selected_actor;
   }
   document.getElementById("pageForm").submit();
-  
 }
 // 배우 선택을 취소하기 위한 js
 function DeleteSelectActor1() {
