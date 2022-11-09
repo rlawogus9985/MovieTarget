@@ -409,3 +409,7 @@ table.actor-list {
 
 }
 
+/* 배우선택 버튼 자리수정 */
+.actors {
+  margin-top: -50px;
+}
