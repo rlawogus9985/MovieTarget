@@ -1,10 +1,10 @@
 {% load static %}
 <title>일일영화 - 내 정보</title>
 <link rel="stylesheet" href="{% static 'user/infos/profile.css' %}">
-<script src="{% static 'user/infos/moving.js' %}"></script>     
+<script src="{% static 'user/infos/moving.js' %}"></script>   
+<link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">  
 
 <body>
-  
   <div style="display: inline-flex;">
     <a href="/" class="logo" target="blank">
       <img src="{% static 'My project-1.png' %}" alt="일일영화 로고" style="height: 100px; width: auto;">
@@ -21,8 +21,8 @@
     <div class="card preShow">
       <div class="card__top">
         <svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="深知" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <g id="消息中心-copy-4" transform="translate(-263.000000, -366.000000)" fill-rule="nonzero">
+          <g id="up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="down-copy-4" transform="translate(-263.000000, -366.000000)" fill-rule="nonzero">
                   <g id="Group-Copy" transform="translate(227.000000, 331.000000)">
                       <g id="Group-4" transform="translate(35.000000, 34.000000)">
                           <g id="Group-2">
@@ -58,11 +58,11 @@
     <div class="card preShow">
       <div class="card__top">
         <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g id="深知" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g id="Deepknow.82d7f8a3" fill-rule="nonzero">
                     <g id="Group-14">
                         <rect id="Rectangle-Copy-13" fill-opacity="0" fill="#FFFFFF" x="0" y="0" width="32" height="32"></rect>
-                        <g id="深知-copy">
+                        <g id="up-copy">
                             <g id="Group-7">
                                 <polygon id="Combined-Shape" fill="#2684FF" points="28.2666667 16.1 32 21 16 32 0 21 3.73333333 16.1 16 24.5333333"></polygon>
                                 <polygon id="Combined-Shape" fill="url(#linearGradient-1)" points="16 32 16 24.5333333 28.2666667 16.1 32 21"></polygon>
@@ -86,14 +86,14 @@
       <span id='sz' onclick="delete_user()"></span>
     </div>
     
-    <!-- 회원데이터 -->
+   
+    <!-- 회원데이터 카드-->
     <div class="wrap">
-      <!-- 비밀번호 변경 카드-->
       <div class="card preShow">
         <div class="card__top">
           <svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g id="深知" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="消息中心-copy-4" transform="translate(-263.000000, -366.000000)" fill-rule="nonzero">
+            <g id="up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="down-copy-4" transform="translate(-263.000000, -366.000000)" fill-rule="nonzero">
                     <g id="Group-Copy" transform="translate(227.000000, 331.000000)">
                         <g id="Group-4" transform="translate(35.000000, 34.000000)">
                             <g id="Group-2">
@@ -114,7 +114,7 @@
           </svg>
           <h2>자료실</h2>
         </div>
-        <!-- 비밀번호 변경 카드 눌렀을 때-->
+        <!-- 자료실 카드 눌렀을 때-->
         <div class="card__bottom">
           <h2>자료실</h2>
           <p></p>

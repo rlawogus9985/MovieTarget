@@ -52,7 +52,6 @@ span {
 }
 
 a {
-  color: #bfc0c0;
   text-decoration: none;
   letter-spacing: 1px;
 }
@@ -67,6 +66,7 @@ a {
 #button-5 a {
   position: relative;
   transition: all 0.45s ease-Out;
+  color: #bfc0c0;
 }
 
 #translate {
@@ -113,7 +113,7 @@ a {
   border: 5px solid gray;
   margin: 0 auto;
   padding: 5px;
-  width: 600px;
+  width: 800px;
   background-color: white;
   margin-top: 20px;
   margin-bottom: 30px;

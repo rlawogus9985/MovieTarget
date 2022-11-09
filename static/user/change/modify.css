@@ -1,44 +1,38 @@
-body{
-	background-image: url("https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-	background-position: center;
-	background-origin: content-box;
-	background-repeat: no-repeat;
-	background-size: cover;
-	min-height:100vh;
+body {
+	background-color:#dae7fa;
 }
 
 .text-center{
-	color:#fff;	
+	color:rgb(2, 2, 2);	
 	text-transform:uppercase;
 	font-size: 23px;
-	margin: -50px 0 50px 0;
+	font-weight: bold;
+	margin: -30px 0 50px 0;
 	display: block;
 	text-align: center;
 }
 
 .name-id {
-	 
-	color:#fff;	
+	color:rgb(90, 82, 82);	
 	text-transform:uppercase;
 	display: block;
 	text-align: left;
 	margin-bottom: -2px;
-	font-size:12px;
+	font-size:15px;
 }
 
 .box{
-	left:50%;
-	top:50%;
 	transform: translate(-50%,-50%);
 	border-radius:3px;
 	backdrop-filter: blur(10px);
-    background-color: rgba(29, 28, 28, 0.345);
-    border: 1px solid rgba(254, 254, 254, 0.18);
-    box-shadow: 0 10px 35px 0 rgba(54, 33, 0, 0.65);
-    max-width: 300px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #dae7fa;
+    max-width: 500px;
     overflow: hidden;
     padding: 50px 30px 50px 30px;
     position: relative;
+	left:50%;
+	top: 55%;
     text-align: center;
     z-index: 1;
 }
@@ -52,27 +46,27 @@ body{
 	position:absolute;
 	top:0px;
 	left:0px;
-	font-size:16px;
-	color:#fff;	
+	font-size:18px;
+	color:rgb(90, 82, 82);	
 	transition: all 0.5s ease-in-out;
 }
 .input-container input{ 
 	border:0;
-	border-bottom:1px solid rgb(151, 124, 124);  
+	border-bottom:1px solid rgb(126, 126, 126);  
 	background:transparent;
 	width:100%;
-	padding:8px 0 5px 0;
-	font-size:16px;
-	color:#fff;
+	padding:20px 0 5px 0;
+	font-size:20px;
+	color:rgb(0, 0, 0);
 }
 .input-container input:focus{ 
 	border:none;	
 	outline:none;
-	border-bottom:1px solid #ffffff;
+	border-bottom:1px solid black;
 }
 .mbtn{
 	border: 1px solid #fff;
-	background-color: rgba(29, 28, 28, 0.345);
+	background-color: #0051cc;
 	color: #fff;
 	box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
 	outline: none;
@@ -89,13 +83,13 @@ body{
 
 .mbtn:active,
 .mbtn:focus{  
-	background-color: #fff;
-	color: #000000d7;
+	background-color: #4d93fc;
+	color: #dae7fa;
 	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 .mbtn:hover{  
-	background-color: #fff;
-	color: #000000d7;
+	background-color: #4d93fc;
+	color: #dae7fa;
 	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 
@@ -103,5 +97,5 @@ body{
 .input-container input:focus ~ label,
 .input-container input:valid ~ label{
 	top:-12px;
-	font-size:12px;
+	font-size:15px;
 }
