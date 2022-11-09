@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}">
   <script src="{% static 'movie/select/dselect.js' %}"></script>
   <script src="{% static 'jquery.min.js' %}"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
   
 
 </head>
@@ -20,10 +21,8 @@
 
 <!-- 메뉴 바(직접 작성)-->
 <div style="background-color:#1f2029; display: flex; justify-content: space-between">
-  <a href="/" target='blank'>
-    <img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
-     style="height: 100px; width: auto;">
-  </a>
+  <a href="/"><img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
+    style="height: 100px; width: auto;"></a>
 	
   <div style="color: white; text-align:right; top: 5px; right: 10px;">
   {% if user.is_authenticated %}
