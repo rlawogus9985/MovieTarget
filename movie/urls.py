@@ -18,8 +18,14 @@ urlpatterns = [
         ## class뷰에는 함수형뷰의 request 매개변수가 없어서 request인수에서 session을 불러오는게 어려워보인다.
         ## class view django session으로 구글에 검색시 맨 처음 나오는 영어질문에 답이 있는것 같으나, override가 복잡하고 이해하지 못해서 작업중지한 상황.
     
-    path('board/1/S', views.movieboardselectview, name= 'board1S'),  
+    path('board/1/S/', views.movieboardselectview, name= 'board1S'),  
         ## 함수형뷰 테스트였었던 url로 session들을 뽑아낼 result 결과페이지를 연결하는 url
+
+    # 자료실에서 결과보기를 누르면 이동하는 url
+    path('board/2/S/<int:pk>', views.movieboardputview.as_view(), name='board2S'),
+    
+    # 자료실에서 삭제버튼을 누르면 이동하는 url
+    path('board/2/S/<int:pk>/delete', views.delete_board, name='delete')
 
     ####### 기준선으로 위 urlpattern은 사용 / 아래 urlpattern은 비사용 ###########
 

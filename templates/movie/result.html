@@ -37,31 +37,31 @@
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">감독 -<br>
-      {{ request.session.selected_director }}
+      {{ movie.director }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">장르 -<br>
-      {{ request.session.selected_genre }}
+      {{ movie.genre }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">배우 -<br>
-      {{ request.session.selected_actor1 }}
+      {{ movie.actor1 }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">배우 -<br>
-      {{ request.session.selected_actor2 }}
+      {{ movie.actor2 }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">배우 -<br>
-      {{ request.session.selected_actor3 }}
+      {{ movie.actor3 }}
     </a>
   </div>
 </div>
@@ -71,19 +71,22 @@
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">국가 -<br>
-      {{ request.session.selected_nations }}
+      {{ movie.nations }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">개봉 분기 -<br>
-      {{ request.session.selected_opendt }}
+      {{ movie.opendt }}
     </a>
   </div>
   <div class="button" id="button-5">
     <div id="translate"></div>
     <a href="#">관람 등급 -<br>
+      {% comment %} {% if request.session.selected_audit %}
       {{ request.session.selected_audit }}
+      {% endif %} {% endcomment %}
+      {{ movie.audit }}
     </a>
   </div>
 </div>
