@@ -1,7 +1,7 @@
 {% extends 'common/base.html' %}
 
 {% block title %}
-영화선택페이지
+일일영화 - 결과 분석
 {% endblock title %}
 
 
@@ -27,75 +27,84 @@
   </div>
 </div>
 
-<div class="button_"></div>
-<div class="button" id="button-5">
-  <div id="translate"></div>
-  <a href="#">감독 -<br>
-    {{ request.session.selected_director }}
-  </a>
+<!-- 감독, 장르, 배우1, 배우2, 배우3 -->
+<div style="display: flex; justify-content: center;">
+  <div class="button" id="button-5">
+    <div id="translate"></div>
+    <a href="#">감독 -<br>
+      {{ request.session.selected_director }}
+    </a>
+  </div>
+  <div class="button" id="button-5">
+    <div id="translate"></div>
+    <a href="#">장르 -<br>
+      {{ request.session.selected_genre }}
+    </a>
+  </div>
+  <div class="button" id="button-5">
+    <div id="translate"></div>
+    <a href="#">배우 -<br>
+      {{ request.session.selected_actor1 }}
+    </a>
+  </div>
+  <div class="button" id="button-5">
+    <div id="translate"></div>
+    <a href="#">배우 -<br>
+      {{ request.session.selected_actor2 }}
+    </a>
+  </div>
+  <div class="button" id="button-5">
+    <div id="translate"></div>
+    <a href="#">배우 -<br>
+      {{ request.session.selected_actor3 }}
+    </a>
+  </div>
 </div>
-<div class="button" id="button-5">
-  <div id="translate"></div>
-  <a href="#">장르 -<br>
-    {{ request.session.selected_genre }}
-  </a>
+
+<!-- 국가, 개봉 분기, 관람등급 -->
+<div style="display: flex; justify-content: center;">
+  <div class="button" id="button-5">
+    <div id="translate"></div>
+    <a href="#">국가 -<br>
+      {{ request.session.selected_nations }}
+    </a>
+  </div>
+  <div class="button" id="button-5">
+    <div id="translate"></div>
+    <a href="#">개봉 분기 -<br>
+      {{ request.session.selected_opendt }}
+    </a>
+  </div>
+  <div class="button" id="button-5">
+    <div id="translate"></div>
+    <a href="#">관람 등급 -<br>
+      {{ request.session.selected_audit }}
+    </a>
+  </div>
 </div>
-<div class="button" id="button-5">
-  <div id="translate"></div>
-  <a href="#">배우 -<br>
-    {{ request.session.selected_actor1 }}
-  </a>
-</div>
-<div class="button" id="button-5">
-  <div id="translate"></div>
-  <a href="#">배우 -<br>
-    {{ request.session.selected_actor2 }}
-  </a>
-</div>
-<div class="button" id="button-5">
-  <div id="translate"></div>
-  <a href="#">배우 -<br>
-    {{ request.session.selected_actor3 }}
-  </a>
-</div>
-<br>
-<div class="button" id="button-5">
-  <div id="translate"></div>
-  <a href="#">국가 -<br>
-    {{ request.session.selected_nations }}
-  </a>
-</div>
-<div class="button" id="button-5">
-  <div id="translate"></div>
-  <a href="#">개봉 분기 -<br>
-    {{ request.session.selected_opendt }}
-  </a>
-</div>
-<div class="button" id="button-5">
-  <div id="translate"></div>
-  <a href="#">관람 등급 -<br>
-    {{ request.session.selected_audit }}
-  </a>
-</div>
+
+
 <!-- 결과에 대한 설명을 적어놓는 란-->
 <div class="result_repr">
   위와 같이 선택했을때 흥행도는 다음과 같습니다.<br><br>
   장르, 감독, 배우들이 출연한 영화들의 매출액, 관객수의 평균을 구하고 만든국가, 개봉일, 관람등급을 통해 조절한 결과 아래와 같은 그래프를 통해 흥행도는 오를/내릴것으로 예상됩니다.
 </div>
 
-<!-- 총매출액 추이를 보여주기 위한 란-->
-<div>
-  <button id="btn_salesAcc">보이기/감추기</button>
-  <span style="color: white;">총 매출액 변동 추이</span>
+<div style="display: flex;">
+  <!-- 총매출액 추이를 보여주기 위한 란-->
+  <div style="flex:1; margin-left: 15%;">
+    <button id="btn_salesAcc">보이기/감추기</button>
+    <span style="color: white;">총 매출액 변동 추이</span><br>
+    <img src="{% static 'SalesAccTestImage.png' %}" id="SalesToggle">
+  </div>
+  
+  <!-- 총관람객수 추이를 보여주기 위한 란-->
+  <div style="flex:1;">
+    <button id="btn_audiAcc">보이기/감추기</button>
+    <span style="color: white;">총 관람객수 변동 추이</span><br>
+    <img src="{% static 'AudiAccTestImage.png' %}" id="AudiToggle">
+  </div>
 </div>
-  <img src="{% static 'SalesAccTestImage.png' %}" id="SalesToggle" style="display:none">
-
-<!-- 총관람객수 추이를 보여주기 위한 란-->
-<div>
-  <button id="btn_audiAcc">보이기/감추기</button>
-  <span style="color: white;">총 관람객수 변동 추이</span>
-</div>
-  <img src="{% static 'AudiAccTestImage.png' %}" id="AudiToggle" style="display:none">
 
 {% comment %}
 String ls_getdata = (String)lobj_getdata
