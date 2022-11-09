@@ -73,7 +73,11 @@
                 <td class="border-dashed border-t border-gray-200" ><span class="text-gray-700 px-6 py-3 flex items-center">{{ list.nations }}</span></td>
                 <td class="border-dashed border-t border-gray-200" ><span class="text-gray-700 px-6 py-3 flex items-center">{{ list.opendt }}</span></td>
                 <td class="border-dashed border-t border-gray-200" ><span class="text-gray-700 px-6 py-3 flex items-center">{{ list.audit }}</span></td>
-                <td class="border-dashed border-t border-gray-200" ><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">결과보기</button></td>
+                <td class="border-dashed border-t border-gray-200" >
+                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
+                    <a href="{% url 'movie:board2S' pk=list.id %}">결과보기</a>
+                  </button>
+                </td>
               </tr>
          {% endfor %}
         </tbody>

@@ -154,26 +154,41 @@ def movieboardselectview(request):
     # targetactor2 = request.GET.get('actor2', '')
     # targetactor3 = request.GET.get('actor3', '')
     # targetopendt = request.GET.get('opendt', '')
-    targetdirector = request.session['selected_director']
-    targetgenre = request.session['selected_genre']
-    targetactor1 = request.session['selected_actor1']
-    targetactor2 = request.session['selected_actor2']
-    targetactor3 = request.session['selected_actor3']
-    targetnations = request.session['selected_nations'] 
-    targetopendt = request.session['selected_opendt']
-    targetaudit = request.session['selected_audit']
-    userid = request.user.id
-    
-    # user = auth_views.UserModel.objects.get(pk=pk)
+    movie = None
+    try:
+        targetdirector = request.session['selected_director']
+        targetgenre = request.session['selected_genre']
+        targetactor1 = request.session['selected_actor1']
+        targetactor2 = request.session['selected_actor2']
+        targetactor3 = request.session['selected_actor3']
+        targetnations = request.session['selected_nations'] 
+        targetopendt = request.session['selected_opendt']
+        targetaudit = request.session['selected_audit']
+        userid = request.user.id
 
-    SelectedBase.objects.create(
-    writer_id=userid, director=targetdirector, genre=targetgenre,
-    actor1=targetactor1, actor2=targetactor2, actor3=targetactor3,
-    nations=targetnations, audit=targetaudit,  opendt=targetopendt
-    )
-
-    return render(request, 'movie/result.html')
+        movie = SelectedBase.objects.create(
+        writer_id=userid, director=targetdirector, genre=targetgenre,
+        actor1=targetactor1, actor2=targetactor2, actor3=targetactor3,
+        nations=targetnations, audit=targetaudit,  opendt=targetopendt)
+    except:
+        pass
    
+    context = {
+        'movie': movie,
+    }
+    # user = auth_views.UserModel.objects.get(pk=pk)
+    return render(request, 'movie/result.html', context)
+
+class movieboardputview(generic.DetailView):
+    model = SelectedBase
+    template_name = 'movie/result.html'
+    context_object_name = 'movie'
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+
+        result = SelectedBase.objects.filter(pk=pk)
+        return result
+    
 # class NationsOpendtAuditToResult(generic.CreateView):
 
 #     pk_url_kwarg = 'user_id'
