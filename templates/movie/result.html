@@ -94,8 +94,10 @@
 
 <!-- 결과에 대한 설명을 적어놓는 란-->
 <div class="result_repr">
-  위와 같이 선택했을때 흥행도는 다음과 같습니다.<br><br>
-  장르, 감독, 배우들이 출연한 영화들의 매출액, 관객수의 평균을 구하고 만든국가, 개봉일, 관람등급을 통해 조절한 결과 아래와 같은 그래프를 통해 흥행도는 오를/내릴것으로 예상됩니다.
+  선택하신 국가, 개봉일, 관람등급을 통해 조절한 결과 
+  장르, 감독, 배우들이 출연한 영화들의 매출액, 관객수의 평균은 
+  <br>관객수 10만명, 매출액 50억원입니다.<br>
+  선택하신 결과 예산 대비 예측 흥행도는 오를것으로 예상됩니다
 </div>
 
 <div style="display: flex;">
@@ -104,7 +106,7 @@
     <button id="btn_salesAcc">보이기/감추기</button>
     <span style="color: white;">총 매출액 변동 추이</span><br>
     <!-- <img src="{% static 'SalesAccTestImage.png' %}" id="SalesToggle"> -->
-    <div class="SalesToggle" id="curve_chart" style="width: 900px; height: 500px"></div>
+    <div class="SalesToggle" id="curve_chart" ></div>
   </div>
   
   <!-- 총관람객수 추이를 보여주기 위한 란-->
@@ -112,7 +114,7 @@
     <button id="btn_audiAcc">보이기/감추기</button>
     <span style="color: white;">총 관람객수 변동 추이</span><br>
     <!-- <img src="{% static 'AudiAccTestImage.png' %}" id="AudiToggle"> -->
-    <div class="AudiToggle" id="chart_div" style="width: 60%; height: 600px;"></div>
+    <div class="AudiToggle" id="chart_div" ></div>
   </div>
 </div>
 
