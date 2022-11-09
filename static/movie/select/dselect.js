@@ -82,7 +82,7 @@ function selectDataNationsAuditOpendt() {
 // 감독 선택을 위한 js
 function TableDirector(e) {
   // e.innerHTML로 DOM 안의 텍스트를 가져와서 .trim()으로 앞뒤 불필요한 공백을 지워준다.
-  let selected_director = e.innerHTML.trim();
+  let selected_director = e.innerText.trim();
   // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
   document.getElementById("selected_director").value = selected_director;
   //감독을 선택하면 선택했다는 텍스트를 넣어준다.
@@ -90,7 +90,7 @@ function TableDirector(e) {
 }
 // 장르 선택을 위한 js
 function TableGenre(e) {
-  let selected_genre = e.innerHTML.trim();
+  let selected_genre = e.innerText.trim();
   document.getElementById("selected_genre").value = selected_genre;
   document.getElementById("genre").value = selected_genre;
   // document.getElementById("pageForm").submit();
@@ -99,7 +99,7 @@ function TableGenre(e) {
 }
 // 배우 선택을 위한 js
 function TableActor(e) {
-  selected_actor = e.innerHTML.trim();
+  selected_actor = e.innerText.trim();
   let fill_actor1 = document.getElementById("selected_actor1").value;
   let fill_actor2 = document.getElementById("selected_actor2").value;
   let fill_actor3 = document.getElementById("selected_actor3").value;
