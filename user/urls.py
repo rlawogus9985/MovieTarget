@@ -20,23 +20,25 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
         ## 프로파일페이지와 관련된 뷰와 연결해주는 url
     path('profile/selected/', views.UserSelectedDataView.as_view(), name='selected_data'),
+    
     path('delete_user_page/', views.delete_user_page, name='delete_user_page'),
         ## 회원탈퇴페이지와 관련된 뷰와 연결해주는 url
-    # path('delete_user/', views.delete_user, name='delete_user'), ## 원래사용하던 회원탈퇴url
-        ## 회원탈퇴기능과 관련된 뷰와 연결해주는 url
+    path('delete_user/', views.delete_user, name='delete_user'),
+        ## 새로이 만들고자하는 회원탈퇴url
+    
     path('change_user_page/', views.userchangepage ,name='change_user_page'),
         ## 회원정보수정페이지와 관련된 뷰와 연결해주는 url
     path('<int:auth_user_id>/change_user/', views.userchangeview ,name='change_user'),
         ## 회원정보수정기능과 관련된 뷰와 연결해주는 url
     
+    path('ajax_user_login/', views.ajax_user_login, name='ajax_user_login'),
+        ## 로그인 관련 ajax view함수  
     path('ajax_user_signup/', views.ajax_user_signup, name='ajax_user_signup'),
         ## 회원가입 관련 ajax view함수
 
-    path('ajax_user_login/', views.ajax_user_login, name='ajax_user_login'),
-        ## 로그인 관련 ajax view함수  
     ######## 주석기준 위 url 사용중인 url / 아래 비사용 혹은 테스트중인 url
     
+    # path('delete_user/', views.delete_user, name='delete_user'), ## 원래사용하던 회원탈퇴url
+        ## 회원탈퇴기능과 관련된 뷰와 연결해주는 url
     # path('login/', views.LoginClassView.as_view(), name='login'),
-    path('delete_user/', views.delete_user, name='delete_user'),
-        ## 새로이 만들고자하는 회원탈퇴url
 ]
