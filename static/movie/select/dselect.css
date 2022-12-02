@@ -395,7 +395,8 @@ table.actor-list {
 }
 
 /* 선택한 내용 보여주기 꾸미기 */
-.showSelect, .showActors {
+.showSelect,
+.showActors {
   background-color: #1f2029;
   border: none;
   outline: 2px none;
@@ -404,9 +405,8 @@ table.actor-list {
 }
 
 .showActors {
- border-bottom: 2px solid white;
- margin-top: 10px;
-
+  border-bottom: 2px solid white;
+  margin-top: 10px;
 }
 
 /* 배우선택 버튼 자리수정 */
