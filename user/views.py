@@ -18,7 +18,6 @@ from movie.models import SelectedBase
 from django.contrib import messages
 from user.decorators import * # 함수형 뷰 데코
 # from django.utils.decorators import method_decorator # 클래스기반뷰에사용 데코
-# from django.contrib.auth.decorators import login_required # django 내장 데코
 
 from json import loads
 
