@@ -5,158 +5,208 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>일일영화 - 장르 선택 #2</title>
+
   {% load static %}
-  <link rel="stylesheet" href="{% static 'common/main/slide.css' %}">
+  <!-- 메뉴바 css -->
+  <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
+  <!-- 사진 card css -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{% static 'movie/select/card.css' %}">
+  <!-- 페이징 css -->
+  <link rel="stylesheet" href="{% static 'user/selected/pselected.css' %}"> 
+  <!-- card 페이징 js  -->
+  <script src="{% static 'movie/select/card.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
+
+  {% comment %} <link rel="stylesheet" href="{% static 'common/main/slide.css' %}"> {% endcomment %}
   <!-- 부트스트랩과 메뉴바의 btn이 혼동되어 적용되어서 메뉴바 css인 main/style.css에서 -->
   <!-- btn을 movie/select/dselect.css로 가져와서 mbtn으로 바꾸고 적용한다.-->
-  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
-  <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}">
+  {% comment %} <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}"> {% endcomment %}
   <script src="{% static 'jquery.min.js' %}"></script>
   <script src="{% static 'movie/select/dselect.js' %}"></script>
-  <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
+
 </head>
-<body style="background-color:#1f2029;">
+<body>
 
-<!-- 메뉴 바(직접 작성)-->
-<div style="background-color:#1f2029; display: flex; justify-content: space-between">
-  <a href="/"><img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
-    style="height: 100px; width: auto;"></a>
-	
-  <div style="color: white; text-align:right; top: 5px; right: 10px;">
-  {% if user.is_authenticated %}
-    {{ user.username }}님, 환영합니다.<br>
-    <a href="{% url 'user:profile' %}" class="btn other">내정보</a>
-    <a href="{% url 'user:logout' %}" class="btn other">로그아웃</a>
-  {% endif %}
-  </div>
-</div>
+  <div class="backs">
+    <!-- 메뉴바 -->
+    <div class=header>
+      <a href="/" class="logo" target="blank">
+        <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+      </a>
 
-<!-- 페이지 설명 창-->
-<div style="margin-bottom: 20px">
-  <h1 style="color: white; text-align:center;">장르를 선택해주세요</h1>
-</div>
+      <div class="welcom">
+      {% if user.is_authenticated %}
+      {{ user.username }}님, 환영합니다.<br>
+      </div>
 
+      <div class="names">
+        <a href="{% url 'user:profile' %}" class="btn"> 회원정보 </a>
+        <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+      {% else %}
+      <!-- <a href="{% url 'user:login' %}" class="btn">로그인하기</a> -->
+      {% endif %}
+      </div> 
+    </div>
+    
+    <!-- 페이지 설명 창-->
+    <div>
+      <h1>장르를 선택해주세요</h1>
+    </div>
 
-<!-- 검색 창-->
-<div class="container custom">
-  <form id="searchForm" autocomplete="off">
-    <div class="finder custom">
-      <div class="finder__outer custom">
-        <div class="finder__inner custom">
-          <div class="finder__icon custom" ref="icon"></div>
-          <input class="finder__input custom" type="text" name="searchWord" value="{{ searchWord|default_if_none:'' }}" />
+    <!-- 검색 창-->
+    <form id="searchForm" autocomplete="off" class="box">
+      <input type="text" name="searchWord" placeholder="{{ searchWord|default:'장르를 검색해주세요'|default_if_none:'' }}" />
+    </form>
+    
+    <!-- 선택한 내용 보여주기 -->
+    <div class="show">
+      <input class="showSelect" type="text" value="{{ selected_genre|default_if_none:'' }}" name="selected_genre" id="selected_genre" readonly>
+    </div>
+
+    <!-- DB 선택 테이블 css -->
+    <section>
+      <div class="content-list">
+        <div class="slider">
+          {% for list in targetbase_list %}
+          <div class="item" onclick="TableGenre(this)">
+            {{ list.genre }}
+          </div>
+          {% endfor %}
         </div>
       </div>
+    </section>
+
+    {% comment %} 
+    <!-- 데이터베이스에 뭐가 있는지 출력-->
+    <div>
+      <table class="genre-list table-bordered table-hover">
+        <tr>
+          {% for list in targetbase_list %}
+          {% if forloop.counter == 1 or forloop.counter == 2 or forloop.counter == 3 or forloop.counter == 4 %}
+          <td onclick="TableGenre(this)">
+              {{ list.genre }}
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
+          {% for list in targetbase_list %}
+          {% if forloop.counter == 5 or forloop.counter == 6 or forloop.counter == 7 or forloop.counter == 8 %}
+          <td onclick="TableGenre(this)">
+              {{ list.genre }}
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
+          {% for list in targetbase_list %}
+          {% if forloop.counter == 9 or forloop.counter == 10 or forloop.counter == 11 or forloop.counter == 12 %}
+          <td onclick="TableGenre(this)">
+              {{ list.genre }}
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+      </table>
     </div>
-  </form>
-</div>
+    {% endcomment %} 
 
-<!-- 선택한 내용 보여주기 -->
-<br>
-<div style="color: white;">
-  <h5 class="showGenres" style="text-align: center;">
-    <input class="showSelect" type="text" value="{{ selected_genre|default_if_none:'' }}" name="selected_genre" id="selected_genre" readonly>
-    <span></span>
-  </h5>
-</div>
-
-<!-- 데이터베이스에 뭐가 있는지 출력-->
-<div>
-  <table class="genre-list table-bordered table-hover">
-    <tr>
-      {% for list in targetbase_list %}
-      {% if forloop.counter == 1 or forloop.counter == 2 or forloop.counter == 3 or forloop.counter == 4 %}
-      <td onclick="TableGenre(this)">
-          {{ list.genre }}
-      </td>
-      {% endif %}
-      {% endfor %}
-    </tr>
-    <tr>
-      {% for list in targetbase_list %}
-      {% if forloop.counter == 5 or forloop.counter == 6 or forloop.counter == 7 or forloop.counter == 8 %}
-      <td onclick="TableGenre(this)">
-          {{ list.genre }}
-      </td>
-      {% endif %}
-      {% endfor %}
-    </tr>
-    <tr>
-      {% for list in targetbase_list %}
-      {% if forloop.counter == 9 or forloop.counter == 10 or forloop.counter == 11 or forloop.counter == 12 %}
-      <td onclick="TableGenre(this)">
-          {{ list.genre }}
-      </td>
-      {% endif %}
-      {% endfor %}
-    </tr>
-  </table>
-</div>
-
-<!-- 페이징 기능 -->
-<div>
-  <ul class="pagination justify-content-center">
-    <!--이전 페이지-->
-    {% if page_obj.has_previous %}
-      <li class="page-item">
+    <!-- css 입힌 페이징 기능 -->   
+    <div class="pagination">
+      <!-- 이전 페이지 -->
+      {% if page_obj.has_previous %}
         <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.previous_page_number }})" class="page-link">이전</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
-      </li>
-    {% endif %}
-  
-    <!-- 페이지 리스트 -->
-    {% for page_number in page_obj.paginator.page_range %}
-    {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
-      {% if page_number == page_obj.number %}
-        <li class="page-item active" aria-current="page">
-          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
-        </li>
       {% else %}
-        <li class="page-item">
-          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
-        </li>
+        <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
       {% endif %}
-    {% endif %}
-    {% endfor %}
 
-    <!-- 다음 페이지 -->
-    {% if page_obj.has_next %}
-    <li class="page-item">
-      <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.next_page_number }});" class="page-link">다음</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-      <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
-    </li>
-    {% endif %}
-  </ul>
-</div>
-<!-- 페이징 기능 끝 -->
+      <!-- 페이지 리스트 -->
+      {% for page_number in page_obj.paginator.page_range %}
+        {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+          {% if page_number == page_obj.number %}
+            <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
+          {% else %}
+            <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- 다음페이지 -->
+      {% if page_obj.has_next %}
+        <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.next_page_number }});" class="page-link">다음</a>
+      {% else %}
+        <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
+      {% endif %}
+    </div>
+    
+{% comment %} 
+    <!-- 페이징 기능 -->
+    <div>
+      <ul class="pagination justify-content-center">
+        <!--이전 페이지-->
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.previous_page_number }})" class="page-link">이전</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
+          </li>
+        {% endif %}
+      
+        <!-- 페이지 리스트 -->
+        {% for page_number in page_obj.paginator.page_range %}
+        {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+          {% if page_number == page_obj.number %}
+            <li class="page-item active" aria-current="page">
+              <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+        {% endfor %}
+
+        <!-- 다음 페이지 -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.next_page_number }});" class="page-link">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <!-- 페이징 기능 끝 -->
+  {% endcomment %} 
 
 
-
-{% comment %}
-<!-- 왼쪽 클릭은 2,3 페이지만-->
-<div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div>
-<!-- 오른쪽 클릭은 1,2,3 페이지만-->
-<!-- 현지점(1페이지)에서 누르면 바로 4페이지로 가는 임시 기능-->
-<div class="slide_next_button slide_button"><a href="{% url 'movie:board3' %}">▶</a></div>
-{% endcomment %}
-  
-<br>
-<div class="lower_">
-  <a href="{% url 'movie:board1' %}" class="btn_">이전(1/4)</a>
-  <a href="javascript:void(0);" class="btn_" onclick="selectDataGenre();">다음(3/4)</a>
-</div>
-  <form id="pageForm">
-    <input type="hidden" name="searchWord" id="searchWord">
-    <input type="hidden" name="page" id="page">
-    <input type="hidden" name="selected_genre" id="genre" value="{{ selected_genre|default_if_none:'' }}">
-  </form>
-
+    {% comment %}
+    <!-- 왼쪽 클릭은 2,3 페이지만-->
+    <div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div>
+    <!-- 오른쪽 클릭은 1,2,3 페이지만-->
+    <!-- 현지점(1페이지)에서 누르면 바로 4페이지로 가는 임시 기능-->
+    <div class="slide_next_button slide_button"><a href="{% url 'movie:board3' %}">▶</a></div>
+    {% endcomment %}
+      
+    <br>
+    <div class="page_">
+      <a href="{% url 'movie:board1' %}" class="btn_before">이전(1/4)</a>
+      <a href="javascript:void(0);" class="btn_next" onclick="selectDataGenre();">다음(3/4)</a>
+    </div>
+      <form id="pageForm">
+        <input type="hidden" name="searchWord" id="searchWord">
+        <input type="hidden" name="page" id="page">
+        <input type="hidden" name="selected_genre" id="genre" value="{{ selected_genre|default_if_none:'' }}">
+      </form>
+  </div>
 </body>
 {% comment %}
 <script src="{% static 'common/session.js' %}"></script>

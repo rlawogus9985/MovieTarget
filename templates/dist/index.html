@@ -73,12 +73,15 @@
 	    </div>
 	</div>
 
-<form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">
+  <!-- 로그인 카드 form** -->
+<form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">  
   {% csrf_token %}
 	<input type="hidden" name="username" id="userName">
+  <!-- name은 VIew로 연결 -->
 	<input type="hidden" name="password" id="passWord">
 </form>
 
+<!-- 회원가입카드 form** -->
 <form action="{% url 'user:join' %}" method="post" id="signupForm"  autocomplete="off">
   {% csrf_token %}
 	<input type="hidden" name="username" id="joinUserName">
