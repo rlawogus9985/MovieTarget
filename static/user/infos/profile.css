@@ -1,277 +1,141 @@
-body {
-    display: flex;
-    justify-content: center;
-    background-color: #dae7fa;
-    font-family: -apple-system, sans-serif;	
-}
-
-.wrap {
-    width: 980px;
-    padding: 80px 0;
-    display: contents;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-}
-.wrap .card {
-    position: relative;
-    width: calc(316px - 64px);
-    height: calc(220px - 64px);
-    background-color: #fff;
-    box-shadow: 0 2px 4px 0 #ccd0d9;
-    border-radius: 4px;
-    margin: 250px 50px 50px;
-    padding: 32px;
-    cursor: pointer;
-    will-change: transform;
-    transition: all 0.3s ease;
-}
-
-.wrap .card__top {
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-/* 카드 아이콘 */
-.wrap .card__top svg {
-    transition: all 0.3s ease;
-}
-.wrap .card__top:after {
-    content: "";
-    display: block;
-    position: absolute;
-    right: 0;
-    width: 24px;
-    height: 24px;
-    /* 카드 뒤의 화살표 그림 */
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/cards-arrow.svg") no-repeat;
-    background-size: 16px;
-    background-position: center;
-    transform: translatex(-50%);
-    transition: all 0.2s ease-in-out;
-    opacity: 0;
-}
-.wrap .card__top h2 {
+@font-face {
+    font-family: 'MonoplexKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Regular.woff2') format('woff2');
     font-weight: 400;
-    margin-left: 12px;
-    font-size: 18px;
-    color: #ffffff;
-    transform: translatex(-8%);
-    transition: all 0.2s ease-out;
-    opacity: 0;
+    font-style: normal;
 }
 
-.wrap .card__bottom {
-    position: relative;
-    margin-top: 24px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'MonoplexKR-Regular';
+    text-transform: capitalize;
+    transition: all 0.3 linear
 }
-.wrap .card__bottom h2 {
-    margin-top: 50px;
-    margin-bottom: 20px;
-    font-size: 18px;
-    color: #292f3a;
-    transition: all 0.2s ease-out;
-}
-.wrap .card__bottom h2:before {
-    content: "";
-    display: block;
-    position: relative;
-    top: 30px;
+
+/* 배경화면 */
+.container{
     width: 100%;
-    height: 1px;
-    background-color: #d8dde6;
-}
-.wrap .card__bottom p {
-    transition: all 0.2s ease-out;
-}
-.wrap .card__bottom p:nth-of-type(1) {
-    opacity: 0.7;
-    font-size: 14px;
-    color: #292f3a;
-    letter-spacing: 0;
-    line-height: 21px;
-}
-.wrap .card__bottom p:nth-of-type(2) {
-    opacity: 0;
-    font-size: 13px;
-    font-weight: 300;
-    color: #c3d5ff;
-    letter-spacing: 0;
-    line-height: 19px;
-    position: absolute;
-    top: -30px;
-    transform: translateY(-10px);
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), 
+        url(https://images.unsplash.com/photo-1581905764498-f1b60bae941a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fG1vdmllfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
+    background-size: cover;
+    background-position: center;
 }
 
-.wrap .card:hover {
-    transform: scale3d(0.985, 0.985, 0.985) translateX(0);
-    background-color: #3973ff;
-    box-shadow: none;
+.container2 {
+    margin-top: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
-.wrap .card:hover .card__top:after {
-    opacity: 1;
-    transform: translatex(0);
+
+/* 카드 css */
+.box {
+    width: 300px;
+    height: 355px;
+    background-color: rgb(85, 85, 85);
+    border-radius: 5px;
+    padding: 20px;
+    padding-top: 80px;
+    margin: 20px;
+    text-align: center;
+    letter-spacing: 1px;
+    box-shadow: 0 3px 5px rgba(0,0,0, .3);
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
 }
-.wrap .card:hover .card__top svg #Combined-Shape {
-    fill: #fff;
+
+.box h3{
+    font-size: 35px;
+    padding: 20px 0;
+    color: rgb(236, 235, 235);
 }
-.wrap .card:hover .card__top svg #Rectangle-13 {
-    fill: url(#linearGradient-2) !important;
+
+.box p{
+    font-size: 15px;
+    color: white;
 }
-.wrap .card:hover .card__top h2 {
-    opacity: 1;
-    transform: translatex(0);
+
+.box button{
+    width: 140px;
+    height: 40px;
+    background-color: #888;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-top: 40px;
 }
-.wrap .card:hover .card__bottom h2 {
-    transform: translateY(16px);
-    opacity: 0;
+
+.box button:hover{
+    letter-spacing: 2px;
+    opacity: .8;
 }
-.wrap .card:hover .card__bottom p:nth-of-type(1) {
-    transform: translateY(16px);
-    opacity: 0;
-}
-.wrap .card:hover .card__bottom p:nth-of-type(2) {
-    transform: translateY(0);
-    opacity: 1;
-}
-.wrap .card:hover span {
-    opacity: 1;
-    transform: scale(1);
-}
-.wrap .card span {
+
+.box::before{
+    width: 100%;
+    height: 100%;
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
+}
+
+.box::after{
     width: 100%;
     height: 100%;
-    /* 카드 뒤 해골 반 그림 */
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/bg-222.png") no-repeat; 
-    background-size: contain;
-    background-position: left;
-    opacity: 0;
-    transition-delay: 0.3s;
-    transform-origin: left;
-    transform: scale(0.9);
-    transition: all 0.4s ease;
-}
-#sz {
-    /* 카드 뒤 나뭇잎 반 그림 */
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/945546/sz.png") no-repeat;
-    background-size: contain;
-    background-position: -100%;
-}
-
-
-.preShow {
-    position: relative;
-    opacity: 0;
-    will-change: transform;
-    transform: translateX(-30px);
-    animation: preShow 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
-.preShow::before {
-    content: "";
-    z-index: 999;
+    background-image: linear-gradient(45deg, #ffd417 0%, #ff6d2f 50%, #ff2f20 100%);
+    content: '';
     position: absolute;
-    left: 0;
     top: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: #f1f5fb;
-    transform-origin: right;
-    will-change: transform;
-    animation-delay: 1s;
-    animation: preShowMove 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    left: 0;
+    z-index: -2;
+    clip-path: circle(20% at 90% 10%);
+    transition: .2s;    
 }
-@keyframes preShowMove {
-    to {
-        transform: scaleX(0);
-    }
-}
-@keyframes preShow {
-    0% {
-        box-shadow: none;
-    }
-    60% {
-        box-shadow: none;
-        opacity: 1;
-        transform: translateX(0);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-        box-shadow: 0 2px 4px 0 #ccd0d9;
-    }
-}
-.dr {
+
+.box .count{
     position: absolute;
-    bottom: 16px;
-    right: 16px;
-    width: 100px;
+    top: 15px;
+    right: 30px;
+    font-size: 50px;
+    /* font-weight: bolder; */
+    color: #fff;
 }
 
-
-/* menubar */
-.sawname {
-	color: #000b24;
-	padding-bottom: 5px;
+.box:nth-child(2):after{
+    background-image: linear-gradient(45deg, #ffd417 0%, #ff6d2f 50%, #ff2f20 100%);
 }
 
-.logo {
-	position: absolute;
-	top: 5px;
-	left: 10px;
-	display: block;
-	z-index: 100;
-	transition: all 250ms linear;
-	}
-.logo img {
-	height: 100px;
-	width: auto;
-	display: block;
+.box:nth-child(3):after{
+    background-image: linear-gradient(45deg, #ffd417 0%, #ff6d2f 50%, #ff2f20 100%);
 }
 
-a {
-	cursor: pointer;
-	transition: all 200ms linear;
-	text-decoration: none;
+.box:hover::after{
+    clip-path:circle(100%);
 }
-.btn{  
-	border-radius: 4px;
-	height: 44px;
-	font-size: 13px;
-	font-weight: 600;
-	text-transform: uppercase;
-	-webkit-transition: all 200ms linear;
-	transition: all 200ms linear;
-	padding: 0 30px;
-	letter-spacing: 1px;
-	display: -webkit-inline-flex;
-	display: -ms-inline-flexbox;
-	display: inline-flex;
-	-webkit-align-items: center;
-	-moz-align-items: center;
-	-ms-align-items: center;
-	align-items: center;
-	-webkit-justify-content: center;
-	-moz-justify-content: center;
-	-ms-justify-content: center;
-	justify-content: center;
-	-ms-flex-pack: center;
-	text-align: center;
-	border: 1px solid #fff;
-	background-color: #fff;
-	color: #3973ff;
-	box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+
+.box:hover h3{
+    color: #fff;
 }
-.btn:active,
-.btn:focus,
-.btn:hover{  
-	background-color: #3973ff;
-    border: 1px solid #3973ff;
-	color: #fff;
-	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+
+.box:hover p{
+    color: #fff;
 }
+
+.box:hover button{
+    color: #333;
+    background-color: #fff;
+}
+
+.box:hover ::before{
+    background-color: rgba(0,0,0, .1);
+}
+

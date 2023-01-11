@@ -18,14 +18,39 @@ from movie.models import SelectedBase
 from django.contrib import messages
 from user.decorators import * # 함수형 뷰 데코
 # from django.utils.decorators import method_decorator # 클래스기반뷰에사용 데코
-
+# from django.contrib.auth.decorators import login_required # django 내장 데코
 from json import loads
+from django.http import HttpResponse
+from django.contrib.auth.hashers import check_password
+
 
 class UserCreateForm(generic.CreateView):
     """ django.views.generic.CreateView 내장뷰를 상속받는 회원가입관련 클래스 뷰"""
     form_class = auth_forms.UserCreationForm # django.contib.auth.forms.UserCreationForm 내장폼을 form_class 변수명에 지정
     template_name = 'dist/index.html' # get 방식일 경우 회원가입유도
     success_url = reverse_lazy('user:login') # post 방식일 경우 리다이렉트로 로그인으로 가는상황
+
+
+class UserLoginView(LoginView):
+    template_name = 'dist/index.html'  #가입하기템플릿으로 가라.
+
+    def form_invalid(self, form):
+        messages.error(self.request, '로그인에 실패하였습니다.', extra_tags='danger')
+        return super().form_invalid(form)
+
+
+# 유저가 선택한 데이터가 있는 게시판을 만들기 위한 view
+class UserSelectedDataView(generic.ListView):
+    # model = SelectedBase
+    paginate_by = 12
+    template_name = 'user/user_selected_data.html'
+    context_object_name = "selecteddata_list"
+
+    def get_queryset(self):
+        
+        result = SelectedBase.objects.order_by('-id').filter(writer_id=self.request.user)
+        return result
+    
 
 @login_required(login_url=reverse_lazy('user:login'))
 def profile(request):
@@ -35,6 +60,7 @@ def profile(request):
     reverse_lazy 로 user:login로 로그인유도."""
     return render(request, 'user/profile.html')
 
+
 @login_required(login_url=reverse_lazy('user:login'))
 def delete_user_page(request):
     """
@@ -43,6 +69,7 @@ def delete_user_page(request):
     reverse_lazy 로 user:login로 로그인유도."""
     return render(request, 'user/user_delete.html')
 
+
 @login_required(login_url=reverse_lazy('user:login'))
 def userchangepage(request):
     """
@@ -50,6 +77,7 @@ def userchangepage(request):
     login_required 데코레이션을 사용하여 로그인이 되어있지 않을경우,
     reverse_lazy 로 user:login로 로그인유도."""
     return render(request, "user/user_change_page.html")
+
 
 @login_required(login_url=reverse_lazy('user:login'))
 def  userchangeview(request, auth_user_id):
@@ -74,14 +102,7 @@ def  userchangeview(request, auth_user_id):
     except:
         return render(request, 'user/profile.html')
 
-# 원래 사용하던 유저탈퇴 함수뷰
-# @require_POST
-# @login_required(login_url=reverse_lazy('user:login'))
-# def delete_user(request):
-#     request.user.delete()
-#     # request.user.is_active()
 
-#     return redirect('user:join')
 
 # delete() 하지않고 is_active를 0으로 update()할 새로운 회원탈퇴함수뷰.
 @require_POST
@@ -101,71 +122,55 @@ def delete_user(request):
         print("이미 비활성화 되어있는 유저입니다.")
         return redirect('user:join')
 
+
 def login(request):
     return render(request, 'dist/index.html')
 
-########### Ajax 함수뷰
+############## Ajax 함수뷰
 
+# 원본 ajax singup view 함수 제대로 되는것!!!
 def ajax_user_signup(request):
     data = loads(request.body)
-    ajax_username = data.get('username')
-    targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+    ajax_username = data.get('signupname')
     
-    # 회원가입이 가능한 ID인 경우:
-    if targetuser.username != ajax_username:
-        return JsonResponse({'result': 'True'})
-    # 회원가입이 불가능한 ID인 경우:
-    else:
-        return JsonResponse({'result': 'False'})
+    targetuser = auth_views.UserModel.objects.filter(username=ajax_username)
 
-# # 원본 ajax login view 함수
+    # print(targetuser)
+
+    if targetuser.count() > 0:
+        return JsonResponse({'result': 'False'})
+    else:
+        return JsonResponse({'result': 'True'})
+
+    
+# 원본 ajax login view 함수
 def ajax_user_login(request):
     data = loads(request.body)
-    ajax_username = data.get('username')
-    ajax_password = data.get('password')
-    targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+    ajax_username = data.get('loginname')
+    ajax_password = data.get('loginpassword')
 
-    # 로그인 시 입력한 ID가 데이터베이스에 존재하지만 PW가 일치하지 않아 로그인이 되지 않는 경우.
-    if targetuser.set_password != ajax_password:
-        return JsonResponse({'result': 'False'})
-    # 로그인 시 입력한 ID가 데이터베이스에 존재하지않는 경우 로그인이 되는 경우.
-    else:
+    targetuser = auth_views.UserModel.objects.filter(username=ajax_username)
+    # auth_views.UserModel.objects.filter(username=ajax_username)
+    # targetpassword = targetuser.set_password
+    # targetpassword = targetuser.password
+    # if targetuser.couont() > 0 and targetpassword == ajax_password:
+    if targetuser.count() > 0:
         return JsonResponse({'result': 'True'})
+    else:
+        return JsonResponse({'result': 'False'})
 
-#####테스트중
-# def ajax_user_login(request):
+# ## 테스트중인 ajax login view 로그인을 form클래스 및 템플릿을 사용했을경우 쓸수 있나봄...
+# def ajax_user_login(request, self):
 #     data = loads(request.body)
-#     ajax_username = data.get('username')
-#     ajax_password = data.get('password')
-#     targetuser = auth_views.UserModel.objects.get(username=ajax_username)
+#     ajax_username = data.get('loginname')
+#     ajax_password = data.get('loginpassword')
+#     if ajax_username and ajax_password:
+#         user = auth_views.UserModel.objects.get(username=ajax_username)
+#         if not check_password(ajax_password, user.username):
+#             self.add_error('password', '비밀번호가 틀렸습니다.')
 
-#     if ajax_username is None:
-#         return JsonResponse({'result': 'UserNameNone'})
-#     elif ajax_password is None:
-#         return JsonResponse({'result': 'UserPassNone'})
-#     elif ajax_username =!
+############## Ajax 함수뷰
 
-#     elif targetuser.set_password != ajax_password:
-#         return JsonResponse({'result': 'InvalidPw'})
-#     else:
-#         return JsonResponse({'result': 'True'})
-
-
-    # # 로그인 시 입력한 ID가 데이터베이스에 존재하지만 PW가 일치하지 않아 로그인이 되지 않는 경우.
-    # if targetuser.set_password != ajax_password:
-    #     return JsonResponse({'result': 'False'})
-    # # 로그인 시 입력한 ID가 데이터베이스에 존재하지않는 경우 로그인이 되는 경우.
-    # else:
-    #     return JsonResponse({'result': 'True'})
-##############
-
-class UserLoginView(LoginView):
-    template_name = 'dist/index.html'
-
-    def form_invalid(self, form):
-        messages.error(self.request, '로그인에 실패하였습니다.', extra_tags='danger')
-        return super().form_invalid(form)
-    
 
 ########## 위 사용하는 뷰 아래 비사용혹은 테스트중인 뷰
 
@@ -214,17 +219,12 @@ class UserLoginView(LoginView):
     #     except KeyError:
     #         return JsonResponse({'error': 'KEY_ERROR'}, status=400)
 
+# 원래 사용하던 유저탈퇴 함수뷰
+# @require_POST
+# @login_required(login_url=reverse_lazy('user:login'))
+# def delete_user(request):
+#     request.user.delete()
+#     # request.user.is_active()
 
-# 유저가 선택한 데이터가 있는 게시판을 만들기 위한 view
-class UserSelectedDataView(generic.ListView):
-    # model = SelectedBase
-    paginate_by = 12
-    template_name = 'user/user_selected_data.html'
-    context_object_name = "selecteddata_list"
-
-    def get_queryset(self):
-        
-        result = SelectedBase.objects.order_by('-id').filter(writer_id=self.request.user)
-        return result
-    
+#     return redirect('user:join')
 

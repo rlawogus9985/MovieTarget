@@ -13,109 +13,119 @@
 <link rel="stylesheet" href="{% static 'movie/result/graph.css' %}">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="{% static 'movie/result/graphs.js' %}"></script> 
+<!-- 메뉴바css -->
+<!-- <link rel="stylesheet" href="{% static 'common/home/welcome.css' %}"> -->
+<link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
 {% endblock head %}
   
 {% block body %}
-<!-- 메뉴 바(직접 작성)-->
-<div style="background-color:#2d3142; display: flex; justify-content: space-between">
-  <a href="/"><img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
-    style="height: 100px; width: auto;"></a>
-	
-  <div style="color: white; text-align:right; top: 5px; right: 10px;">
-  {% if user.is_authenticated %}
+<div class="backs">
+  <!-- 메뉴바 -->
+  <div class=header>
+    <a href="/" class="logo" target="blank">
+      <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+    </a>
+
+    <div class="welcom">
+    {% if user.is_authenticated %}
     {{ user.username }}님, 환영합니다.<br>
-    <a href="{% url 'user:profile' %}" class="result_menubar_btn">내정보</a>
-    <a href="{% url 'user:logout' %}" class="result_menubar_btn">로그아웃</a>
-  {% endif %}
+    </div>
+
+    <div class="names">
+      <a href="{% url 'user:profile' %}" class="btn"> 회원정보 </a>
+      <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+    {% else %}
+    <!-- <a href="{% url 'user:login' %}" class="btn">로그인하기</a> -->
+    {% endif %}
+    </div> 
+  </div>
+
+  <!-- 감독, 장르, 배우1, 배우2, 배우3 -->
+  <div style="display: flex; justify-content: center;">
+    <div class="button" id="button-5">
+      <div id="translate"></div>
+      <a href="#">감독 -<br>
+        {{ movie.director }}
+      </a>
+    </div>
+    <div class="button" id="button-5">
+      <div id="translate"></div>
+      <a href="#">장르 -<br>
+        {{ movie.genre }}
+      </a>
+    </div>
+    <div class="button" id="button-5">
+      <div id="translate"></div>
+      <a href="#">배우 -<br>
+        {{ movie.actor1 }}
+      </a>
+    </div>
+    <div class="button" id="button-5">
+      <div id="translate"></div>
+      <a href="#">배우 -<br>
+        {{ movie.actor2 }}
+      </a>
+    </div>
+    <div class="button" id="button-5">
+      <div id="translate"></div>
+      <a href="#">배우 -<br>
+        {{ movie.actor3 }}
+      </a>
+    </div>
+  </div>
+
+  <!-- 국가, 개봉 분기, 관람등급 -->
+  <div style="display: flex; justify-content: center;">
+    <div class="button" id="button-5">
+      <div id="translate"></div>
+      <a href="#">국가 -<br>
+        {{ movie.nations }}
+      </a>
+    </div>
+    <div class="button" id="button-5">
+      <div id="translate"></div>
+      <a href="#">개봉 분기 -<br>
+        {{ movie.opendt }}
+      </a>
+    </div>
+    <div class="button" id="button-5">
+      <div id="translate"></div>
+      <a href="#">관람 등급 -<br>
+        {% comment %} {% if request.session.selected_audit %}
+        {{ request.session.selected_audit }}
+        {% endif %} {% endcomment %}
+        {{ movie.audit }}
+      </a>
+    </div>
+  </div>
+
+
+  <!-- 결과에 대한 설명을 적어놓는 란-->
+  <div class="result_repr">
+    선택하신 국가, 개봉일, 관람등급을 통해 조절한 결과 
+    장르, 감독, 배우들이 출연한 영화들의 매출액, 관객수의 평균은 
+    관객수 10만명, 매출액 50억원입니다.<br>
+    선택하신 결과 예산 대비 예측 흥행도는 오를것으로 예상됩니다
+  </div>
+
+  <div style="display: flex;">
+    <!-- 총매출액 추이를 보여주기 위한 란-->
+    <div style="flex:1; margin-left: 15%;">
+      <button id="btn_salesAcc">보이기/감추기</button>
+      <span style="color: white;">총 매출액 변동 추이</span><br>
+      <!-- <img src="{% static 'SalesAccTestImage.png' %}" id="SalesToggle"> -->
+      <div class="SalesToggle" id="curve_chart" ></div>
+    </div>
+    
+    <!-- 총관람객수 추이를 보여주기 위한 란-->
+    <div style="flex:1;">
+      <button id="btn_audiAcc">보이기/감추기</button>
+      <span style="color: white;">총 관람객수 변동 추이</span><br>
+      <!-- <img src="{% static 'AudiAccTestImage.png' %}" id="AudiToggle"> -->
+      <div class="AudiToggle" id="chart_div" ></div>
+    </div>
   </div>
 </div>
-
-<!-- 감독, 장르, 배우1, 배우2, 배우3 -->
-<div style="display: flex; justify-content: center;">
-  <div class="button" id="button-5">
-    <div id="translate"></div>
-    <a href="#">감독 -<br>
-      {{ movie.director }}
-    </a>
-  </div>
-  <div class="button" id="button-5">
-    <div id="translate"></div>
-    <a href="#">장르 -<br>
-      {{ movie.genre }}
-    </a>
-  </div>
-  <div class="button" id="button-5">
-    <div id="translate"></div>
-    <a href="#">배우 -<br>
-      {{ movie.actor1 }}
-    </a>
-  </div>
-  <div class="button" id="button-5">
-    <div id="translate"></div>
-    <a href="#">배우 -<br>
-      {{ movie.actor2 }}
-    </a>
-  </div>
-  <div class="button" id="button-5">
-    <div id="translate"></div>
-    <a href="#">배우 -<br>
-      {{ movie.actor3 }}
-    </a>
-  </div>
-</div>
-
-<!-- 국가, 개봉 분기, 관람등급 -->
-<div style="display: flex; justify-content: center;">
-  <div class="button" id="button-5">
-    <div id="translate"></div>
-    <a href="#">국가 -<br>
-      {{ movie.nations }}
-    </a>
-  </div>
-  <div class="button" id="button-5">
-    <div id="translate"></div>
-    <a href="#">개봉 분기 -<br>
-      {{ movie.opendt }}
-    </a>
-  </div>
-  <div class="button" id="button-5">
-    <div id="translate"></div>
-    <a href="#">관람 등급 -<br>
-      {% comment %} {% if request.session.selected_audit %}
-      {{ request.session.selected_audit }}
-      {% endif %} {% endcomment %}
-      {{ movie.audit }}
-    </a>
-  </div>
-</div>
-
-
-<!-- 결과에 대한 설명을 적어놓는 란-->
-<div class="result_repr">
-  선택하신 국가, 개봉일, 관람등급을 통해 조절한 결과 
-  장르, 감독, 배우들이 출연한 영화들의 매출액, 관객수의 평균은 
-  <br>관객수 10만명, 매출액 50억원입니다.<br>
-  선택하신 결과 예산 대비 예측 흥행도는 오를것으로 예상됩니다
-</div>
-
-<div style="display: flex;">
-  <!-- 총매출액 추이를 보여주기 위한 란-->
-  <div style="flex:1; margin-left: 15%;">
-    <button id="btn_salesAcc">보이기/감추기</button>
-    <span style="color: white;">총 매출액 변동 추이</span><br>
-    <!-- <img src="{% static 'SalesAccTestImage.png' %}" id="SalesToggle"> -->
-    <div class="SalesToggle" id="curve_chart" ></div>
-  </div>
-  
-  <!-- 총관람객수 추이를 보여주기 위한 란-->
-  <div style="flex:1;">
-    <button id="btn_audiAcc">보이기/감추기</button>
-    <span style="color: white;">총 관람객수 변동 추이</span><br>
-    <!-- <img src="{% static 'AudiAccTestImage.png' %}" id="AudiToggle"> -->
-    <div class="AudiToggle" id="chart_div" ></div>
-  </div>
-</div>
-
 {% comment %}
 String ls_getdata = (String)lobj_getdata
 나중에 str 아닌 session정보 str로 변환하는것 밑에서 빼옴.  
