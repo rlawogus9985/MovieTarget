@@ -413,3 +413,40 @@ table.actor-list {
 .actors {
   margin-top: -50px;
 }
+
+/* 이메일 관련 모달창 css 시작점 */
+#modalOpenBtn{
+  /* position: bottom 203 left65 right 890 top 624; */
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items:  center;
+  background-color: greenyellow;
+  z-index: 150;
+}
+
+#emailModal {
+  /* position: bottom 150 right 555 top 607; */
+  position: absolute;
+  width: 550px;
+  height: 120px;
+  display: none;
+  justify-content: center;
+  align-items:  center;
+  background-color: #343a40;
+  z-index: 160;
+}
+#modalCloseBtn{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items:  center;
+  background-color: red;
+  z-index: 150;
+}
+
+/* 이메일 관련 모달창 css 끝 */

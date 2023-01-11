@@ -24,11 +24,11 @@
       <form action="{% url 'user:delete_user' %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
         {% csrf_token %}
         <div class="check">
-          삭제 버튼을 누르시면 완전히 삭제가 되어 되돌릴 수 없습니다.<br>
-          정말 {{ user.username }} 회원님의 계정을 삭제 하시겠습니까?<br>
+          사용하고 계신 아이디( {{ user.username }} )는 탈퇴할 경우 재사용이 불가능하오니<br><br>
+          신중하게 선택하시기 바랍니다. 정말 탈퇴를 하시겠습니까?<br>
         </div>
     </div>
-        <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn o">삭제</button>
+        <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn o">확인</button>
       </form>
         <button type="submit" class="btn x" onclick="info_user()">취소</button>        
   </table>        

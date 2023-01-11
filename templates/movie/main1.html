@@ -14,11 +14,13 @@
   <script src="{% static 'movie/select/dselect.js' %}"></script>
   <script src="{% static 'jquery.min.js' %}"></script>
   <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
-  
+  <script async src="https://cse.google.com/cse.js?cx=e39f7e3af791d4e49"></script>
+
 
 </head>
 <body style="background-color:#1f2029;">
-
+<input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+<!-- <img src="{% static 'test_select_page.png' %}" alt=""> -->
 <!-- 메뉴 바(직접 작성)-->
 <div style="background-color:#1f2029; display: flex; justify-content: space-between">
   <a href="/"><img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
@@ -58,9 +60,12 @@
 <div style="color: white;">
   <h5 class="showDirectors" style="text-align: center;"> 
     <input class="showSelect" type="text" name="selected_director" id="selected_director" readonly>
-    <span></span>
+    <span id="showDirectorsSpan"></span>
+    <!-- 원본{% comment %}<span></span>{% endcomment %} -->
+      
   </h5>
 </div>
+<!-- <div class="gcse-search"></div> -->
 
 <!-- 데이터베이스에 뭐가 있는지 출력-->
 <div>
@@ -149,16 +154,51 @@
 <br>
 <div class="lower_">
   {% comment %} <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a> {% endcomment %}
-  <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>
+  {% comment %}<button class="btn_next" id="only_one_botton" onclick="constitution();">다음(2/4)</button>{% endcomment %}
+  {% comment %}원본!!<a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>{% endcomment %}
+  <a href="javascript:void(0);" class="btn_next" onclick="nextBtnEmailCheckAjax();">다음(2/4)</a>
 </div>
 
-</body>
-{% comment %}
-<script src="{% static 'common/session.js' %}"></script>
-{% endcomment %}
+<!-- 영화설립이메일 모달창 -->
+<button id="modalOpenBtn">이메일등록
+
+</button>
+<div id="emailModal">
   
+  <ul>
+    <button id="modalCloseBtn">닫기</button>
+    <li>
+      <input type="text" name="user_email" placeholder="이메일 ID를 입력해주세요." id="userEmailId">@<input type="text" name="domain_email" placeholder="이메일 Domain을 입력해주세요." id="userEmailDomain">
+      <a href="javascript:void(0);" class="film_email_constitution" id="film_email_constitution_id" onclick="emailCheckAjax()">등록하기</a>
+    </li>
+  </ul>  
+</div>
+<!--  영화설립이메일 모달창 -->    
+
+</body>
 </html>
+
+
+
 
 <form action="{% url 'movie:board1to2' %}" method="get" id="selectedDirectorForm">
   <input type="hidden" name="director" id="selected_director_hidden_input">
 </form>
+
+<form action="{% url 'user:constitution_email' %}" method="post" id="film_email_constitution_form_id">
+  {% csrf_token %}
+  <input type="hidden" name="emailname" id="emailname_input">
+  <input type="hidden" name="emaildomain" id="emaildomain_input">
+</form>
+
+<form action="{% url 'user:ajax_token_email' %}" method="post" id="tokenEmailFromId">
+  {% csrf_token %}
+  <input type="hidden" name="tokenemailname" id="tokenEmailName">
+  <input type="hidden" name="tokenemaildomain" id="tokenEmailDomain">
+</form>
+
+
+
+{% comment %}
+<script src="{% static 'common/session.js' %}"></script>
+{% endcomment %}

@@ -14,6 +14,7 @@ window.onload = function() {
 //   document.getElementById('signupPass').addEventListener('keyup', enterCheckSign);
 //   document.getElementById('signupPass2').addEventListener('keyup', enterCheckSign);
 // }
+
 function enterCheckLogin(e) {
   // if (e.key == "Enter") loginFormCheck();
   if (e.key == "Enter") loginAjax();
