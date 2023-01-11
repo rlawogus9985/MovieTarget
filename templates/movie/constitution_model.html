@@ -1,0 +1,25 @@
+<script src="{% static 'movie/modal/constitutionmodal.js' %}"></script>
+<link rel="stylesheet" href="{% static 'movie/modal/constitutionmodal.css' %}">
+<script src="{% static 'jquery.min.js' %}"></script>
+
+<button>다음으로가기버튼모달</button>
+
+<div class="modal-constitution">
+  <div class="modal-constitution-content" 
+    title="클릭하면 창이 닫힙니다">
+  <tr>
+    <th>영화사 이메일입력</th>
+    <td>
+      <input type="text" name="film_company_email" id="film_company_email">
+      @
+      <input type="text" name="film_company_=domain" id="film_company_domain">
+      <select>
+        <option value="naver.com">naver.com</option>
+        <option value="daum.net">daum.net</option>
+        <option value="gmail.com">gmail.com</option>
+        <option value="직접입력">직접입력</option>
+      </select>
+    </td>
+  </tr>
+  </div>
+</div>

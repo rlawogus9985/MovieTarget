@@ -33,12 +33,14 @@
     <div class="content">
       <form action="{% url 'user:delete_user' %}" method="post" novalidate onsubmit="return deleteFormCheckMent();">
         {% csrf_token %}
+
         <h3>
           삭제 버튼을 누르시면 완전히 삭제가 되어 되돌릴 수 없습니다.<br><br>
           {{ user.username }} 회원님의 계정을 삭제 하시겠습니까?<br>
         </h3>
+
     </div>
-        <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn o">삭제</button>
+        <button type="submit" name="delete_user_bt" id="deleteUserBt" class="btn o">확인</button>
       </form>
         <button type="submit" class="btn x" onclick="info_user()">취소</button>        
   </table>        

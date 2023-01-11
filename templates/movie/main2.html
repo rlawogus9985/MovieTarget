@@ -112,12 +112,14 @@
         </tr>
       </table>
     </div>
+
     {% endcomment %} 
 
     <!-- css 입힌 페이징 기능 -->   
     <div class="pagination">
       <!-- 이전 페이지 -->
       {% if page_obj.has_previous %}
+
         <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.previous_page_number }})" class="page-link">이전</a>
       {% else %}
         <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
