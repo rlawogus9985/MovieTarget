@@ -3,7 +3,8 @@ BEST VIEWED FULLSCREEN
 https://codepen.io/ig_design/full/KKVQpVP
 * ========================================= */
 window.onload = function() {
-  document.getElementById('loginName').addEventListener('keyup', enterCheckLogin);
+  document.getElementById('loginName').addEventListener('keyup', enterCheckLogin); 
+  // 깜박이는 것이 키업**
   document.getElementById('loginPassword').addEventListener('keyup', enterCheckLogin);
   document.getElementById('signupName').addEventListener('keyup', enterCheckSign);
   document.getElementById('signupPass').addEventListener('keyup', enterCheckSign);
@@ -14,9 +15,10 @@ window.onload = function() {
 //   document.getElementById('signupPass').addEventListener('keyup', enterCheckSign);
 //   document.getElementById('signupPass2').addEventListener('keyup', enterCheckSign);
 // }
+
 function enterCheckLogin(e) {
   // if (e.key == "Enter") loginFormCheck();
-  if (e.key == "Enter") loginAjax();
+  if (e.key == "Enter") loginAjax(); // 엔터를 눌르면 동작해라**
 }
 function enterCheckSign(e) {
   // if (e.key == "Enter") SignupFormCheck();

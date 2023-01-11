@@ -47,11 +47,11 @@
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">회원가입</h4>
 											<div class="form-group">
-												<input type="text" name="signupname" class="form-style" placeholder="4~12글자 사이의 ID를 입력해주세요." id="signupName" autocomplete="off">
+												<input type="text" name="signupname" class="form-style" placeholder="4이상~12이하의 글자를 ID에 입력해주세요." id="signupName" autocomplete="off">
                         <i class="input-icon uil uil-user"></i>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="password" name="signuppass" class="form-style" placeholder="8~20글자 사이의 PW를 입력해주세요." id="signupPass" autocomplete="off">
+												<input type="password" name="signuppass" class="form-style" placeholder="8이상~20이하의 글자를 PW에 입력해주세요." id="signupPass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>	
 											<div class="form-group mt-2">
@@ -73,12 +73,15 @@
 	    </div>
 	</div>
 
-<form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">
+  <!-- 로그인 카드 form** -->
+<form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">  
   {% csrf_token %}
 	<input type="hidden" name="username" id="userName">
+  <!-- name은 VIew로 연결 -->
 	<input type="hidden" name="password" id="passWord">
 </form>
 
+<!-- 회원가입카드 form** -->
 <form action="{% url 'user:join' %}" method="post" id="signupForm"  autocomplete="off">
   {% csrf_token %}
 	<input type="hidden" name="username" id="joinUserName">

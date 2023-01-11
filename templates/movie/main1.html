@@ -6,159 +6,287 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>일일영화 - 감독 선택 #1</title>
   {% load static %}
+  <!-- 사진 card css -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{% static 'movie/select/card.css' %}">
+  <!-- 메뉴바 css -->
+  <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
+  <!-- 페이징 css -->
+  <link rel="stylesheet" href="{% static 'user/selected/pselected.css' %}"> 
+  <!-- card 페이징 js  -->
+  <script src="{% static 'movie/select/card.js' %}"></script>
+  <!-- 검색창 css -->
+  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
+
+  
   {% comment %} <link rel="stylesheet" href="{% static 'common/main/slide.css' %}"> {% endcomment %}
   <!-- 부트스트랩과 메뉴바의 btn이 혼동되어 적용되어서 메뉴바 css인 main/style.css에서 -->
   <!-- btn을 movie/select/dselect.css로 가져와서 mbtn으로 바꾸고 적용한다.-->
-  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
-  <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}">
+  {% comment %} <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}">{% endcomment %}
   <script src="{% static 'movie/select/dselect.js' %}"></script>
   <script src="{% static 'jquery.min.js' %}"></script>
   <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
-  
+
+  <script async src="https://cse.google.com/cse.js?cx=e39f7e3af791d4e49"></script>
 
 </head>
-<body style="background-color:#1f2029;">
 
-<!-- 메뉴 바(직접 작성)-->
-<div style="background-color:#1f2029; display: flex; justify-content: space-between">
-  <a href="/"><img src="{% static 'My project-1.png' %}" alt="일일영화 로고"
-    style="height: 100px; width: auto;"></a>
-	
-  <div style="color: white; text-align:right; top: 5px; right: 10px;">
-  {% if user.is_authenticated %}
-    {{ user.username }}님, 환영합니다.<br>
-    <a href="{% url 'user:profile' %}" class="btn other">내정보</a>
-    <a href="{% url 'user:logout' %}" class="btn other">로그아웃</a>
-  {% endif %}
-  </div> 
-</div>
+<body>
+  <div class="backs">
+    <!-- 메뉴바 -->
+    <div class=header>
+      <a href="/" class="logo" target="blank">
+        <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+      </a>
 
-<!-- 페이지 설명 창-->
-<div style="margin-bottom: 20px">
-  <h1 style="color: white; text-align:center;">감독을 선택해주세요</h1>
-</div>
+      <div class="welcom">
+      {% if user.is_authenticated %}
+      {{ user.username }}님, 환영합니다.<br>
+      </div>
 
+      <div class="names">
+        <a href="{% url 'user:profile' %}" class="btn"> 회원정보 </a>
+        <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+      {% else %}
+      <!-- <a href="{% url 'user:login' %}" class="btn">로그인하기</a> -->
+      {% endif %}
+      </div> 
+    </div>
 
-<!-- 검색 창-->
-<div class="container custom">
-  <form id="searchForm" autocomplete="off">
-    <div class="finder custom">
-      <div class="finder__outer custom">
-        <div class="finder__inner custom">
-          <div class="finder__icon custom" ref="icon"></div>
-          <input class="finder__input custom" type="text" name="searchWord" value="{{ searchWord|default_if_none:'' }}" />
+    <!-- 페이지 설명 창-->
+    <div>
+    <h1>감독을 선택해주세요</h1>
+    </div>
+
+    <!-- 검색 창-->
+    <form id="searchForm" autocomplete="off" class="box">
+      <input type="text" name="searchWord" placeholder="{{ searchWord|default:'감독을 검색해주세요'|default_if_none:'' }}" />
+    </form>
+    
+    <!-- 선택한 내용 보여주기 -->
+    <div class="show">
+      <input class="showSelect" type="text" name="selected_director" id="selected_director" readonly>
+    </div>
+
+  
+    {% comment %} 
+    <!-- 검색 창-->
+    <div class="container custom">
+      <form id="searchForm" autocomplete="off">
+        <div class="finder custom">
+          <div class="finder__outer custom">
+            <div class="finder__inner custom">
+              <div class="finder__icon custom" ref="icon"></div>
+              <input class="finder__input custom" type="text" name="searchWord" value="{{ searchWord|default_if_none:'' }}" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    {% endcomment %}
+
+    <!-- DB 선택 테이블 css -->
+    <section>
+      <div class="content-list">
+        <div class="slider">
+          {% for list in targetbase_list %}
+          <div class="item" onclick="TableDirector(this)">
+            {{ list.director }}
+          </div>
+          {% endfor %}
+
         </div>
       </div>
+    </section>
+
+    
+    {% comment %} 
+    <!-- 데이터베이스에 뭐가 있는지 출력-->
+    <div>
+      <table class="director-list table-bordered table-hover">
+        <tr>
+          {% for list in targetbase_list %}
+          {% if forloop.counter == 1 or forloop.counter == 2 or forloop.counter == 3 or forloop.counter == 4 %}
+          <td onclick="TableDirector(this)">
+              {{ list.director }}
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
+          {% for list in targetbase_list %}
+          {% if forloop.counter == 5 or forloop.counter == 6 or forloop.counter == 7 or forloop.counter == 8 %}
+          <td onclick="TableDirector(this)">
+              {{ list.director }}
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
+          {% for list in targetbase_list %}
+          {% if forloop.counter == 9 or forloop.counter == 10 or forloop.counter == 11 or forloop.counter == 12 %}
+          <td onclick="TableDirector(this)">
+              {{ list.director }}
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+      </table>
     </div>
-  </form>
-</div>
 
-<!-- 선택한 내용 보여주기 -->
-<br>
-<div style="color: white;">
-  <h5 class="showDirectors" style="text-align: center;"> 
-    <input class="showSelect" type="text" name="selected_director" id="selected_director" readonly>
-    <span></span>
-  </h5>
-</div>
+    {% endcomment %} 
 
-<!-- 데이터베이스에 뭐가 있는지 출력-->
-<div>
-  <table class="director-list table-bordered table-hover">
-    <tr>
-      {% for list in targetbase_list %}
-      {% if forloop.counter == 1 or forloop.counter == 2 or forloop.counter == 3 or forloop.counter == 4 %}
-      <td onclick="TableDirector(this)">
-          {{ list.director }}
-      </td>
-      {% endif %}
-      {% endfor %}
-    </tr>
-    <tr>
-      {% for list in targetbase_list %}
-      {% if forloop.counter == 5 or forloop.counter == 6 or forloop.counter == 7 or forloop.counter == 8 %}
-      <td onclick="TableDirector(this)">
-          {{ list.director }}
-      </td>
-      {% endif %}
-      {% endfor %}
-    </tr>
-    <tr>
-      {% for list in targetbase_list %}
-      {% if forloop.counter == 9 or forloop.counter == 10 or forloop.counter == 11 or forloop.counter == 12 %}
-      <td onclick="TableDirector(this)">
-          {{ list.director }}
-      </td>
-      {% endif %}
-      {% endfor %}
-    </tr>
-  </table>
-</div>
 
-<!-- 페이징 기능 -->
-<div>
-  <ul class="pagination justify-content-center">
-    <!--이전 페이지-->
-    {% if page_obj.has_previous %}
-      <li class="page-item">
+    <!-- css 입힌 페이징 기능 -->   
+    <div class="pagination">
+      <!-- 이전 페이지 -->
+      {% if page_obj.has_previous %}
         <a href="?searchWord={{ searchWord }}&page={{ page_obj.previous_page_number }}" class="page-link">이전</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
+      {% else %}
         <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
-      </li>
-    {% endif %}
+
+      {% endif %}
+
+      <!-- 페이지 리스트 -->
+      {% for page_number in page_obj.paginator.page_range %}
+        {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+          {% if page_number == page_obj.number %}
+            <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          {% else %}
+            <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- 다음페이지 -->
+      {% if page_obj.has_next %}
+        <a href="?searchWord={{ searchWord }}&page={{ page_obj.next_page_number }}" class="page-link">다음</a>
+      {% else %}
+        <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
+      {% endif %}
+    </div>
+ 
   
-    <!-- 페이지 리스트 -->
-    {% for page_number in page_obj.paginator.page_range %}
-    {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
-      {% if page_number == page_obj.number %}
-        <li class="page-item active" aria-current="page">
-          <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+
+{% comment %} 
+<!-- 페이징 기능 -->
+  <div>
+    <ul class="pagination justify-content-center">
+      <!--이전 페이지-->
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a href="?searchWord={{ searchWord }}&page={{ page_obj.previous_page_number }}" class="page-link">이전</a>
         </li>
       {% else %}
-        <li class="page-item">
-          <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+        <li class="page-item disabled">
+          <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
         </li>
       {% endif %}
-    {% endif %}
-    {% endfor %}
+    
+      <!-- 페이지 리스트 -->
+      {% for page_number in page_obj.paginator.page_range %}
+      {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+        {% if page_number == page_obj.number %}
+          <li class="page-item active" aria-current="page">
+            <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+          </li>
+        {% endif %}
+      {% endif %}
+      {% endfor %}
 
-    <!-- 다음 페이지 -->
-    {% if page_obj.has_next %}
-    <li class="page-item">
-      <a href="?searchWord={{ searchWord }}&page={{ page_obj.next_page_number }}" class="page-link">다음</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-      <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
-    </li>
-    {% endif %}
-  </ul>
-</div>
+      <!-- 다음 페이지 -->
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a href="?searchWord={{ searchWord }}&page={{ page_obj.next_page_number }}" class="page-link">다음</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
 <!-- 페이징 기능 끝 -->
-
-{% comment %}
-<!-- 왼쪽 클릭은 2,3 페이지만-->
-<div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div>
-<!-- 오른쪽 클릭은 1,2,3 페이지만-->
-<!-- 현지점(1페이지)에서 누르면 바로 2페이지로 가는 임시 기능-->
-<div class="slide_next_button slide_button"><a href="{% url 'movie:board2' %}">▶</a></div>
 {% endcomment %}
+
 
 <br>
 <div class="lower_">
   {% comment %} <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a> {% endcomment %}
-  <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>
+  {% comment %}<button class="btn_next" id="only_one_botton" onclick="constitution();">다음(2/4)</button>{% endcomment %}
+  {% comment %}원본!!<a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>{% endcomment %}
+  <a href="javascript:void(0);" class="btn_next" onclick="nextBtnEmailCheckAjax();">다음(2/4)</a>
 </div>
 
+<!-- 영화설립이메일 모달창 -->
+<button id="modalOpenBtn">이메일등록
+
+</button>
+<div id="emailModal">
+
+
+  {% comment %}
+  <!-- 왼쪽 클릭은 2,3 페이지만-->
+  <div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div>
+  <!-- 오른쪽 클릭은 1,2,3 페이지만-->
+  <!-- 현지점(1페이지)에서 누르면 바로 2페이지로 가는 임시 기능-->
+  <div class="slide_next_button slide_button"><a href="{% url 'movie:board2' %}">▶</a></div>
+  {% endcomment %}
+
+  <div class="page_first_next">
+    {% comment %} <a href="{% url 'movie:board1' %}" class="page_first_btn">이전(◀)</a> {% endcomment %}
+    <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>
+  </div>
+
+  </div>
 </body>
+
 {% comment %}
 <script src="{% static 'common/session.js' %}"></script>
 {% endcomment %}
+
   
+  <ul>
+    <button id="modalCloseBtn">닫기</button>
+    <li>
+      <input type="text" name="user_email" placeholder="이메일 ID를 입력해주세요." id="userEmailId">@<input type="text" name="domain_email" placeholder="이메일 Domain을 입력해주세요." id="userEmailDomain">
+      <a href="javascript:void(0);" class="film_email_constitution" id="film_email_constitution_id" onclick="emailCheckAjax()">등록하기</a>
+    </li>
+  </ul>  
+</div>
+<!--  영화설립이메일 모달창 -->    
+
+</body>
 </html>
+
+
+
 
 <form action="{% url 'movie:board1to2' %}" method="get" id="selectedDirectorForm">
   <input type="hidden" name="director" id="selected_director_hidden_input">
 </form>
+
+
+<form action="{% url 'user:constitution_email' %}" method="post" id="film_email_constitution_form_id">
+  {% csrf_token %}
+  <input type="hidden" name="emailname" id="emailname_input">
+  <input type="hidden" name="emaildomain" id="emaildomain_input">
+</form>
+
+<form action="{% url 'user:ajax_token_email' %}" method="post" id="tokenEmailFromId">
+  {% csrf_token %}
+  <input type="hidden" name="tokenemailname" id="tokenEmailName">
+  <input type="hidden" name="tokenemaildomain" id="tokenEmailDomain">
+</form>
+
+
+
+{% comment %}
+<script src="{% static 'common/session.js' %}"></script>
+{% endcomment %}
+
