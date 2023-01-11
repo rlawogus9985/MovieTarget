@@ -18,7 +18,7 @@ a {
 }
 
 .slide_button > a {
-  color: black;
+  color: #292a2c;
 } 
 
 /* 페이지 제목 */
@@ -62,6 +62,7 @@ form.box input[text=text]::placeholder{
   color: white;
   padding: 10px;
   height: 20px;
+
 }
 
 .show_acto{
@@ -186,7 +187,7 @@ section .content-list .next {
 
 /* 선택한 내용 보여주기 꾸미기 */
 .showSelect, .showActors {
-  background-color: #1f2029;
+  background-color: #292a2c;
   border: none;
   outline: 2px none;
   color: white;
@@ -203,6 +204,7 @@ section .content-list .next {
 .actors {
   margin-top: -50px;
 }
+
 
 /* 이메일 관련 모달창 css 시작점 */
 #modalOpenBtn{
@@ -240,6 +242,3 @@ section .content-list .next {
 }
 
 /* 이메일 관련 모달창 css 끝 */
-
-} */
-
