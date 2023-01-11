@@ -6,28 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>일일영화 - 배우 선택 #3</title>
   {% load static %}
+  <!-- 파비콘 이미지 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
   <!-- 메뉴바 css -->
   <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
-  <!-- DB card css -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+
+  <!-- 검색창 css -->
+  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
+  <!-- DB card 선택 css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="{% static 'movie/select/card.css' %}">
-  
   <!-- 페이징 css -->
   <link rel="stylesheet" href="{% static 'user/selected/pselected.css' %}"> 
   
-  <!-- DB card 페이징 js  -->
+  <!-- DB card 선택 js  -->
   <script src="{% static 'movie/select/card.js' %}"></script>
-  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
-
-
-  {% comment %} <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}"> {% endcomment %}
-  <link rel="stylesheet" href="{% static 'common/main/slide.css' %}">
-  <!-- 부트스트랩과 메뉴바의 btn이 혼동되어 적용되어서 메뉴바 css인 main/style.css에서 -->
-  <!-- btn을 movie/select/dselect.css로 가져와서 mbtn으로 바꾸고 적용한다.-->
+  <!-- 메인js화면  -->
   <script src="{% static 'movie/select/dselect.js' %}"></script>
+  <!-- j쿼리사용 js -->
   <script src="{% static 'jquery.min.js' %}"></script>
-  <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
 </head>
 <body>
   <div class="backs">
@@ -52,12 +50,17 @@
       </div> 
     </div>
 
-
     <!-- 페이지 설명 창-->
     <div>
       <h1>배우를 3명 선택해주세요</h1>
     </div>
 
+    <!-- 선택한 내용 보여주기 -->
+    <div class="show_acto">
+      <input  class="showActors" type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
+      <input  class="showActors" type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
+      <input  class="showActors" type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
+    </div>
 
     <!-- 검색 창-->
     <form id="searchForm" autocomplete="off" class="box">
@@ -66,13 +69,6 @@
       <input type="hidden" name="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}">
       <input type="hidden" name="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}">
     </form>
-    
-    <!-- 선택한 내용 보여주기 -->
-    <div class="show_acto">
-      <input  class="showActors" type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
-      <input  class="showActors" type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
-      <input  class="showActors" type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
-    </div>
 
     <!-- DB 선택 테이블 css -->
     <section>
@@ -133,8 +129,8 @@
       <span class="points_point active"></span>
     </span>
 
-    <br>
-    <div class="page_">
+    <!-- 각 HTML로 이동 버튼 -->
+    <div class="page_3">
       <a href="{% url 'movie:board2' %}" class="btn_before">이전(2/4)</a>
       <a href="javascript:void(0);" class="btn_next" onclick="selectDataActors();" >다음(4/4)</a>
     </div>

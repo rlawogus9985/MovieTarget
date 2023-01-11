@@ -8,55 +8,46 @@
 <link rel="stylesheet" href="{% static 'common/home/welcome.css' %}">
 <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
 <script src="{% static 'jquery.min.js' %}"></script>
-<script src="{% static 'common/home/about.js' %}"></script>
 
-<!-- 본문 -->
-  <!-- 홈 배경-->
-  <div class="backs">
-    <!-- 메뉴바 -->
-    <div class=header>
-      <a href="/" class="logo" target="blank">
-        <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
-      </a>
-      
-      <div class="welcom">
-        {% if user.is_authenticated %}
-      </div>
-
-      <div class="names">
-        <a href="{% url 'user:profile' %}" class="btn">회원정보</a>
-        <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
-      {% endif %}
-      </div> 
-    </div>
-   
-    {% if user.is_authenticated %} 
-    <div class="content">
-      <h1>{{ user.username }}님, 환영합니다.</h1>
-      <br>
-      <p>오직 일일영화에서만 제공하는 차별화된 영화 흥행 예측 서비스!
-        <br>지금시작할까요?</p>
-      <div>
-        <button type="button" onclick="location.href='movie/board/1'"><span></span>시작하기</button>
-      </div>
-    </div>
-    {% else %}  
-    <div class="content">
-      <h1>영화의 가치를 같이</h1>
-      <br>
-      <p>영화의 흥행지수를 심층분석하여 흥행정도를 예측 할 수 있는 일일영화는<br>
-        영화의 가치를 함께 생각하고 제시 할 수 있는 공간입니다. 
-        <br>우리와 함께 관객을 만족시킬 수 밖에 없는 영화를 만들어볼까요? </p>
-      <div>
-        <button type="button" onclick="location.href='user/login'"><span></span>가입하기</button>
-      </div>
-    </div>
+<!-- 홈 배경-->
+<div class="backs">
+  <!-- 메뉴바 -->
+  <div class=header>
+    <a href="/" class="logo" target="blank">
+      <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+    </a>
+      {% if user.is_authenticated %}
+    <div class="names">
+      <a href="{% url 'user:profile' %}" class="btn">회원정보</a>
+      <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
     {% endif %}
-
+    </div> 
   </div>
+  
+  <!-- 본문 -->
+  {% if user.is_authenticated %} 
+  <div class="content">
+    <h1>{{ user.username }}님, 환영합니다.</h1>
+    <br>
+    <p>오직 일일영화에서만 제공하는 차별화된 영화 흥행 예측 서비스!
+      <br>지금시작할까요?</p>
+    <div>
+      <button type="button" onclick="location.href='movie/board/1'"><span></span>시작하기</button>
+    </div>
+  </div>
+  {% else %}  
+  <div class="content">
+    <h1>영화의 가치를 같이</h1>
+    <br>
+    <p>영화의 흥행지수를 심층분석하여 흥행정도를 예측 할 수 있는 일일영화는<br>
+      영화의 가치를 함께 생각하고 제시 할 수 있는 공간입니다. 
+      <br>우리와 함께 관객을 만족시킬 수 밖에 없는 영화를 만들어볼까요? </p>
+    <div>
+      <button type="button" onclick="location.href='user/login'"><span></span>가입하기</button>
+    </div>
+  </div>
+  {% endif %}
 
 </div>
-<button></button>
-
 {% endblock body %}
 
