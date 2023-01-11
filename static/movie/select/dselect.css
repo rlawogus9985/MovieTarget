@@ -377,4 +377,104 @@ table.actor-list {
   .actor-list th:nth-child(4) {
     display: none;
   }
+
+}
+
+/* 다음페이지 */
+.btn_next {
+  cursor: pointer;
+  transition: all 200ms linear;
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 200ms linear;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  background-color: #ffeba7;
+  color: #102770;
+  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+
+  margin-left: 80%;
+  margin-top: -3%;
+  text-decoration: none;
+}
+
+.btn_next:active,
+.btn_next:focus {
+  background-color: #102770;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
+}
+
+.btn_next:hover {
+  background-color: #102770;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
+}
+
+/* 선택한 내용 보여주기 꾸미기 */
+.showSelect, .showActors {
+  background-color: #1f2029;
+  border: none;
+  outline: 2px none;
+  color: white;
+  text-align: center;
+}
+
+.showActors {
+ border-bottom: 2px solid white;
+ margin-top: 10px;
+
+}
+
+/* 배우선택 버튼 자리수정 */
+.actors {
+  margin-top: -50px;
+}
+
+/* 이메일 관련 모달창 css 시작점 */
+#modalOpenBtn{
+  /* position: bottom 203 left65 right 890 top 624; */
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items:  center;
+  background-color: greenyellow;
+  z-index: 150;
+}
+
+#emailModal {
+  /* position: bottom 150 right 555 top 607; */
+  position: absolute;
+  width: 550px;
+  height: 120px;
+  display: none;
+  justify-content: center;
+  align-items:  center;
+  background-color: #343a40;
+  z-index: 160;
+}
+#modalCloseBtn{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items:  center;
+  background-color: red;
+  z-index: 150;
+}
+
+/* 이메일 관련 모달창 css 끝 */
+
 } */
+

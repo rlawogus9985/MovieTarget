@@ -16,10 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', TemplateView.as_view(template_name='common/home.html'), name='home'),
     path("movie/", include("movie.urls")),
     path("user/", include("user.urls")),
+    path('password/', include('django.contrib.auth.urls')),
+
+
+    # 비밀번호 재설정 토큰관련 url
+    path('password_reset/done/',
+         auth_views.PasswordResetDoneView.as_view(template_name='account/password_reset_done.html'),
+         name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name='account/password_reset_confirm.html'),
+         name='password_reset_confirm'),
+    path('reset/done/',
+         auth_views.PasswordResetCompleteView.as_view(template_name='account/password_reset_complete.html'),
+         name='password_reset_complete'),
 ]
