@@ -417,7 +417,8 @@ table.actor-list {
 }
 
 /* 선택한 내용 보여주기 꾸미기 */
-.showSelect, .showActors {
+.showSelect,
+.showActors {
   background-color: #1f2029;
   border: none;
   outline: 2px none;
@@ -426,9 +427,8 @@ table.actor-list {
 }
 
 .showActors {
- border-bottom: 2px solid white;
- margin-top: 10px;
-
+  border-bottom: 2px solid white;
+  margin-top: 10px;
 }
 
 /* 배우선택 버튼 자리수정 */
@@ -437,14 +437,14 @@ table.actor-list {
 }
 
 /* 이메일 관련 모달창 css 시작점 */
-#modalOpenBtn{
+#modalOpenBtn {
   /* position: bottom 203 left65 right 890 top 624; */
   position: absolute;
   width: 150px;
   height: 50px;
   display: flex;
   justify-content: center;
-  align-items:  center;
+  align-items: center;
   background-color: greenyellow;
   z-index: 150;
 }
@@ -456,22 +456,19 @@ table.actor-list {
   height: 120px;
   display: none;
   justify-content: center;
-  align-items:  center;
+  align-items: center;
   background-color: #343a40;
   z-index: 160;
 }
-#modalCloseBtn{
+#modalCloseBtn {
   position: relative;
   width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
-  align-items:  center;
+  align-items: center;
   background-color: red;
   z-index: 150;
 }
 
 /* 이메일 관련 모달창 css 끝 */
-
-} */
-

@@ -217,16 +217,23 @@
 
 <br>
 <div class="lower_">
-  {% comment %} <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a> {% endcomment %}
-  {% comment %}<button class="btn_next" id="only_one_botton" onclick="constitution();">다음(2/4)</button>{% endcomment %}
-  {% comment %}원본!!<a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>{% endcomment %}
-  <a href="javascript:void(0);" class="btn_next" onclick="nextBtnEmailCheckAjax();">다음(2/4)</a>
-</div>
+  {% comment %} <a href="{% url 'movie:board1' %}" class="btn_">이전(◀)</a>
+  <button class="btn_next" id="only_one_botton" onclick="constitution();">다음(2/4)</button> {% endcomment %}
+  <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>
+  {% comment %} <a href="javascript:void(0);" class="btn_next" onclick="nextBtnEmailCheckAjax();">다음(2/4)</a> {% endcomment %}
+</div> 
+
+{% comment %} 
+<div class="page_first_next">
+  <a href="{% url 'movie:board1' %}" class="page_first_btn">이전(◀)</a>
+  <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>
+</div> {% endcomment %}
 
 <!-- 영화설립이메일 모달창 -->
 <button id="modalOpenBtn">이메일등록
 
 </button>
+
 <div id="emailModal">
 
 
@@ -238,27 +245,23 @@
   <div class="slide_next_button slide_button"><a href="{% url 'movie:board2' %}">▶</a></div>
   {% endcomment %}
 
-  <div class="page_first_next">
-    {% comment %} <a href="{% url 'movie:board1' %}" class="page_first_btn">이전(◀)</a> {% endcomment %}
-    <a href="javascript:void(0);" class="btn_next" onclick="selectDataDirector();">다음(2/4)</a>
+ 
   </div>
 
-  </div>
-</body>
 
 {% comment %}
 <script src="{% static 'common/session.js' %}"></script>
 {% endcomment %}
 
   
-  <ul>
+  {% comment %} <ul>
     <button id="modalCloseBtn">닫기</button>
     <li>
       <input type="text" name="user_email" placeholder="이메일 ID를 입력해주세요." id="userEmailId">@<input type="text" name="domain_email" placeholder="이메일 Domain을 입력해주세요." id="userEmailDomain">
       <a href="javascript:void(0);" class="film_email_constitution" id="film_email_constitution_id" onclick="emailCheckAjax()">등록하기</a>
     </li>
-  </ul>  
-</div>
+  </ul>   {% endcomment %}
+
 <!--  영화설립이메일 모달창 -->    
 
 </body>
