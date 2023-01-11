@@ -114,7 +114,7 @@ body {
 .page_first_next{
   display: flex;
   margin-top: -70px;
-  margin-left: 21vh;
+  /* margin-left: vh; */
 }
 
 .page_first_btn {
