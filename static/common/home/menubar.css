@@ -1,7 +1,7 @@
-/* menubar */
-.sawname {
-	color: rgb(255, 255, 255);
-	padding-bottom: 5px;
+/*  사용중인 메뉴바 */
+
+.header {
+    padding-bottom: 100px;
 }
 
 .logo {
@@ -11,17 +11,37 @@
 	display: block;
 	z-index: 100;
 	transition: all 250ms linear;
-	}
+}
 .logo img {
 	height: 100px;
 	width: auto;
 	display: block;
 }
 
+.welcom{
+    color: white;
+    margin-top: 30px;
+    margin-right: 250px;
+    text-align:right; 
+    position: absolute; 
+    top: 5px; 
+    right: 10px; 
+
+}
+
+.names{
+    margin-top: 10px;
+    text-align:right; 
+    position: absolute; 
+    top: 5px; 
+    right: 10px; 
+}
+
 a {
 	cursor: pointer;
 	transition: all 200ms linear;
 	text-decoration: none;
+    margin-top: 10px;
 }
 .btn{  
 	border-radius: 4px;
@@ -46,19 +66,16 @@ a {
 	justify-content: center;
 	-ms-flex-pack: center;
 	text-align: center;
-	border: 1px solid #fff;
-    background-color: #ff2c2c;
-	color: rgb(193, 49, 49);
-	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+	border: 1px solid #ff0000;
+	background-color: #ff0000;
+	color: #fff;
+	box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
 }
 .btn:active,
-.btn:focus {  
-    background-color: #ff2c2c;
-	color: rgb(193, 49, 49);
-	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
-}
-.btn:hover {  
-    background-color: #ff2c2c;
-	color: rgb(193, 49, 49);
+.btn:focus,
+.btn:hover{  
+	background-color: #fff;
+    border: 1px solid #fff;
+	color: #ff0000;
 	box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }

@@ -79,7 +79,7 @@ class UserCreateForm(generic.CreateView):
 
 
 class UserLoginView(LoginView):
-    template_name = 'dist/index.html'
+    template_name = 'dist/index.html'  #가입하기템플릿으로 가라.
 
     def form_invalid(self, form):
         messages.error(self.request, '로그인에 실패하였습니다.', extra_tags='danger')
