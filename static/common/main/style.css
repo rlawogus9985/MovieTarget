@@ -1,9 +1,67 @@
-body {
-  background: var(--bg);
-  --bg: #292a2c;
+/* main.html의 드롭박스 css */
+
+/* 드롭박스 위치 */
+.select_{
+  margin-top: 11%;
+  margin-left: 19%;
 }
 
-.dropbox{
+.select_container {
+  display: flex;
+  justify-content: center;
+  position: absolute;  
+  /* position: relative; */
+  min-width: 250px;
+  height: 50px;
+  flex-wrap: space-between;
+  align-items: center;
+  /* padding: 100px; */
+}
+
+/* 드롭박스 꾸미기 */
+.select_box {
+  border: none;
+  appearance: none;
+  padding: 0 30px 0 45px;
+  color: white;
+  background-color: #ff6200;
+  font-size: 20px;
+  width: 300px;
+  /* width: 100%; */
+  height: 75px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.select_container .select_icon {
+  width: 30px;
+  height: 30px;
+  /* height: 100%; */
+  /* position: absolute; */
+  position: relative;
+  right: 50px;
+  background-color: #ff6200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2px;
+  border-radius: 0 15px 15px 0;
+}
+
+.select_icon i {
+  font-size: 30px;
+  color: #fff;
+}
+
+.infos{
+  background-color: #ffae00;
+}
+
+
+
+
+/* 원래 있던 드롭박스 꾸미기 */
+/* .dropbox{
   margin-top: 8%;
   margin-left: 10%;
 }
@@ -21,7 +79,7 @@ body {
   --max-scroll: 8;
   --text: #3f4656;;
   --border: #2f3545;
-  --borderActive: #23c4f8;
+  --borderActive: #ff0a0a;
   --background: #fff;
   --arrow: #6c7486;
   --arrowActive: #e4ecfa;
@@ -38,8 +96,8 @@ select {
   --text: #3f4656;
   --border: #2f3545;
   --background: #fff;
-  height: 30px;
 }
+
 select.dropdown {
   padding: 9px 16px;
   border-radius: 6px;
@@ -49,11 +107,4 @@ select.dropdown {
   line-height: 22px;
   font-size: 16px;
   font-family: inherit;
-}
-
-.lower_ {
-  display: flex;
-  margin-top: 400px;
-  z-index: 9999999;
-}
-
+} */
