@@ -44,31 +44,31 @@
   <div style="display: flex; justify-content: center;">
     <div class="button" id="button-5">
       <div id="translate"></div>
-      <a href="#">감독 -<br>
+      <a href="#">- 감독 -<br>
         {{ movie.director }}
       </a>
     </div>
     <div class="button" id="button-5">
       <div id="translate"></div>
-      <a href="#">장르 -<br>
+      <a href="#">- 장르 -<br>
         {{ movie.genre }}
       </a>
     </div>
     <div class="button" id="button-5">
       <div id="translate"></div>
-      <a href="#">배우 -<br>
+      <a href="#">- 배우 -<br>
         {{ movie.actor1 }}
       </a>
     </div>
     <div class="button" id="button-5">
       <div id="translate"></div>
-      <a href="#">배우 -<br>
+      <a href="#">- 배우 -<br>
         {{ movie.actor2 }}
       </a>
     </div>
     <div class="button" id="button-5">
       <div id="translate"></div>
-      <a href="#">배우 -<br>
+      <a href="#">- 배우 -<br>
         {{ movie.actor3 }}
       </a>
     </div>
@@ -78,19 +78,19 @@
   <div style="display: flex; justify-content: center;">
     <div class="button" id="button-5">
       <div id="translate"></div>
-      <a href="#">국가 -<br>
+      <a href="#">- 국가 -<br>
         {{ movie.nations }}
       </a>
     </div>
     <div class="button" id="button-5">
       <div id="translate"></div>
-      <a href="#">개봉 분기 -<br>
+      <a href="#">- 개봉 분기 -<br>
         {{ movie.opendt }}
       </a>
     </div>
     <div class="button" id="button-5">
       <div id="translate"></div>
-      <a href="#">관람 등급 -<br>
+      <a href="#">- 관람 등급 -<br>
         {% comment %} {% if request.session.selected_audit %}
         {{ request.session.selected_audit }}
         {% endif %} {% endcomment %}
@@ -105,14 +105,14 @@
     선택하신 국가, 개봉일, 관람등급을 통해 조절한 결과 
     장르, 감독, 배우들이 출연한 영화들의 매출액, 관객수의 평균은 
     관객수 10만명, 매출액 50억원입니다.<br>
-    선택하신 결과 예산 대비 예측 흥행도는 오를것으로 예상됩니다
+    선택하신 결과 예산 대비 예측 흥행도는 오를것으로 예상됩니다.
   </div>
 
-  <div style="display: flex;">
+  <div style="display: flex; padding-bottom: 150px;">
     <!-- 총매출액 추이를 보여주기 위한 란-->
     <div style="flex:1; margin-left: 15%;">
       <button id="btn_salesAcc">보이기/감추기</button>
-      <span style="color: white;">총 매출액 변동 추이</span><br>
+      <span style="color: white;">총 매출액 변동 추이</span>
       <!-- <img src="{% static 'SalesAccTestImage.png' %}" id="SalesToggle"> -->
       <div class="SalesToggle" id="curve_chart" ></div>
     </div>
@@ -120,7 +120,7 @@
     <!-- 총관람객수 추이를 보여주기 위한 란-->
     <div style="flex:1;">
       <button id="btn_audiAcc">보이기/감추기</button>
-      <span style="color: white;">총 관람객수 변동 추이</span><br>
+      <span style="color: white;">총 관람객수 변동 추이</span>
       <!-- <img src="{% static 'AudiAccTestImage.png' %}" id="AudiToggle"> -->
       <div class="AudiToggle" id="chart_div" ></div>
     </div>

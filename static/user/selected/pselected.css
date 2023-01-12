@@ -1,7 +1,7 @@
 /* home.html에서 사용하는 css 
 
-main1.html에서 사용하는 css
-(페이징,)
+main들에서 사용하는 css
+(db페이징, HTML 페이지 이동버튼)
 
 */
 
@@ -77,6 +77,13 @@ body {
   display: flex;
   margin-top: -96.5px;
 }
+
+.page_4 {
+  display: flex;
+  margin-top: 440px;
+  z-index: 9999999;
+}
+
 
 
 /* HTML로 이동 버튼 꾸미기 */
