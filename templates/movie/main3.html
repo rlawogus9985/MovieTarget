@@ -6,28 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>일일영화 - 배우 선택 #3</title>
   {% load static %}
+  <!-- 파비콘 이미지 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
   <!-- 메뉴바 css -->
   <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
-  <!-- DB card css -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+
+  <!-- 검색창 css -->
+  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
+  <!-- DB card 선택 css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="{% static 'movie/select/card.css' %}">
-  
   <!-- 페이징 css -->
   <link rel="stylesheet" href="{% static 'user/selected/pselected.css' %}"> 
   
-  <!-- DB card 페이징 js  -->
+  <!-- DB card 선택 js  -->
   <script src="{% static 'movie/select/card.js' %}"></script>
-  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
-
-
-  {% comment %} <link rel="stylesheet" href="{% static 'common/bootstrap.min.css' %}"> {% endcomment %}
-  <link rel="stylesheet" href="{% static 'common/main/slide.css' %}">
-  <!-- 부트스트랩과 메뉴바의 btn이 혼동되어 적용되어서 메뉴바 css인 main/style.css에서 -->
-  <!-- btn을 movie/select/dselect.css로 가져와서 mbtn으로 바꾸고 적용한다.-->
+  <!-- 메인js화면  -->
   <script src="{% static 'movie/select/dselect.js' %}"></script>
+  <!-- j쿼리사용 js -->
   <script src="{% static 'jquery.min.js' %}"></script>
-  <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
 </head>
 <body>
   <div class="backs">
@@ -52,12 +50,17 @@
       </div> 
     </div>
 
-
     <!-- 페이지 설명 창-->
     <div>
       <h1>배우를 3명 선택해주세요</h1>
     </div>
 
+    <!-- 선택한 내용 보여주기 -->
+    <div class="show_acto">
+      <input  class="showActors" type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
+      <input  class="showActors" type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
+      <input  class="showActors" type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
+    </div>
 
     <!-- 검색 창-->
     <form id="searchForm" autocomplete="off" class="box">
@@ -66,13 +69,6 @@
       <input type="hidden" name="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}">
       <input type="hidden" name="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}">
     </form>
-    
-    <!-- 선택한 내용 보여주기 -->
-    <div class="show_acto">
-      <input  class="showActors" type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
-      <input  class="showActors" type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
-      <input  class="showActors" type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
-    </div>
 
     <!-- DB 선택 테이블 css -->
     <section>
@@ -114,125 +110,6 @@
         <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
       {% endif %}
     </div>
-
-  <!-- 재현이가 만든 페이지  -->
-  {% comment %}
-    <!-- 검색 창-->
-    <div class="container custom">
-      <form id="searchForm" autocomplete="off">
-        <div class="finder custom">
-          <div class="finder__outer custom">
-            <div class="finder__inner custom">
-              <div class="finder__icon custom" ref="icon"></div>
-              <input class="finder__input custom" type="text" name="searchWord" value="{{ searchWord|default_if_none:'' }}" />
-              <input type="hidden" name="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}">
-              <input type="hidden" name="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}">
-              <input type="hidden" name="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}">
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
- 
-
-    <!-- 선택한 내용 보여주기 -->
-    <br>
-    <div style="color: white;">
-      <div style="text-align: center;" > 밑줄에 보이는 이름 클릭하면 선택을 취소할 수 있습니다.</div>
-      <h5 style="text-align: center;">
-        <input  class="showActors" type="text" name="selected_actor1" id="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}" onclick="DeleteSelectActor1()" readonly>
-        <input  class="showActors" type="text" name="selected_actor2" id="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}" onclick="DeleteSelectActor2()" readonly>
-        <input  class="showActors" type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
-        배우들을 선택하셨습니다.
-      </h5>
-    </div>
-
-    <!-- 데이터베이스에 뭐가 있는지 출력-->
-    <div>
-      <table class="actor-list table-bordered table-hover">
-        <tr>
-          {% for list in actorlist_list %}
-          {% if forloop.counter == 1 or forloop.counter == 2 or forloop.counter == 3 or forloop.counter == 4 %}
-          <td onclick="TableActor(this)">
-            {{ list.actor1 }}
-          </td>
-          {% endif %}
-          {% endfor %}
-        </tr>
-        <tr>
-          {% for list in actorlist_list %}
-          {% if forloop.counter == 5 or forloop.counter == 6 or forloop.counter == 7 or forloop.counter == 8 %}
-          <td onclick="TableActor(this)">
-            {{ list.actor1 }}
-          </td>
-          {% endif %}
-          {% endfor %}
-        </tr>
-        <tr>
-          {% for list in actorlist_list %}
-          {% if forloop.counter == 9 or forloop.counter == 10 or forloop.counter == 11 or forloop.counter == 12 %}
-          <td onclick="TableActor(this)">
-            {{ list.actor1 }}
-          </td>
-          {% endif %}
-          {% endfor %}
-        </tr>
-      </table>
-    </div>
-
-    <!-- 페이징 기능 -->
-    <div>
-      <ul class="pagination justify-content-center">
-        <!--이전 페이지-->
-        {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.previous_page_number }})" class="page-link">이전</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled">
-            <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
-          </li>
-        {% endif %}
-      
-        <!-- 페이지 리스트 -->
-        {% for page_number in page_obj.paginator.page_range %}
-        {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
-          {% if page_number == page_obj.number %}
-            <li class="page-item active" aria-current="page">
-              <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
-            </li>
-          {% else %}
-            <li class="page-item">
-              <a onclick="searchFormCheck('{{ searchWord }}', {{ page_number }});" class="page-link">{{ page_number }}</a>
-            </li>
-          {% endif %}
-        {% endif %}
-        {% endfor %}
-
-        <!-- 다음 페이지 -->
-        {% if page_obj.has_next %}
-        <li class="page-item">
-          <a onclick="searchFormCheck('{{ searchWord }}', {{ page_obj.next_page_number }});" class="page-link">다음</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-          <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
-    <!-- 페이징 기능 끝 -->
-  {% endcomment %}
-
-
-    {% comment %}
-    <!-- 왼쪽 클릭은 2,3 페이지만-->
-    <div class="slide_prev_button slide_button"><a href="movie:board2">◀</a></div>
-    <!-- 오른쪽 클릭은 1,2,3 페이지만-->
-    <!-- 현지점(1페이지)에서 누르면 바로 4페이지로 가는 임시 기능-->
-    <div class="slide_next_button slide_button"><a href="{% url 'movie:board4' %}">▶</a></div>
-    {% endcomment %}
-      
       
     <form id="pageForm">
       <input type="hidden" name="searchWord" id="searchWord">
@@ -252,18 +129,15 @@
       <span class="points_point active"></span>
     </span>
 
-    <br>
-    <div class="page_">
+    <!-- 각 HTML로 이동 버튼 -->
+    <div class="page_3">
       <a href="{% url 'movie:board2' %}" class="btn_before">이전(2/4)</a>
       <a href="javascript:void(0);" class="btn_next" onclick="selectDataActors();" >다음(4/4)</a>
     </div>
   </div>
 </body>
 
-{% comment %}
-<script src="{% static 'common/session.js' %}"></script>
-{% endcomment %}
-  
+
 </html>
 
 <form action="{% url 'movie:board3to4' %}" method="get" id="selectedActorsForm">

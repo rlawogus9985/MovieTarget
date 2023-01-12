@@ -71,21 +71,20 @@ function TableDirector(e) {
   // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
   document.getElementById("selected_director").value = selected_director;
 
-  
-  // //감독을 선택하면 선택했다는 텍스트를 넣어준다.
-  // $(".showDirectors>span").text("감독을 선택하셨습니다.");
-  
   // 수정해보려고함 2023 01 09 아래
   // 이메일 등록 관련 모달창 관련 자바스크립트 코드 - 시작점에서 null값이 출력이되서 click event객체가 없었음
   // 질문 결과 위에서 제이쿼리 객체로 사용했으면 아래에서 바닐라자바스크립트에서 dom get element 사용시 값을 가져올 수 없다고함.
   // 그래서 제이쿼리 대신에 자바스크립트 바닐라코드로 변경
-  const spanShowDirectors = document.querySelector("span#showDirectorsSpan")
-  spanShowDirectors.textContent = "감독을 선택하셨습니다.";
+  // const spanShowDirectors = document.querySelector("span#showDirectorsSpan")
+  // spanShowDirectors.textContent = "감독을 선택하셨습니다.";
 
   //감독을 선택했을 때 css
+  // let showcss = document.getElementsByClassName("showSelect")
+  // showcss.css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
+  // "border-radius": "25px"});
+
   $(".showSelect").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
   "border-radius": "25px"});
-
 }
 
 // 장르 선택을 위한 js
@@ -94,16 +93,6 @@ function TableGenre(e) {
   document.getElementById("selected_genre").value = selected_genre;
   document.getElementById("genre").value = selected_genre;
   // document.getElementById("pageForm").submit();
-
-  //장르를 선택하면 선택했다는 텍스트를 넣어준다.
-  // $(".showGenres>span").text("장르를 선택하셨습니다.");
-  
-  // 수정해보려고함 2023 01 09 아래
-  // 이메일 등록 관련 모달창 관련 자바스크립트 코드 - 시작점에서 null값이 출력이되서 click event객체가 없었음
-  // 질문 결과 위에서 제이쿼리 객체로 사용했으면 아래에서 바닐라자바스크립트에서 dom get element 사용시 값을 가져올 수 없다고함.
-  // 그래서 제이쿼리 대신에 자바스크립트 바닐라코드로 변경
-  const spanShowGenresSpan = document.querySelector("span#showGenresSpan")
-  spanShowGenresSpan.textContent = "장르를 선택하셨습니다.";
 
   //장르를 선택했을 때 css
   $(".showSelect").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
