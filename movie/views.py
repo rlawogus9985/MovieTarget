@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect
 from django.views import generic
+from json import loads
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 from movie.models import TargetBase, SelectedBase, Actorlist
-from movie.models import TargetBase, Actorlist
+from movie.models import TargetBase, Actorlist, Secondbase
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import SelectedBaseForm
 from .models import SelectedBase
 from django.contrib.auth import views as auth_views
+from django.http import JsonResponse
+import joblib
+import pandas as pd
 @login_required(login_url=reverse_lazy('user:login'))
 def MovieBoardtest(request):
     """
@@ -282,3 +286,47 @@ class MovieBoardActor(generic.ListView):
         context['selected_actor2'] = selected_actor2
         context['selected_actor3'] = selected_actor3
         return context
+
+loaded_model = joblib.load('model/sim_model.pkl')
+# print(loaded_model)
+# 영화 추천 페이지에 대한 class view
+class recommendation(generic.ListView):
+    template_name = 'movie/recommendation.html'
+    context_object_name = 'targetbase'
+
+    global loaded_model
+    def get_queryset(self):
+        # 검색어는 정확히 일치해야한다.
+        search_word = self.request.GET.get('searchWord','')
+        qs = Secondbase.objects.all().values()
+        data = pd.DataFrame(qs)
+        if search_word:
+            result = find_sim_movie(data,loaded_model,search_word,10).to_dict(orient='list')
+            # result = Secondbase.objects.filter(title=search_word)
+            print(result)
+
+        else:
+            result = None
+        return result
+    
+def find_sim_movie(df, sorted_idx, title_name, top_n=10):
+    target_movie = df[df['title'] == title_name ]
+
+    title_index = target_movie.index.values
+    similar_index = sorted_idx[title_index, :top_n]
+    similar_index = similar_index.reshape(-1)
+
+    return df.iloc[similar_index]
+
+
+
+# ajax로 자동완성을 위해 받아오기 위한 함수
+def recomAjax(request):
+    input_val = request.GET.get('searchTitle','')
+    
+    result = Secondbase.objects.values('title').filter(title__icontains=input_val)
+    context = { 'result_title': result}
+    print(input_val)
+    return render(request, 'movie/recommendation.html',context)
+    # return JsonResponse(context)
+    

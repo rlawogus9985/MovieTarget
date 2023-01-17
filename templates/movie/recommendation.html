@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일일영화 - 영화 추천</title>
+  {% load static %}
+  {% load user_filter %}
+  <!-- 파비콘 이미지 -->
+  <link rel="icon" type="image/png" size="32x32" href="../../static/film-slate.png">
+  <!-- 메뉴바 css -->
+  <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
+  <!-- j쿼리사용 js -->
+  <script src="{% static 'jquery.min.js' %}"></script>
+  <!-- 꾸미기 css -->
+  <link rel="stylesheet" href="{% static 'movie/select/recom.css' %}">
+  <!-- 자동완성 등 js-->
+  <script src="{% static 'movie/select/recom.js' %}"></script>
+</head>
+<body>
+  <div class="backs">
+    <!-- 메뉴바 -->
+    <div class="header">
+      <a href="/" class="logo" target="blank">
+        <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+      </a>
+
+      <div class="welcom">
+        {% if user.is_authenticated %}
+        {{ user.username }}님 환영합니다.<br>
+      </div>
+
+      <div class="names">
+        <a href="{% url 'user:profile' %}" class="btn"> 회원정보 </a>
+        <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+      {% endif %}
+      </div>
+    </div>
+
+    <!-- 페이지 설명 창 -->
+    <div class="show">
+      <h2>영화의 제목을 입력하시면 그와 유사한 영화를<br>
+         소개해 드립니다. 제목을 입력해주세요</h2>
+    </div>
+
+    <!-- 검색 창 -->
+    <div class="search">
+      <form id="searchForm" class="box">
+        <input type="text" id="searchInput" class="search_input" name="searchWord" />
+        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" class="searchImage">
+      </form>
+    </div>
+    
+
+    <!-- 자동완성 시행착오 -->
+    {% comment %} <div class='auto_title' style='background-color: white'>
+      {% for title in result_title %}
+        {{ title.movienm }}
+      {% endfor %}
+    </div> {% endcomment %}
+
+    <div style="color: red;">
+      {% if targetbase %}
+        {% for key, values in targetbase.items %}
+          {% if key == 'poster_path' %}
+            {% for value in values %}
+              <img src="https://image.tmdb.org/t/p/w500{{ value }}" alt="오류">
+            {% endfor %}
+          {% endif %}
+          {% if key == 'title' %}
+            {% for value in values %}
+              {{forloop.counter }} {{ value }} <br>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

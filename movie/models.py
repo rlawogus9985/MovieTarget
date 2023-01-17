@@ -38,3 +38,27 @@ class Actorlist(models.Model):
     class Meta:
         managed = True
         db_table = 'actorlist'
+
+class Secondbase(models.Model):
+    index = models.BigIntegerField(blank=True, null=True)
+    id = models.BigIntegerField(blank=True, primary_key=True)
+    release_date = models.TextField(blank=True, null=True)
+    title = models.TextField(blank=True, null=True)
+    director = models.TextField(blank=True, null=True)
+    genres = models.TextField(blank=True, null=True)
+    original_language = models.TextField(blank=True, null=True)
+    overview = models.TextField(blank=True, null=True)
+    popularity = models.FloatField(blank=True, null=True)
+    budget = models.BigIntegerField(blank=True, null=True)
+    revenue = models.BigIntegerField(blank=True, null=True)
+    tagline = models.TextField(blank=True, null=True)
+    vote_average = models.FloatField(blank=True, null=True)
+    vote_count = models.IntegerField(blank=True, null=True)
+    credits = models.TextField(blank=True, null=True)
+    keywords = models.TextField(blank=True, null=True)
+    poster_path = models.TextField(blank=True, null=True)
+    audits = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'secondbase'
