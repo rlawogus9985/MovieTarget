@@ -95,69 +95,129 @@ function TableGenre(e) {
   // document.getElementById("pageForm").submit();
 
   //장르를 선택했을 때 css
+  
   $(".showSelect").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
   "border-radius": "25px"});
 
 }
 
 // 배우 선택을 위한 js
+let name = []
 function TableActor(e) {
-  selected_actor = e.innerText.trim();
-  let fill_actor1 = document.getElementById("selected_actor1").value;
-  let fill_actor2 = document.getElementById("selected_actor2").value;
-  let fill_actor3 = document.getElementById("selected_actor3").value;
-  $(document).ready(function(){
+  // selected_actor = e.innerText.trim();
+  // let fill_actor1 = $(this);
 
-    $(".showActors").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
-    "border-radius": "25px"});
-    
+  // 신입사원이 아닌 배우의 중복된 체크
+  if(e != '신입 배우' ) {
+    for(let i=0; i<name.length; ++i) 
+      if(name[i] === e ) {return;}
+    }
+  name.push(e);
+
+  if(name.length > 3) {
+    return;
+  }
+
+  $.each(name, function(i, item) {
+    let temp = $("#selected_actor"+(i+1)).val(item)
+  //   let fill_actor = $(".show_actor"+(i+1));
+
+  //   fill_actor.css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
+  // "border-radius": "25px"})
+    let fill = document.getElementById("selected_actor"+(i+1))
+    fill.className = "actos"
   })
 
+  // 배우선택 취소 
+  const clz = document.querySelectorAll('input#selected_actor1, input#selected_actor2,input#selected_actor3');
+ 
+  for(let i=0; i<clz.length; i++){
+    clz[i].addEventListener('click', ()=>{
+      //alert($(this))
+      //clz[i].style.display="none";
+      $("#selected_actor"+(i+1)).val("")
+      let remove = document.getElementById("selected_actor"+(i+1))
+      remove.classList.remove('actos')
+      // clz[i].remove();
+      delete name[i];
+       
+    }, 10);
+
+  }
+
   // actor 중복검사
-  if (selected_actor != "신입 배우") {
-    if (selected_actor == fill_actor1 || selected_actor == fill_actor2 || selected_actor == fill_actor3) {
-      alert("중복선택하셨습니다. 배우를 다시 선택해주세요.");
-      return;
-    }
-  }
+  // if (selected_actor != "신입 배우") {
+  //   if (selected_actor == fill_actor1 || selected_actor == fill_actor2 || selected_actor == fill_actor3) {
+  //     alert("중복선택하셨습니다. 배우를 다시 선택해주세요.");
+  //     return;
+  //   }
+  // }
 
-  if (fill_actor1 == 0 || fill_actor1 == "") {
-    document.getElementById("selected_actor1").value = selected_actor;
-    document.getElementById("actor1").value = selected_actor;
-  } else if (fill_actor2 == 0 || fill_actor2 == "") {
-    document.getElementById("selected_actor2").value = selected_actor;
-    document.getElementById("actor2").value = selected_actor;
-  } else {
-    fill_actor3 = document.getElementById("selected_actor3").value;
-    document.getElementById("selected_actor3").value = selected_actor;
-    document.getElementById("actor3").value = selected_actor;
-  }
+  // if (fill_actor1 == 0 || fill_actor1 == "") {
+  //   document.getElementById("selected_actor1").value = selected_actor;
+  //   document.getElementById("actor1").value = selected_actor;
+  // } else if (fill_actor2 == 0 || fill_actor2 == "") {
+  //   document.getElementById("selected_actor2").value = selected_actor;
+  //   document.getElementById("actor2").value = selected_actor;
+  // } else {
+  //   fill_actor3 = document.getElementById("selected_actor3").value;
+  //   document.getElementById("selected_actor3").value = selected_actor;
+  //   document.getElementById("actor3").value = selected_actor;
+  // }
 
-  document.getElementById("pageForm").submit();
+  // document.getElementById("pageForm").submit();
 }
+
 
 // 배우 선택을 취소하기 위한 js
 function DeleteSelectActor1() {
-  let input = document.getElementById("selected_actor1");
-  let input2 = document.getElementById("actor1");
-  input.value = null;
-  input2.value = null;
-  document.getElementById("pageForm").submit();
+ 
+
+
+  //1번 아이템 삭제
+  var i = 0;
+  while (i < name.length) {
+    if (name[i] === name[0]) {
+      name.splice(0, 1);
+    } else {
+      ++i;
+    }
+  }
+  return name;
+  
+  // console.log(name);
+
+
+
+
+  // let input = document.getElementById("selected_actor1");
+  // input.value = null;
+  // let input2 = document.getElementById("actor1");
+  // input2.value = null;
+  // document.getElementById("pageForm").submit();
 }
 function DeleteSelectActor2() {
-  let input = document.getElementById("selected_actor2");
-  let input2 = document.getElementById("actor2");
-  input.value = null;
-  input2.value = null;
-  document.getElementById("pageForm").submit();
+  name.splice(1, 1);
+ 
+ 
+
+  // let input = document.getElementById("selected_actor2");
+  // let input2 = document.getElementById("actor2");
+  // input.value = null;
+  // input2.value = null;
+  // document.getElementById("pageForm").submit();
 }
 function DeleteSelectActor3() {
-  let input = document.getElementById("selected_actor3");
-  let input2 = document.getElementById("actor3");
-  input.value = null;
-  input2.value = null;
-  document.getElementById("pageForm").submit();
+
+  name.splice(2, 1);
+
+  // let input = document.getElementById("selected_actor3");
+  // let input2 = document.getElementById("actor3");
+  // input.value = null;
+  // input2.value = null;
+  // document.getElementById("pageForm").submit();
 }
+
 // 배우 선택을 취소하기 위한 js 끝
 
 // jQuery(document).ready(function () {
@@ -186,7 +246,7 @@ window.onload = function() {
   }
   
   const modalOpenBtn = document.querySelector("button#modalOpenBtn");
-  modalOpenBtn.addEventListener('click', openEmailModal);
+  //modalOpenBtn.addEventListener('click', openEmailModal);
   
   const modalCloseBtn = document.querySelector("button#modalCloseBtn");
   modalCloseBtn.addEventListener('click', closeEmailModal); 
