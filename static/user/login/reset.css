@@ -3,7 +3,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: silver;
+    background-color: dimgray;
     width: 400px;
     height: 250px;
 }
@@ -32,7 +32,7 @@
     left: 25%;
     top: 55%;
     transform: translate(-40%, -40%);
-    background-color: silver;
+    background-color: dimgray;
 }
 h2 {
     text-align: center;
