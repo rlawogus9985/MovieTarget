@@ -274,7 +274,7 @@ function resetPasswordPage() {
     return false; 
   }
   
-  if (resetPassword1 < 8 ||resetPassword1 > 20 || resetPassword2 < 8 || resetPassword2 > 20) {
+  if (resetPassword1.length < 8 ||resetPassword1.length > 20 || resetPassword2.length < 8 || resetPassword2.length > 20) {
     alert('새로운 비밀번호는 8글자이상 20글자 이하로 입력해주세요.')
     return false;
   }
@@ -332,7 +332,7 @@ function ToresetPasswordFindEmail(){
     },
     success: function (json) {
         if (json.result == 'True') {
-          resetPasswordAjax();
+          ToresetPasswordCheckPassword();
         }
         else {
           alert('입력한 아이디는 없는 계정입니다.')
@@ -346,7 +346,33 @@ function ToresetPasswordFindEmail(){
       })}
 
 
-
+function ToresetPasswordCheckPassword(){
+  $.ajax({
+    async: false,
+    type: 'POST',
+    url: '/user/toresetpasswordcheckpassword/',
+    data: JSON.stringify({
+        resetID: $('#resetID').val(),
+        resetPassword1: $('#resetPassword1').val(),
+    }),
+    headers: {
+      'X-CSRFTOKEN': $('#csrf_token').val()
+    },
+    success: function (json) {
+        if (json.result == 'False') {
+          alert('변경하고자 하는 비밀번호와 현재 비밀번호가 일치합니다.\n다시 입력해주세요.')
+          return false;
+        }
+        else {
+          resetPasswordAjax();
+        }
+        },
+        error: function (xhr, errmsg, err) {
+          alert('에러가 발생합니다.\n좀 더 개선된 모습을 선보이도록 하겠습니다.');
+          // console.log(xhr.status + ": " + xhr.responseText);
+        }
+      })}
+      
 // // 비밀번호 재설정 관련 자바스크립트 ###########
 // ###################################################
 ////////// Ajax /////////////

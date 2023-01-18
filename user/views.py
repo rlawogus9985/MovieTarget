@@ -22,6 +22,7 @@ from django.contrib.auth.hashers import check_password
 import json
 import smtplib
 from email.mime.text import MIMEText
+from django.contrib.auth.hashers import check_password
 
 ## SMTP 관련 인증
 from django.contrib.sites.shortcuts import get_current_site
@@ -143,8 +144,9 @@ def userchangepage(request):
 
 
 # @login_required(login_url=URL_LOGIN)
-# @login_required(login_url=reverse_lazy('user:login'))
-def  userchangeview(request, auth_user_id):
+@login_required(login_url=reverse_lazy('user:login'))
+def  userchangeview(request):
+# def  userchangeview(request, auth_user_id):
     """
     회원정보수정 기능과 관련된 함수 뷰이며
     현재 뷰 그리고 현재 뷰로 오도록한 url 그리고 url로 오도록한
@@ -153,6 +155,7 @@ def  userchangeview(request, auth_user_id):
     # auth_user.username 테이블 필드명 
     # username = request.POST.get('username', '') ## form에서 POST 형식으로 보낸 name명인 username을 get 해서 username이라는 변수명에 초기화 
     username = request.user.username
+    auth_user_id=request.user.id
     password = request.POST.get('password', '') ## form에서 POST 형식으로 보낸 name명인 password을 get 해서 username이라는 변수명에 초기화 
     password2 = request.POST.get('password2', '') ## form에서 POST 형식으로 보낸 name명인 password2을 get 해서 username이라는 변수명에 초기화 
     try:
@@ -160,14 +163,28 @@ def  userchangeview(request, auth_user_id):
             user = auth_views.UserModel.objects.get(pk=auth_user_id)
             user.set_password(password)
             user.save()
-            return render(request, 'user/profile.html')
+            # return render(request, 'user/profile.html')
+            return redirect(reverse_lazy('user:profile'))
         else:
-            return render(request, "user/user_change_page.html")
-            
+            # return render(request, "user/user_change_page.html")
+            return redirect(reverse_lazy('user:change_user_page'))
     except:
-        return render(request, 'user/profile.html')
+        # return render(request, 'user/profile.html')
+        return redirect(reverse_lazy('user:profile'))
 
-
+def password_check_ajax(request):
+    id = request.user.id
+    data = loads(request.body)
+    wantnewpassword=data.get("changepassword1")
+    user = auth_views.UserModel.objects.get(pk=id)
+    
+    if check_password(wantnewpassword,user.password):
+        print('변경하고자하는 비밀번호가 현재 비밀번호와 일치합니다.')
+        return JsonResponse({'result':'False'})
+    else:
+        print('변경하고자하는 비밀번호가 현재 비밀번호와 일치하지 않습니다.')
+        return JsonResponse({'result':'True'})
+    
 
 # delete() 하지않고 is_active를 0으로 update()할 새로운 회원탈퇴함수뷰.
 # @login_required(login_url=URL_LOGIN)
@@ -427,6 +444,17 @@ def toresetpasswordfindemail(requset):
     else:
         print('타켓유저가 존재하지않습니다.')
         return JsonResponse({'result':' Flase'})
+
+def toresetpasswordcheckpassword(request):
+    data = loads(request.body)
+    resetID=data.get("resetID")
+    resetPassword1=data.get("resetPassword1")
+    user=auth_views.UserModel.objects.get(username=resetID)
+    if check_password(resetPassword1, user.password):
+        print('변경하고자 하는 비밀번호와 현재 비밀번호가 일치합니다 다시 입력해주세요.')
+        return JsonResponse({'result':'False'})
+    else:
+        return JsonResponse({'result':'True'})
 
 
 ############## 지금은 사용하지 않는 이메일등록 함수뷰 

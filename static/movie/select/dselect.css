@@ -271,6 +271,9 @@ section .content-list .next {
 .modalEmailConstitution{
   height: 100px;
   width: 500px;
+  margin: 0;
+  position: absolute;
+  left: 0px;
 }
 /* 이메일 관련 모달창 css 끝 */
 
