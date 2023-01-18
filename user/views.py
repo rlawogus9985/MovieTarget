@@ -19,6 +19,18 @@ from user.decorators import * # 함수형 뷰 데코
 from django.utils.decorators import method_decorator # 클래스기반뷰에사용 데코
 from json import loads
 from django.contrib.auth.hashers import check_password
+import json
+import smtplib
+from email.mime.text import MIMEText
+
+## SMTP 관련 인증
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_str #,django 4버젼 미만force_text
+from .tokens import account_activation_token
+
 
 ## 비밀번호 재설정 토큰관련 모듈
 from django.conf import settings
@@ -198,7 +210,7 @@ def ajax_user_signup(request):
 
     
 # 원본 ajax login view 함수
-
+# 자바스크립트 ajax와 연결되어 
 def ajax_user_login(request):
     data = loads(request.body)
     ajax_username = data.get('loginname')
@@ -214,17 +226,10 @@ def ajax_user_login(request):
     else:
         return JsonResponse({'result': 'False'})
 
-# ## 테스트중인 ajax login view 로그인을 form클래스 및 내장form템플릿을 사용했을경우 쓸수 있나봄...
-# def ajax_user_login(request, self):
-#     data = loads(request.body)
-#     ajax_username = data.get('loginname')
-#     ajax_password = data.get('loginpassword')
-#     if ajax_username and ajax_password:
-#         user = auth_views.UserModel.objects.get(username=ajax_username)
-#         if not check_password(ajax_password, user.username):
-#             self.add_error('password', '비밀번호가 틀렸습니다.')
 
-#### 이메일 Ajax뷰
+################ 이메일 자바스크립트Ajax관련 함수뷰 
+################ 이메일관련 함수뷰
+# 자바스크립트 ajax와 연결되어 유저의 email 컬럼에 데이터가 존재하는지 여부를 확인하는 함수뷰
 # @login_required(login_url=URL_LOGIN)
 # @login_required(login_url=reverse_lazy('user:login'))
 def ajax_confirm_email(request):
@@ -233,7 +238,7 @@ def ajax_confirm_email(request):
     
     targetuser = auth_views.UserModel.objects.get(id=user_id)
     print(targetuser.email)
-    # targetuser = auth_views.UserModel.objects.filter(email=email)
+
     if len(targetuser.email) <= 0:
         print('해당유저의 이메일이 존재 하지 않음을 확인합니다.')
         return JsonResponse({'result': 'True'})
@@ -242,112 +247,204 @@ def ajax_confirm_email(request):
         return JsonResponse({'result': 'Fasle'})
 
 
-############## 이메일 함수뷰
-@login_required(login_url=URL_LOGIN)
-# @login_required(login_url=reverse_lazy('user:login'))
-def constitution_email(request):
+# 자바스크립트 ajax와 연결되어 이메일을 작성해서 이메일을 보내는 함수뷰
+# 구글링해서 얻은 코드를 일일영화 프로젝트에 맞게 커스텀한 함수뷰
+# 필요는 없지만 토큰(token)과 먼지는 모르지만 uid를 생성 및 이동 시도하는 함수뷰
+def ajax_token_email(request):
+    data = loads(request.body)
+    usereamil = data.get('userEmailId')
+    useremaildomain = data.get('userEmailDomain')
+    targetemail = usereamil+'@'+useremaildomain
+
     user_id = request.user.id
-    # userauth = auth_views.UserModel()
-    email_name = request.POST.get('emailname', '')
-    emaildomain = request.POST.get('emaildomain', '')
-    print(email_name+'@'+emaildomain)
-    email=email_name+'@'+emaildomain
     user = auth_views.UserModel.objects.get(pk=user_id)
+    
+    current_site = get_current_site(request) 
+    print('current_site : ', current_site)
+    
+    title = '일일영화설립 관련 이메일 입니다'
+    message = render_to_string('user/activation_email.html', {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+        'targetemail':targetemail,
+        })
+    print('message', message)
+    email = EmailMessage(title,message,to=[targetemail])
+    
+    # if targetemail.find('.') is False:
+    #     print('이메일의 형식 잘못되었습니다.')
+    #     return JsonResponse({'result': 'False'})
+    if auth_views.UserModel.objects.filter(email=targetemail):
+        print('이미등록된 이메일입니다.')
+        return JsonResponse({'result': 'False'})
+    elif auth_views.UserModel.objects.filter(pk=user_id).exists():
+        email.send()
+        print('이메일 보냈습니다.')
+        return JsonResponse({'result': 'True'})
+    else:
+        print('대상이 되는 이메일이 없습니다.')
+        return JsonResponse({'result': 'False'})
+
+
+# 이메일에서 클릭하라는 부분은 클릭시 데이터를 받아온 url이 데이터를 전해주고 그 데이터를 가지고 유저의 email을 업데이트(등록)해주는 함수뷰
+def activate(request, uidb64, token, targetemail):
+    print('targetemail',targetemail)
+    user_id = request.user.id
+    user = auth_views.UserModel.objects.get(pk=user_id)
+    # if len(user.email) <= 0:
     if len(user.email) <= 0:
-        auth_views.UserModel.objects.filter(pk=user_id).update(email=email)
+        auth_views.UserModel.objects.filter(pk=user_id).update(email=targetemail)
         print("영화사 이메일이 등록되었습니다.")
         return redirect('movie:board1')
     else:
-        print("이미 비활성화 되어있는 유저입니다.")
+        print("영화사 이메일이 이미 존재하는 유저입니다.")
         return redirect('movie:board1')
-##################################################
 
-#애 쓰고 주석처리안하면 무한방복문 걸림
-# -*- coding:utf-8 -*-
- 
-# import smtplib
-# from email.mime.text import MIMEText
- 
-# smtp = smtplib.SMTP('smtp.live.com', 587)
-# smtp.ehlo()      # say Hello
-# smtp.starttls()  # TLS 사용시 필요
-# smtp.login('lee@live.com', 'password')
- 
-# msg = MIMEText('본문 테스트 메시지')
-# msg['Subject'] = '테스트'
-# msg['To'] = 'kim@naver.com'
-# smtp.sendmail('lee@live.com', 'kim@naver.com', msg.as_string())
- 
-# smtp.quit()
+def ajax_to_find_confirm_email(request):
+    data = loads(request.body)
+    usereamil = data.get('emailName')
+    useremaildomain = data.get('emailDomain')
+    targetemail = usereamil+'@'+useremaildomain
+    print('targetemail',targetemail)
 
+    user = auth_views.UserModel.objects.get(email=targetemail)
+    username=user.username
+    if auth_views.UserModel.objects.filter(email=targetemail).exists():
+        print('아이디 찾기를 위한 이메일이 데이터베이스에 존재합니다.')
+        print('username은' ,username)
 
-######### 토큰함수뷰
-def ajax_token_email(request):
+        current_site = get_current_site(request) 
 
-    user_id = request.user.id
-    targetuser = auth_views.UserModel.objects.get(id=user_id)
-    print(targetuser.email)
-    # targetuser = auth_views.UserModel.objects.filter(email=email)
-    if len(targetuser.email) <= 0:
-        print('해당유저의 이메일이 존재 하지 않음을 확인합니다.')
+        title = '일일영화 아이디 찾기와 관련된 이메일입니다'
+        message = render_to_string('user/find_id_email.html', {
+            'username': username,
+            'domain': current_site.domain,
+            'targetemail':targetemail,
+            })
+        print('message', message)
+        email = EmailMessage(title,message,to=[targetemail])
+        email.send()
+        print('아이디 찾기 이메일보내기 완료했습니다.')
+
         return JsonResponse({'result': 'True'})
     else:
-        print('해당유저의 이메일이 존재 함을 확인합니다.')
+        print('아이디 찾기를 위한 이메일이 데이터베이스에 존재하지 않습니다.')
+        return JsonResponse({'result': 'False'})
+
+def findpasswordreset(request):
+    data = loads(request.body)
+    userName = data.get('userName')
+    emailName = data.get('emailName')
+    emailDomain = data.get('emailDomain')
+    targetemail = emailName+'@'+emailDomain
+    print('userName :', userName)
+    print('targetemail :',targetemail)
+
+    if auth_views.UserModel.objects.filter(username=userName,email=targetemail).exists():
+
+        print('비밀번호를 찾기를 위한 아이디와 이메일이 일치하는 데이터가 데이터베이스에 존재합니다.')
+
+        # 아래 한줄 새로 추가한 코드
+        user=auth_views.UserModel.objects.filter(username=userName,email=targetemail)
+        
+        current_site = get_current_site(request) 
+        title = '일일영화 비밀번호 찾기와 관련된 이메일입니다'
+        message = render_to_string('user/find_pw_emai.html', {
+            'username': userName,
+            'domain': current_site.domain,
+            'targetemail':targetemail,
+
+            #아래 두줄 새로 추가한코드
+            # 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            # 'token': account_activation_token.make_token(user),
+            })
+        print('message', message)
+        email = EmailMessage(title,message,to=[targetemail])
+        email.send()
+        print('비밀번호를 찾기를 위한 이메일보내기 완료했습니다.')
+
+        return JsonResponse({'result': 'True'})
+        
+    else:
+        print('비밀번호를 찾기를 위한 아이디와 이메일이 일치하는 데이터가 데이터베이스에 존재하지않습니다')
+        return JsonResponse({'result': 'False'})
+
+# @login_required(login_url='login')
+def emailresetpassword(request, username, targetemail):
+    print(username,targetemail)
+    return render(request,'user/to_rest_input_password.html')
+
+
+def fromeamilpasswordreset(requset):
+    data=loads(requset.body)
+    resetid=data.get('resetID')
+    resetpassword1=data.get('resetPassword1')
+    resetpassword2=data.get('resetPassword2')
+    print('restid : ',resetid)
+    print('resetpassword1 : ', resetpassword1)
+    print(type(resetpassword1))
+
+    # 'uid': urlsafe_base64_encode(force_bytes(user.pk))
+    # 'token': account_activation_token.make_token(user)
+
+
+    import bcrypt
+    if auth_views.UserModel.objects.filter(username=resetid).exists():
+
+        # resetpassword1 = bcrypt.hashpw(resetpassword1.encode('utf-8'), bcrypt.gensalt())
+        # print('resetpassword1에 관한정보 : ',resetpassword1, type(resetpassword1))
+        
+        user=auth_views.UserModel.objects.get(username=resetid)
+        user.set_password(resetpassword1)
+        user.save()
+
+        # user.set_password(self.cleaned_data["password1"])
+
+        # auth_views.UserModel.objects.filter(username=resetid).update(password=resetpassword1)
+
+        # print('user type은?', type(user))
+        # u=auth_views.UserModel.objects.filter(username=resetid)#.set_password(resetpassword1)
+        # u.update
+        # u.set_password(resetpassword1)
+        # u.save()
+        print(f'{resetid}의 비밀번호가 변경되었습니다.')
+        # return render(requset, 'dist/index.html')
+        return JsonResponse({'result':'True'})
+    else:
         return JsonResponse({'result': 'Fasle'})
 
-########## 위 사용하는 뷰 아래 비사용혹은 테스트중인 뷰
+
+def toresetpasswordfindemail(requset):
+    data=loads(requset.body)
+    resetid=data.get('resetID')
+    print(resetid)
+    if auth_views.UserModel.objects.filter(username=resetid):
+        print('타켓유저가 존재합니다.')
+        return JsonResponse({'result': 'True'})
+    else:
+        print('타켓유저가 존재하지않습니다.')
+        return JsonResponse({'result':' Flase'})
 
 
-#########
-# @require_POST
-# @login_required(login_url=reverse_lazy('user:login'))
-# def delete_user(request):
-
-#     userid = request.user.id 
-#     user =  auth_views.UserModel.objects.get(pk=userid) 
-#     if user.is_active:
-#         request.user.objects.update(is_active=0)
-#         user.save()
-#         print("해당유저가 비활성화 되었습니다.")
-#         return redirect('user:join')
+############## 지금은 사용하지 않는 이메일등록 함수뷰 
+# # @login_required(login_url=URL_LOGIN)
+# # @login_required(login_url=reverse_lazy('user:login'))
+# def constitution_email(request):
+#     user_id = request.user.id
+#     # userauth = auth_views.UserModel()
+#     email_name = request.POST.get('emailname', '')
+#     emaildomain = request.POST.get('emaildomain', '')
+#     print(email_name+'@'+emaildomain)
+#     email=email_name+'@'+emaildomain
+#     user = auth_views.UserModel.objects.get(pk=user_id)
+#     if len(user.email) <= 0:
+#         auth_views.UserModel.objects.filter(pk=user_id).update(email=email)
+#         print("영화사 이메일이 등록되었습니다.")
+#         return redirect('movie:board1')
 #     else:
 #         print("이미 비활성화 되어있는 유저입니다.")
-#         return redirect('user:join')
-
-def login(request):
-    return render(request, 'dist/index.html')
-# 로그인할때 사용하는 클래스 함수.
-# 로그인 이후 넘어가는 화면은 settings.py 의 Login_redirect_url
-
-## 테스트중인 새로운 클래스뷰
-@login_required(login_url=reverse_lazy('user:login'))
-class LoginClassView(View):
-    model = auth_views.UserModel
-    fields = ['username', 'password']
-    template_name = 'dist/index.html'
-    
-
-    def post(self, request):
-        data = json.loads(request.body)
-        try:
-            username    = data['username']
-            password = data['password']
-
-            if not auth_views.UserModel.objects.filter(username=username).exists():
-                return JsonResponse({'error': 'INVALID_USER'}, status=401)
-            if auth_views.UserModel.objects.get(username=username).password == password:
-                return JsonResponse({'message':'SUCCESS'}, status=200)
-            return JsonResponse({'error': 'INVALID_USER'}, status=401)
-
-        except KeyError:
-            return JsonResponse({'error': 'KEY_ERROR'}, status=400)
-
-# 원래 사용하던 유저탈퇴 함수뷰
-# @require_POST
-# @login_required(login_url=reverse_lazy('user:login'))
-# def delete_user(request):
-#     request.user.delete()
-#     # request.user.is_active()
-
-#     return redirect('user:join')
-
+#         return redirect('movie:board1')
+##################################################
+  
