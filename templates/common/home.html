@@ -8,39 +8,39 @@
 <link rel="stylesheet" href="{% static 'common/home/welcome.css' %}">
 <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
 <script src="{% static 'jquery.min.js' %}"></script>
-<script src="{% static 'common/home/about.js' %}"></script>
 
-<!-- 본문 -->
-  <!-- 홈 배경-->
-  <div class="backs">
-    <!-- 메뉴바 -->
-    <div class=header>
-      <a href="/" class="logo" target="blank">
-        <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
-      </a>
-      
-      <div class="welcom">
-        {% if user.is_authenticated %}
-      </div>
-
-      <div class="names">
-        <a href="{% url 'user:profile' %}" class="btn">회원정보</a>
-        <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
-      {% endif %}
-      </div> 
-    </div>
-   
-    {% if user.is_authenticated %} 
+<!-- 홈 배경-->
+<div class="backs">
+  <!-- 메뉴바 -->
+  <div class=header>
+    <a href="/" class="logo" target="blank">
+      <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+    </a>
+      {% if user.is_authenticated %}
+    <div class="names">
+      <a href="{% url 'user:profile' %}" class="btn">회원정보</a>
+      <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+    {% endif %}
+    </div> 
+  </div>
+  
+  <!-- 본문 -->
+  {% if user.is_authenticated %} 
+  
+  <section>
     <div class="content">
       <h1>{{ user.username }}님, 환영합니다.</h1>
       <br>
       <p>오직 일일영화에서만 제공하는 차별화된 영화 흥행 예측 서비스!
         <br>지금시작할까요?</p>
       <div>
-        <button type="button" onclick="location.href='movie/board/1'"><span></span>시작하기</button>
+        <button type="button" onclick="location.href='movie/board/1'"><span></span>직접 만들기</button>
+        <button type="button" onclick="location.href='movie/board/recommendation'"><span></span>추천을 받기</button>
       </div>
     </div>
-    {% else %}  
+ 
+
+  {% else %}  
     <div class="content">
       <h1>영화의 가치를 같이</h1>
       <br>
@@ -51,12 +51,43 @@
         <button type="button" onclick="location.href='user/login'"><span></span>가입하기</button>
       </div>
     </div>
-    {% endif %}
+  {% endif %}
 
-  </div>
+  </section>
 
+  <section id="s2">
+    <h1 class="about_t">일일영화 소개</h1>
+    <div class="about_1">
+      <h3>일일영화의 시작</h3>
+      <img src="{% static 'common/home/movie1.svg' %}">
+      <p>
+        영화는 많은 의미가 담겨 있습니다. 하지만 의미있는 영화가 전부 가치있는 영화라고 말 하긴 어렵습니다. <br> 
+        또한 가치 있는 영화도 좋은 성과를 이루지 못하기도 합니다. 
+        특히 영화는 평론과 비평의 결과가 다른 경우가 많습니다.
+        <br> 세상에 나쁜 영화는 없습니다. 관객과 맞지 않는 영화가 존재 할 뿐…<br><br>  
+        어떤 영화가 관객과 맞는지 알 수 있는 방법이 있다면 어떨까요? 
+        영화를 만들 때 소재별로 관객들의 선호도를 보여주면 어떨까요? <br> 
+        영화를 만들기 전에 관객들의 선호도를 미리 알 수 있다면 어떨까요? 
+        <br>
+        <br>
+        일일영화는 이런 작은 호기심에서 시작되었습니다.
+      </p>
+    </div>
+
+    <div class="about_2">
+      <h3>영화의 가치를 같이 제시하는 공간, 일일영화</h3>
+      <p>
+        만약 이런 궁금증을 해결 할 수 있는 공간이 있다면 어떨까요? <br>
+        목적에 맞는 각 분야의 전문가들이 모여 관객을 만족시킬 수 밖에 없는 영화를 만 들 수 있지 않을까요?<br>
+        가치 있는 영화가 큰 성과를 이루는 세상이 되지 않을까요?<br><br> 
+        영화의 흥행지수를 심층분석하여 흥행정도를 예측 할 수 있는 공간인 일일영화는 
+        영화의 가치를 함께 생각하고 제시 할 수 있는 공간이 되기 위해 노력합니다.
+        
+      </p>
+      <img src="{% static 'common/home/movie2.svg' %}">
+    </div>
+  </section>
+  
 </div>
-<button></button>
-
 {% endblock body %}
 

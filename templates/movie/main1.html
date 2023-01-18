@@ -1,135 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>일일영화 - 감독 선택 #1</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일일영화 - 감독 선택 #1</title>
 
-  {% load static %}  
-  <!-- 파비콘 이미지 -->
-  <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
+    {% load static %}  
+    <!-- 파비콘 이미지 -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
+    <!-- 메뉴바 css -->
+    <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
 
-  <!-- 사진 card css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-  <link rel="stylesheet" href="{% static 'movie/select/card.css' %}">
-
-  <!-- 메뉴바 css -->
-  <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
-  <!-- 페이징 css -->
-  <link rel="stylesheet" href="{% static 'user/selected/pselected.css' %}"> 
-  <!-- card 페이징 js  -->
-  <script src="{% static 'movie/select/card.js' %}"></script>
-  <!-- 검색창 css -->
-  <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
-
-  <!-- 메인js화면  -->
-  <script src="{% static 'movie/select/dselect.js' %}"></script>
-  <!-- j쿼리 -->
-  <script src="{% static 'jquery.min.js' %}"></script>
-
-</head>
-<body>
-  <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
-  <div class="backs">
-    <!-- 메뉴바 -->
-    <div class=header>
-      <a href="/" class="logo" target="blank">
-        <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
-      </a>
-
-      <div class="welcom">
-      {% if user.is_authenticated %}
-      {{ user.username }}님, 환영합니다.<br>
-      </div>
-
-      <div class="names">
-        <a href="{% url 'user:profile' %}" class="btn"> 회원정보 </a>
-        <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
-      {% else %}
-      <!-- <a href="{% url 'user:login' %}" class="btn">로그인하기</a> -->
-      {% endif %}
-      </div> 
-    </div>
-
-    <!-- 페이지 설명 창-->
-    <div>
-    <h1>감독을 선택해주세요</h1>
-    </div>
-
-    <!-- 검색 창-->
-    <form id="searchForm" autocomplete="off" class="box">
-      <input type="text" name="searchWord" placeholder="{{ searchWord|default:'감독을 검색해주세요'|default_if_none:'' }}" />
-    </form>
+    <!-- 검색창 css -->
+    <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
+    <!-- DB card 선택 css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static 'movie/select/card.css' %}">
+    <!-- 페이징 css -->
+    <link rel="stylesheet" href="{% static 'user/selected/pselected.css' %}"> 
     
-    <!-- 선택한 내용 보여주기 -->
-    <div class="show">
-      <input class="showSelect" type="text" name="selected_director" id="selected_director" readonly>
-    </div>
+    <!-- DB card 선택 js  -->
+    <script src="{% static 'movie/select/card.js' %}"></script>
+    <!-- 메인js화면  -->
+    <script src="{% static 'movie/select/dselect.js' %}"></script>
+    <!-- j쿼리사용 js -->
+    <script src="{% static 'jquery.min.js' %}"></script>
+  </head>
+  <body>
+    <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+    <div class="backs">
+      <!-- 메뉴바 -->
+      <div class=header>
+        <a href="/" class="logo" target="blank">
+          <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+        </a>
 
-    <!-- DB 선택 테이블 css -->
-    <section>
-      <div class="content-list">
-        <div class="slider">
-          {% for list in targetbase_list %}
-          <div class="item" onclick="TableDirector(this)">
-            {{ list.director }}
-          </div>
-          {% endfor %}
-
+        <div class="welcom">
+        {% if user.is_authenticated %}
+        {{ user.username }}님, 환영합니다.<br>
         </div>
-      </div>
-    </section>
 
-    <!-- css 입힌 페이징 기능 -->   
-    <div class="pagination">
-      <!-- 이전 페이지 -->
-      {% if page_obj.has_previous %}
-        <a href="?searchWord={{ searchWord }}&page={{ page_obj.previous_page_number }}" class="page-link">이전</a>
-      {% else %}
-        <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
-
-      {% endif %}
-
-      <!-- 페이지 리스트 -->
-      {% for page_number in page_obj.paginator.page_range %}
-        {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
-          {% if page_number == page_obj.number %}
-            <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
-          {% else %}
-            <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
-          {% endif %}
+        <div class="names">
+          <a href="{% url 'user:profile' %}" class="btn"> 회원정보 </a>
+          <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+        {% else %}
+        <!-- <a href="{% url 'user:login' %}" class="btn">로그인하기</a> -->
         {% endif %}
-      {% endfor %}
+        </div> 
+      </div>
 
-      <!-- 다음페이지 -->
-      {% if page_obj.has_next %}
-        <a href="?searchWord={{ searchWord }}&page={{ page_obj.next_page_number }}" class="page-link">다음</a>
-      {% else %}
-        <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
-      {% endif %}
-    </div>
- 
-    <div class="page_first_next">
-      <!-- 다음(2/4) 버튼의 기존기능에 현재 로그인 되어있는 계정의 email 컬럼에 value가 있는지 여부를 확인하는 Ajax추가 -->
-      <a href="javascript:void(0);" class="page_first_btn" onclick="nextBtnEmailCheckAjax();">다음(2/4)</a>
-      {% comment %}<a href="javascript:void(0);" class="page_first_btn" onclick="selectDataDirector();">다음(2/4)</a>{% endcomment %} 
-    </div>
+      <!-- 페이지 설명 창-->
+      <div>
+      <h1>감독을 선택해주세요</h1>
+      </div>
 
-    <!-- 영화설립이메일 모달창 -->
-    <div class="modalEmailConstitution">
-      <button id="modalOpenBtn">이메일등록</button>
-      <button id="modalCloseBtn">닫기</button>
+      <!-- 선택한 내용 보여주기 -->
+      <div class="show">
+        <input class="showSelect" type="text" name="selected_director" id="selected_director" readonly>
+      </div>
+
+      <!-- 검색 창-->
+      <form id="searchForm" autocomplete="off" class="box">
+        <input type="text" name="searchWord" placeholder="{{ searchWord|default:'감독을 검색해주세요'|default_if_none:'' }}" />
+      </form>
+      
+      <!-- DB 선택 테이블 css -->
+      <section>
+        <div class="content-list">
+          <div class="slider">
+            {% for list in targetbase_list %}
+            <div class="item" onclick="TableDirector(this)">
+              {{ list.director }}
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </section>
+
+      <!-- DB 페이징 기능 -->   
+      <div class="pagination">
+        <!-- DB 이전 페이지 -->
+        {% if page_obj.has_previous %}
+          <a href="?searchWord={{ searchWord }}&page={{ page_obj.previous_page_number }}" class="page-link">이전</a>
+        {% else %}
+          <a href="#" class="page-link" tabindex="-1" aria-disabled="true">이전</a>
+
+        {% endif %}
+
+        <!-- DB 페이지 리스트 -->
+        {% for page_number in page_obj.paginator.page_range %}
+          {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+            {% if page_number == page_obj.number %}
+              <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+            {% else %}
+              <a href="?searchWord={{ searchWord }}&page={{ page_number }}" class="page-link">{{ page_number }}</a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        <!-- DB 다음페이지 -->
+        {% if page_obj.has_next %}
+          <a href="?searchWord={{ searchWord }}&page={{ page_obj.next_page_number }}" class="page-link">다음</a>
+        {% else %}
+          <a href="#" tabindex="-1" aria-disabled="true" class="page-link">다음</a>
+        {% endif %}
+      </div>
+  
+      <!-- main2.html로 이동 버튼 -->
+      <div class="page_1">
+        {% comment %} <a href="{% url 'movie:board1' %}" class="page_1_btn">이전(◀)</a> {% endcomment %}
+        <a href="javascript:void(0);" class="page_1_btn" onclick="selectDataDirector();">다음(2/4)</a>
+      </div>
+      
+      <!-- 이메일 모달 -->
+      {% comment %}
+      <div class="page_first_next">
+        <button class="page_first_btn" id="only_one_botton" onclick="constitution();">다음(2/4)</button>
+        <a href="javascript:void(0);" class="page_first_btn" onclick="selectDataDirector();">다음(2/4)</a>
+        <a href="javascript:void(0);" class="page_first_btn" onclick="nextBtnEmailCheckAjax();">다음(2/4)</a>
+      </div>
+
+      <!-- 영화설립이메일 모달창 -->
+      <button id="modalOpenBtn">이메일등록
+
+      </button>
       <div id="emailModal">
+
+        <!-- 왼쪽 클릭은 2,3 페이지만-->
+        <div class="slide_prev_button slide_button"><a href="movie:board1">◀</a></div>
+        <!-- 오른쪽 클릭은 1,2,3 페이지만-->
+        <!-- 현지점(1페이지)에서 누르면 바로 2페이지로 가는 임시 기능-->
+        <div class="slide_next_button slide_button"><a href="{% url 'movie:board2' %}">▶</a></div>
+
+        <ul>
+          <button id="modalCloseBtn">닫기</button>
+          <li>
+            <input type="text" name="user_email" placeholder="이메일 ID를 입력해주세요." id="userEmailId">@<input type="text" name="domain_email" placeholder="이메일 Domain을 입력해주세요." id="userEmailDomain">
+            <a href="javascript:void(0);" class="film_email_constitution" id="film_email_constitution_id" onclick="emailCheckAjax()">등록하기</a>
+          </li>
+        </ul>  
+      </div>
+      {% endcomment %}
+
+      <!--  영화설립이메일 모달창 -->    
+      <div class="modalEmailConstitution">
+        <button id="modalOpenBtn">이메일등록</button>
+        <button id="modalCloseBtn">닫기</button>
+        <div id="emailModal">
           
           <input type="text" name="user_email" placeholder="이메일 ID를 입력" id="userEmailId">
           <div style='color: white;' id="to_to_id">@</div>
           <input type="text" name="domain_email" placeholder="이메일 Domain을 입력" id="userEmailDomain">
           <a href="javascript:void(0);" class="film_email_constitution" id="film_email_constitution_id" onclick="emailCheckAjax()" style="color: white; margin: 0;">등록하기</a>  
+        </div>
       </div>
+      
     </div>
-    
   </body>
 </html>
 

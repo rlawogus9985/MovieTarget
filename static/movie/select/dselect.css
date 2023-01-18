@@ -1,3 +1,11 @@
+/* 
+home.html에서 사용하는 css 
+main들에서 사용하는 css
+(검색창,)
+
+
+*/
+
 *{
   margin: 0;
   padding: 0;
@@ -18,7 +26,7 @@ a {
 }
 
 .slide_button > a {
-  color: black;
+  color: #292a2c;
 } 
 
 /* 페이지 제목 */
@@ -33,7 +41,7 @@ h1{
 form.box{
   position: absolute;
   top: 19%;
-  left: 76%;
+  left: 76.5%;
   color: #fff;
   text-align: center;
 }
@@ -54,25 +62,19 @@ form.box input[text=text]::placeholder{
 }
   
 
-/* 선택한 내용 보여주기 꾸미기 */
+/* main1-2.html 선택한 내용 보여주기 위치 */
 .show{
   float: right;
   margin-top: 23px;
-  margin-right: 200px;
+  margin-right: 32px;
   color: white;
   padding: 10px;
   height: 20px;
+
 }
 
-.show_acto{
-  float: right;
-  text-align:center;
-  margin-top: 23px;
-  color: white;
-  padding: 11px;
-}
-
-.showSelect, .showActors {
+/* main1-2.html 선택한 내용 보여주기 꾸미기 */
+.showSelect {
   background-color: #292a2c;
   border: none;
   outline: 2px none;
@@ -83,7 +85,35 @@ form.box input[text=text]::placeholder{
   cursor: pointer;
 }
 
-/* 메인 선택 card css */
+/* main3.html db선택한 내용 보여주기 위치 */
+.show_acto{
+  float: right;
+  text-align:center;
+  margin-top: 23px;
+  color: white;
+  padding: 8px;
+  margin-right: 33px;
+}
+
+/*  main3.html db 선택한 내용 보여주기 꾸미기 */
+.show_acto input {
+  background-color: #292a2c;
+  border: none;
+  outline: 2px none;
+  color: white;
+  text-align: center;
+  font-size: 13px;
+  padding: 2px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.actos {
+  background-image: linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%);
+  border-radius: 25px;
+}
+
+/* DB 선택 테이블 */
 section .content-list {
   margin-top: 5rem;
   margin-bottom: 3rem;
@@ -143,66 +173,6 @@ section .content-list .next {
   cursor: pointer;
 }
 
-
-
-/* 다음페이지 */
-.btn_next {
-  cursor: pointer;
-  transition: all 200ms linear;
-  border-radius: 4px;
-  height: 44px;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  transition: all 200ms linear;
-  padding: 0 30px;
-  letter-spacing: 1px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: none;
-  background-color: #ffeba7;
-  color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
-
-  margin-left: 80%;
-  margin-top: -3%;
-  text-decoration: none;
-}
-
-.btn_next:active,
-.btn_next:focus {
-  background-color: #102770;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
-}
-
-.btn_next:hover {
-  background-color: #102770;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
-}
-
-/* 선택한 내용 보여주기 꾸미기 */
-.showSelect, .showActors {
-  background-color: #1f2029;
-  border: none;
-  outline: 2px none;
-  color: white;
-  text-align: center;
-}
-
-.showActors {
- border-bottom: 2px solid white;
- margin-top: 10px;
-
-}
-
-/* 배우선택 버튼 자리수정 */
-.actors {
-  margin-top: -50px;
-}
 
 /* 이메일 관련 모달창 css 시작점 */
 #modalOpenBtn {
@@ -287,9 +257,6 @@ section .content-list .next {
   position: inherit;
   top: 30;
   right: 100px;
-
-
-  
 }
 
 #userEmailDomain{
@@ -300,10 +267,10 @@ section .content-list .next {
   position: inherit;
 
 } */
+
 .modalEmailConstitution{
   height: 100px;
   width: 500px;
-
 }
 /* 이메일 관련 모달창 css 끝 */
 

@@ -80,10 +80,6 @@ function TableDirector(e) {
   // 필요한 텍스트 파일인 selected_director를 사용하여 id가 selected_director인 곳에 value로 집어넣어준다.
   document.getElementById("selected_director").value = selected_director;
 
-  
-  // //감독을 선택하면 선택했다는 텍스트를 넣어준다.
-  // $(".showDirectors>span").text("감독을 선택하셨습니다.");
-  
   // 수정해보려고함 2023 01 09 아래
   // 이메일 등록 관련 모달창 관련 자바스크립트 코드 - 시작점에서 null값이 출력이되서 click event객체가 없었음
   // 질문 결과 위에서 제이쿼리 객체로 사용했으면 아래에서 바닐라자바스크립트에서 dom get element 사용시 값을 가져올 수 없다고함.
@@ -92,9 +88,12 @@ function TableDirector(e) {
   // spanShowDirectors.textContent = "감독을 선택하셨습니다.";
 
   //감독을 선택했을 때 css
+  // let showcss = document.getElementsByClassName("showSelect")
+  // showcss.css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
+  // "border-radius": "25px"});
+
   $(".showSelect").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
   "border-radius": "25px"});
-
 }
 
 // 장르 선택을 위한 js
@@ -115,69 +114,129 @@ function TableGenre(e) {
   // spanShowGenresSpan.textContent = "장르를 선택하셨습니다.";
 
   //장르를 선택했을 때 css
+  
   $(".showSelect").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
   "border-radius": "25px"});
 
 }
 
 // 배우 선택을 위한 js
+let name = []
 function TableActor(e) {
-  selected_actor = e.innerText.trim();
-  let fill_actor1 = document.getElementById("selected_actor1").value;
-  let fill_actor2 = document.getElementById("selected_actor2").value;
-  let fill_actor3 = document.getElementById("selected_actor3").value;
-  $(document).ready(function(){
+  // selected_actor = e.innerText.trim();
+  // let fill_actor1 = $(this);
 
-    $(".showActors").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
-    "border-radius": "25px"});
-    
+  // 신입사원이 아닌 배우의 중복된 체크
+  if(e != '신입 배우' ) {
+    for(let i=0; i<name.length; ++i) 
+      if(name[i] === e ) {return;}
+    }
+  name.push(e);
+
+  if(name.length > 3) {
+    return;
+  }
+
+  $.each(name, function(i, item) {
+    let temp = $("#selected_actor"+(i+1)).val(item)
+  //   let fill_actor = $(".show_actor"+(i+1));
+
+  //   fill_actor.css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
+  // "border-radius": "25px"})
+    let fill = document.getElementById("selected_actor"+(i+1))
+    fill.className = "actos"
   })
 
+  // 배우선택 취소 
+  const clz = document.querySelectorAll('input#selected_actor1, input#selected_actor2,input#selected_actor3');
+ 
+  for(let i=0; i<clz.length; i++){
+    clz[i].addEventListener('click', ()=>{
+      //alert($(this))
+      //clz[i].style.display="none";
+      $("#selected_actor"+(i+1)).val("")
+      let remove = document.getElementById("selected_actor"+(i+1))
+      remove.classList.remove('actos')
+      // clz[i].remove();
+      delete name[i];
+       
+    }, 10);
+
+  }
+
   // actor 중복검사
-  if (selected_actor != "신입 배우") {
-    if (selected_actor == fill_actor1 || selected_actor == fill_actor2 || selected_actor == fill_actor3) {
-      alert("중복선택하셨습니다. 배우를 다시 선택해주세요.");
-      return;
-    }
-  }
+  // if (selected_actor != "신입 배우") {
+  //   if (selected_actor == fill_actor1 || selected_actor == fill_actor2 || selected_actor == fill_actor3) {
+  //     alert("중복선택하셨습니다. 배우를 다시 선택해주세요.");
+  //     return;
+  //   }
+  // }
 
-  if (fill_actor1 == 0 || fill_actor1 == "") {
-    document.getElementById("selected_actor1").value = selected_actor;
-    document.getElementById("actor1").value = selected_actor;
-  } else if (fill_actor2 == 0 || fill_actor2 == "") {
-    document.getElementById("selected_actor2").value = selected_actor;
-    document.getElementById("actor2").value = selected_actor;
-  } else {
-    fill_actor3 = document.getElementById("selected_actor3").value;
-    document.getElementById("selected_actor3").value = selected_actor;
-    document.getElementById("actor3").value = selected_actor;
-  }
+  // if (fill_actor1 == 0 || fill_actor1 == "") {
+  //   document.getElementById("selected_actor1").value = selected_actor;
+  //   document.getElementById("actor1").value = selected_actor;
+  // } else if (fill_actor2 == 0 || fill_actor2 == "") {
+  //   document.getElementById("selected_actor2").value = selected_actor;
+  //   document.getElementById("actor2").value = selected_actor;
+  // } else {
+  //   fill_actor3 = document.getElementById("selected_actor3").value;
+  //   document.getElementById("selected_actor3").value = selected_actor;
+  //   document.getElementById("actor3").value = selected_actor;
+  // }
 
-  document.getElementById("pageForm").submit();
+  // document.getElementById("pageForm").submit();
 }
+
 
 // 배우 선택을 취소하기 위한 js
 function DeleteSelectActor1() {
-  let input = document.getElementById("selected_actor1");
-  let input2 = document.getElementById("actor1");
-  input.value = null;
-  input2.value = null;
-  document.getElementById("pageForm").submit();
+ 
+
+
+  //1번 아이템 삭제
+  var i = 0;
+  while (i < name.length) {
+    if (name[i] === name[0]) {
+      name.splice(0, 1);
+    } else {
+      ++i;
+    }
+  }
+  return name;
+  
+  // console.log(name);
+
+
+
+
+  // let input = document.getElementById("selected_actor1");
+  // input.value = null;
+  // let input2 = document.getElementById("actor1");
+  // input2.value = null;
+  // document.getElementById("pageForm").submit();
 }
 function DeleteSelectActor2() {
-  let input = document.getElementById("selected_actor2");
-  let input2 = document.getElementById("actor2");
-  input.value = null;
-  input2.value = null;
-  document.getElementById("pageForm").submit();
+  name.splice(1, 1);
+ 
+ 
+
+  // let input = document.getElementById("selected_actor2");
+  // let input2 = document.getElementById("actor2");
+  // input.value = null;
+  // input2.value = null;
+  // document.getElementById("pageForm").submit();
 }
 function DeleteSelectActor3() {
-  let input = document.getElementById("selected_actor3");
-  let input2 = document.getElementById("actor3");
-  input.value = null;
-  input2.value = null;
-  document.getElementById("pageForm").submit();
+
+  name.splice(2, 1);
+
+  // let input = document.getElementById("selected_actor3");
+  // let input2 = document.getElementById("actor3");
+  // input.value = null;
+  // input2.value = null;
+  // document.getElementById("pageForm").submit();
 }
+
 // 배우 선택을 취소하기 위한 js 끝
 
 // jQuery(document).ready(function () {
@@ -210,7 +269,7 @@ window.onload = function() {
   }
   
   const modalOpenBtn = document.querySelector("button#modalOpenBtn");
-  modalOpenBtn.addEventListener('click', openEmailModal);
+  //modalOpenBtn.addEventListener('click', openEmailModal);
   
   const modalCloseBtn = document.querySelector("button#modalCloseBtn");
   
@@ -368,3 +427,4 @@ function ToResultBtnEmailCheckAjax() {
   
 
 // 이메일 등록 관련 모달창 관련 자바스크립트 코드 - 끝점 #######################
+
