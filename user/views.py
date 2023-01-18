@@ -151,7 +151,8 @@ def  userchangeview(request, auth_user_id):
     html template의 내의 urltemplates가 적힌  form에서 보내는 name을 활용
     """
     # auth_user.username 테이블 필드명 
-    username = request.POST.get('username', '') ## form에서 POST 형식으로 보낸 name명인 username을 get 해서 username이라는 변수명에 초기화 
+    # username = request.POST.get('username', '') ## form에서 POST 형식으로 보낸 name명인 username을 get 해서 username이라는 변수명에 초기화 
+    username = request.user.username
     password = request.POST.get('password', '') ## form에서 POST 형식으로 보낸 name명인 password을 get 해서 username이라는 변수명에 초기화 
     password2 = request.POST.get('password2', '') ## form에서 POST 형식으로 보낸 name명인 password2을 get 해서 username이라는 변수명에 초기화 
     try:
