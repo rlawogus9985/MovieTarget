@@ -6,58 +6,157 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <title>일일영화 - 추가 선택 #4</title>
   {% load static %}
-  <link rel="stylesheet" href="{% static 'common/menubar/style.css' %}">
-  <link rel="stylesheet" href="{% static 'common/main/style.css' %}">
+
+  <!-- 메인js화면  -->
   <script src="{% static 'movie/select/dselect.js' %}"></script>
+  <!-- 파비콘 이미지 -->
   <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
+  <!-- 메뉴바 css -->
+  <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
+  <!-- HTML로 이동 버튼 css -->
+  <link rel="stylesheet" href="{% static 'user/selected/pselected.css' %}">
+  <!-- j쿼리 -->
+  <script src="{% static 'jquery.min.js' %}"></script>
+  <!-- 드롭박스 css -->
+  <link rel="stylesheet" href="{% static 'common/main/style.css' %}">
+  <script src="https://kit.fontawesome.com/917d6fe11c.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
+  <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
 
-<!-- 메뉴 바(직접 작성)-->
-<div style="background-color:#171c28; display: flex; justify-content: space-between">
-  <a href="/"><img src="{% static 'My project-1.png' %}" alt="일일영화 로고" style="height: 100px; width: auto;"></a>
-	
-  <div style="color: white; text-align:right; top: 5px; right: 10px;">
-  {% if user.is_authenticated %}
-    {{ user.username }}님, 환영합니다.<br>
-    <a href="{% url 'user:profile' %}" class="btn other">내정보</a>
-    <a href="{% url 'user:logout' %}" class="btn other">로그아웃</a>
-  {% endif %}
-  </div> 
-</div>
+  <div class="backs">
+    <!-- 메뉴바 -->
+    <div class=header>
+      <a href="/" class="logo" target="blank">
+        <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+      </a>
 
-  <br>
-  <div class="dropdown_">
-    <select class="dropdown" id="movieNations">
-      <option>한국</option>
-      <option>미국</option>
-      <option>아시아</option>
-      <option>유럽</option>
-      <option>기타</option>
-    </select>
+      <div class="welcom">
+      {% if user.is_authenticated %}
+      {{ user.username }}님, 환영합니다.<br>
+      </div>
+
+      <div class="names">
+        <a href="{% url 'user:profile' %}" class="btn"> 회원정보 </a>
+        <a href="{% url 'user:logout' %}" class="btn">로그아웃</a>
+      {% else %}
+      <!-- <a href="{% url 'user:login' %}" class="btn">로그인하기</a> -->
+      {% endif %}
+      </div> 
+    </div>
+
+    <!-- 새 드롭박스 -->
+  
+    <div class="select_">
+      <div class="select_container">
+        <select class="select_box" id="movieNations" >
+          <option selected disabled hidden>국가를 선택하세요</option>
+          <option class="infos">한국</option>
+          <option class="infos">미국</option>
+          <option class="infos">아시아</option>
+          <option class="infos">유럽</option>
+          <option class="infos">기타</option>
+        </select>
+        <div class="select_icon">
+          <i class="fa-solid fa-caret-down"></i>
+        </div>
+
+        <select class="select_box" id="movieOpenDt" >
+          <option selected disabled hidden>기간을 선택하세요</option>
+          <option class="infos">1분기</option>
+          <option class="infos">2분기</option>
+          <option class="infos">3분기</option>
+          <option class="infos">4분기</option>
+        </select>
+        <div class="select_icon">
+          <i class="fa-solid fa-caret-down"></i>
+        </div>
+        
+        <select class="select_box" id="movieAudit" >
+          <option selected disabled hidden>연령을 선택하세요</option>
+          <option class="infos">전체관람가</option>
+          <option class="infos">12세관람가</option>
+          <option class="infos">12세이상관람가</option>
+          <option class="infos">15세이상관람가</option>
+          <option class="infos">청소년관람불가</option>
+        </select>
+        <div class="select_icon">
+          <i class="fa-solid fa-caret-down"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기존 드롭박스  -->
+    {% comment %}
+    <div class="dropbox">
+      <div class="dropdown_">
+        <select class="dropdown" id="movieNations" >
+          <option selected disabled value="option1">국가를 선택하세요</option>
+          <option>한국</option>
+          <option>미국</option>
+          <option>아시아</option>
+          <option>유럽</option>
+          <option>기타</option>
+        </select>
+        
+        <select class="dropdown" id="movieOpenDt">
+          <option selected disabled value="option2">기간을 선택하세요</option>
+          <option>1분기</option>
+          <option>2분기</option>
+          <option>3분기</option>
+          <option>4분기</option>
+        </select>
+        
+        <select class="dropdown" id="movieAudit">
+          <option selected disabled value="option3">연령을 선택하세요</option>
+          <option>전체관람가</option>
+          <option>12세</option>
+          <option>12세이상관람가</option>
+          <option>15세이상관람가</option>
+          <option>청소년관람불가</option>
+        </select>
+      </div>
+    </div>
+    {% endcomment %}
+
+    <div class="page_4">
+      <a href="{% url 'movie:board3' %}" class="btn_before">이전(3/4)</a>
+      
+      
+      <a href="javascript:void(0);" class="btn_next" onclick="selectDataNationsAuditOpendt();">결과 보기</a>
+      {% comment %}
+      <a href="javascript:void(0);" class="btn_next" onclick="ToResultBtnEmailCheckAjax();">결과 보기</a>
+      {% endcomment %}
+     
+  
+         
+    </div>
     
-    <select class="dropdown" id="movieOpenDt">
-      <option>1분기</option>
-      <option>2분기</option>
-      <option>3분기</option>
-      <option>4분기</option>
-    </select>
     
-    <select class="dropdown" id="movieAudit">
-      <option>전체관람가</option>
-      <option>12세</option>
-      <option>12세이상관람가</option>
-      <option>15세이상관람가</option>
-      <option>청소년관람불가</option>
-    </select>
+    
   </div>
-  <br>
-  <div class="lower_">
-    <a href="{% url 'movie:board3' %}" class="btn_">이전(3/4)</a>
-    <a href="javascript:void(0);" class="btn_" onclick="selectDataNationsAuditOpendt();">결과 보기</a>
+  {% comment %}
+  <!-- 영화설립이메일 모달창 -->
+  <button id="modalOpenBtn">이메일등록</button>
+  <div id="emailModal">
+    <ul>
+      <button id="modalCloseBtn">닫기</button>
+      <li>
+        <ul id="modalUl">
+          <input type="text" name="user_email" placeholder="이메일 ID를 입력해주세요." id="userEmailId">@<input type="text" name="domain_email" placeholder="이메일 Domain을 입력해주세요." id="userEmailDomain">
+          <a href="javascript:void(0);" class="film_email_constitution" id="film_email_constitution_id" onclick="emailCheckAjax()">등록하기</a>
+          
+        </ul>
+      </li>
+    </ul>  
   </div>
-
+  {% endcomment %}
+  </div>
 </body>
+</html>
+</body>
+
 {% comment %}
 <form action="{% url 'movie:select' %}" id="movieSelect" method="post" autocomplete="off">
   {% csrf_token %}

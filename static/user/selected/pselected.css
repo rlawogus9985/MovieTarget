@@ -1,36 +1,173 @@
-.skybtn {
+/* home.html에서 사용하는 css 
+
+main들에서 사용하는 css
+(db페이징, HTML 페이지 이동버튼)
+
+*/
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* 홈 배경 css */
+.backs{
+  width: 100%;
+  height: 100vh;
+  background: #292a2c;
+  background-size: cover;
+  background-position: center;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #292a2c;
+  /* background: linear-gradient(#0f0c29, #302b63, #24243e); */
+}
+
+/* DB 페이징 */
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a {
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #292a2c;
+}
+
+.pagination a:active{
+  background-color: red;
+  color: white;
+  border: 1px solid #292a2c;
+}
+
+.pagination a:hover {
+  background-color: rgb(255, 255, 255);
+  color: red;
+}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
+/* html 이동 버튼 위치*/
+.page_1{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -75px;
+  margin-right: 41px;
+}
+.page_2 {
+  display: flex;
+  margin-top: -75px;
+}
+.page_3 {
+  display: flex;
+  margin-top: -96.5px;
+}
+
+.page_4 {
+  display: flex;
+  margin-top: 440px;
+  z-index: 9999999;
+}
+
+
+
+/* HTML로 이동 버튼 꾸미기 */
+.page_1_btn {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 200ms linear;
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
-  -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
   padding: 0 30px;
   letter-spacing: 1px;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
   justify-content: center;
-  -ms-flex-pack: center;
   text-align: center;
-  border: 1px solid #fff;
+  border: none;
   background-color: #fff;
-  color: #3973ff;
+  color: red;
   box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
 }
-.skybtn:active,
-.skybtn:focus,
-.skybtn:hover {
-  background-color: #3973ff;
-  border: 1px solid #3973ff;
+
+.page_1_btn:active,
+.page_1_btn:focus {
+  background-color: red;
   color: #fff;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
+
+.page_1_btn:hover {
+  background-color: red;
+  color: #fff;
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
+}
+
+.btn_before{
+  background-color: #fff;
+  color: red;
+  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+  margin-left: 5vh;
+
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 200ms linear;
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 200ms linear;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+}
+
+.btn_next{
+  background-color: #fff;
+  color: red;
+  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 200ms linear;
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 200ms linear;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  /* 다음 버튼위치 */
+  margin-left: 170vh;
+}
+
+

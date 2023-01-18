@@ -1,6 +1,13 @@
-body {
-  background: #2d3142;
-  font-family: "Raleway", sans-serif;
+*{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.backs {
+  width: 100%;
+  height: 100%;
+  background-color: #292a2c;
 }
 
 /* Heading */
@@ -36,8 +43,6 @@ span {
   min-width: 1030px;
 }
 .button {
-  display: inline-flex;
-  height: 40px;
   width: 150px;
   border: 2px solid #bfc0c0;
   margin: 20px 20px 20px 20px;
@@ -61,6 +66,7 @@ a {
   overflow: hidden;
   cursor: pointer;
   margin-top: 60px;
+  text-align: center;
 }
 
 #button-5 a {
@@ -102,6 +108,7 @@ a {
 }
 #AudiToggle,
 #SalesToggle {
+  background-color: #292a2c;
   width: 300px;
   height: 150px;
   margin-bottom: 30px;

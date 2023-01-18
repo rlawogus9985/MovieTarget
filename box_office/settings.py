@@ -55,7 +55,7 @@ ROOT_URLCONF = "box_office.urls"
 
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "BACKEND": "django.template.backends.django.DjangoTemplates",   
         "DIRS": [BASE_DIR/'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -131,3 +131,33 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # 로그인 되면 이동하는 위치
 LOGIN_REDIRECT_URL = '/'
+
+
+# 이메일 관련 세팅 Django SMTP 설정
+# 메일을 보내는 호스트 서버
+EMAIL_HOST = 'smtp.gmail.com'
+
+# ENAIL_HOST에 정의된 SMTP 서버가 사용하는 포트 (587: TLS/STARTTLS용 포트)
+EMAIL_PORT = '587'
+
+#  발신할 이메일 주소 '~@gmail.com'
+# env()?
+EMAIL_HOST_USER = 'dailydailymovie@gmail.com'
+
+# 발신할 이메일 비밀번호 (2단계 인증일경우 앱 비밀번호)
+# env()?
+EMAIL_HOST_PASSWORD = 'zlhhcnewcvuwwhth'
+
+# TLS 보안 방법 (SMPT 서버와 통신할 떄 TLS (secure) connection 을 사용할지 말지 여부)
+EMAIL_USE_TLS = True
+
+# 사이트와 관련한 자동응답을 받을 이메일 주소
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# pip install djangorestframework-simplejwt 의 세팅설정
+# REST_FRAMEWORK={
+#     ###'NON_FIELD_ERRORS_KEY': 'error',###  요거 제외밑에부터       
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     )
+# }

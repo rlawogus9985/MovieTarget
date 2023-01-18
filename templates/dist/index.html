@@ -18,7 +18,7 @@
 			<div class="row full-height justify-content-center">
 				<div class="col-12 text-center align-self-center py-5">
 					<div class="section pb-5 pt-5 pt-sm-2 text-center">
-						<h6 class="mb-0 pb-3"><span>로그인 </span><span>회원가입</span></h6>
+						<h6 class="mb-0 pb-3"><span>로그인 </span><span>회원가입</span><span id="h6SpanFind">찾기</span></h6>
 			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
 			          	<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
@@ -27,17 +27,19 @@
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">로그인</h4>
-											<div class="form-group">
-												<input type="text" name="loginame" class="form-style" placeholder="아이디를 입력해주세요." id="loginName" autocomplete="off">
-												<i class="input-icon uil uil-at"></i>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="password" name="loginpassword" class="form-style" placeholder="패스워드를 입력해주세요." id="loginPassword" autocomplete="off">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<a href="#" class="btn mt-4" onclick="loginFormCheck();">확인</a>
+                      <form>
+                        <div class="form-group">
+                          <input type="text" name="loginame" class="form-style" placeholder="아이디를 입력해주세요." id="loginName" autocomplete="off">
+                          <i class="input-icon uil uil-at"></i>
+                        </div>	
+                        <div class="form-group mt-2">
+                          <input type="password" name="loginpassword" class="form-style" placeholder="패스워드를 입력해주세요." id="loginPassword" autocomplete="off">
+                          <i class="input-icon uil uil-lock-alt"></i>
+                        </div>
+                      </form>
+                      <a href="javascript:void(0);" class="btn mt-4" onclick="loginAjax();">확인</a>
                       {% comment %}
-                      <!-- <a href="#" class="btn mt-4" onclick="loginAjax();">확인</a> -->
+											<!-- <a href="javascript:void(0);" class="btn mt-4" onclick="loginFormCheck();">확인</a> -->
                       {% endcomment %}
 				      					</div>
 			      					</div>
@@ -46,42 +48,64 @@
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">회원가입</h4>
-											<div class="form-group">
-												<input type="text" name="signupname" class="form-style" placeholder="4~12글자 사이의 ID를 입력해주세요." id="signupName" autocomplete="off">
-                        <i class="input-icon uil uil-user"></i>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="password" name="signuppass" class="form-style" placeholder="8~20글자 사이의 PW를 입력해주세요." id="signupPass" autocomplete="off">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="password" name="signuppass2" class="form-style" placeholder="비밀번호를 다시 한 번 입력해주세요." id="signupPass2" autocomplete="off">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-                      <a href="#" class="btn mt-5" id="signUpBtnAjax" onclick="SignupFormCheck();">가입하기</a>
-                      <!-- onclick에 ()있으면 거의 대부분 js에 정의되어 있는 함수 
-                            onclick 사용하면 a 링크 사용하지 않는 걸 권장함. -->
+                      <form>
+                        <div class="form-group">
+                          <input type="text" name="signupname" class="form-style" placeholder="4이상~12이하의 글자를 ID에 입력해주세요." id="signupName" autocomplete="off">
+                          <i class="input-icon uil uil-user"></i>
+                        </div>	
+                        <div class="form-group mt-2">
+                          <input type="password" name="signuppass" class="form-style" placeholder="8이상~20이하의 글자를 PW에 입력해주세요." id="signupPass" autocomplete="off">
+                          <i class="input-icon uil uil-lock-alt"></i>
+                        </div>	
+                        <div class="form-group mt-2">
+                          <input type="password" name="signuppass2" class="form-style" placeholder="비밀번호를 다시 한 번 입력해주세요." id="signupPass2" autocomplete="off">
+                          <i class="input-icon uil uil-lock-alt"></i>
+                        </div>
+                      </form>
+											<a href="javascript:void(0);" class="btn mt-5" id="signUpBtnAjax" onclick="signupAjax();">가입하기</a>
                       {% comment %}
-											<!-- <a href="#" class="btn mt-5" id="signUpBtnAjax" onclick="signupAjax();">가입하기</a> -->
+                      <!-- <a href="#" class="btn mt-5" id="signUpBtnAjax" onclick="SignupFormCheck();">가입하기</a> -->
                       {% endcomment %}                        
 				      					</div>
 			      					</div>
 			      				</div>
 			      			</div>
 			      		</div>
+                <!-- 찾기모달 -->
+                <div class="ForMoveFindModalCss">
+                  <div class="findModal" id="findModal">
+                    <button class="findModalCloseBtn" id="findModalCloseBtn">닫기</button>
+                    <li style="list-style-type: none;" class="ToFindModalLi1Css">
+                      <div id="modalfindid">아이디 찾기</div>
+                      <input type="text" name="find_email_id" placeholder=" 이메일 ID 입력" class="FindInputcss1" id="findUserEmailId" style="font-size: small;">@<input type="text" name="find_email_domain" placeholder=" 이메일 Domain 입력"class="FindInputcss1" id="findUserEmailDomain" style="font-size: small;">
+                    </li>
+                    <button class="fidnModalBtn" id="findIdModalBtn" onclick="wantFindId()">아이디 찾기</button>
+                    <li  style="list-style-type: none;" class="ToFindModalLi2Css">
+                      <div>비밀번호 찾기</div>
+                      <input type="text" name="username" placeholder="  ID 입력"  id="findId" style="font-size: small;">
+                      <hr style="line-height: 0px;">
+                      <hr style="line-height: 0px;">
+                      <input type="text" name="topasswordfind_email_id" placeholder=" 이메일 ID 입력" class="FindInputcss2" id="toPasswordFindEmailId" style="font-size: small;">@<input type="text" name="topasswordfind_email_domain" placeholder=" 이메일 Domain 입력" class="FindInputcss2" id="toPasswordFindEmailDomain" style="font-size: small;">
+                    </li>
+                    <button class="fidnModalBtn" id="findPasswordModalBtn" onclick="wantFindPassword()">비밀번호 찾기</button>
+                  </div>
+                </div>
+                <!-- 찾기모달 -->
 			      	</div>
 		      	</div>
 	      	</div>
-	    </div>
+	    </div>  
 	</div>
 
-<form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">
+  <!-- 로그인 카드 form** -->
+<form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">  
   {% csrf_token %}
-	<input type="hidden" name="username" id="userName"> 
-  <!-- name은 view로 연결, id는 자바스크립트, css -->
+	<input type="hidden" name="username" id="userName">
+  <!-- name은 VIew로 연결 -->
 	<input type="hidden" name="password" id="passWord">
 </form>
 
+<!-- 회원가입카드 form** -->
 <form action="{% url 'user:join' %}" method="post" id="signupForm"  autocomplete="off">
   {% csrf_token %}
 	<input type="hidden" name="username" id="joinUserName">
