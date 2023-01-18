@@ -48,28 +48,20 @@ function selectDataActors() {
 }
 
 function selectDataNationsAuditOpendt() {
-  // $("#selectBox option[value='option1']").remove();
-  // document.getElementById('movieNations').options[value='option1'].remove();
-  // document.getElementById('movieNations').options[value='option2'].remove();
-  // document.getElementById('movieNations').options[value='option3'].remove();
+
   let selected_nations = document.getElementById("movieNations").value;
   let selected_opendt = document.getElementById("movieOpenDt").value;
   let selected_audit = document.getElementById("movieAudit").value;
-  console.log(selected_nations)
-  console.log(selected_opendt)
-  console.log(selected_audit)
   if (selected_nations == 0 || selected_nations =="" || selected_opendt == 0 || selected_opendt =="" || selected_audit == 0 || selected_audit =="") {
     alert("모든 선택사항을 골라주세요.")
-
     return false;
   }
-  else {document.getElementById("selected_nations_hidden_input").value = selected_nations;
-  document.getElementById("selected_opendt_hidden_input").value = selected_opendt;
-  document.getElementById("selected_audit_hidden_input").value = selected_audit;
-  alert("모든 선택이 완료되었습니다.\n결과를 확인해 보실까요?");
-  document.getElementById("selectedNationsOpendtAuditForm").submit();}
-
-  
+  else {
+    document.getElementById("selected_nations_hidden_input").value = selected_nations;
+    document.getElementById("selected_opendt_hidden_input").value = selected_opendt;
+    document.getElementById("selected_audit_hidden_input").value = selected_audit;
+    alert("모든 선택이 완료되었습니다.\n결과를 확인해 보실까요?");
+    document.getElementById("selectedNationsOpendtAuditForm").submit();}
 }
 ////////////////////무기입방지
 
@@ -102,16 +94,6 @@ function TableGenre(e) {
   document.getElementById("selected_genre").value = selected_genre;
   document.getElementById("genre").value = selected_genre;
   // document.getElementById("pageForm").submit();
-
-  //장르를 선택하면 선택했다는 텍스트를 넣어준다.
-  // $(".showGenres>span").text("장르를 선택하셨습니다.");
-  
-  // 수정해보려고함 2023 01 09 아래
-  // 이메일 등록 관련 모달창 관련 자바스크립트 코드 - 시작점에서 null값이 출력이되서 click event객체가 없었음
-  // 질문 결과 위에서 제이쿼리 객체로 사용했으면 아래에서 바닐라자바스크립트에서 dom get element 사용시 값을 가져올 수 없다고함.
-  // 그래서 제이쿼리 대신에 자바스크립트 바닐라코드로 변경
-  // const spanShowGenresSpan = document.querySelector("span#showGenresSpan")
-  // spanShowGenresSpan.textContent = "장르를 선택하셨습니다.";
 
   //장르를 선택했을 때 css
   
@@ -269,7 +251,7 @@ window.onload = function() {
   }
   
   const modalOpenBtn = document.querySelector("button#modalOpenBtn");
-  //modalOpenBtn.addEventListener('click', openEmailModal);
+  modalOpenBtn.addEventListener('click', openEmailModal);
   
   const modalCloseBtn = document.querySelector("button#modalCloseBtn");
   
