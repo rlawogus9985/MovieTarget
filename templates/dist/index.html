@@ -59,6 +59,8 @@
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
                       <a href="#" class="btn mt-5" id="signUpBtnAjax" onclick="SignupFormCheck();">가입하기</a>
+                      <!-- onclick에 ()있으면 거의 대부분 js에 정의되어 있는 함수 
+                            onclick 사용하면 a 링크 사용하지 않는 걸 권장함. -->
                       {% comment %}
 											<!-- <a href="#" class="btn mt-5" id="signUpBtnAjax" onclick="signupAjax();">가입하기</a> -->
                       {% endcomment %}                        
@@ -75,7 +77,8 @@
 
 <form action="{% url 'user:login' %}" method="post" id="loginForm" autocomplete="off">
   {% csrf_token %}
-	<input type="hidden" name="username" id="userName">
+	<input type="hidden" name="username" id="userName"> 
+  <!-- name은 view로 연결, id는 자바스크립트, css -->
 	<input type="hidden" name="password" id="passWord">
 </form>
 

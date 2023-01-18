@@ -87,7 +87,10 @@ function TableDirector(e) {
   document.getElementById("selected_director").value = selected_director;
   //감독을 선택하면 선택했다는 텍스트를 넣어준다.
   $(".showDirectors>span").text("감독을 선택하셨습니다.");
-}
+} 
+
+// $ = 제이쿼리 (. = class / # = id / 부모태그>자식태그)
+
 // 장르 선택을 위한 js
 function TableGenre(e) {
   let selected_genre = e.innerText.trim();
