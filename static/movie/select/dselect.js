@@ -48,19 +48,28 @@ function selectDataActors() {
 }
 
 function selectDataNationsAuditOpendt() {
+  // $("#selectBox option[value='option1']").remove();
+  // document.getElementById('movieNations').options[value='option1'].remove();
+  // document.getElementById('movieNations').options[value='option2'].remove();
+  // document.getElementById('movieNations').options[value='option3'].remove();
   let selected_nations = document.getElementById("movieNations").value;
   let selected_opendt = document.getElementById("movieOpenDt").value;
   let selected_audit = document.getElementById("movieAudit").value;
-  // if (selected_nations == 0 || selected_nations =="" || selected_opendt == 0 || selected_opendt =="" || selected_audit == 0 || selected_audit =="") {
-  //   alert("모든 선택사항을 골라주세요.")
-  //   return false;
-  // }
+  console.log(selected_nations)
+  console.log(selected_opendt)
+  console.log(selected_audit)
+  if (selected_nations == 0 || selected_nations =="" || selected_opendt == 0 || selected_opendt =="" || selected_audit == 0 || selected_audit =="") {
+    alert("모든 선택사항을 골라주세요.")
 
-  document.getElementById("selected_nations_hidden_input").value = selected_nations;
+    return false;
+  }
+  else {document.getElementById("selected_nations_hidden_input").value = selected_nations;
   document.getElementById("selected_opendt_hidden_input").value = selected_opendt;
   document.getElementById("selected_audit_hidden_input").value = selected_audit;
   alert("모든 선택이 완료되었습니다.\n결과를 확인해 보실까요?");
-  document.getElementById("selectedNationsOpendtAuditForm").submit();
+  document.getElementById("selectedNationsOpendtAuditForm").submit();}
+
+  
 }
 ////////////////////무기입방지
 
@@ -79,8 +88,8 @@ function TableDirector(e) {
   // 이메일 등록 관련 모달창 관련 자바스크립트 코드 - 시작점에서 null값이 출력이되서 click event객체가 없었음
   // 질문 결과 위에서 제이쿼리 객체로 사용했으면 아래에서 바닐라자바스크립트에서 dom get element 사용시 값을 가져올 수 없다고함.
   // 그래서 제이쿼리 대신에 자바스크립트 바닐라코드로 변경
-  const spanShowDirectors = document.querySelector("span#showDirectorsSpan")
-  spanShowDirectors.textContent = "감독을 선택하셨습니다.";
+  // const spanShowDirectors = document.querySelector("span#showDirectorsSpan")
+  // spanShowDirectors.textContent = "감독을 선택하셨습니다.";
 
   //감독을 선택했을 때 css
   $(".showSelect").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
@@ -102,8 +111,8 @@ function TableGenre(e) {
   // 이메일 등록 관련 모달창 관련 자바스크립트 코드 - 시작점에서 null값이 출력이되서 click event객체가 없었음
   // 질문 결과 위에서 제이쿼리 객체로 사용했으면 아래에서 바닐라자바스크립트에서 dom get element 사용시 값을 가져올 수 없다고함.
   // 그래서 제이쿼리 대신에 자바스크립트 바닐라코드로 변경
-  const spanShowGenresSpan = document.querySelector("span#showGenresSpan")
-  spanShowGenresSpan.textContent = "장르를 선택하셨습니다.";
+  // const spanShowGenresSpan = document.querySelector("span#showGenresSpan")
+  // spanShowGenresSpan.textContent = "장르를 선택하셨습니다.";
 
   //장르를 선택했을 때 css
   $(".showSelect").css({"background-image": "linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%)",
@@ -190,18 +199,26 @@ function searchFormCheck(searchWord, pageNumber) {
 window.onload = function() {
   function openEmailModal() {
     document.getElementById("emailModal").style.display="flex";
+    document.getElementById("modalOpenBtn").style.display="none";
+    document.getElementById("modalCloseBtn").style.display="flex";
   }
   
   function closeEmailModal() {
     document.getElementById("emailModal").style.display="none";
+    document.getElementById("modalOpenBtn").style.display="flex";
+    document.getElementById("modalCloseBtn").style.display="none";
   }
   
   const modalOpenBtn = document.querySelector("button#modalOpenBtn");
   modalOpenBtn.addEventListener('click', openEmailModal);
   
   const modalCloseBtn = document.querySelector("button#modalCloseBtn");
-  modalCloseBtn.addEventListener('click', closeEmailModal); 
+  
+  modalCloseBtn.addEventListener('click', closeEmailModal);   
+  
 }
+
+
 
 // ################ 모달창의 등록하기 버튼 클릭시 실행되는 onclick속성의 자바스크립트 ajax로 접속해있는 user의 email의 존재여부를 판단
 function emailCheckAjax() {
@@ -209,8 +226,8 @@ function emailCheckAjax() {
     type: 'POST',
     url: '/user/ajax_confirm_email/',
     data: JSON.stringify({
-        emailName: $('#emailname_input').val(),
-        emailDomain: $('#emaildomain_input').val(),
+        emailName: $('#userEmailId').val(),
+        emailDomain: $('#userEmailDomain').val(),
     }),
     headers: {
       'X-CSRFTOKEN': $('#csrf_token').val()
@@ -219,6 +236,7 @@ function emailCheckAjax() {
         if (json.result == 'True') {
 
           filmEmailConstitutionSubmit(); //이메일 유효성 검사 자바스크립트
+
 
         } else {
           alert('영화사이메일 등록이 이미 되어있습니다.');
@@ -240,35 +258,21 @@ function filmEmailConstitutionSubmit() {
     return false;
   }
   else {
-    // authBackendsAjax(); // 토큰검사를위해서 위한 자바스크립트 Ajax
     
-    // let userEmailId=document.getElementById("userEmailId").value;
-    // let userEmailDomain=document.getElementById("userEmailDomain").value;
-
-    // console.log("sdfsd"+userEmailId+"-->"+typeof(userEmailId)) 존재여부 consolec창 출력
-    // console.log("sdfsd"+userEmailDomain+"-->"+typeof(userEmailDomain))
-
-    document.getElementById("emailname_input").value = userEmailId;
-    document.getElementById("emaildomain_input").value = userEmailDomain;
-    alert("영화사 이메일등록이 완료되었습니다.")
-    document.getElementById("film_email_constitution_form_id").submit();
+    authBackendsAjax(); // 토큰검사를위해서 위한 자바스크립트 Ajax  주석 비주석 포인트
+    // alert("입력하신 이메일에서 링크를 눌러주세요")
+    // document.getElementById("emailname_input").value = userEmailId;
+    // document.getElementById("emaildomain_input").value = userEmailDomain;
+    // alert("영화사 이메일등록이 완료되었습니다.");
+    // document.getElementById("film_email_constitution_form_id").submit();
   }
 }
 
 // 토큰검사를위해서 위한 자바스크립트 Ajax
 function authBackendsAjax(){
 
-  // let userEmailId=document.getElementById("userEmailId").value;
-  // let userEmailDomain=document.getElementById("userEmailDomain").value;
-  // console.log("sdfsd"+userEmailId+"-->"+typeof(userEmailId))
-  // console.log("sdfsd"+userEmailDomain+"-->"+typeof(userEmailDomain))
-  // document.getElementById("tokenEmailName").value = userEmailId;
-  // document.getElementById("tokenEmailDomain").value = userEmailDomain;
-  // console.log("sdfsd"+userEmailId+"-->"+typeof(userEmailId))
-  // console.log("sdfsd"+userEmailDomain+"-->"+typeof(userEmailDomain))
-  // document.getElementById("tokenEmailFromId").submit();
-
   $.ajax({
+    async: false, // 비동기인 ajax의 스케줄링을 위한 설정(default : true)
     type: 'POST',
     url: '/user/ajax_token_email/',
     data: JSON.stringify({
@@ -280,20 +284,34 @@ function authBackendsAjax(){
     },
     success: function (json) {
         if (json.result == 'True') {
-          
-          console.log('True의 결과를 입력해주세요.')
 
+          alert("입력하신 이메일에서 링크를 눌러주세요\n만약 이메일이 오지 않았다면 입력한 이메일을 다시 한 번 확인하고 등록하기 버튼을 눌러주세요.")
+                    
         } else {
-        
-          console.log('Flase의 결과를 입력해주세요.')
+
+          alert('이미 등록된 Email이거나 유효하지 않은 Email일 수있습니다.\nEmail을 제대로 입력했는지 다시 한 번 확인해주세요.');
+          return false;
+    
         }
     },
     error: function (xhr, errmsg, err) {
-        alert('에러가 발생했습니다.' + errmsg);
+        alert('유효하지 않은 이메일입니다. 다시 한번 확인해주세요.');
+        // alert('에러가 발생했습니다.' + errmsg);
         console.log(xhr.status + ": " + xhr.responseText);
     }
   });
 };
+
+// function emailDivtagClick () {
+//   let userEmailId=document.getElementById("userEmailId").value;
+//   let userEmailDomain=document.getElementById("userEmailDomain").value;
+//   document.getElementById("emailname_input").value = userEmailId;
+//   document.getElementById("emaildomain_input").value = userEmailDomain;
+//   alert("영화사 이메일등록이 완료되었습니다.");
+//   document.getElementById("film_email_constitution_form_id").submit();
+// }
+
+
 
 
 //################# 다음으로가기버튼클릭시 email 존재여부 확인 ajax
@@ -310,7 +328,7 @@ function nextBtnEmailCheckAjax() {
     },
     success: function (json) {
         if (json.result == 'True') {
-          alert('이메일을 등록해주세요.');
+          alert('앗! 영화사를 설립하는 것을 깜박했습니다.\n다음에 배우3명을 캐스팅하기 전에\n이메일을 등록해주시겠어요?');
           return false;
         } 
         else {
@@ -321,6 +339,32 @@ function nextBtnEmailCheckAjax() {
         alert('에러가 발생했습니다.' + errmsg);
         console.log(xhr.status + ": " + xhr.responseText);
     }
-  }); 
-}
+  })}
+function ToResultBtnEmailCheckAjax() {
+  $.ajax({
+    type: 'POST',
+    url: '/user/ajax_confirm_email/', 
+    data: JSON.stringify({
+        emailName: $('#emailname_input').val(),
+        emailDomain: $('#emaildomain_input').val(),
+    }),
+    headers: {
+      'X-CSRFTOKEN': $('#csrf_token').val()
+    },
+    success: function (json) {
+        if (json.result == 'True') {
+          alert('이메일을 등록해주세요.');
+          return false;
+        } 
+        else {
+          selectDataNationsAuditOpendt();
+        }
+    },
+    error: function (xhr, errmsg, err) {
+        alert('에러가 발생했습니다.' + errmsg);
+        console.log(xhr.status + ": " + xhr.responseText);
+    }
+  })}
+  
+
 // 이메일 등록 관련 모달창 관련 자바스크립트 코드 - 끝점 #######################
