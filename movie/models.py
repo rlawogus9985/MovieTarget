@@ -39,7 +39,6 @@ class Actorlist(models.Model):
         managed = True
         db_table = 'actorlist'
 
-
 class Secondbase(models.Model):
     index = models.BigIntegerField(blank=True, null=True)
     id = models.BigIntegerField(blank=True, primary_key=True)
