@@ -390,4 +390,3 @@ def recomAjax(request):
     return render(request, 'movie/recommendation.html',context)
     # return JsonResponse(context)
     
-    
