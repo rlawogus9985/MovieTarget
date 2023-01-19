@@ -1,32 +1,112 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+/* 메뉴바 전체 위치 */
+.jh_header {
+  padding-bottom: 100px;
+}
+
+.jh_logo {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  display: block;
+  z-index: 100;
+  transition: all 250ms linear;
+}
+.jh_logo img {
+  height: 100px;
+  width: auto;
+  display: block;
+}
+
+/* 유저 환영 메시지 */
+.jh_welcom {
+  color: white;
+  margin-top: 30px;
+  margin-right: 250px;
+  text-align: right;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+/* 로그인,로그아웃 버튼 */
+.jh_names {
+  margin-top: 10px;
+  text-align: right;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+a {
+  cursor: pointer;
+  transition: all 200ms linear;
+  text-decoration: none;
+  margin-top: 10px;
+}
+.jh_btn {
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: 1px solid #ff0000;
+  background-color: #ff0000;
+  color: #fff;
+  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+}
+.jh_btn:active,
+.jh_btn:focus,
+.jh_btn:hover {
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: #ff0000;
+  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
 /* 홈 배경 css */
 .backs {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: #292a2c;
   background-size: cover;
   background-position: center;
 }
 
 /* 설명 글씨 */
-.show {
+.jh_show {
   /* float: middle; */
   text-align: center;
   margin-top: 23px;
   margin-right: 32px;
   color: white;
   padding: 10px;
-  height: 64px;
 }
 
 /* 검색창 css */
 .search {
-  margin-top: 10px;
+  margin: auto;
   position: relative;
   width: 300px;
 }
@@ -34,8 +114,6 @@
 #searchForm {
   width: 100%;
   position: relative;
-  /* 검색박스를 중정렬하기 위해서는 form을 옮겨야 하는데 어디다가 놓을지 미정 */
-  margin-left: 170%;
 }
 
 input {
@@ -55,24 +133,326 @@ input {
 }
 /* 검색창 css 끝 */
 
-/* 검색창 자동완성 */
-.hide {
-  display: none !important;
-}
+/* 글 박스 영역 설정 */
 
-.rel_search {
+div.content_wrapper {
+  flex-wrap: wrap;
+  max-width: 1400px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  border: 1px solid red;
-  border-radius: 12px;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  box-sizing: border-box;
 }
 
-.pop_rel_keywords {
-  list-style: none;
-  margin-right: 30%;
+#fullscreen {
+  width: 100%;
+  height: 500px;
+  background-color: grey;
+  margin-bottom: 20px;
 }
 
-.pop_rel_keywords > li {
-  line-height: 250%;
+#posterImage {
+  width: 30%;
+  height: 500px;
+  float: left;
+}
+
+#posterImageIn {
+  width: 83%;
+  height: 450px;
+  margin-top: 25px;
+  margin-left: 25px;
+}
+#description {
+  width: 70%;
+  height: 500px;
+  float: left;
+}
+
+#descTitle,
+#descReleaseDate,
+#descVote,
+#descDirector {
+  width: 95%;
+  margin-bottom: 4px;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  height: 48px;
+}
+
+#descActors {
+  width: 95%;
+  margin-bottom: 4px;
+  overflow: hidden;
+  word-break: break-all;
+  height: 100px;
+}
+#descOverview {
+  width: 95%;
+  overflow: hidden;
+  word-break: break-all;
+  height: calc(100% - 20px - (48px * 4) - 100px - 25px);
+}
+#description_wrapper {
+  padding-left: 25px;
+  padding-top: 25px;
+  height: 500px;
+}
+
+div {
+  display: block;
+}
+
+div.filter_panel {
+  min-width: 260px;
+  width: 100%;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: white;
+}
+
+div.filter_panel div.name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+div.filter_panel div.name h2 {
+  font-size: 1.1em;
+}
+
+div.filter_panel h2,
+div.filter_panel h3 {
+  margin: 0;
+  padding: 0;
+}
+
+div.filter_panel div.name span.chevron-right {
+  transform: rotate(90deg);
+}
+
+.glyphicons_v2.chevron-right {
+  background-image: url("https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-224-chevron-right-d1f88a6c15e68190c3b47e1ee4f39fe47f4b69f4966ca7c250c2e14cfa689a04.svg");
+}
+
+.glyphicons_v2 {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1em;
+  min-height: 1em;
+  width: 1em;
+  height: 1em;
+  line-height: inherit;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+div.filter_panel div.filter {
+  width: 100%;
+  border-top: 1px solid #eee;
+  padding: 14px 16px 16px 16px;
+}
+
+div.filter_panel div.filter h3 {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  font-size: 1em;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.font_size_1 {
+  font-size: 0.9em;
+}
+
+.full_width {
+  width: 100%;
+}
+.k-dropdown {
+  border-width: 0;
+  outline: 0;
+  background: 0 0;
+  box-sizing: border-box;
+  line-height: 1.5;
+  text-align: left;
+  white-space: nowrap;
+  display: inline-flex;
+  vertical-align: middle;
+  position: relative;
+}
+
+.k-dropdown .k-dropdown-wrap {
+  border-color: #e4e7eb;
+  color: #212529;
+  background-color: #e4e7eb;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 0.25rem;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  border-width: 1px;
+  border-style: solid;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  outline: 0;
+}
+
+.k-input {
+  margin: 0;
+  padding: 0.375rem 0.85rem;
+  width: 100%;
+  min-width: 0;
+  height: calc(1.5em + 0.75rem);
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  box-shadow: none;
+  color: inherit;
+  background: 0 0;
+  font: inherit;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.k-select {
+  border-radius: 0 0.25rem 0.25rem 0;
+  padding: 0.375rem 0.375rem;
+  border-width: 0;
+  box-sizing: border-box;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.k-icon {
+  width: 1em;
+  height: 1em;
+  outline: 0;
+  font-size: 16px;
+  font-family: WebComponentsIcons;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: none;
+  text-decoration: none;
+  flex-shrink: 0;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+.k-i-arrow-60-down::before {
+  content: "▼";
+}
+
+select.kendo_dropdown {
+  visibility: hidden;
+}
+
+select {
+  text-transform: none;
+}
+
+select {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+div.apply.disabled,
+div.media.discover div.apply.disabled:hover {
+  background-color: rgba(228, 228, 228, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+div.apply {
+  min-width: 260px;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  height: 44px;
+}
+
+div.apply p {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-size: 1em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+div.apply.disabled a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+div.apply a {
+  font-size: 1.2em;
+  line-height: 1;
+  font-weight: 600;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.jh_content {
+  float: left;
+  width: 72%;
+  margin-left: 25px;
+}
+
+.jh_sort {
+  float: left;
+  width: 25%;
 }

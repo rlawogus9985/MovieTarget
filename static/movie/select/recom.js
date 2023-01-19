@@ -64,3 +64,32 @@
 //   },
 //   close: function (evt) {},
 // });
+
+$(document).ready(function () {
+  $("#similarityDesc").click(function () {
+    $("#currentOption").text("유사도 내림차순");
+  });
+  $("#similarityAsc").click(function () {
+    $("#currentOption").text("유사도 오름차순");
+  });
+  $("#voteAverageDesc").click(function () {
+    $("#currentOption").text("평점 내림차순");
+  });
+  $("#voteAverageAsc").click(function () {
+    $("#currentOption").text("평점 오름차순");
+  });
+  $("#releaseDateDesc").click(function () {
+    $("#currentOption").text("상영일 내림차순");
+  });
+  $("#releaseDateAsc").click(function () {
+    $("#currentOption").text("상영일 오름차순");
+  });
+  $("#sortSearch").click(function () {
+    let criteria = $("#currentOption").text();
+    // console.log($("#searchInput").val());
+    $("#criteriaInput").val(criteria);
+    $("#sortSearchWord").val($("#searchInput").val());
+    // console.log($("#criteriaInput").val());
+    $("#sortCriteriaForm").submit();
+  });
+});

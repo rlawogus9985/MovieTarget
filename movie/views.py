@@ -279,7 +279,7 @@ class MovieBoardActor(generic.ListView):
         selected_actor1 = self.request.GET.get('selected_actor1','')
         selected_actor2 = self.request.GET.get('selected_actor2','')
         selected_actor3 = self.request.GET.get('selected_actor3','')
-        print(search_word, selected_actor1, selected_actor2, selected_actor3)
+        # print(search_word, selected_actor1, selected_actor2, selected_actor3)
         if search_word:
             context['searchWord'] = search_word
         context['selected_actor1'] = selected_actor1
@@ -298,19 +298,79 @@ class recommendation(generic.ListView):
     def get_queryset(self):
         # 검색어는 정확히 일치해야한다.
         search_word = self.request.GET.get('searchWord','')
+
+        sort_criteria = self.request.GET.get('criteria','')
+        search_word2 = self.request.GET.get('searchWord2','')
+        print(sort_criteria)
         qs = Secondbase.objects.all().values()
         data = pd.DataFrame(qs)
-        if search_word:
-            result = find_sim_movie(data,loaded_model,search_word,10).to_dict(orient='list')
+        result = []
+        if search_word or search_word2:
+            if search_word:
+                diction = find_sim_movie(data,loaded_model,search_word,11).to_dict()
+            if search_word2:
+                diction = find_sim_movie(data,loaded_model,search_word2,11).to_dict()
+            for i in zip(diction['index'].values() ,diction['id'].values(),diction['release_date'].values(),diction['title'].values(),diction['director'].values(),diction['genres'].values(),
+                diction['original_language'].values(),diction['overview'].values(),diction['popularity'].values(),diction['budget'].values(),diction['revenue'].values(),diction['tagline'].values(),diction['vote_average'].values(),diction['vote_count'].values(),diction['credits'].values(),
+                diction['keywords'].values(),diction['poster_path'].values(),diction['audits'].values()):
+                result.append({ x:y for x,y in zip(diction.keys(),i)})
             # result = Secondbase.objects.filter(title=search_word)
-            print(result)
-
+            # print(result)
         else:
             result = None
+        print(f'{search_word=}, {sort_criteria=}, {search_word2=}')
+        # result 리스트가 만들어진 상태에서 진행.
+        if sort_criteria == '유사도 내림차순':
+            result = result
+        elif sort_criteria == '유사도 오름차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_similarity_asc = list(reversed(result))
+            sorted_by_similarity_asc.insert(0, searched)
+            result = sorted_by_similarity_asc
+        elif sort_criteria == '평점 내림차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_vote_desc = list(reversed(sorted(result, key=lambda x: x['vote_average'])))
+            sorted_by_vote_desc.insert(0, searched)
+            result = sorted_by_vote_desc
+        elif sort_criteria == '평점 오름차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_vote_asc = list(sorted(result, key=lambda x: x['vote_average']))
+            sorted_by_vote_asc.insert(0, searched)
+            result = sorted_by_vote_asc
+        elif sort_criteria == '상영일 내림차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_release_date_desc = list(reversed(sorted(result, key=lambda x:x['release_date'])))
+            sorted_by_release_date_desc.insert(0, searched)
+            result = sorted_by_release_date_desc
+        elif sort_criteria == '상영일 오름차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_release_date_asc = list(sorted(result, key=lambda x: x['release_date']))
+            sorted_by_release_date_asc.insert(0, searched)
+            result = sorted_by_release_date_asc
+
         return result
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search_word = self.request.GET.get('searchWord','')
+        search_word2 = self.request.GET.get('searchWord2','')
+        option = self.request.GET.get('criteria','유사도 내림차순')
+        if search_word:
+            context['searchWord'] = search_word
+            context['optionWord'] = option
+        if search_word2:
+            context['searchWord'] = search_word2
+            context['optionWord'] = option
+        return context
+        
+    
 def find_sim_movie(df, sorted_idx, title_name, top_n=10):
-    target_movie = df[df['title'] == title_name ]
+    target_movie = df[df['title'] == title_name][:1]
 
     title_index = target_movie.index.values
     similar_index = sorted_idx[title_index, :top_n]
