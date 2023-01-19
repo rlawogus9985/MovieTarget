@@ -69,7 +69,7 @@ class MovieBoardtest1(generic.ListView):
         if search_word:
             result = TargetBase.objects.values('director').distinct().filter(director__icontains=search_word)
         else:
-            result = TargetBase.objects.values('director').distinct()            
+            result = TargetBase.objects.values('director').distinct()
         return result
     
     # 요청을 통해 전달받은 검색어를 다시 템플릿으로 전달
@@ -78,6 +78,7 @@ class MovieBoardtest1(generic.ListView):
         search_word = self.request.GET.get('searchWord','')
         if search_word:
             context['searchWord'] = search_word
+        print('c: ', context)
         return context
 
     # def get_queryset(self):
@@ -223,7 +224,7 @@ def delete_board(request, pk):
 # classview에서 login_required쓰면 오류가 났었던것 같았음
 # @login_required(login_url=reverse_lazy('user:login'))
 class MovieBoardGenre(generic.ListView):
-
+   
     # 페이징 수
     paginate_by = 12
     # 연결할 템플릿 이름
