@@ -106,6 +106,8 @@ function SignupFormCheck() {
 
 ////////// Ajax /////////////
 // 원본 Ajax login jvs
+// var _csrftoken = document.querySelector("meta[name=csrf_token]").content;
+// const csrftoken = Cookies.get('csrftoken');
 function loginAjax() {
   $.ajax({
     type: 'POST',
@@ -116,6 +118,7 @@ function loginAjax() {
     }),
     headers: {
       'X-CSRFTOKEN': $('#csrf_token').val()
+      // 'X-CSRFTOKEN': csrftoken
     },
     success: function (json) {
         if (json.result == 'True') {

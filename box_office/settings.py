@@ -161,3 +161,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 #         'rest_framework_simplejwt.authentication.JWTAuthentication',
 #     )
 # }
+
+CSRF_COOKIE_NAME = 'csrftoken'
