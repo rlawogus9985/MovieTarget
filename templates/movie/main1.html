@@ -111,8 +111,11 @@
   
       <!-- main2.html로 이동 버튼 -->
       <div class="page_1">
-        {% comment %} <a href="{% url 'movie:board1' %}" class="page_1_btn">이전(◀)</a> {% endcomment %}
+        {% comment %} <a href="{% url 'movie:board1' %}" class="page_1_btn">이전(◀)</a> 
+        <a href="javascript:void(0);" class="page_first_btn" onclick="nextBtnEmailCheckAjax();">다음(2/4)</a>
         <a href="javascript:void(0);" class="page_1_btn" onclick="selectDataDirector();">다음(2/4)</a>
+        {% endcomment %}
+        <a href="javascript:void(0);" class="page_1_btn" onclick="nextBtnEmailCheckAjax();">다음(2/4)</a>
       </div>
       
       <!-- 이메일 모달 -->

@@ -30,6 +30,9 @@
   </div>
 
   <!-- 본 내용 -->
+  <input type="hidden"  id="originName" value="{{ user.username }}">
+
+  
   <table>
     {% comment %}
     <form action="{% url 'user:change_user' %}" id="userChange" method="post" novalidate onsubmit="return changeFormIdCheckMent();">
@@ -45,7 +48,6 @@
           <input type="text" name="username" value="{{ user.username }}" id="changeName" readonly>
           <input type="hidden" id="originName" value="{{ user.username }}">
         </div> -->
-
         <div class="inputBox">		
           <input type="password" name="password" id="changePassword1" required=""/>
           <span>비밀번호</span>
