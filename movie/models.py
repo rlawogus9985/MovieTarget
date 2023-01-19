@@ -18,7 +18,7 @@ class TargetBase(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'target_base'
+        # db_table = 'target_base'
 
 class SelectedBase(models.Model):
     director = models.TextField(blank=True, null=True)
@@ -38,7 +38,6 @@ class Actorlist(models.Model):
     class Meta:
         managed = True
         db_table = 'actorlist'
-
 
 class Secondbase(models.Model):
     index = models.BigIntegerField(blank=True, null=True)
