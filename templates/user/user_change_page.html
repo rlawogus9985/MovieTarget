@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="{% static 'user/change/modify.css' %}">
 <link rel="stylesheet" href="{% static 'common/home/menubar.css' %}">
 <link rel="icon" type="image/png" sizes="32x32" href="../../static/film-slate.png">
-
+<!-- j쿼리사용 js -->
+<script src="{% static 'jquery.min.js' %}"></script>  
 
 <!-- <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload=""> -->
 <body>
@@ -30,6 +31,10 @@
   </div>
 
   <!-- 본 내용 -->
+  <input type="hidden"  id="originName" value="{{ user.username }}">
+  <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+
+  
   <table>
     {% comment %}
     <form action="{% url 'user:change_user' %}" id="userChange" method="post" novalidate onsubmit="return changeFormIdCheckMent();">
@@ -37,7 +42,10 @@
     {% endcomment %}
     <div class="box">
       <span class="text-center">비밀번호 수정</span>
-      <form action="{% url 'user:change_user' auth_user_id=user.id %}" id="userChange" method="post" onsubmit="return false">
+      <form action="{% url 'user:change_user' %}" id="userChange" method="post" onsubmit="return false">
+      {% comment %}
+      <form action="{% url 'user:change_user' auth_user_id=user.id %}" id="userChange" method="post" onsubmit="return false"></form>  
+      {% endcomment %}
         {% csrf_token %}
 
         <!-- <div class="input-container">
@@ -45,7 +53,6 @@
           <input type="text" name="username" value="{{ user.username }}" id="changeName" readonly>
           <input type="hidden" id="originName" value="{{ user.username }}">
         </div> -->
-
         <div class="inputBox">		
           <input type="password" name="password" id="changePassword1" required=""/>
           <span>비밀번호</span>
@@ -56,6 +63,7 @@
           <span>비밀번호 재입력</span>
         </div>
           <button type="submit" name="change_user_bt" class="mbtn" onclick="changeFormIdCheckMent();">수정하기</button>
+          {% comment %}<button type="submit" name="change_user_bt" class="mbtn" onclick="changeFormIdCheckMent();">수정하기</button>{% endcomment %}
       </form>
     </div>
   </table>  

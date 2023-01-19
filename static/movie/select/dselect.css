@@ -1,6 +1,6 @@
 /* 
 home.html에서 사용하는 css 
-main1.html에서 사용하는 css
+main들에서 사용하는 css
 (검색창,)
 
 
@@ -94,7 +94,7 @@ form.box input[text="text"]::placeholder {
 }
 
 /*  main3.html db 선택한 내용 보여주기 꾸미기 */
-.showActors {
+.show_acto input {
   background-color: #292a2c;
   border: none;
   outline: 2px none;
@@ -104,6 +104,11 @@ form.box input[text="text"]::placeholder {
   padding: 2px;
   cursor: pointer;
   margin-top: 8px;
+}
+
+.actos {
+  background-image: linear-gradient(45deg, #ff6d2f 0%, #ff2f20 100%);
+  border-radius: 25px;
 }
 
 /* DB 선택 테이블 */
@@ -169,36 +174,103 @@ section .content-list .next {
 /* 이메일 관련 모달창 css 시작점 */
 #modalOpenBtn {
   /* position: bottom 203 left65 right 890 top 624; */
-  position: absolute;
-  width: 150px;
+  position: static;
+  width: 100px;
   height: 50px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: greenyellow;
+  align-items:  center;
+  /* background-color: #8f8989; */
   z-index: 150;
+
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition : all 200ms linear;
+  transition: all 200ms linear;
+  /* padding: 0 30px; */
+  letter-spacing: 1px;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: none;
+  background-color: #ff0000;
+  color: #fff;
+  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+
 }
 
 #emailModal {
   /* position: bottom 150 right 555 top 607; */
-  position: absolute;
+  position: static;
   width: 550px;
-  height: 120px;
+  height: 20px;
   display: none;
   justify-content: center;
-  align-items: center;
-  background-color: #343a40;
+  align-items:  center;
+  background-color: #292a2c;
   z-index: 160;
 }
-#modalCloseBtn {
-  position: relative;
+#modalCloseBtn{
+  position: static;
   width: 50px;
   height: 50px;
-  display: flex;
+  display: none;
   justify-content: center;
-  align-items: center;
-  background-color: red;
+  align-items:  center;
+  background-color: #8f8989;
   z-index: 150;
+
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition : all 200ms linear;
+  transition: all 200ms linear;
+  /* padding: 0 30px; */
+  letter-spacing: 1px;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: none;
+  background-color: #ff0000;
+  color: #fff;
+  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+
 }
 
+#userEmailId{
+  position: inherit;
+  top: 30;
+  right: 100px;
+}
+
+#userEmailDomain{
+  position: inherit;
+}
+
+/* #to_to_id{
+  position: inherit;
+
+} */
+
+.modalEmailConstitution{
+  height: 100px;
+  width: 500px;
+  margin: 0;
+  position: absolute;
+  left: 0px;
+}
 /* 이메일 관련 모달창 css 끝 */
+

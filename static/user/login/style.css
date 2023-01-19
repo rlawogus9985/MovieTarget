@@ -5,8 +5,8 @@
 
 body{
   font-family: 'Poppins', sans-serif;
-	font-weight: 300;
-	font-size: 15px;
+	font-weight: 600;
+	font-size: 20px;
 	line-height: 1.7;
 	color: white;
 	overflow-x: hidden;
@@ -134,6 +134,9 @@ h6 span{
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
+
+
+  /* 여기 test */
 }
 .card-back {
   transform: rotateY(180deg);
@@ -281,6 +284,226 @@ h6 span{
   box-shadow: 0 8px 24px 0 rgba(165, 185, 250, 0.2);
 }
 
+/* 찾기 모달 */
+.findModalCloseBtn{
+  position: absolute;
+  left: 397px;
+  top: 0px;
+  width: 43px;
+  height: 43px;
+  display: none;
+  justify-content: center;
+  align-items:  center;
+  z-index: 150;
+  margin: 0;
+  padding: 0;
 
 
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition : all 200ms linear;
+  transition: all 200ms linear;
+  letter-spacing: 1px;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: none;
+  background-color: #ff0000;
+  color: #fff;
+  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+
+.findModal {
+  /* position: bottom 150 right 555 top 607; */
+  display: none;
+  /* position: absolute; */
+  position: sticky;
+  left: 555px;
+  top: 219px;
+  width: 440px;
+  height: 397px;
+  display: none;
+  justify-content: center;
+  align-items:  center;
+  background-color: #292a2c;
+  z-index: 160;
+  color: rgb(255, 255, 255);
+  background-color: #252424;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: 300%;
+  border-radius: 6px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.fidnModalBtn{
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition : all 200ms linear;
+  transition: all 200ms linear;
+  /* padding: 0 30px; */
+  letter-spacing: 1px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: none;
+  background-color: #ff0000;
+  color: #fff;
+  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+
+#findIdModalBtn {
+  padding: 3px;
+  position: absolute;
+  top: 138px;
+  left: 293px;
+}
+
+#findPasswordModalBtn {
+  position: absolute;
+  padding: 3px;
+  top: 327px;
+  left: 280px;
+}
+
+
+.ToFindModalLi1Css {
+  position: absolute;
+  top: 60px;
+}
+.ToFindModalLi2Css {
+  position: absolute;
+  top: 200px;
+}
+
+.ForMoveFindModalCss {
+  position: absolute;
+  top: 132px;
+  left: 335px;
+}
+
+/* .ForEmailCss{
+  position: absolute;
+  top: 130px
+} */
+
+/* #findId {
+  position: absolute;
+  width: 174px;
+  height: 28px;
+  right: 174px;
+  left: 0px;
+  padding: 0;
+} */
+
+
+.FindInputcss1 {
+/* padding: 13px 20px; */
+/* padding-left: 55px; */
+
+height: 35px;
+width: 145px;
+font-weight: 500;
+border-radius: 4px;
+font-size: 14px;
+line-height: 22px;
+letter-spacing: 0.5px;
+outline: none;
+color: white;
+background-color: #a2a2a2;
+border: none;
+-webkit-transition: all 200ms linear;
+transition: all 200ms linear;
+box-shadow: 0 4px 8px 0 rgb(21 21 21 / 20%);
+-webkit-text-fill-color: whitesmoke;
+
+}
+
+.FindInputcss2 {
+  /* padding: 13px 20px; */
+  /* padding-left: 55px; */
+  
+  height: 35px;
+  width: 145px;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  outline: none;
+  color: white;
+  background-color: #a2a2a2;
+  border: none;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px 0 rgb(21 21 21 / 20%);
+  -webkit-text-fill-color: whitesmoke;
+  
+  }
+  
+
+#findId{
+  height: 35px;
+  width: 145px;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  outline: none;
+  color: white;
+  background-color: #a2a2a2;
+  border: none;
+  /* -webkit-transition: all 200ms linear; */
+  /* transition: all 200ms linear; */
+  box-shadow: 0 4px 8px 0 rgb(21 21 21 / 20%);
+  -webkit-text-fill-color: whitesmoke;  
+  position: absolute;
+  /* width: 174px; */
+  /* height: 34px; */
+  right: 174px;
+  left: 0px;
+  padding: 0;
+ 
+}
+
+.modalfindid{
+  position: absolute;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin-top: 0;
+  /* position: absolute;
+  left: 100px;
+  /* top: 200px; */
+  width: 30px;
+  height: 25px;
+  font-weight: 600;
+}
 
