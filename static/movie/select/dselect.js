@@ -43,7 +43,6 @@ function selectDataActors() {
   document.getElementById("selected_actor1_hidden_input").value = selected_actor1;
   document.getElementById("selected_actor2_hidden_input").value = selected_actor2;
   document.getElementById("selected_actor3_hidden_input").value = selected_actor3;
-  alert("선택이 완료되었습니다."+name);
   document.getElementById("selectedActorsForm").submit();
 }
 
