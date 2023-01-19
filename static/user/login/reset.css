@@ -3,9 +3,13 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: dimgray;
-    width: 400px;
+    background-color:#292a2c ;
+    width: 540px;
     height: 250px;
+    color: whitesmoke;
+    border-color: whitesmoke;
+    border: solid 6px;
+    border-radius: 15px;
 }
 #resetID {
     position: absolute;
@@ -21,10 +25,17 @@
 }
 
 #resetBtnCss{
-    width: 30px;
+    width: 60px;
+    height: 40px;
     left: 315px;
     position: absolute;
-    bottom: 10px;
+    bottom: 1px;
+    background-color: #292a2c;
+    border-color: whitesmoke;
+    border: solid 3px;
+    border-radius: 7px;
+    color: whitesmoke;
+
     
 }
 .toResetInputCss2 {
@@ -32,10 +43,26 @@
     left: 25%;
     top: 55%;
     transform: translate(-40%, -40%);
-    background-color: dimgray;
+    background-color:#292a2c;
 }
 h2 {
     text-align: center;
+
 }
+p {
+    top: 5px;
+    text-align: center;
+    font-weight: 400;
+    margin: 0;
+}
+
+body {
+    background-color: #292a2c;
+}
+#resetFormId {
+    position: relative;
+    top: 10px;
+}
+
 
 
