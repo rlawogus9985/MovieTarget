@@ -26,10 +26,14 @@ urlpatterns = [
         # 회원탈퇴페이지와 관련된 뷰와 연결해주는 url
     path('delete_user/', views.delete_user, name='delete_user'),
         # 새로이 만들고자하는 회원탈퇴url
-    
+
+    path('password_check_ajax/', views.password_check_ajax, name='password_check_ajax'),
+    # 비밀번호 변경시 현재의 비밀번호와 동일한 비밀번호로 변경하지 못하도록 하는 비밀번호 체크 ajax 함수
+
     path('change_user_page/', views.userchangepage ,name='change_user_page'),
         # 회원정보수정페이지와 관련된 뷰와 연결해주는 url
-    path('<int:auth_user_id>/change_user/', views.userchangeview ,name='change_user'),
+    path('change_user/', views.userchangeview ,name='change_user'),
+    # path('<int:auth_user_id>/change_user/', views.userchangeview ,name='change_user'),
         # 회원정보수정기능과 관련된 뷰와 연결해주는 url
     
     path('ajax_user_login/', views.ajax_user_login, name='ajax_user_login'),
@@ -76,6 +80,8 @@ urlpatterns = [
 
 
     path('toresetpasswordfindemail/', views.toresetpasswordfindemail, name='toresetpasswordfindemail'),
+
+    path('toresetpasswordcheckpassword/', views.toresetpasswordcheckpassword, name='toresetpasswordcheckpassword'),
 
     
 ]

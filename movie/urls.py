@@ -25,8 +25,12 @@ urlpatterns = [
     path('board/2/S/<int:pk>', views.movieboardputview.as_view(), name='board2S'),
     
     # 자료실에서 삭제버튼을 누르면 이동하는 url
-    path('board/2/S/<int:pk>/delete', views.delete_board, name='delete')
+    path('board/2/S/<int:pk>/delete', views.delete_board, name='delete'),
 
+    # 영화 추천 페이지 url
+    path('recommendation/', views.recommendation.as_view(), name='recommendation'),
+    # 영화 추천 페이지 검색 자동완성 경우 url
+    path('recommendation/autofind/', views.recomAjax, name='recomajax'),
     ####### 기준선으로 위 urlpattern은 사용 / 아래 urlpattern은 비사용 ###########
 
     # path('board/',views.MovieBoard ,name='board'), 

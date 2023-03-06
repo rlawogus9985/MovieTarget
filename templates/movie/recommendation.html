@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일일영화 - 영화 추천</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- 파비콘 이미지 -->
+  <link rel="icon" type="image/png" size="32x32" href="../../static/film-slate.png">
+  <!-- 꾸미기 css -->
+  <link rel="stylesheet" href="{% static 'movie/select/recom.css' %}">
+  <!-- 영어 폰트 -->
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <!-- 자동완성 등 js-->
+  <script src="{% static 'jquery.min.js' %}"></script>
+  <script src="{% static 'movie/select/recom.js' %}"></script>
+  
+
+  
+</head>
+<body>
+  <div class="backs">
+    <!-- 메뉴바 -->
+    <div class="jh_header">
+      <a href="/" class="jh_logo" target="blank">
+        <img src="{% static 'My project-1.png' %}" alt="일일영화 로고">
+      </a>
+
+      <div class="jh_welcom">
+        {% if user.is_authenticated %}
+        {{ user.username }}님 환영합니다.<br>
+      </div>
+
+      <div class="jh_names">
+        <a href="{% url 'user:profile' %}" class="jh_btn"> 회원정보 </a>
+        <a href="{% url 'user:logout' %}" class="jh_btn">로그아웃</a>
+      {% endif %}
+      </div>
+    </div>
+
+    <!-- 페이지 설명 창 -->
+    <div class="jh_show">
+      <h2>영화의 제목을 입력하시면 그와 유사한 영화를<br>
+         추천해 드립니다. 제목을 입력해주세요</h2>
+    </div>
+
+    <!-- 검색 창 -->
+    <div class="search">
+      <form id="searchForm" class="box">
+        <input type="text" id="searchInput" class="search_input" name="searchWord" value="{{ searchWord|default_if_none:''}}" />
+        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" class="searchImage">
+      </form>
+    </div>
+    
+
+    <!-- 자동완성 시행착오 -->
+    {% comment %} <div class='auto_title' style='background-color: white'>
+      {% for title in result_title %}
+        {{ title.movienm }}
+      {% endfor %}
+    </div> {% endcomment %}
+
+    <div class="content_wrapper">
+      {% if targetbase %}
+      <div class="jh_sort">
+        <div class="filter_panel card">
+          <div class="name">
+            <h2>정렬</h2>
+            <span class="glyphicons_v2 chevron-right"></span>
+          </div>
+          <div class="filter">
+            <h3>Sort Results By</h3>
+            <span data-toggle="dropdown" class="dropdown k-dropdown full_width font_size_1" aria-expanded="false" tabindex="0" aria-owns="sort_by_listbox" aria-disabled="false">
+              <span class="k-dropdown-wrap">
+                <span id="currentOption" class="k-input">{{ optionWord }}</span>
+                <span class="k-select" aria-label="select">
+                  <span class="k-icon k-i-arrow-60-down"></span>
+                </span>
+              </span>
+            </span>
+            <div class="dropdown-menu" style="z-index: 3;">
+              <span class="dropdown-item" id="similarityDesc">유사도 내림차순</span>
+              <span class="dropdown-item" id="similarityAsc">유사도 오름차순</span>
+              <span class="dropdown-item" id="voteAverageDesc">평점 내림차순</span>
+              <span class="dropdown-item" id="voteAverageAsc">평점 오름차순</span>
+              <span class="dropdown-item" id="releaseDateDesc">상영일 내림차순</span>
+              <span class="dropdown-item" id="releaseDateAsc">상영일 오름차순</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="apply small background_color light_blue disabled">
+          <p class="load_more">
+            <a id="sortSearch" class="no_click load_more">검색</a>
+          </p>
+        </div>
+
+      </div>
+      <div class="jh_content">
+        {% for i in targetbase %}
+          {% if forloop.counter == 1 %}
+            <h2 style="color: white;">Movie</h2>
+          {% endif %}
+          {% if forloop.counter == 2 %}
+            <h2 style="color: white;">Ranking Top10</h2>
+          {% endif %}
+          <div id="fullscreen">
+            <div id="posterImage">
+              <img id="posterImageIn" src="https://image.tmdb.org/t/p/w500{{ i.poster_path }}" alt="Invalid">
+            </div>
+            <div id="description">
+              <div id="description_wrapper">
+                <div id="descTitle">
+                  <b>Title</b><br>
+                  {{ i.title }} 
+                </div>
+                <div id="descReleaseDate">
+                  <b>Release Date</b><br>
+                  {{ i.release_date }}
+                </div>
+                <div id="descVote">
+                  <b>Rating / Numbers</b><br>
+                  {{ i.vote_average }} / {{i.vote_count}}
+                </div>
+                <div id="descDirector">
+                  <b>Director</b><br>
+                  {{ i.director }}
+                </div>
+                <div id="descActors">
+                  <b>Actors</b><br>
+                  {{ i.credits|truncatechars:205 }}
+                </div>
+                <div id="descOverview">
+                  <b>Overview</b><br>
+                  {{ i.overview|truncatechars:370 }} <br>
+                </div>
+              </div>
+            </div>
+          </div>
+         {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <span class="backs_down"></span>
+    
+
+  </div>
+</body>
+</html>
+
+<form id="sortCriteriaForm">
+  <input type="hidden" name="criteria" id="criteriaInput">
+  <input type="hidden" name="searchWord2" id="sortSearchWord">
+</form>

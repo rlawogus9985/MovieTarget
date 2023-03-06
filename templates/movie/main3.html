@@ -13,6 +13,7 @@
 
   <!-- 검색창 css -->
   <link rel="stylesheet" href="{% static 'movie/select/dselect.css' %}">
+
   <!-- DB card 선택 css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
@@ -62,10 +63,10 @@
       <input type="text" name="selected_actor3" id="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}" onclick="DeleteSelectActor3()" readonly>
     </div>
 
-    <!-- 검색 창-->
+    <!-- 검색 창, 데이터 받는 곳-->
     <form id="searchForm" autocomplete="off" class="box">
       <input type="text" name="searchWord" placeholder="{{ searchWord|default:'배우를 검색해주세요'|default_if_none:'' }}" />
-      <input type="hidden" name="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}">
+      <input type="hidden" name="selected_actor1" value="{{ selected_actor1|default_if_none:'' }}"> 
       <input type="hidden" name="selected_actor2" value="{{ selected_actor2|default_if_none:'' }}">
       <input type="hidden" name="selected_actor3" value="{{ selected_actor3|default_if_none:'' }}">
     </form>
@@ -75,7 +76,7 @@
       <div class="content-list">
         <div class="slider">
           {% for list in actorlist_list %}
-          <div class="item"  onclick="TableActor('{{list.actor1}}');">
+          <div class="item"  onclick="TableActor(this);">
             {{ list.actor1 }}
           </div>
           {% endfor %}

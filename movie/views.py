@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect
 from django.views import generic
+from json import loads
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 from movie.models import TargetBase, SelectedBase, Actorlist
-from movie.models import TargetBase, Actorlist
+from movie.models import TargetBase, Actorlist, Secondbase
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import SelectedBaseForm
 from .models import SelectedBase
 from django.contrib.auth import views as auth_views
+from django.http import JsonResponse
+import joblib
+import pandas as pd
 @login_required(login_url=reverse_lazy('user:login'))
 def MovieBoardtest(request):
     """
@@ -69,7 +73,7 @@ class MovieBoardtest1(generic.ListView):
         if search_word:
             result = TargetBase.objects.values('director').distinct().filter(director__icontains=search_word)
         else:
-            result = TargetBase.objects.values('director').distinct()            
+            result = TargetBase.objects.values('director').distinct()
         return result
     
     # 요청을 통해 전달받은 검색어를 다시 템플릿으로 전달
@@ -78,6 +82,7 @@ class MovieBoardtest1(generic.ListView):
         search_word = self.request.GET.get('searchWord','')
         if search_word:
             context['searchWord'] = search_word
+        print('c: ', context)
         return context
 
     # def get_queryset(self):
@@ -223,7 +228,7 @@ def delete_board(request, pk):
 # classview에서 login_required쓰면 오류가 났었던것 같았음
 # @login_required(login_url=reverse_lazy('user:login'))
 class MovieBoardGenre(generic.ListView):
-
+   
     # 페이징 수
     paginate_by = 12
     # 연결할 템플릿 이름
@@ -275,10 +280,115 @@ class MovieBoardActor(generic.ListView):
         selected_actor1 = self.request.GET.get('selected_actor1','')
         selected_actor2 = self.request.GET.get('selected_actor2','')
         selected_actor3 = self.request.GET.get('selected_actor3','')
-        print(search_word, selected_actor1, selected_actor2, selected_actor3)
+        # print(search_word, selected_actor1, selected_actor2, selected_actor3)
         if search_word:
             context['searchWord'] = search_word
         context['selected_actor1'] = selected_actor1
         context['selected_actor2'] = selected_actor2
         context['selected_actor3'] = selected_actor3
         return context
+
+loaded_model = joblib.load('model/sim_model.pkl')
+# print(loaded_model)
+# 영화 추천 페이지에 대한 class view
+class recommendation(generic.ListView):
+    template_name = 'movie/recommendation.html'
+    context_object_name = 'targetbase'
+
+    global loaded_model
+    def get_queryset(self):
+        # 검색어는 정확히 일치해야한다.
+        search_word = self.request.GET.get('searchWord','')
+
+        sort_criteria = self.request.GET.get('criteria','')
+        search_word2 = self.request.GET.get('searchWord2','')
+        print(sort_criteria)
+        qs = Secondbase.objects.all().values()
+        data = pd.DataFrame(qs)
+        result = []
+        if search_word or search_word2:
+            if search_word:
+                diction = find_sim_movie(data,loaded_model,search_word,11).to_dict()
+            if search_word2:
+                diction = find_sim_movie(data,loaded_model,search_word2,11).to_dict()
+            for i in zip(diction['index'].values() ,diction['id'].values(),diction['release_date'].values(),diction['title'].values(),diction['director'].values(),diction['genres'].values(),
+                diction['original_language'].values(),diction['overview'].values(),diction['popularity'].values(),diction['budget'].values(),diction['revenue'].values(),diction['tagline'].values(),diction['vote_average'].values(),diction['vote_count'].values(),diction['credits'].values(),
+                diction['keywords'].values(),diction['poster_path'].values(),diction['audits'].values()):
+                result.append({ x:y for x,y in zip(diction.keys(),i)})
+            # result = Secondbase.objects.filter(title=search_word)
+            # print(result)
+        else:
+            result = None
+        print(f'{search_word=}, {sort_criteria=}, {search_word2=}')
+        # result 리스트가 만들어진 상태에서 진행.
+        if sort_criteria == '유사도 내림차순':
+            result = result
+        elif sort_criteria == '유사도 오름차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_similarity_asc = list(reversed(result))
+            sorted_by_similarity_asc.insert(0, searched)
+            result = sorted_by_similarity_asc
+        elif sort_criteria == '평점 내림차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_vote_desc = list(reversed(sorted(result, key=lambda x: x['vote_average'])))
+            sorted_by_vote_desc.insert(0, searched)
+            result = sorted_by_vote_desc
+        elif sort_criteria == '평점 오름차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_vote_asc = list(sorted(result, key=lambda x: x['vote_average']))
+            sorted_by_vote_asc.insert(0, searched)
+            result = sorted_by_vote_asc
+        elif sort_criteria == '상영일 내림차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_release_date_desc = list(reversed(sorted(result, key=lambda x:x['release_date'])))
+            sorted_by_release_date_desc.insert(0, searched)
+            result = sorted_by_release_date_desc
+        elif sort_criteria == '상영일 오름차순':
+            searched = result[0]
+            result.pop(0)
+            sorted_by_release_date_asc = list(sorted(result, key=lambda x: x['release_date']))
+            sorted_by_release_date_asc.insert(0, searched)
+            result = sorted_by_release_date_asc
+
+        return result
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search_word = self.request.GET.get('searchWord','')
+        search_word2 = self.request.GET.get('searchWord2','')
+        option = self.request.GET.get('criteria','유사도 내림차순')
+        if search_word:
+            context['searchWord'] = search_word
+            context['optionWord'] = option
+        if search_word2:
+            context['searchWord'] = search_word2
+            context['optionWord'] = option
+        return context
+        
+    
+def find_sim_movie(df, sorted_idx, title_name, top_n=10):
+    target_movie = df[df['title'] == title_name][:1]
+
+    title_index = target_movie.index.values
+    similar_index = sorted_idx[title_index, :top_n]
+    similar_index = similar_index.reshape(-1)
+
+    return df.iloc[similar_index]
+
+
+
+# ajax로 자동완성을 위해 받아오기 위한 함수
+def recomAjax(request):
+    input_val = request.GET.get('searchTitle','')
+    
+    result = Secondbase.objects.values('title').filter(title__icontains=input_val)
+    context = { 'result_title': result}
+    print(input_val)
+    return render(request, 'movie/recommendation.html',context)
+    # return JsonResponse(context)
+    
+    
