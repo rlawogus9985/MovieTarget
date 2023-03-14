@@ -180,7 +180,7 @@ def movieboardselectview(request):
         pass
    
     context = {
-        'movie': movie,
+        'movie': movie
     }
     # user = auth_views.UserModel.objects.get(pk=pk)
     return render(request, 'movie/result.html', context)
