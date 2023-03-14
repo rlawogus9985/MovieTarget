@@ -18,7 +18,7 @@ class TargetBase(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'target_base'
+        db_table = 'movie_targetbase'
 
 class SelectedBase(models.Model):
     director = models.TextField(blank=True, null=True)
@@ -62,3 +62,10 @@ class Secondbase(models.Model):
     class Meta:
         managed = False
         db_table = 'secondbase'
+
+class Reason(models.Model):
+    reason = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        

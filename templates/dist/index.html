@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -39,8 +40,11 @@
                         </div>
                       </form>
                       <a href="javascript:void(0);" class="btn mt-4" onclick="loginAjax();">확인</a>
+                      
                       {% comment %}
-											<!-- <a href="javascript:void(0);" class="btn mt-4" onclick="loginFormCheck();">확인</a> -->
+                      <a href="{% url 'user:login_user_kakao' %}" class="btn mt-4">카카오 로그인</a>
+											<a href="{% provider_login_url 'kakao' %}" class="btn mt-4">카카오 로그인</a>
+                      <!-- <a href="javascript:void(0);" class="btn mt-4" onclick="loginFormCheck();">확인</a> -->
                       {% endcomment %}
 				      					</div>
 			      					</div>
