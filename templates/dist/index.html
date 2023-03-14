@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -10,6 +11,7 @@
   <link rel="stylesheet" href="{% static 'user/login/style.css' %}">
   <script src="{% static 'user/login/script.js' %}"></script>
   <script src="{% static 'jquery.min.js' %}"></script>
+  <!-- <meta name="csrf_token" content="{{ csrf_token }}"> -->
 </head>
 <body>
 <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
@@ -38,8 +40,11 @@
                         </div>
                       </form>
                       <a href="javascript:void(0);" class="btn mt-4" onclick="loginAjax();">확인</a>
+                      
                       {% comment %}
-											<!-- <a href="javascript:void(0);" class="btn mt-4" onclick="loginFormCheck();">확인</a> -->
+                      <a href="{% url 'user:login_user_kakao' %}" class="btn mt-4">카카오 로그인</a>
+											<a href="{% provider_login_url 'kakao' %}" class="btn mt-4">카카오 로그인</a>
+                      <!-- <a href="javascript:void(0);" class="btn mt-4" onclick="loginFormCheck();">확인</a> -->
                       {% endcomment %}
 				      					</div>
 			      					</div>
