@@ -62,3 +62,10 @@ class Secondbase(models.Model):
     class Meta:
         managed = False
         db_table = 'secondbase'
+
+class Reason(models.Model):
+    reason = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        

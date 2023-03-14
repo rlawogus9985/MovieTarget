@@ -29,8 +29,16 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# allauth, allauth.account, AUTHENTICATION_BACKENDS, SOCIALACCOUNT_PROVIDERS 추가됨 kakaoapi떄문에
 INSTALLED_APPS = [
+    # 'allauth', 
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'django.contrib.sites',
+
+    # pip install한 djangorestframework 등록
+    # "rest_framework",
+    # "restFrameWork",
     "user.apps.UserConfig",
     "movie.apps.MovieConfig",
     "django.contrib.admin",
@@ -40,7 +48,22 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+# SITE_ID = 1
 
+# AUTHENTICATION_BACKENDS = [
+#     'allauth.account.auth_backends.AuthenticationBackend',
+#     'django.contrib.auth.backends.ModelBackend'
+# ]
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'kakao': {
+#         'APP': {
+#             'client_id': '6e53823758bb6e47aa946e66119f2dca',
+#             'secret': '',
+#             'key': ''
+#         }
+#     }
+# }
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -160,4 +183,25 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 #     'DEFAULT_AUTHENTICATION_CLASSES': (
 #         'rest_framework_simplejwt.authentication.JWTAuthentication',
 #     )
+# }
+
+CSRF_COOKIE_NAME = 'csrftoken'
+
+
+# KAKAO_REST_API_KEY = '6e53823758bb6e47aa946e66119f2dca'
+# TABLEAU_URL=https://prod-apnortheast-a.online.tableau.com
+# TABLEAU_SITE_ID={"일일영화"}
+# TABLEAU_PERSONAL_ACCESS_TOKEN_NAME={"일일영화"}
+# TABLEAU_PERSONAL_ACCESS_TOKEN_SECRET={"bWmAUdIgaRySZVI_u6tkxa29I1w9CrVUZGTfkN0bCiolDwAAAYbEv5nj"}
+
+
+# REST_FRAMEWORK = {
+    # User Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES' : [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ],
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10
+
 # }

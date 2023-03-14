@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+# from user.views import kakaoSignInView, kakaoCallbackView
 from django.contrib.auth import views as auth_views
 from rest_framework_simplejwt.views import TokenRefreshView
 app_name = 'user'
@@ -82,6 +83,17 @@ urlpatterns = [
     path('toresetpasswordfindemail/', views.toresetpasswordfindemail, name='toresetpasswordfindemail'),
 
     path('toresetpasswordcheckpassword/', views.toresetpasswordcheckpassword, name='toresetpasswordcheckpassword'),
+    
+    #탈퇴하기 직전 탈퇴의 이유를 가지고 view로 가는 url
+    path('delete_user_reason/', views.delete_user_reason, name='delete_user_reason'),
+
+
+    # 실패
+    # 카카오 로그인 요청에 대한 코드 
+    # path('login_user_kakao', views.login_user_kakao, name='login_user_kakao'),
+    # 다녀오고나서 데이터를 가지고 redirect될 url과 View
+    # path('login_user_kakao_callback', kakaoCallbackView.as_view(), name='login_user_kakao_callback'),
+    
 
     
 ]
