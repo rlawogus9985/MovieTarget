@@ -60,7 +60,7 @@ class Secondbase(models.Model):
     audits = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'secondbase'
 
 class Reason(models.Model):

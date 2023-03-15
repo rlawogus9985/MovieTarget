@@ -80,7 +80,7 @@ function reasonAjax() {
       async: false,
       url: "/user/delete_user_reason/",
       data: JSON.stringify({
-        reason: $("#reason").val(),
+        reason:$(":input:radio[name=reason]:checked").val(),
       }),
       headers: {
         "X-CSRFTOKEN": $("#csrf_token").val(),
