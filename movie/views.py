@@ -180,7 +180,7 @@ def movieboardselectview(request):
         pass
    
     context = {
-        'movie': movie,
+        'movie': movie
     }
     # user = auth_views.UserModel.objects.get(pk=pk)
     return render(request, 'movie/result.html', context)
@@ -311,7 +311,9 @@ class recommendation(generic.ListView):
                 diction = find_sim_movie(data,loaded_model,search_word,11).to_dict()
             if search_word2:
                 diction = find_sim_movie(data,loaded_model,search_word2,11).to_dict()
-            for i in zip(diction['index'].values() ,diction['id'].values(),diction['release_date'].values(),diction['title'].values(),diction['director'].values(),diction['genres'].values(),
+            for i in zip(diction['index'].values() ,
+                         diction['id'].values(),
+                         diction['release_date'].values(),diction['title'].values(),diction['director'].values(),diction['genres'].values(),
                 diction['original_language'].values(),diction['overview'].values(),diction['popularity'].values(),diction['budget'].values(),diction['revenue'].values(),diction['tagline'].values(),diction['vote_average'].values(),diction['vote_count'].values(),diction['credits'].values(),
                 diction['keywords'].values(),diction['poster_path'].values(),diction['audits'].values()):
                 result.append({ x:y for x,y in zip(diction.keys(),i)})
@@ -390,5 +392,4 @@ def recomAjax(request):
     print(input_val)
     return render(request, 'movie/recommendation.html',context)
     # return JsonResponse(context)
-    
     
