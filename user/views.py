@@ -190,8 +190,10 @@ def password_check_ajax(request):
 # delete() 하지않고 is_active를 0으로 update()할 새로운 회원탈퇴함수뷰.
 def delete_user_reason(request):
     data = loads(request.body)
+
     reason = data.get('reason')
     print(f'탈퇴한이유는 -> {reason}')
+    
     request.session['reason'] = reason
     if reason is not None:
         return JsonResponse({'result': 'True'})
@@ -204,11 +206,15 @@ def delete_user(request):
     if auth_views.UserModel.objects.get(pk=userid):
         reason = request.session['reason']
         print(f'reason은 : {reason}')
-        auth_views.UserModel.objects.filter(pk=userid).update(is_active=False, username="",email="", first_name=reason)                                                          
+        auth_views.UserModel.objects.filter(pk=userid).update(is_active=False, username="",email="", first_name=reason)
         print("해당유저가 비활성화 되었습니다.")
 
-        session_key = 'reason'
-        Session.objects.filter(session_key=session_key).delete()
+        try:
+            request.session.modified = True #세션삭제가 가능하도록 등록
+            del request.session['reason']
+        except:
+            pass
+        
         return redirect('user:join')
     else:
         print("이미 비활성화 되어있는 유저입니다.")
