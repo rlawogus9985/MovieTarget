@@ -269,7 +269,7 @@ def ajax_confirm_email(request):
         return JsonResponse({'result': 'True'})
     else:
         print('해당유저의 이메일이 존재 함을 확인합니다.')
-        return JsonResponse({'result': 'Fasle'})
+        return JsonResponse({'result': 'False'})
 
 # 자바스크립트 ajax와 연결되어 이메일을 작성해서 이메일을 보내는 함수뷰
 # 구글링해서 얻은 코드를 일일영화 프로젝트에 맞게 커스텀한 함수뷰
@@ -412,7 +412,7 @@ def fromeamilpasswordreset(requset):
         print(f'{resetid}의 비밀번호가 변경되었습니다.')
         return JsonResponse({'result':'True'})
     else:
-        return JsonResponse({'result': 'Fasle'})
+        return JsonResponse({'result': 'False'})
 
 
 def toresetpasswordfindemail(requset):
@@ -424,7 +424,7 @@ def toresetpasswordfindemail(requset):
         return JsonResponse({'result': 'True'})
     else:
         print('타켓유저가 존재하지않습니다.')
-        return JsonResponse({'result':' Flase'})
+        return JsonResponse({'result':'False'})
 
 def toresetpasswordcheckpassword(request):
     data = loads(request.body)
